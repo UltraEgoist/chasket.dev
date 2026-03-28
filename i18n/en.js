@@ -109,7 +109,9 @@ window.__i18n_register('en', {
     ui: 'Accessible, pre-built UI components: buttons, inputs, dialogs, tabs, and more.',
     vite: 'First-class Vite integration with Hot Module Replacement and source maps.',
     lsp: 'Language Server for VS Code, Neovim, Sublime — completions, diagnostics, formatting.',
-    vscode: 'VS Code extension with syntax highlighting, real-time diagnostics, and Go to Definition.'
+    vscode: 'VS Code extension with syntax highlighting, real-time diagnostics, and Go to Definition.',
+    comingSoon: 'Coming Soon',
+    available: 'Available'
   },
 
   cta: {
