@@ -73,6 +73,30 @@
         <p>{{ tr('why.section4Desc') }}</p>
       </div>
 
+      <div class="why-card">
+        <div class="why-card-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#E17055" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline><line x1="14" y1="4" x2="10" y2="20"></line></svg>
+        </div>
+        <h2>{{ tr('why.section6Title') }}</h2>
+        <p>{{ tr('why.section6Desc') }}</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-card-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#81ECEC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
+        </div>
+        <h2>{{ tr('why.section7Title') }}</h2>
+        <p>{{ tr('why.section7Desc') }}</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-card-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FAB1A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+        </div>
+        <h2>{{ tr('why.section8Title') }}</h2>
+        <p>{{ tr('why.section8Desc') }}</p>
+      </div>
+
       <div class="why-card why-card-future">
         <div class="why-card-icon">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--c-primary-light, #A29BFE)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
@@ -81,6 +105,56 @@
         <p>{{ tr('why.section5Desc') }}</p>
       </div>
 
+    </section>
+
+    <section class="why-comparison">
+      <h2 class="why-section-title">{{ tr('why.comparisonTitle') }}</h2>
+      <p class="why-section-desc">{{ tr('why.comparisonDesc') }}</p>
+      <div class="why-compare-grid">
+        <div class="why-compare-card">
+          <div class="why-compare-num">01</div>
+          <h3>{{ tr('why.compare1Title') }}</h3>
+          <p>{{ tr('why.compare1Desc') }}</p>
+        </div>
+        <div class="why-compare-card">
+          <div class="why-compare-num">02</div>
+          <h3>{{ tr('why.compare2Title') }}</h3>
+          <p>{{ tr('why.compare2Desc') }}</p>
+        </div>
+        <div class="why-compare-card">
+          <div class="why-compare-num">03</div>
+          <h3>{{ tr('why.compare3Title') }}</h3>
+          <p>{{ tr('why.compare3Desc') }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="why-usecases">
+      <h2 class="why-section-title">{{ tr('why.usecaseTitle') }}</h2>
+      <p class="why-section-desc">{{ tr('why.usecaseDesc') }}</p>
+      <div class="why-usecase-grid">
+        <div class="why-usecase-card">
+          <div class="why-usecase-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          </div>
+          <h3>{{ tr('why.usecase1Title') }}</h3>
+          <p>{{ tr('why.usecase1Desc') }}</p>
+        </div>
+        <div class="why-usecase-card">
+          <div class="why-usecase-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>
+          </div>
+          <h3>{{ tr('why.usecase2Title') }}</h3>
+          <p>{{ tr('why.usecase2Desc') }}</p>
+        </div>
+        <div class="why-usecase-card">
+          <div class="why-usecase-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"></path><path d="M18 20V4"></path><path d="M6 20v-4"></path></svg>
+          </div>
+          <h3>{{ tr('why.usecase3Title') }}</h3>
+          <p>{{ tr('why.usecase3Desc') }}</p>
+        </div>
+      </div>
     </section>
 
     <section class="why-cta">
@@ -213,6 +287,99 @@
     color: var(--c-text-dim, #9898ab);
     line-height: 1.7;
     font-size: clamp(0.9rem, 1.1vw, 1rem);
+    margin: 0;
+  }
+
+  /* --- Comparison Section --- */
+  .why-comparison, .why-usecases {
+    padding: 3rem 0;
+  }
+  .why-section-title {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 0.75rem;
+    letter-spacing: -0.02em;
+  }
+  .why-section-desc {
+    text-align: center;
+    color: var(--c-text-dim, #9898ab);
+    font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+    max-width: 35rem;
+    margin: 0 auto 2.5rem;
+    line-height: 1.6;
+  }
+
+  .why-compare-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 1.5rem;
+  }
+  .why-compare-card {
+    background: var(--c-surface, #1a1a26);
+    border: 1px solid var(--c-border, #2a2a3a);
+    border-radius: 0.75rem;
+    padding: 2rem;
+    transition: border-color 0.2s;
+  }
+  .why-compare-card:hover {
+    border-color: var(--c-primary, #6C5CE7);
+  }
+  .why-compare-num {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #6C5CE7, #00B894);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.75rem;
+    line-height: 1;
+  }
+  .why-compare-card h3 {
+    font-size: clamp(1rem, 1.3vw, 1.15rem);
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+  }
+  .why-compare-card p {
+    color: var(--c-text-dim, #9898ab);
+    line-height: 1.7;
+    font-size: clamp(0.85rem, 1vw, 0.95rem);
+    margin: 0;
+  }
+
+  /* --- Use Cases Section --- */
+  .why-usecase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 1.5rem;
+  }
+  .why-usecase-card {
+    background: var(--c-surface, #1a1a26);
+    border: 1px solid var(--c-border, #2a2a3a);
+    border-radius: 0.75rem;
+    padding: 2rem;
+    transition: border-color 0.2s;
+  }
+  .why-usecase-card:hover {
+    border-color: var(--c-accent, #00B894);
+  }
+  .why-usecase-icon {
+    width: 3rem; height: 3rem;
+    border-radius: 0.625rem;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,184,148,0.12);
+    color: var(--c-accent-light, #55efc4);
+    margin-bottom: 1rem;
+  }
+  .why-usecase-card h3 {
+    font-size: clamp(1rem, 1.3vw, 1.15rem);
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+  }
+  .why-usecase-card p {
+    color: var(--c-text-dim, #9898ab);
+    line-height: 1.7;
+    font-size: clamp(0.85rem, 1vw, 0.95rem);
     margin: 0;
   }
 
