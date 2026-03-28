@@ -1,0 +1,431 @@
+<meta>
+  name: csk-page-testing
+  shadow: none
+</meta>
+
+<script>
+  // csk-page-testing: テストフレームワーク文書の親ページ
+  // shadow: none — サブコンポーネント（csk-test-*）がライト DOM でスタイルを共有。
+  // TOC パターンは csk-page-guide と同一（ARCHITECTURE.md §7 参照）。
+  // ⚠️ activeSection を state にしないこと（#patch() がサブコンポーネントを破壊する）。
+
+  state sidebarOpen: boolean = true
+
+  fn tr(k: string) { return window.__t(k) }
+
+  fn toggleSidebar() {
+    sidebarOpen = !sidebarOpen
+  }
+
+  fn handleTocClick(e: Event) {
+    const link = e.target.closest('a')
+    if (!link) return
+    const href = link.getAttribute('href')
+    if (href && href.startsWith('#') && !href.startsWith('#/')) {
+      e.preventDefault()
+      const el = document.getElementById(href.substring(1))
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  fn updateActiveLink(sectionId: string) {
+    const links = document.querySelectorAll('.toc a')
+    links.forEach((link) => {
+      const href = link.getAttribute('href')
+      if (href && href.substring(1) === sectionId) {
+        link.classList.add('active')
+      } else {
+        link.classList.remove('active')
+      }
+    })
+  }
+
+  on mount {
+    const sections = document.querySelectorAll('.doc-section[id]')
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          updateActiveLink(entry.target.id)
+        }
+      }
+    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 })
+    sections.forEach((s) => { observer.observe(s) })
+  }
+</script>
+
+<template>
+  <div class="page-container">
+    <!-- Sidebar Navigation -->
+    <aside :class="'sidebar ' + (sidebarOpen ? 'open' : 'closed')">
+      <div class="sidebar-header">
+        <h2>{{ tr('testing.toc') }}</h2>
+        <button class="sidebar-toggle" @click="toggleSidebar">
+          <span class="toggle-icon">≡</span>
+        </button>
+      </div>
+
+      <nav class="toc" @click="handleTocClick">
+        <ul>
+          <li><a href="#overview">{{ tr('testing.sections.overview') }}</a></li>
+          <li><a href="#install">{{ tr('testing.sections.install') }}</a></li>
+          <li><a href="#quickstart">{{ tr('testing.sections.quickstart') }}</a></li>
+          <li>
+            <a href="#api-reference">{{ tr('testing.sections.apiReference') }}</a>
+            <ul>
+              <li><a href="#api-suite">{{ tr('testing.toc_items.suite') }}</a></li>
+              <li><a href="#api-test">{{ tr('testing.toc_items.test') }}</a></li>
+              <li><a href="#api-lifecycle">{{ tr('testing.toc_items.lifecycle') }}</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#compile-helpers">{{ tr('testing.sections.compileHelpers') }}</a>
+            <ul>
+              <li><a href="#compile-ok-fail">{{ tr('testing.toc_items.compileOkFail') }}</a></li>
+              <li><a href="#csk-helper">{{ tr('testing.toc_items.cskHelper') }}</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#assertions">{{ tr('testing.sections.assertions') }}</a>
+            <ul>
+              <li><a href="#assert-basic">{{ tr('testing.toc_items.basic') }}</a></li>
+              <li><a href="#assert-compile">{{ tr('testing.toc_items.compile') }}</a></li>
+              <li><a href="#assert-output">{{ tr('testing.toc_items.output') }}</a></li>
+              <li><a href="#assert-template">{{ tr('testing.toc_items.template') }}</a></li>
+              <li><a href="#assert-state">{{ tr('testing.toc_items.state') }}</a></li>
+              <li><a href="#assert-diag">{{ tr('testing.toc_items.diagnostics') }}</a></li>
+            </ul>
+          </li>
+          <li><a href="#full-example">{{ tr('testing.sections.fullExample') }}</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+      <!-- Header -->
+      <div class="page-header">
+        <h1>{{ tr('testing.title') }}</h1>
+        <p class="subtitle">{{ tr('testing.subtitle') }}</p>
+      </div>
+
+      <!-- Sub-components -->
+      <csk-test-overview></csk-test-overview>
+      <csk-test-api></csk-test-api>
+      <csk-test-compile></csk-test-compile>
+      <csk-test-assertions></csk-test-assertions>
+      <csk-test-example></csk-test-example>
+    </main>
+  </div>
+</template>
+
+<style>
+:host {
+  display: block;
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--font);
+  min-height: 100vh;
+}
+
+.page-container {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 0;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+/* Sidebar Navigation */
+.sidebar {
+  background: var(--c-surface);
+  border-right: 1px solid var(--c-border);
+  padding: var(--space-page);
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--c-border);
+}
+
+.sidebar-header h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--c-text);
+}
+
+.sidebar-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--c-text);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.toc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc > ul > li {
+  margin: 0.25rem 0;
+}
+
+.toc a {
+  color: var(--c-text-dim);
+  text-decoration: none;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.toc a:hover {
+  color: var(--c-primary);
+  background: rgba(108, 92, 231, 0.1);
+}
+
+.toc a.active {
+  color: var(--c-primary);
+  background: rgba(108, 92, 231, 0.15);
+  font-weight: 600;
+}
+
+.toc ul ul {
+  padding-left: 1rem;
+  margin-top: 0.25rem;
+}
+
+.toc ul ul li {
+  margin: 0.125rem 0;
+}
+
+.toc ul ul a {
+  font-size: 0.85rem;
+  color: var(--c-text-dim);
+  padding: 0.375rem 0.5rem;
+}
+
+/* Main Content */
+.content {
+  padding: var(--space-page) 2rem;
+  overflow-y: auto;
+}
+
+.page-header {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid var(--c-border);
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: var(--c-text);
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--c-text-dim);
+  margin: 0;
+}
+
+/* Documentation Sections */
+.doc-section {
+  margin-bottom: 3rem;
+  scroll-margin-top: 2rem;
+}
+
+.doc-section h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  color: var(--c-text);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--c-primary);
+}
+
+.doc-section h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.75rem 0;
+  color: var(--c-text);
+}
+
+.doc-section h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 1rem 0 0.5rem 0;
+  color: var(--c-primary);
+  font-family: var(--mono);
+}
+
+.doc-section p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0.75rem 0;
+  color: var(--c-text);
+}
+
+.doc-section ul {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.doc-section li {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.subsection {
+  margin: 1.5rem 0;
+  padding: 0;
+}
+
+.property {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: rgba(108, 92, 231, 0.05);
+  border-left: 3px solid var(--c-primary);
+  border-radius: 0.375rem;
+}
+
+.property h4 {
+  margin-top: 0;
+}
+
+.property p {
+  margin: 0.5rem 0;
+}
+
+.property ul {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.property li {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+/* Code Blocks */
+pre {
+  background: var(--c-bg-code);
+  border: 1px solid var(--c-border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+  font-family: var(--mono);
+}
+
+code {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--c-accent);
+  word-break: break-word;
+}
+
+pre code {
+  color: #dfe6e9;
+}
+pre code .t  { color: #7c8aff; }
+pre code .a  { color: #f8a5c2; }
+pre code .s  { color: #55efc4; }
+pre code .k  { color: #fd79a8; }
+pre code .tp { color: #74b9ff; }
+pre code .v  { color: #dfe6e9; }
+pre code .f  { color: #ffeaa7; }
+pre code .n  { color: #fab1a0; }
+pre code .i  { color: #fdcb6e; }
+pre code .c  { color: #e17055; }
+pre code .d  { color: #a29bfe; }
+pre code .cm { color: #636e72; }
+pre code .cs { color: #81ecec; }
+
+/* Notes and Warnings */
+.note, .warning, .note-text {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+
+.note {
+  background: rgba(0, 184, 148, 0.1);
+  border-left: 3px solid var(--c-accent);
+  color: var(--c-text);
+}
+
+.note strong {
+  color: var(--c-accent);
+}
+
+.note ul, .note li {
+  margin: 0.5rem 0;
+}
+
+.note-text {
+  background: rgba(108, 92, 231, 0.05);
+  border-left: 3px solid var(--c-text-dim);
+  color: var(--c-text-dim);
+}
+
+.warning {
+  background: rgba(253, 203, 110, 0.1);
+  border-left: 3px solid #fdcb6e;
+  color: var(--c-text);
+}
+
+.example-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--c-text-dim);
+  margin: 1rem 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-container {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    display: none;
+    position: fixed;
+    top: 3.75rem;
+    left: 0;
+    width: 280px;
+    height: calc(100vh - 3.75rem);
+    z-index: 100;
+  }
+  .sidebar.open {
+    display: block;
+  }
+  .sidebar-toggle {
+    display: flex;
+  }
+  .content {
+    padding: var(--space-page) 1rem;
+  }
+}
+</style>

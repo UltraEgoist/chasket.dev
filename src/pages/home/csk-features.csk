@@ -1,0 +1,188 @@
+<!-- csk-features: ホームページの機能紹介セクション（6カード）
+     shadow: open — 独自のスコープ付きスタイルを持つ。
+     各カードにシンタックスハイライト付きコードスニペットを含む。
+     コード例の表示パターンは csk-code-demo と同一（ARCHITECTURE.md §6 参照）。 -->
+<meta>
+  name: "csk-features"
+  shadow: open
+</meta>
+
+<script>
+  fn tr(k: string) { return window.__t(k) }
+
+  // 各機能カードのコードスニペット（シンタックスハイライト付き）。
+  // class=k 形式（unquoted 属性）、\n で改行制御。
+  state codeReactivity: string = "<span class=k>state</span> <span class=v>count</span>: <span class=tp>number</span> = <span class=n>0</span>\n<span class=k>fn</span> <span class=f>inc</span>() { count += <span class=n>1</span> }\n<span class=cm>// DOM updates — done.</span>"
+
+  state codeTemplate: string = "<span class=c>&lt;#for</span> <span class=a>each</span>=<span class=s>&quot;item&quot;</span> <span class=a>of</span>=<span class=s>&quot;items&quot;</span><span class=c>&gt;</span>\n  <span class=t>&lt;li&gt;</span><span class=i>{{ item.name }}</span><span class=t>&lt;/li&gt;</span>\n  <span class=c>&lt;:empty&gt;</span>No results<span class=c>&lt;/:empty&gt;</span>\n<span class=c>&lt;/#for&gt;</span>"
+
+  state codeCompile: string = "<span class=cm>// Compiler output:</span>\n<span class=er>error: Undefined 'coutn'</span>\n<span class=er>error: Expected number, got string</span>"
+
+  state codeXss: string = "<span class=i>{{ userInput }}</span>  <span class=cm>&lt;!-- escaped --&gt;</span>\n<span class=d>@html</span>=<span class=s>&quot;trusted&quot;</span> <span class=cm>&lt;!-- opt-in --&gt;</span>"
+
+  state codeScoped: string = "<span class=t>&lt;style&gt;</span>\n  <span class=cs>button</span> { <span class=a>color</span>: <span class=s>blue</span>; }\n  <span class=cm>/* Only THIS component */</span>\n<span class=t>&lt;/style&gt;</span>"
+
+  state codeEvents: string = "<span class=k>emit</span> <span class=v>close</span>: { <span class=v>reason</span>: <span class=tp>string</span> }\n<span class=k>emit</span>(<span class=a>local</span>) <span class=v>internal</span>: <span class=tp>void</span>"
+
+  fn cleanPre() {
+    requestAnimationFrame(() => {
+      this.shadowRoot.querySelectorAll('pre').forEach((el) => {
+        for (let i = el.childNodes.length - 1; i >= 0; i--) {
+          const n = el.childNodes[i]
+          if (n.nodeType === 3 && !n.textContent.trim()) n.remove()
+        }
+      })
+    })
+  }
+
+  on mount { cleanPre() }
+</script>
+
+<template>
+  <section class="section">
+    <div class="container">
+      <div class="hd">
+        <h2>{{ tr('features.title') }}</h2>
+        <p>{{ tr('features.subtitle') }}</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="icon i-react">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M14.83 9.17l4.24-4.24M9.17 14.83l-4.24 4.24M12 2v4M12 18v4M2 12h4M18 12h4"></path></svg>
+          </div>
+          <h3>{{ tr('features.reactivity.title') }}</h3>
+          <p>{{ tr('features.reactivity.desc') }}</p>
+          <div class="snippet"><pre><code>{{ codeReactivity }}</code></pre></div>
+        </div>
+
+        <div class="card">
+          <div class="icon i-tpl">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+          </div>
+          <h3>{{ tr('features.templates.title') }}</h3>
+          <p>{{ tr('features.templates.desc') }}</p>
+          <div class="snippet"><pre><code>{{ codeTemplate }}</code></pre></div>
+        </div>
+
+        <div class="card">
+          <div class="icon i-type">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+          </div>
+          <h3>{{ tr('features.compileCheck.title') }}</h3>
+          <p>{{ tr('features.compileCheck.desc') }}</p>
+          <div class="snippet"><pre><code>{{ codeCompile }}</code></pre></div>
+        </div>
+
+        <div class="card">
+          <div class="icon i-xss">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg>
+          </div>
+          <h3>{{ tr('features.xss.title') }}</h3>
+          <p>{{ tr('features.xss.desc') }}</p>
+          <div class="snippet"><pre><code>{{ codeXss }}</code></pre></div>
+        </div>
+
+        <div class="card">
+          <div class="icon i-lock">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0110 0v4"></path></svg>
+          </div>
+          <h3>{{ tr('features.scopedStyles.title') }}</h3>
+          <p>{{ tr('features.scopedStyles.desc') }}</p>
+          <div class="snippet"><pre><code>{{ codeScoped }}</code></pre></div>
+        </div>
+
+        <div class="card">
+          <div class="icon i-event">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+          </div>
+          <h3>{{ tr('features.customEvents.title') }}</h3>
+          <p>{{ tr('features.customEvents.desc') }}</p>
+          <div class="snippet"><pre><code>{{ codeEvents }}</code></pre></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<style>
+  :host { display: block; padding: var(--space-section, 5rem) 0; }
+
+  .container { max-width: var(--max-w, 70rem); margin: 0 auto; padding: 0 var(--space-page, 1.5rem); }
+
+  .hd { text-align: center; margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+  .hd h2 {
+    font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+    font-weight: 700; letter-spacing: -0.02em;
+    margin-bottom: 0.75rem; color: var(--c-text, #e4e4ed);
+  }
+  .hd p {
+    font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+    color: var(--c-text-dim, #9898ab); max-width: 35rem; margin: 0 auto;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  .card {
+    background: var(--c-bg-card, #12121a);
+    border: 1px solid var(--c-border, #2a2a3a);
+    border-radius: var(--radius-lg, 1rem);
+    padding: clamp(1.5rem, 2.5vw, 2rem) clamp(1.25rem, 2vw, 1.75rem);
+    transition: border-color 0.25s, transform 0.2s;
+  }
+  .card:hover { border-color: var(--c-primary, #6C5CE7); transform: translateY(-2px); }
+
+  .icon {
+    width: 3.25rem; height: 3.25rem;
+    border-radius: 0.75rem;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: clamp(0.875rem, 1.5vw, 1.25rem);
+  }
+  .i-react { background: rgba(108,92,231,0.15); color: #a29bfe; }
+  .i-tpl   { background: rgba(0,184,148,0.15);   color: #55efc4; }
+  .i-type  { background: rgba(116,185,255,0.15); color: #74b9ff; }
+  .i-xss   { background: rgba(253,121,168,0.15); color: #fd79a8; }
+  .i-lock  { background: rgba(253,203,110,0.15); color: #ffeaa7; }
+  .i-event { background: rgba(129,236,236,0.15); color: #81ecec; }
+
+  .card h3 { font-size: clamp(0.95rem, 1.1vw, 1.1rem); font-weight: 600; margin-bottom: 0.5rem; color: var(--c-text, #e4e4ed); }
+  .card p  { font-size: clamp(0.8rem, 0.95vw, 0.88rem); color: var(--c-text-dim, #9898ab); line-height: 1.55; margin-bottom: 1rem; }
+
+  .snippet {
+    background: var(--c-bg-code, #0d0d14);
+    border: 1px solid var(--c-border, #2a2a3a);
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  .snippet pre {
+    margin: 0; padding: 0.875rem 1rem;
+    font-family: var(--mono, monospace);
+    font-size: clamp(0.68rem, 0.82vw, 0.78rem);
+    line-height: 1.65; color: #c8c8d8; overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .snippet code { font-family: inherit; font-size: inherit; }
+
+  .t  { color: #7c8aff; }
+  .a  { color: #f8a5c2; }
+  .s  { color: #55efc4; }
+  .k  { color: #fd79a8; }
+  .tp { color: #74b9ff; }
+  .v  { color: #dfe6e9; }
+  .f  { color: #ffeaa7; }
+  .n  { color: #fab1a0; }
+  .i  { color: #fdcb6e; }
+  .c  { color: #e17055; }
+  .d  { color: #a29bfe; }
+  .cs { color: #81ecec; }
+  .cm { color: #636e72; font-style: italic; }
+  .er { color: #ff7675; }
+
+  @media (max-width: 30rem) {
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>

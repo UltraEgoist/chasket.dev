@@ -1,0 +1,65 @@
+<meta>
+  name: "csk-footer"
+  shadow: open
+</meta>
+
+<script>
+  fn tr(k: string) { return window.__t(k) }
+</script>
+
+<template>
+  <footer class="footer">
+    <div class="inner">
+      <div class="brand">
+        <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="8" fill="url(#fg)"></rect>
+          <path d="M9 22V10h3.2l3.8 7.5L19.8 10H23v12h-2.8v-7.4L17 21.2h-2L11.8 14.6V22H9z" fill="#fff"></path>
+          <defs><linearGradient id="fg" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#6C5CE7"></stop><stop offset="1" stop-color="#00B894"></stop></linearGradient></defs>
+        </svg>
+        <span>Chasket</span>
+      </div>
+      <p class="copy">{{ tr('footer.copyright') }}</p>
+    </div>
+  </footer>
+</template>
+
+<style>
+  :host { display: block; }
+
+  .footer {
+    padding: clamp(1.25rem, 2.5vw, 2rem) 0;
+    border-top: 1px solid var(--c-border, #2a2a3a);
+  }
+
+  .inner {
+    max-width: var(--max-w, 70rem);
+    margin: 0 auto;
+    padding: 0 var(--space-page, 1.5rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: clamp(0.8rem, 1vw, 0.9rem);
+    color: var(--c-text, #e4e4ed);
+  }
+
+  .copy {
+    font-size: clamp(0.7rem, 0.9vw, 0.8rem);
+    color: var(--c-text-dim, #9898ab);
+  }
+
+  @media (max-width: 48rem) {
+    .inner {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

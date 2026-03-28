@@ -1,0 +1,26 @@
+<meta>
+  name: "csk-page-home"
+  shadow: none
+</meta>
+
+<script>
+</script>
+
+<template>
+  <div class="page-home">
+    <csk-hero></csk-hero>
+    <csk-highlights></csk-highlights>
+    <csk-code-demo id="code"></csk-code-demo>
+    <csk-features id="features"></csk-features>
+    <csk-ecosystem id="ecosystem"></csk-ecosystem>
+    <csk-comparison></csk-comparison>
+    <csk-cta></csk-cta>
+  </div>
+</template>
+
+<style>
+  .page-home {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

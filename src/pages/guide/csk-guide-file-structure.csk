@@ -1,0 +1,59 @@
+<meta>
+  name: csk-guide-file-structure
+  shadow: none
+</meta>
+
+<script>
+  state code_fileStructure: string = "&lt;meta&gt;\n  name: component-name\n  shadow: true\n&lt;/meta&gt;\n\n&lt;script&gt;\n  state count: number = 0\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;/template&gt;\n\n&lt;style&gt;\n  p { color: white; }\n&lt;/style&gt;"
+
+  fn tr(k: string) { return window.__t(k) }
+</script>
+
+<template>
+  <!-- ファイル構造 -->
+  <section id="file-structure" class="doc-section">
+    <h2>{{ tr('guideContent.fileStructure.title') }}</h2>
+    <p>{{ tr('guideContent.fileStructure.desc') }}</p>
+
+    <div class="subsection">
+      <h3>{{ tr('guideContent.fileStructure.fourBlocks.heading') }}</h3>
+      <p>{{ tr('guideContent.fileStructure.fourBlocks.desc') }}</p>
+
+      <pre><code>{{ code_fileStructure }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.fileStructure.fourBlocks.noteLabel') }}:</strong> {{ tr('guideContent.fileStructure.fourBlocks.noteText') }}
+      </div>
+    </div>
+  </section>
+
+  <!-- meta ブロック -->
+  <section id="meta-block" class="doc-section">
+    <h2>{{ tr('guideContent.fileStructure.metaBlock.title') }}</h2>
+    <p>{{ tr('guideContent.fileStructure.metaBlock.desc') }}</p>
+
+    <div class="subsection">
+      <h3>{{ tr('guideContent.fileStructure.metaBlock.properties') }}</h3>
+
+      <div class="property">
+        <h4><code>name</code></h4>
+        <p>{{ tr('guideContent.fileStructure.metaBlock.name.desc') }}</p>
+        <pre><code>name: my-counter</code></pre>
+      </div>
+
+      <div class="property">
+        <h4><code>shadow</code></h4>
+        <p>{{ tr('guideContent.fileStructure.metaBlock.shadow.desc') }}</p>
+        <pre><code>shadow: true    &lt;!-- Shadow DOM --&gt;
+shadow: none    &lt;!-- Light DOM with scoping --&gt;</code></pre>
+        <p class="note-text"><strong>{{ tr('guideContent.fileStructure.metaBlock.shadow.hint') }}:</strong> {{ tr('guideContent.fileStructure.metaBlock.shadow.hintText') }}</p>
+      </div>
+
+      <div class="property">
+        <h4><code>form</code></h4>
+        <p>{{ tr('guideContent.fileStructure.metaBlock.form.desc') }}</p>
+        <pre><code>form: true</code></pre>
+      </div>
+    </div>
+  </section>
+</template>

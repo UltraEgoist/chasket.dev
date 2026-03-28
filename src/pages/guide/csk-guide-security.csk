@@ -1,0 +1,73 @@
+<meta>
+  name: csk-guide-security
+  shadow: none
+</meta>
+
+<script>
+  state code_xssExample: string = "&lt;!-- Safe: auto-escaped --&gt;\n&lt;p&gt;{{ userInput }}&lt;/p&gt;\n\n&lt;!-- Dangerous: allows script injection --&gt;\n&lt;div @html=\"userInput\"&gt;&lt;/div&gt;\n\n&lt;!-- Safe: URL validation --&gt;\n&lt;a :href=\"isValidUrl(link) ? link : '#'\"&gt;Link&lt;/a&gt;"
+
+  fn tr(k: string) { return window.__t(k) }
+</script>
+
+<template>
+  <!-- セキュリティ -->
+  <section id="security" class="doc-section">
+    <h2>{{ tr('guideContent.security.title') }}</h2>
+    <p>{{ tr('guideContent.security.desc') }}</p>
+
+    <div class="subsection">
+      <h3>{{ tr('guideContent.security.autoEscape.title') }}</h3>
+      <p>{{ tr('guideContent.security.autoEscape.desc') }}</p>
+
+      <pre><code>{{ code_xssExample }}</code></pre>
+
+      <div class="warning">
+        <strong>⚠️ {{ tr('guideContent.security.autoEscape.warningLabel') }}:</strong> {{ tr('guideContent.security.autoEscape.warningText') }}
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>{{ tr('guideContent.security.urlValidation.title') }}</h3>
+      <p>{{ tr('guideContent.security.urlValidation.desc') }}</p>
+
+      <pre><code>fn isValidUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url)
+    return ['http:', 'https:'].includes(parsed.protocol)
+  } catch {
+    return false
+  }
+}</code></pre>
+    </div>
+
+    <div class="subsection">
+      <h3>{{ tr('guideContent.security.bestPractices.title') }}</h3>
+      <div class="note">
+        <strong>{{ tr('guideContent.security.bestPractices.label') }}:</strong>
+        <ul>
+          <li>{{ tr('guideContent.security.bestPractices.items.i1') }}</li>
+          <li>{{ tr('guideContent.security.bestPractices.items.i2') }}</li>
+          <li>{{ tr('guideContent.security.bestPractices.items.i3') }}</li>
+          <li>{{ tr('guideContent.security.bestPractices.items.i4') }}</li>
+          <li>{{ tr('guideContent.security.bestPractices.items.i5') }}</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- まとめ -->
+  <section id="summary" class="doc-section">
+    <h2>{{ tr('guideContent.summary.title') }}</h2>
+    <p>{{ tr('guideContent.summary.desc') }}</p>
+
+    <div class="note">
+      <strong>{{ tr('guideContent.summary.nextStepsLabel') }}:</strong>
+      <ul>
+        <li>{{ tr('guideContent.summary.nextSteps.s1') }}</li>
+        <li>{{ tr('guideContent.summary.nextSteps.s2') }}</li>
+        <li>{{ tr('guideContent.summary.nextSteps.s3') }}</li>
+        <li>{{ tr('guideContent.summary.nextSteps.s4') }}</li>
+      </ul>
+    </div>
+  </section>
+</template>

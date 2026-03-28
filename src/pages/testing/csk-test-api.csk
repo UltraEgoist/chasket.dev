@@ -1,0 +1,47 @@
+<meta>
+  name: csk-test-api
+  shadow: none
+</meta>
+
+<script>
+  state exampleAPI: string = "const { suite, compileOk, csk } = require('./lib/chasket-test');\n\nsuite('API Usage', t => {\n  t.beforeEach(() => {\n    console.log('setup');\n  });\n\n  t.test('test 1', () => {\n    const r = compileOk('&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;&lt;/p&gt;&lt;/template&gt;');\n    t.compileSuccess(r);\n  });\n\n  t.xtest('skipped test', () => {\n    // This test is skipped\n  });\n\n  t.afterEach(() => {\n    console.log('teardown');\n  });\n});\n\nsuite.run();"
+</script>
+
+<template>
+  <!-- API Reference -->
+  <section id="api-reference" class="doc-section">
+    <h2>API リファレンス</h2>
+
+    <div class="subsection">
+      <h3 id="api-suite">suite(name, setupFn)</h3>
+      <p>テストスイートを定義します。<code>setupFn</code> はテストコンテキストを受け取り、テストを登録します。</p>
+      <div class="property">
+        <h4>suite.run(opts?)</h4>
+        <p>すべての登録済みスイートを実行し、結果をコンソール出力します。</p>
+        <p><strong>オプション:</strong></p>
+        <ul>
+          <li><code>filter</code> (string): スイート名またはテスト名に一致するもののみ実行</li>
+          <li><code>verbose</code> (boolean): 詳細出力（デフォルト: true）</li>
+        </ul>
+      </div>
+      <div class="example-title">使用例</div>
+      <pre><code>{{ exampleAPI }}</code></pre>
+    </div>
+
+    <div class="subsection">
+      <h3 id="api-test">test(name, fn) / xtest(name, fn)</h3>
+      <p><code>test()</code> は実行するテストを登録します。<code>xtest()</code> は同じですがテストをスキップします。</p>
+      <p>各テスト関数はテストコンテキストで利用可能なアサーションにアクセスできます。</p>
+    </div>
+
+    <div class="subsection">
+      <h3 id="api-lifecycle">beforeEach(fn) / afterEach(fn)</h3>
+      <p>各テスト前後に実行するセットアップ / クリーンアップ関数を登録します。</p>
+      <pre><code>t.beforeEach(() => \{{ /* setup */ }});
+t.afterEach(() => \{{ /* cleanup */ }});</code></pre>
+    </div>
+  </section>
+</template>
+
+<style>
+</style>

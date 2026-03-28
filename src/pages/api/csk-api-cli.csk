@@ -1,0 +1,197 @@
+<meta>
+  name: csk-api-cli
+  shadow: none
+</meta>
+
+<script>
+  fn tr(k: string) { return window.__t(k) }
+
+  state code_chasketInit: string = "chasket init my-project\ncd my-project\nnpm install\nchasket dev"
+
+  state code_chasketDev: string = "chasket dev                    # port 5173 (default)\nchasket dev --port 3000      # custom port\nchasket dev --no-hmr         # disable HMR"
+
+  state code_chasketBuild: string = "chasket build                  # src/ → dist/\nchasket build src/pages       # specify directory"
+
+  state code_chasketCheck: string = "chasket check                  # report type errors (no build)\nchasket check src/pages"
+</script>
+
+<template>
+      <!-- CLI Commands -->
+      <section id="cli-commands" class="doc-section">
+        <h2>{{ tr('apiContent.cli.title') }}</h2>
+        <p>{{ tr('apiContent.cli.description') }}</p>
+
+        <div class="subsection">
+          <h3>chasket init &lt;name&gt;</h3>
+          <p>{{ tr('apiContent.cli.initDescription') }}</p>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.cli.purpose') }}</h4>
+            <p>{{ tr('apiContent.cli.initPurpose') }}</p>
+          </div>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.cli.example') }}</h4>
+            <pre><code>{{ code_chasketInit }}</code></pre>
+          </div>
+
+          <div class="note">
+            <strong>{{ tr('apiContent.cli.filesCreated') }}:</strong>
+            <ul>
+              <li>chasket.config.json - {{ tr('apiContent.cli.projectConfig') }}</li>
+              <li>package.json - {{ tr('apiContent.cli.npmPackage') }}</li>
+              <li>src/pages/ - {{ tr('apiContent.cli.componentDir') }}</li>
+              <li>dist/ - {{ tr('apiContent.cli.buildDir') }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3>chasket dev [--port] [--no-hmr]</h3>
+          <p>{{ tr('apiContent.cli.devDescription') }}</p>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.cli.purpose') }}</h4>
+            <p>{{ tr('apiContent.cli.devPurpose') }}</p>
+          </div>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.cli.example') }}</h4>
+            <pre><code>{{ code_chasketDev }}</code></pre>
+          </div>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.cli.options') }}</h4>
+            <ul>
+              <li><code>--port &lt;number&gt;</code> - {{ tr('apiContent.cli.portOption') }}</li>
+              <li><code>--no-hmr</code> - {{ tr('apiContent.cli.noHmrOption') }}</li>
+              <li><code>--host &lt;host&gt;</code> - {{ tr('apiContent.cli.hostOption') }}</li>
+            </ul>
+          </div>
+
+          <div class="note">
+            <strong>{{ tr('apiContent.cli.features') }}:</strong>
+            <ul>
+              <li>{{ tr('apiContent.cli.autoFileWatch') }}</li>
+              <li>{{ tr('apiContent.cli.hmr') }}</li>
+              <li>{{ tr('apiContent.cli.sourceMap') }}</li>
+              <li>{{ tr('apiContent.cli.autoReload') }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3>chasket build [src]</h3>
+          <p>{{ tr('apiContent.cli.buildDescription') }}</p>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.cli.purpose') }}</h4>
+            <p>{{ tr('apiContent.cli.buildPurpose') }}</p>
+          </div>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.cli.example') }}</h4>
+            <pre><code>{{ code_chasketBuild }}</code></pre>
+          </div>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.cli.output') }}</h4>
+            <ul>
+              <li><code>dist/components/</code> - {{ tr('apiContent.cli.compiledComponents') }}</li>
+              <li><code>dist/index.js</code> - {{ tr('apiContent.cli.mainBundle') }}</li>
+              <li><code>dist/index.d.ts</code> - {{ tr('apiContent.cli.typeDefinitions') }}</li>
+            </ul>
+          </div>
+
+          <div class="note">
+            <strong>{{ tr('apiContent.cli.optimizations') }}:</strong>
+            <ul>
+              <li>{{ tr('apiContent.cli.minification') }}</li>
+              <li>{{ tr('apiContent.cli.treeShaking') }}</li>
+              <li>{{ tr('apiContent.cli.cssBundling') }}</li>
+              <li>{{ tr('apiContent.cli.sourceMapOptional') }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3>chasket check [src]</h3>
+          <p>{{ tr('apiContent.cli.checkDescription') }}</p>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.cli.purpose') }}</h4>
+            <p>{{ tr('apiContent.cli.checkPurpose') }}</p>
+          </div>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.cli.example') }}</h4>
+            <pre><code>{{ code_chasketCheck }}</code></pre>
+          </div>
+
+          <div class="note">
+            <strong>{{ tr('apiContent.cli.purpose') }}:</strong>
+            <ul>
+              <li>{{ tr('apiContent.cli.checkCicdPurpose') }}</li>
+              <li>{{ tr('apiContent.cli.checkErrorOnlyPurpose') }}</li>
+              <li>{{ tr('apiContent.cli.checkFastValidation') }}</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- CLI Options -->
+      <section id="cli-options" class="doc-section">
+        <h2>{{ tr('apiContent.cli.optionsList') }}</h2>
+
+        <div class="table-wrapper">
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>{{ tr('apiContent.cli.tableOption') }}</th>
+                <th>{{ tr('apiContent.cli.tableCommand') }}</th>
+                <th>{{ tr('apiContent.cli.tableDescription') }}</th>
+                <th>{{ tr('apiContent.cli.tableDefault') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>--port</code></td>
+                <td>dev</td>
+                <td>{{ tr('apiContent.cli.tablePortDesc') }}</td>
+                <td>5173</td>
+              </tr>
+              <tr>
+                <td><code>--host</code></td>
+                <td>dev</td>
+                <td>{{ tr('apiContent.cli.tableHostDesc') }}</td>
+                <td>localhost</td>
+              </tr>
+              <tr>
+                <td><code>--no-hmr</code></td>
+                <td>dev</td>
+                <td>{{ tr('apiContent.cli.tableNoHmrDesc') }}</td>
+                <td>enabled</td>
+              </tr>
+              <tr>
+                <td><code>--watch</code></td>
+                <td>build, check</td>
+                <td>{{ tr('apiContent.cli.tableWatchDesc') }}</td>
+                <td>disabled</td>
+              </tr>
+              <tr>
+                <td><code>--sourcemap</code></td>
+                <td>build</td>
+                <td>{{ tr('apiContent.cli.tableSourcemapDesc') }}</td>
+                <td>{{ tr('apiContent.cli.tableConfigDependent') }}</td>
+              </tr>
+              <tr>
+                <td><code>--minify</code></td>
+                <td>build</td>
+                <td>{{ tr('apiContent.cli.tableMinifyDesc') }}</td>
+                <td>{{ tr('apiContent.cli.tableProduction') }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+</template>

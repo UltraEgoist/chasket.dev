@@ -1,0 +1,78 @@
+<meta>
+  name: csk-api-config
+  shadow: none
+</meta>
+
+<script>
+  fn tr(k: string) { return window.__t(k) }
+
+  state code_configBasic: string = "{\n  &quot;src&quot;: &quot;src&quot;,\n  &quot;outdir&quot;: &quot;dist&quot;,\n  &quot;target&quot;: &quot;es2020&quot;,\n  &quot;bundle&quot;: true,\n  &quot;shadow&quot;: true,\n  &quot;sourcemap&quot;: true,\n  &quot;minify&quot;: true\n}"
+</script>
+
+<template>
+      <!-- Config File -->
+      <section id="config-file" class="doc-section">
+        <h2>{{ tr('apiContent.config.title') }} (chasket.config.json)</h2>
+        <p>{{ tr('apiContent.config.description') }}</p>
+
+        <div class="subsection">
+          <h3>{{ tr('apiContent.config.properties') }}</h3>
+
+          <div class="property">
+            <h4><code>src</code></h4>
+            <p>{{ tr('apiContent.config.srcDesc') }}</p>
+            <pre><code>"src": "src"</code></pre>
+          </div>
+
+          <div class="property">
+            <h4><code>outdir</code></h4>
+            <p>{{ tr('apiContent.config.outdirDesc') }}</p>
+            <pre><code>"outdir": "dist"</code></pre>
+          </div>
+
+          <div class="property">
+            <h4><code>target</code></h4>
+            <p>{{ tr('apiContent.config.targetDesc') }}</p>
+            <pre><code>"target": "es2020"</code></pre>
+          </div>
+
+          <div class="property">
+            <h4><code>bundle</code></h4>
+            <p>{{ tr('apiContent.config.bundleDesc') }}</p>
+            <pre><code>"bundle": true</code></pre>
+          </div>
+
+          <div class="property">
+            <h4><code>shadow</code></h4>
+            <p>{{ tr('apiContent.config.shadowDesc') }}</p>
+            <pre><code>"shadow": true</code></pre>
+          </div>
+
+          <div class="property">
+            <h4><code>sourcemap</code></h4>
+            <p>{{ tr('apiContent.config.sourcemapDesc') }}</p>
+            <pre><code>"sourcemap": true</code></pre>
+          </div>
+
+          <div class="property">
+            <h4><code>minify</code></h4>
+            <p>{{ tr('apiContent.config.minifyDesc') }}</p>
+            <pre><code>"minify": true</code></pre>
+          </div>
+
+          <div class="property">
+            <h4><code>imports</code></h4>
+            <p>{{ tr('apiContent.config.importsDesc') }}</p>
+            <pre><code>"imports": {
+  "@": "./src",
+  "utils": "./src/utils"
+}</code></pre>
+          </div>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.config.exampleTitle') }}</h4>
+            <pre><code>{{ code_configBasic }}</code></pre>
+          </div>
+        </div>
+      </section>
+</template>

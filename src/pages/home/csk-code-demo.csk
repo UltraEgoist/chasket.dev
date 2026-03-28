@@ -1,0 +1,355 @@
+<!-- csk-code-demo: ホームページのインタラクティブコードデモ
+     shadow: open — 独自のスコープ付きスタイルを持つ。
+     3つのタブ（Counter / Todo / Fetch）でコード例とライブプレビューを表示。
+
+     コード例の表示パターン（ARCHITECTURE.md §6 参照）:
+     - シンタックスハイライト付き HTML を state 変数に格納
+     - class=t（unquoted 属性）を使用。class=&quot;t&quot; は不可
+     - \n で改行を制御（コンパイラの HTML 正規化を回避）
+     - postbuild.js が <pre><code> 内の #esc() を除去済み -->
+<meta>
+  name: "csk-code-demo"
+  shadow: open
+</meta>
+
+<script>
+  state activeTab: string = "counter"
+  state demoCount: number = 0
+  state todoItems: string[] = []
+  state todoText: string = ""
+
+  // シンタックスハイライト付きコード例。state 変数に格納することで
+  // コンパイラの <pre> 内 HTML 正規化（改行崩れ）を回避する。
+  // class=t 形式（unquoted 属性）を使用 — class=&quot;t&quot; は HTML パーサーが
+  // 引用符込みの class 名として解釈するため不可。
+  state codeCounter: string = "<span class=t>&lt;meta&gt;</span>\n  <span class=a>name</span>: <span class=s>&quot;x-counter&quot;</span>\n  <span class=a>shadow</span>: <span class=s>open</span>\n<span class=t>&lt;/meta&gt;</span>\n\n<span class=t>&lt;script&gt;</span>\n  <span class=k>state</span> <span class=v>count</span>: <span class=tp>number</span> = <span class=n>0</span>\n\n  <span class=k>fn</span> <span class=f>increment</span>() { count += <span class=n>1</span> }\n  <span class=k>fn</span> <span class=f>decrement</span>() { count -= <span class=n>1</span> }\n<span class=t>&lt;/script&gt;</span>\n\n<span class=t>&lt;template&gt;</span>\n  <span class=t>&lt;div</span> <span class=a>class</span>=<span class=s>&quot;counter&quot;</span><span class=t>&gt;</span>\n    <span class=t>&lt;button</span> <span class=d>@click</span>=<span class=s>&quot;decrement&quot;</span><span class=t>&gt;</span>-<span class=t>&lt;/button&gt;</span>\n    <span class=t>&lt;span&gt;</span><span class=i>{{ count }}</span><span class=t>&lt;/span&gt;</span>\n    <span class=t>&lt;button</span> <span class=d>@click</span>=<span class=s>&quot;increment&quot;</span><span class=t>&gt;</span>+<span class=t>&lt;/button&gt;</span>\n  <span class=t>&lt;/div&gt;</span>\n<span class=t>&lt;/template&gt;</span>\n\n<span class=t>&lt;style&gt;</span>\n  <span class=cs>.counter</span> { <span class=a>display</span>: flex; <span class=a>gap</span>: 12px; }\n  <span class=cs>button</span>  { <span class=a>width</span>: 36px; <span class=a>border-radius</span>: 8px; }\n  <span class=cs>span</span>    { <span class=a>font-size</span>: 1.5rem; }\n<span class=t>&lt;/style&gt;</span>"
+
+  state codeTodo: string = "<span class=t>&lt;meta&gt;</span>\n  <span class=a>name</span>: <span class=s>&quot;x-todo&quot;</span>\n<span class=t>&lt;/meta&gt;</span>\n\n<span class=t>&lt;script&gt;</span>\n  <span class=k>state</span> <span class=v>items</span>: <span class=tp>string[]</span> = []\n  <span class=k>state</span> <span class=v>text</span>: <span class=tp>string</span> = <span class=s>&quot;&quot;</span>\n\n  <span class=k>fn</span> <span class=f>add</span>() {\n    <span class=k>if</span> (text.trim() === <span class=s>&quot;&quot;</span>) <span class=k>return</span>\n    items = [...items, text.trim()]\n    text = <span class=s>&quot;&quot;</span>\n  }\n\n  <span class=k>fn</span> <span class=f>remove</span>(<span class=v>index</span>: <span class=tp>number</span>) {\n    items = items.filter((<span class=v>_</span>, <span class=v>i</span>) =&gt; i !== index)\n  }\n<span class=t>&lt;/script&gt;</span>\n\n<span class=t>&lt;template&gt;</span>\n  <span class=t>&lt;input</span> <span class=d>:bind</span>=<span class=s>&quot;text&quot;</span> <span class=d>@keydown|enter</span>=<span class=s>&quot;add&quot;</span> <span class=t>/&gt;</span>\n  <span class=t>&lt;button</span> <span class=d>@click</span>=<span class=s>&quot;add&quot;</span><span class=t>&gt;</span>Add<span class=t>&lt;/button&gt;</span>\n  <span class=t>&lt;ul&gt;</span>\n    <span class=c>&lt;#for</span> <span class=a>each</span>=<span class=s>&quot;item, index&quot;</span> <span class=a>of</span>=<span class=s>&quot;items&quot;</span><span class=c>&gt;</span>\n      <span class=t>&lt;li&gt;</span><span class=i>{{ item }}</span>\n        <span class=t>&lt;button</span> <span class=d>@click</span>=<span class=s>&quot;remove(index)&quot;</span><span class=t>&gt;</span>x<span class=t>&lt;/button&gt;</span>\n      <span class=t>&lt;/li&gt;</span>\n      <span class=c>&lt;:empty&gt;&lt;</span><span class=t>li&gt;</span>No items<span class=t>&lt;/li&gt;</span><span class=c>&lt;/:empty&gt;</span>\n    <span class=c>&lt;/#for&gt;</span>\n  <span class=t>&lt;/ul&gt;</span>\n<span class=t>&lt;/template&gt;</span>"
+
+  state codeFetch: string = "<span class=t>&lt;script&gt;</span>\n  <span class=k>prop</span> <span class=v>userId</span>: <span class=tp>number</span> = <span class=n>1</span>\n  <span class=k>state</span> <span class=v>user</span>: <span class=tp>object | null</span> = <span class=n>null</span>\n  <span class=k>state</span> <span class=v>loading</span>: <span class=tp>boolean</span> = <span class=n>true</span>\n\n  <span class=k>fn</span> <span class=k>async</span> <span class=f>fetchUser</span>() {\n    loading = <span class=n>true</span>\n    <span class=k>const</span> res = <span class=k>await</span> fetch(\n      <span class=s>`/api/users/${userId}`</span>\n    )\n    user = <span class=k>await</span> res.json()\n    loading = <span class=n>false</span>\n  }\n\n  <span class=k>on</span> <span class=f>mount</span> { fetchUser() }\n  <span class=k>watch</span>(userId) { fetchUser() }\n<span class=t>&lt;/script&gt;</span>\n\n<span class=t>&lt;template&gt;</span>\n  <span class=c>&lt;#if</span> <span class=a>condition</span>=<span class=s>&quot;loading&quot;</span><span class=c>&gt;</span>\n    <span class=t>&lt;div&gt;</span>Loading...<span class=t>&lt;/div&gt;</span>\n  <span class=c>&lt;:else&gt;</span>\n    <span class=t>&lt;div</span> <span class=a>class</span>=<span class=s>&quot;card&quot;</span><span class=t>&gt;</span>\n      <span class=t>&lt;img</span> <span class=d>:src</span>=<span class=s>&quot;user.avatar&quot;</span> <span class=t>/&gt;</span>\n      <span class=t>&lt;h3&gt;</span><span class=i>{{ user.name }}</span><span class=t>&lt;/h3&gt;</span>\n      <span class=t>&lt;p&gt;</span><span class=i>{{ user.email }}</span><span class=t>&lt;/p&gt;</span>\n    <span class=t>&lt;/div&gt;</span>\n  <span class=c>&lt;/#if&gt;</span>\n<span class=t>&lt;/template&gt;</span>"
+
+  fn tr(k: string) { return window.__t(k) }
+
+  fn setCounter() { activeTab = "counter"; cleanPre() }
+  fn setTodo() { activeTab = "todo"; cleanPre() }
+  fn setFetch() { activeTab = "fetch"; cleanPre() }
+
+  fn inc() { demoCount += 1 }
+  fn dec() { demoCount -= 1 }
+
+  fn addTodo() {
+    if (todoText.trim() === "") return
+    todoItems = [...todoItems, todoText.trim()]
+    todoText = ""
+  }
+
+  fn removeTodo(index: number) {
+    todoItems = todoItems.filter((_, i) => i !== index)
+  }
+
+  // cleanPre: <pre> 要素内の空テキストノードを除去。
+  // コンパイラがテンプレートリテラル生成時に挿入する不要な空白ノードを
+  // 描画後に除去し、コード表示のレイアウト崩れを防止する。
+  fn cleanPre() {
+    requestAnimationFrame(() => {
+      this.shadowRoot.querySelectorAll('pre').forEach((el) => {
+        for (let i = el.childNodes.length - 1; i >= 0; i--) {
+          const n = el.childNodes[i]
+          if (n.nodeType === 3 && !n.textContent.trim()) n.remove()
+        }
+      })
+    })
+  }
+
+  on mount { cleanPre() }
+</script>
+
+<template>
+  <section class="section">
+    <div class="container">
+      <div class="header">
+        <h2>{{ tr('codeDemo.title') }}</h2>
+        <p>{{ tr('codeDemo.subtitle') }}</p>
+      </div>
+
+      <div class="tabs">
+        <button :class="activeTab === 'counter' ? 'tab active' : 'tab'" @click="setCounter">{{ tr('codeDemo.tabs.counter') }}</button>
+        <button :class="activeTab === 'todo' ? 'tab active' : 'tab'" @click="setTodo">{{ tr('codeDemo.tabs.todo') }}</button>
+        <button :class="activeTab === 'fetch' ? 'tab active' : 'tab'" @click="setFetch">{{ tr('codeDemo.tabs.fetch') }}</button>
+      </div>
+
+      <div class="panels">
+        <#if condition="activeTab === 'counter'">
+          <div class="layout">
+            <div class="code">
+              <div class="file">counter.csk</div>
+              <pre><code>{{ codeCounter }}</code></pre>
+            </div>
+            <div class="preview">
+              <div class="preview-label">{{ tr('codeDemo.preview') }}</div>
+              <div class="preview-body">
+                <div class="demo-counter">
+                  <button class="dbtn" @click="dec">-</button>
+                  <span class="dcount">{{ demoCount }}</span>
+                  <button class="dbtn" @click="inc">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </#if>
+
+        <#if condition="activeTab === 'todo'">
+          <div class="layout">
+            <div class="code">
+              <div class="file">todo.csk</div>
+              <pre><code>{{ codeTodo }}</code></pre>
+            </div>
+            <div class="preview">
+              <div class="preview-label">{{ tr('codeDemo.preview') }}</div>
+              <div class="preview-body">
+                <div class="demo-todo">
+                  <div class="demo-row">
+                    <input
+                      class="dinput"
+                      :bind="todoText"
+                      @keydown|enter="addTodo"
+                      :placeholder="tr('codeDemo.todoPlaceholder')"
+                    />
+                    <button class="dbtn" @click="addTodo">{{ tr('codeDemo.todoAdd') }}</button>
+                  </div>
+                  <ul class="dlist">
+                    <#for each="item, index" of="todoItems" key="item">
+                      <li class="ditem">
+                        <span>{{ item }}</span>
+                        <button class="dremove" @click="removeTodo(index)">x</button>
+                      </li>
+                      <:empty>
+                        <li class="dempty">{{ tr('codeDemo.todoEmpty') }}</li>
+                      </:empty>
+                    </#for>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </#if>
+
+        <#if condition="activeTab === 'fetch'">
+          <div class="layout">
+            <div class="code">
+              <div class="file">user-card.csk</div>
+              <pre><code>{{ codeFetch }}</code></pre>
+            </div>
+            <div class="preview">
+              <div class="preview-label">{{ tr('codeDemo.preview') }}</div>
+              <div class="preview-body">
+                <div class="demo-user">
+                  <div class="davatar">J</div>
+                  <h3 class="dname">Jane Doe</h3>
+                  <p class="demail">jane@example.com</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </#if>
+      </div>
+    </div>
+  </section>
+</template>
+
+<style>
+  :host { display: block; padding: var(--space-section, 5rem) 0; }
+
+  .container { max-width: var(--max-w, 70rem); margin: 0 auto; padding: 0 var(--space-page, 1.5rem); }
+
+  .header { text-align: center; margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+  .header h2 {
+    font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+    color: var(--c-text, #e4e4ed);
+  }
+  .header p {
+    font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+    color: var(--c-text-dim, #9898ab);
+    max-width: 35rem;
+    margin: 0 auto;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 0.25rem;
+    background: var(--c-surface, #1a1a26);
+    border-radius: 0.625rem 0.625rem 0 0;
+    padding: 0.375rem 0.375rem 0;
+    border: 1px solid var(--c-border, #2a2a3a);
+    border-bottom: none;
+    width: fit-content;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab {
+    padding: 0.5rem 1.25rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--c-text-dim, #9898ab);
+    font-size: clamp(0.75rem, 0.95vw, 0.85rem);
+    font-weight: 500;
+    border-radius: 0.5rem 0.5rem 0 0;
+    transition: 0.2s;
+    font-family: inherit;
+    white-space: nowrap;
+    min-height: 2.5rem;
+  }
+  .tab.active { background: var(--c-bg-code, #0d0d14); color: #fff; }
+  .tab:hover:not(.active) { color: var(--c-text, #e4e4ed); }
+
+  .panels {
+    border: 1px solid var(--c-border, #2a2a3a);
+    border-radius: 0 var(--radius, 0.75rem) var(--radius, 0.75rem) var(--radius, 0.75rem);
+    overflow: hidden;
+    background: var(--c-bg-code, #0d0d14);
+  }
+
+  .layout { display: grid; grid-template-columns: 1fr clamp(14rem, 25%, 18.75rem); }
+
+  .code { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .file {
+    padding: 0.625rem 1.25rem;
+    border-bottom: 1px solid var(--c-border, #2a2a3a);
+    font-size: clamp(0.7rem, 0.85vw, 0.8rem);
+    color: var(--c-text-dim, #9898ab);
+    font-family: var(--mono, monospace);
+  }
+  pre {
+    margin: 0;
+    padding: 1.25rem;
+    font-family: var(--mono, 'JetBrains Mono', monospace);
+    font-size: clamp(0.7rem, 0.85vw, 0.82rem);
+    line-height: 1.7;
+    color: #c8c8d8;
+    white-space: pre;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  code { font-family: inherit; font-size: inherit; }
+
+  .t  { color: #7c8aff; }
+  .a  { color: #f8a5c2; }
+  .s  { color: #55efc4; }
+  .k  { color: #fd79a8; }
+  .tp { color: #74b9ff; }
+  .v  { color: #dfe6e9; }
+  .f  { color: #ffeaa7; }
+  .n  { color: #fab1a0; }
+  .i  { color: #fdcb6e; }
+  .c  { color: #e17055; }
+  .d  { color: #a29bfe; }
+  .cs { color: #81ecec; }
+
+  .preview {
+    border-left: 1px solid var(--c-border, #2a2a3a);
+    display: flex;
+    flex-direction: column;
+  }
+  .preview-label {
+    padding: 0.625rem 1.25rem;
+    border-bottom: 1px solid var(--c-border, #2a2a3a);
+    font-size: clamp(0.7rem, 0.85vw, 0.8rem);
+    color: var(--c-text-dim, #9898ab);
+    font-weight: 500;
+  }
+  .preview-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1rem, 2.5vw, 2rem) 1.25rem;
+    background: #fff;
+    color: #1a1a2e;
+    font-family: system-ui, sans-serif;
+  }
+
+  .demo-counter { display: flex; gap: 0.75rem; align-items: center; }
+  .dcount { font-size: 1.5rem; font-weight: 700; min-width: 2ch; text-align: center; }
+  .dbtn {
+    min-width: 2.75rem; min-height: 2.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid #d1d5db;
+    background: #f9fafb;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+    padding: 0 0.5rem;
+    font-family: inherit;
+  }
+  .dbtn:hover { background: #f3f4f6; }
+
+  .demo-todo { width: 100%; }
+  .demo-row { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; }
+  .dinput {
+    flex: 1;
+    padding: 0.625rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-family: inherit;
+    outline: none;
+    min-width: 0;
+    min-height: 2.75rem;
+  }
+  .dinput:focus { border-color: #6C5CE7; }
+  .dlist { list-style: none; padding: 0; margin: 0; }
+  .ditem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 0.875rem;
+  }
+  .dremove {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+    min-width: 2rem;
+    min-height: 2rem;
+  }
+  .dempty {
+    color: #9ca3af;
+    font-size: 0.875rem;
+    padding: 0.5rem 0;
+    list-style: none;
+  }
+
+  .demo-user { text-align: center; }
+  .davatar {
+    width: 3.5rem; height: 3.5rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6C5CE7, #00B894);
+    margin: 0 auto 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+  .dname { margin: 0 0 0.25rem; font-size: 1rem; font-weight: 600; color: #1a1a2e; }
+  .demail { margin: 0; font-size: 0.875rem; color: #6b7280; }
+
+  @media (max-width: 48rem) {
+    .layout { grid-template-columns: 1fr; }
+    .preview { border-left: none; border-top: 1px solid var(--c-border, #2a2a3a); }
+  }
+</style>
