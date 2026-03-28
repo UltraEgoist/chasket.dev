@@ -1,0 +1,185 @@
+<meta>
+  name: csk-api-diagnostics
+  shadow: none
+</meta>
+
+<script>
+  fn tr(k: string) { return window.__t(k) }
+
+  state code_diagnostic_e0001: string = "&lt;!-- csk-page-api.csk --&gt;\n&lt;meta&gt;\n  name: my-component\n&lt;/meta&gt;\n&lt;script&gt;\n  state count: number = 0\n&lt;/script&gt;\n&lt;!-- no template block --&gt;\n\n&lt;!-- fix: add template block --&gt;\n&lt;template&gt;\n  &lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;/template&gt;"
+
+  state code_diagnostic_e0002: string = "&lt;!-- invalid: no hyphens --&gt;\n&lt;meta&gt;\n  name: MyComponent\n&lt;/meta&gt;\n\n&lt;!-- fix: use kebab-case --&gt;\n&lt;meta&gt;\n  name: my-component\n&lt;/meta&gt;"
+
+  state code_diagnostic_e0003: string = "state count: number = 0\nstate result: string = count + 10  // error: assigning number+number to string\n\n// fix:\nstate result: number = count + 10\n// or\nstate result: string = (count + 10).toString()"
+
+  state code_diagnostic_w0101: string = "state count: number = 0   // warning: unused\nstate name: string = 'John'\n\n&lt;template&gt;\n  &lt;p&gt;{{ name }}&lt;/p&gt;\n&lt;/template&gt;\n\n// fix: use or remove count"
+
+  state code_diagnostic_w0201: string = "&lt;!-- dangerous: inserting user input as HTML --&gt;\n&lt;div @html=\"userContent\"&gt;&lt;/div&gt;\n\n&lt;!-- safe: auto-escaped --&gt;\n&lt;div&gt;{{ userContent }}&lt;/div&gt;\n\n&lt;!-- fix: use only trusted HTML --&gt;\n&lt;div @html=\"sanitize(userContent)\"&gt;&lt;/div&gt;"
+
+  state code_diagnostic_w0202: string = "&lt;!-- dangerous: dynamic URL injection --&gt;\n&lt;a :href=\"'https://' + userInput\"&gt;Link&lt;/a&gt;\n\n&lt;!-- fix: URL validation --&gt;\n&lt;a :href=\"isValidUrl(userInput) ? userInput : '#'\"&gt;Link&lt;/a&gt;"
+
+  state code_diagnostic_w0203: string = "&lt;!-- duplicate ID warning --&gt;\n&lt;div id=\"header\"&gt;&lt;/div&gt;\n&lt;div id=\"header\"&gt;&lt;/div&gt;  &lt;!-- warning --&gt;\n\n&lt;!-- fix: use unique IDs --&gt;\n&lt;div id=\"header\"&gt;&lt;/div&gt;\n&lt;div id=\"main\"&gt;&lt;/div&gt;"
+</script>
+
+<template>
+      <!-- Diagnostic Messages -->
+      <section id="diagnostics" class="doc-section">
+        <h2>{{ tr('apiContent.diagnostics.title') }}</h2>
+        <p>{{ tr('apiContent.diagnostics.description') }}</p>
+      </section>
+
+      <!-- Error Codes -->
+      <section id="error-codes" class="doc-section">
+        <h2>{{ tr('apiContent.diagnostics.errorCodes') }} (E)</h2>
+
+        <div id="e0001" class="subsection">
+          <h3>E0001: {{ tr('apiContent.diagnostics.e0001.title') }}</h3>
+          <p>{{ tr('apiContent.diagnostics.e0001.description') }}</p>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
+            <pre><code>{{ code_diagnostic_e0001 }}</code></pre>
+          </div>
+        </div>
+
+        <div id="e0002" class="subsection">
+          <h3>E0002: {{ tr('apiContent.diagnostics.e0002.title') }}</h3>
+          <p>{{ tr('apiContent.diagnostics.e0002.description') }}</p>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
+            <pre><code>{{ code_diagnostic_e0002 }}</code></pre>
+          </div>
+
+          <div class="note">
+            <strong>{{ tr('apiContent.diagnostics.kebabCaseConvention') }}:</strong>
+            <ul>
+              <li>{{ tr('apiContent.diagnostics.kebabRule1') }}</li>
+              <li>{{ tr('apiContent.diagnostics.kebabRule2') }}</li>
+              <li>{{ tr('apiContent.diagnostics.kebabRule3') }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="e0003" class="subsection">
+          <h3>E0003: {{ tr('apiContent.diagnostics.e0003.title') }}</h3>
+          <p>{{ tr('apiContent.diagnostics.e0003.description') }}</p>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
+            <pre><code>{{ code_diagnostic_e0003 }}</code></pre>
+          </div>
+        </div>
+
+        <div id="e0004" class="subsection">
+          <h3>E0004: {{ tr('apiContent.diagnostics.e0004.title') }}</h3>
+          <p>{{ tr('apiContent.diagnostics.e0004.description') }}</p>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
+            <p>{{ tr('apiContent.diagnostics.e0004.fixDescription') }}</p>
+          </div>
+        </div>
+
+        <div id="e0301" class="subsection">
+          <h3>E0301: {{ tr('apiContent.diagnostics.e0301.title') }}</h3>
+          <p>{{ tr('apiContent.diagnostics.e0301.description') }}</p>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
+            <p>{{ tr('apiContent.diagnostics.e0301.fixDescription') }}</p>
+          </div>
+        </div>
+
+        <div id="e0302" class="subsection">
+          <h3>E0302: {{ tr('apiContent.diagnostics.e0302.title') }}</h3>
+          <p>{{ tr('apiContent.diagnostics.e0302.description') }}</p>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
+            <p>{{ tr('apiContent.diagnostics.e0302.fixDescription') }}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Warning Codes -->
+      <section id="warning-codes" class="doc-section">
+        <h2>{{ tr('apiContent.diagnostics.warningCodes') }} (W)</h2>
+
+        <div id="w0101" class="subsection">
+          <h3>W0101: {{ tr('apiContent.diagnostics.w0101.title') }}</h3>
+          <p>{{ tr('apiContent.diagnostics.w0101.description') }}</p>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
+            <pre><code>{{ code_diagnostic_w0101 }}</code></pre>
+          </div>
+
+          <div class="note">
+            <strong>{{ tr('apiContent.diagnostics.approaches') }}:</strong>
+            <ul>
+              <li>{{ tr('apiContent.diagnostics.w0101.approach1') }}</li>
+              <li>{{ tr('apiContent.diagnostics.w0101.approach2') }}</li>
+              <li>{{ tr('apiContent.diagnostics.w0101.approach3') }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="w0201" class="subsection">
+          <h3>W0201: {{ tr('apiContent.diagnostics.w0201.title') }}</h3>
+          <p>{{ tr('apiContent.diagnostics.w0201.description') }}</p>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
+            <pre><code>{{ code_diagnostic_w0201 }}</code></pre>
+          </div>
+
+          <div class="note">
+            <strong>{{ tr('apiContent.diagnostics.securityMeasures') }}:</strong>
+            <ul>
+              <li>{{ tr('apiContent.diagnostics.w0201.measure1') }}</li>
+              <li>{{ tr('apiContent.diagnostics.w0201.measure2') }}</li>
+              <li>{{ tr('apiContent.diagnostics.w0201.measure3') }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="w0202" class="subsection">
+          <h3>W0202: {{ tr('apiContent.diagnostics.w0202.title') }}</h3>
+          <p>{{ tr('apiContent.diagnostics.w0202.description') }}</p>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
+            <pre><code>{{ code_diagnostic_w0202 }}</code></pre>
+          </div>
+
+          <div class="note">
+            <strong>{{ tr('apiContent.diagnostics.countermeasures') }}:</strong>
+            <ul>
+              <li>{{ tr('apiContent.diagnostics.w0202.measure1') }}</li>
+              <li>{{ tr('apiContent.diagnostics.w0202.measure2') }}</li>
+              <li>{{ tr('apiContent.diagnostics.w0202.measure3') }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="w0203" class="subsection">
+          <h3>W0203: {{ tr('apiContent.diagnostics.w0203.title') }}</h3>
+          <p>{{ tr('apiContent.diagnostics.w0203.description') }}</p>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
+            <pre><code>{{ code_diagnostic_w0203 }}</code></pre>
+          </div>
+
+          <div class="note">
+            <strong>{{ tr('apiContent.diagnostics.bestPractices') }}:</strong>
+            <ul>
+              <li>{{ tr('apiContent.diagnostics.w0203.practice1') }}</li>
+              <li>{{ tr('apiContent.diagnostics.w0203.practice2') }}</li>
+              <li>{{ tr('apiContent.diagnostics.w0203.practice3') }}</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+</template>

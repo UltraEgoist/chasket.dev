@@ -1,0 +1,192 @@
+<meta>
+  name: csk-guide-template
+  shadow: none
+</meta>
+
+<script>
+  state code_interpolation: string = "&lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;p&gt;{{ firstName + ' ' + lastName }}&lt;/p&gt;\n&lt;p&gt;{{ formatDate(date) }}&lt;/p&gt;"
+
+  state code_dynamicAttr: string = "&lt;div :class=\"isActive ? 'active' : ''\"&gt;\n  &lt;a :href=\"'/posts/' + postId\"&gt;View&lt;/a&gt;\n  &lt;img :src=\"imageUrl\" :alt=\"imageName\" /&gt;\n&lt;/div&gt;"
+
+  state code_twoWayBinding: string = "&lt;input :bind=\"name\" type=\"text\" /&gt;\n&lt;textarea :bind=\"description\"&gt;&lt;/textarea&gt;\n&lt;!-- name and description update automatically --&gt;"
+
+  state code_eventHandling: string = "&lt;button @click=\"increment\"&gt;Count: {{ count }}&lt;/button&gt;\n&lt;form @submit|prevent=\"handleSubmit\"&gt;\n  &lt;input @keydown|enter=\"handleEnter\" /&gt;\n  &lt;button @click|stop=\"handleClick\"&gt;Click&lt;/button&gt;\n&lt;/form&gt;"
+
+  state code_conditional: string = "&lt;#if condition=\"isLoggedIn\"&gt;\n  &lt;p&gt;Welcome, {{ username }}!&lt;/p&gt;\n&lt;#else if condition=\"loading\"&gt;\n  &lt;p&gt;Loading...&lt;/p&gt;\n&lt;#else&gt;\n  &lt;p&gt;Please log in&lt;/p&gt;\n&lt;/#if&gt;"
+
+  state code_loop: string = "&lt;#for each=\"item\" of=\"items\" key=\"item.id\"&gt;\n  &lt;div&gt;\n    &lt;h3&gt;{{ item.name }}&lt;/h3&gt;\n    &lt;p&gt;{{ item.description }}&lt;/p&gt;\n  &lt;/div&gt;\n&lt;#empty&gt;\n  &lt;p&gt;No items found&lt;/p&gt;\n&lt;/#for&gt;"
+
+  state code_html: string = "&lt;div @html=\"richContent\"&gt;&lt;/div&gt;\n&lt;!-- Renders: rawHtmlString (use only with trusted content!) --&gt;"
+
+  state code_slot: string = "&lt;div class=\"card\"&gt;\n  &lt;slot name=\"header\"&gt;&lt;/slot&gt;\n  &lt;slot&gt;&lt;/slot&gt;\n  &lt;slot name=\"footer\"&gt;&lt;/slot&gt;\n&lt;/div&gt;"
+
+  state code_slotUsage: string = "&lt;Card&gt;\n  &lt;template #header&gt;\n    &lt;h2&gt;Title&lt;/h2&gt;\n  &lt;/template&gt;\n  &lt;p&gt;Main content&lt;/p&gt;\n  &lt;template #footer&gt;\n    &lt;button&gt;Close&lt;/button&gt;\n  &lt;/template&gt;\n&lt;/Card&gt;"
+
+  fn tr(k: string) { return window.__t(k) }
+</script>
+
+<template>
+  <!-- template ブロック -->
+  <section id="template-block" class="doc-section">
+    <h2>{{ tr('guideContent.template.templateBlock.title') }}</h2>
+    <p>{{ tr('guideContent.template.templateBlock.desc') }}</p>
+  </section>
+
+  <!-- テンプレート構文 -->
+  <section id="template-syntax" class="doc-section">
+    <h2>{{ tr('guideContent.template.syntax.title') }}</h2>
+
+    <!-- 補間 -->
+    <div id="interpolation" class="subsection">
+      <h3>{{ tr('guideContent.template.interpolation.title') }}</h3>
+      <p>{{ tr('guideContent.template.interpolation.desc') }}</p>
+
+      <pre><code>{{ code_interpolation }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.template.interpolation.featuresLabel') }}:</strong>
+        <ul>
+          <li>{{ tr('guideContent.template.interpolation.features.f1') }}</li>
+          <li>{{ tr('guideContent.template.interpolation.features.f2') }}</li>
+          <li>{{ tr('guideContent.template.interpolation.features.f3') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 動的属性 -->
+    <div id="dynamic-attr" class="subsection">
+      <h3>{{ tr('guideContent.template.dynamicAttr.title') }}</h3>
+      <p>{{ tr('guideContent.template.dynamicAttr.desc') }}</p>
+
+      <pre><code>{{ code_dynamicAttr }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.template.dynamicAttr.commonLabel') }}:</strong>
+        <ul>
+          <li><code>:class</code> - {{ tr('guideContent.template.dynamicAttr.common.c1') }}</li>
+          <li><code>:href</code> - {{ tr('guideContent.template.dynamicAttr.common.c2') }}</li>
+          <li><code>:src</code> - {{ tr('guideContent.template.dynamicAttr.common.c3') }}</li>
+          <li><code>:disabled</code> - {{ tr('guideContent.template.dynamicAttr.common.c4') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 双方向バインディング -->
+    <div id="two-way" class="subsection">
+      <h3>{{ tr('guideContent.template.twoWay.title') }}</h3>
+      <p>{{ tr('guideContent.template.twoWay.desc') }}</p>
+
+      <pre><code>{{ code_twoWayBinding }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.template.twoWay.supportedLabel') }}:</strong>
+        <ul>
+          <li>&lt;input type="text"&gt;</li>
+          <li>&lt;textarea&gt;</li>
+          <li>&lt;select&gt;</li>
+          <li>&lt;input type="checkbox"&gt;</li>
+          <li>&lt;input type="radio"&gt;</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- イベントハンドリング -->
+    <div id="events" class="subsection">
+      <h3>{{ tr('guideContent.template.events.title') }}</h3>
+      <p>{{ tr('guideContent.template.events.desc') }}</p>
+
+      <pre><code>{{ code_eventHandling }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.template.events.modifiersLabel') }}:</strong>
+        <ul>
+          <li><code>|prevent</code> - {{ tr('guideContent.template.events.modifiers.prevent') }}</li>
+          <li><code>|stop</code> - {{ tr('guideContent.template.events.modifiers.stop') }}</li>
+          <li><code>|enter</code> - {{ tr('guideContent.template.events.modifiers.enter') }}</li>
+          <li><code>|escape</code> - {{ tr('guideContent.template.events.modifiers.escape') }}</li>
+          <li><code>|space</code> - {{ tr('guideContent.template.events.modifiers.space') }}</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.template.events.commonLabel') }}:</strong>
+        <ul>
+          <li><code>@click</code> - {{ tr('guideContent.template.events.common.c1') }}</li>
+          <li><code>@submit</code> - {{ tr('guideContent.template.events.common.c2') }}</li>
+          <li><code>@change</code> - {{ tr('guideContent.template.events.common.c3') }}</li>
+          <li><code>@keydown</code>, <code>@keyup</code> - {{ tr('guideContent.template.events.common.c4') }}</li>
+          <li><code>@focus</code>, <code>@blur</code> - {{ tr('guideContent.template.events.common.c5') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 条件分岐 -->
+    <div id="conditionals" class="subsection">
+      <h3>{{ tr('guideContent.template.conditionals.title') }}</h3>
+      <p>{{ tr('guideContent.template.conditionals.desc') }}</p>
+
+      <pre><code>{{ code_conditional }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.template.conditionals.syntaxLabel') }}:</strong>
+        <ul>
+          <li><code>&lt;#if condition="..."&gt;</code> - {{ tr('guideContent.template.conditionals.syntax.s1') }}</li>
+          <li><code>&lt;#else if condition="..."&gt;</code> - {{ tr('guideContent.template.conditionals.syntax.s2') }}</li>
+          <li><code>&lt;#else&gt;</code> - {{ tr('guideContent.template.conditionals.syntax.s3') }}</li>
+          <li><code>&lt;/#if&gt;</code> - {{ tr('guideContent.template.conditionals.syntax.s4') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ループ -->
+    <div id="loops" class="subsection">
+      <h3>{{ tr('guideContent.template.loops.title') }}</h3>
+      <p>{{ tr('guideContent.template.loops.desc') }}</p>
+
+      <pre><code>{{ code_loop }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.template.loops.attributesLabel') }}:</strong>
+        <ul>
+          <li><code>each="variable"</code> - {{ tr('guideContent.template.loops.attributes.a1') }}</li>
+          <li><code>of="array"</code> - {{ tr('guideContent.template.loops.attributes.a2') }}</li>
+          <li><code>key="item.id"</code> - {{ tr('guideContent.template.loops.attributes.a3') }}</li>
+          <li><code>&lt;#empty&gt;</code> - {{ tr('guideContent.template.loops.attributes.a4') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- HTML出力 -->
+    <div id="html-output" class="subsection">
+      <h3>{{ tr('guideContent.template.htmlOutput.title') }}</h3>
+      <p>{{ tr('guideContent.template.htmlOutput.desc') }}</p>
+
+      <pre><code>{{ code_html }}</code></pre>
+
+      <div class="warning">
+        <strong>⚠️ {{ tr('guideContent.template.htmlOutput.warningLabel') }}:</strong> {{ tr('guideContent.template.htmlOutput.warningText') }}
+      </div>
+    </div>
+
+    <!-- スロット -->
+    <div id="slots" class="subsection">
+      <h3>{{ tr('guideContent.template.slots.title') }}</h3>
+      <p>{{ tr('guideContent.template.slots.desc') }}</p>
+
+      <p class="example-title">{{ tr('guideContent.template.slots.componentDef') }}:</p>
+      <pre><code>{{ code_slot }}</code></pre>
+
+      <p class="example-title">{{ tr('guideContent.template.slots.componentUsage') }}:</p>
+      <pre><code>{{ code_slotUsage }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.template.slots.typesLabel') }}:</strong>
+        <ul>
+          <li><code>&lt;slot&gt;</code> - {{ tr('guideContent.template.slots.types.t1') }}</li>
+          <li><code>&lt;slot name="..."&gt;</code> - {{ tr('guideContent.template.slots.types.t2') }}</li>
+          <li><code>&lt;template #name&gt;</code> - {{ tr('guideContent.template.slots.types.t3') }}</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</template>

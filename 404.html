@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Chasket</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', 'Noto Sans JP', system-ui, sans-serif;
+      background: #0a0a0f;
+      color: #e4e4ed;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1.5rem;
+    }
+    h1 {
+      font-size: clamp(4rem, 12vw, 6rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #a29bfe, #55efc4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    p { font-size: clamp(0.95rem, 1.2vw, 1.15rem); color: #9898ab; margin-bottom: 2rem; }
+    a {
+      display: inline-flex;
+      padding: 0.75rem 1.75rem;
+      border-radius: 0.625rem;
+      font-weight: 600;
+      font-size: clamp(0.85rem, 1vw, 0.95rem);
+      background: linear-gradient(135deg, #6C5CE7, #5a4bd1);
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 0.25rem 1.25rem rgba(108,92,231,0.35);
+      transition: transform 0.15s, box-shadow 0.2s;
+    }
+    a:hover { transform: translateY(-1px); box-shadow: 0 0.375rem 1.75rem rgba(108,92,231,0.5); }
+  </style>
+  <script src="/i18n/i18n.js"></script>
+  <script src="/i18n/ja.js"></script>
+  <script src="/i18n/en.js"></script>
+</head>
+<body>
+  <h1>404</h1>
+  <p id="msg"></p>
+  <a id="back" href="/"></a>
+  <script>
+    document.getElementById('msg').textContent = window.__t('notFound.message')
+    document.getElementById('back').textContent = window.__t('notFound.backHome')
+  </script>
+</body>
+</html>

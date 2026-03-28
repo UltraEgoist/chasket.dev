@@ -1,0 +1,64 @@
+<meta>
+  name: csk-test-overview
+  shadow: none
+</meta>
+
+<script>
+  state exampleOverview: string = "const { suite, compileOk, assert } = require('./lib/chasket-test');\n\nsuite('My Component Tests', t => {\n  t.test('basic compile', () => {\n    const r = compileOk('&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;hi&lt;/p&gt;&lt;/template&gt;');\n    t.assert(r.success, 'compiles');\n    t.outputIncludes(r, 'hi');\n  });\n});\n\nsuite.run();"
+
+  state exampleSetup: string = "const { suite, compileOk, compileFail, csk } = require('./lib/chasket-test');\n\n// Simple compile check\nconst src = '&lt;meta&gt;name: &quot;test&quot;&lt;/meta&gt;&lt;template&gt;&lt;div&gt;content&lt;/div&gt;&lt;/template&gt;';\nconst result = compileOk(src);\nconsole.log(result.success);  // true\nconsole.log(result.output);   // generated JS code\nconsole.log(result.diagnostics);  // [ ]"
+
+  state exampleQuick: string = "const { suite, compileOk, csk } = require('./lib/chasket-test');\n\nsuite('Counter Component', t => {\n  t.test('compiles with state', () => {\n    const src = csk({\n      name: 'my-counter',\n      script: 'state count: number = 0',\n      template: '&lt;button @click=&quot;count++&quot;&gt;{{ count }}&lt;/button&gt;'\n    });\n    const r = compileOk(src);\n    t.compileSuccess(r);\n    t.hasState(r, 'count');\n    t.outputIncludes(r, 'count++');\n  });\n});\n\nsuite.run();"
+</script>
+
+<template>
+  <!-- Overview -->
+  <section id="overview" class="doc-section">
+    <h2>概要</h2>
+    <p>chasket-test は Chasket コンパイラの出力検証を簡潔に記述するための、ゼロ依存のテストユーティリティライブラリです。Node.js 標準機能のみを使用しており、外部パッケージに依存していません。</p>
+    <p>テストランナーと充実したアサーション群により、コンポーネントの以下をテストできます:</p>
+    <ul>
+      <li>コンパイルの成功 / 失敗</li>
+      <li>生成される JavaScript コードの検証</li>
+      <li>テンプレート出力の確認</li>
+      <li>state、watch、ライフサイクルフック</li>
+      <li>診断情報（エラー、警告）</li>
+      <li>補間と属性バインディング</li>
+    </ul>
+    <div class="example-title">概要</div>
+    <pre><code>{{ exampleOverview }}</code></pre>
+  </section>
+
+  <!-- Installation / Setup -->
+  <section id="install" class="doc-section">
+    <h2>セットアップ</h2>
+    <p>chasket-test は Chasket リポジトリに含まれています。以下の方法でアクセスできます:</p>
+    <div class="property">
+      <h4>ローカル開発</h4>
+      <p>テストファイルから以下の形式でインポートします:</p>
+      <pre><code>const \{{ suite, compileOk, compileFail, csk }} = require('./lib/chasket-test');</code></pre>
+    </div>
+    <p class="note-text">chasket-test はコンパイラの場所を自動検出し、相対パスの候補から探索します。</p>
+    <div class="example-title">セットアップ例</div>
+    <pre><code>{{ exampleSetup }}</code></pre>
+  </section>
+
+  <!-- Quick Start -->
+  <section id="quickstart" class="doc-section">
+    <h2>クイックスタート</h2>
+    <p>最小限のテストを実行する例:</p>
+    <div class="example-title">基本的な使用方法</div>
+    <pre><code>{{ exampleQuick }}</code></pre>
+    <p>この例では:</p>
+    <ul>
+      <li><code>suite()</code> でテストスイートを定義</li>
+      <li><code>csk()</code> でコンポーネントソースを構築</li>
+      <li><code>compileOk()</code> でコンパイル</li>
+      <li>アサーション群で出力を検証</li>
+      <li><code>suite.run()</code> でテストを実行</li>
+    </ul>
+  </section>
+</template>
+
+<style>
+</style>

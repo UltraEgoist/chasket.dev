@@ -1,0 +1,131 @@
+<meta>
+  name: csk-api-compiler
+  shadow: none
+</meta>
+
+<script>
+  fn tr(k: string) { return window.__t(k) }
+
+  state code_compileBasic: string = "import { compile } from '@aspect/chasket'\n\nconst source = `\n&lt;meta&gt;\n  name: my-component\n&lt;/meta&gt;\n&lt;script&gt;\n  state count: number = 0\n&lt;/script&gt;\n&lt;template&gt;\n  &lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;/template&gt;\n`\n\nconst result = compile(source, 'my-component.csk', {\n  target: 'es2020'\n})\n\nif (result.success) {\n  console.log(result.output)\n}"
+
+  state code_compileOptions: string = "const options = {\n  target: 'es2020',           // &quot;es2020&quot; | &quot;es2021&quot; | &quot;esnext&quot;\n  bundle: true,               // embed CSS in JS\n  shadow: false,              // Shadow DOM or Light DOM\n  sourcemap: true,            // generate source maps\n  minify: false,              // enable in production\n  imports: {                  // external import mapping\n    'lodash': './libs/lodash.js'\n  }\n}"
+
+  state code_splitBlocks: string = "import { splitBlocks } from '@aspect/chasket'\n\nconst source = `...csk file content...`\nconst blocks = splitBlocks(source)\n\nconsole.log(blocks.meta)      // meta block\nconsole.log(blocks.script)    // script block\nconsole.log(blocks.template)  // template block\nconsole.log(blocks.style)     // style block"
+
+  state code_parseTemplate: string = "import { parseTemplateNodes } from '@aspect/chasket'\n\nconst html = `\n  &lt;div&gt;\n    &lt;p&gt;{{ name }}&lt;/p&gt;\n    &lt;button @click=&quot;handleClick&quot;&gt;Click&lt;/button&gt;\n  &lt;/div&gt;\n`\n\nconst ast = parseTemplateNodes(html)\nconsole.log(ast)  // node syntax tree"
+</script>
+
+<template>
+      <!-- Compiler API -->
+      <section id="compiler-api" class="doc-section">
+        <h2>{{ tr('apiContent.compiler.title') }}</h2>
+        <p>{{ tr('apiContent.compiler.description') }}</p>
+
+        <!-- compile() function -->
+        <div id="api-functions" class="subsection">
+          <h3 id="compile-fn">compile(source, filename, options)</h3>
+          <p>{{ tr('apiContent.compiler.compileFn.description') }}</p>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.compiler.signature') }}</h4>
+            <pre><code>compile(source: string, filename: string, options: CompileOptions): CompileResult</code></pre>
+          </div>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.compiler.parameters') }}</h4>
+            <ul>
+              <li><code>source</code> (string) — {{ tr('apiContent.compiler.paramSource') }}</li>
+              <li><code>filename</code> (string) — {{ tr('apiContent.compiler.paramFilename') }}</li>
+              <li><code>options</code> (CompileOptions) — {{ tr('apiContent.compiler.paramOptions') }}</li>
+            </ul>
+          </div>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.compiler.returnValue') }} (CompileResult)</h4>
+            <ul>
+              <li><code>success</code> (boolean) — {{ tr('apiContent.compiler.returnSuccess') }}</li>
+              <li><code>output</code> (string) — {{ tr('apiContent.compiler.returnOutput') }}</li>
+              <li><code>dtsOutput</code> (string) — {{ tr('apiContent.compiler.returnDts') }}</li>
+              <li><code>diagnostics</code> (Diagnostic[]) — {{ tr('apiContent.compiler.returnDiagnostics') }}</li>
+              <li><code>meta</code> (object) — {{ tr('apiContent.compiler.returnMeta') }}</li>
+            </ul>
+          </div>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.compiler.example') }}</h4>
+            <pre><code>{{ code_compileBasic }}</code></pre>
+          </div>
+        </div>
+
+        <!-- splitBlocks() function -->
+        <div class="subsection">
+          <h3 id="split-blocks">splitBlocks(source)</h3>
+          <p>{{ tr('apiContent.compiler.splitBlocksFn.description') }}</p>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.compiler.signature') }}</h4>
+            <pre><code>splitBlocks(source: string): { meta: string, script: string, template: string, style: string }</code></pre>
+          </div>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.compiler.example') }}</h4>
+            <pre><code>{{ code_splitBlocks }}</code></pre>
+          </div>
+
+          <div class="note">
+            <strong>{{ tr('apiContent.compiler.purpose') }}:</strong>
+            <ul>
+              <li>{{ tr('apiContent.compiler.splitBlocksUse1') }}</li>
+              <li>{{ tr('apiContent.compiler.splitBlocksUse2') }}</li>
+              <li>{{ tr('apiContent.compiler.splitBlocksUse3') }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- parseTemplateNodes() function -->
+        <div class="subsection">
+          <h3 id="parse-template">parseTemplateNodes(html)</h3>
+          <p>{{ tr('apiContent.compiler.parseTemplateFn.description') }}</p>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.compiler.signature') }}</h4>
+            <pre><code>parseTemplateNodes(html: string): ASTNode[]</code></pre>
+          </div>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.compiler.example') }}</h4>
+            <pre><code>{{ code_parseTemplate }}</code></pre>
+          </div>
+
+          <div class="note">
+            <strong>{{ tr('apiContent.compiler.astNodeTypes') }}:</strong>
+            <ul>
+              <li>ElementNode — {{ tr('apiContent.compiler.nodeTypeElement') }}</li>
+              <li>TextNode — {{ tr('apiContent.compiler.nodeTypeText') }}</li>
+              <li>CommentNode — {{ tr('apiContent.compiler.nodeTypeComment') }}</li>
+              <li>DirectiveNode — {{ tr('apiContent.compiler.nodeTypeDirective') }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CompileOptions Object -->
+        <div class="subsection">
+          <h3>CompileOptions {{ tr('apiContent.compiler.object') }}</h3>
+          <p>{{ tr('apiContent.compiler.compileOptionsDesc') }}</p>
+
+          <pre><code>{{ code_compileOptions }}</code></pre>
+
+          <div class="note">
+            <strong>{{ tr('apiContent.compiler.optionDetails') }}:</strong>
+            <ul>
+              <li><code>target</code> — {{ tr('apiContent.compiler.optTarget') }}</li>
+              <li><code>bundle</code> — {{ tr('apiContent.compiler.optBundle') }}</li>
+              <li><code>shadow</code> — {{ tr('apiContent.compiler.optShadow') }}</li>
+              <li><code>sourcemap</code> — {{ tr('apiContent.compiler.optSourcemap') }}</li>
+              <li><code>minify</code> — {{ tr('apiContent.compiler.optMinify') }}</li>
+              <li><code>imports</code> — {{ tr('apiContent.compiler.optImports') }}</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+</template>

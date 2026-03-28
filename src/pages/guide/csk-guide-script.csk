@@ -1,0 +1,232 @@
+<meta>
+  name: csk-guide-script
+  shadow: none
+</meta>
+
+<script>
+  state code_stateExample: string = "state count: number = 0\nstate name: string = 'John'\nstate items: array&lt;string&gt; = ['a', 'b']\nstate visible: boolean = true"
+
+  state code_propExample: string = "prop title: string = 'Default Title'\nprop count: number\nprop items: array&lt;unknown&gt;"
+
+  state code_computedExample: string = "computed doubleCount: number = count * 2\ncomputed fullName: string = firstName + ' ' + lastName"
+
+  state code_fnExample: string = "fn increment() {\n  count = count + 1\n}\n\nfn async fetchData() {\n  const response = await fetch('/api/data')\n  return response.json()\n}"
+
+  state code_emitExample: string = "emit click: { x: number, y: number }\nemit change|prevent: { value: string }\nemit submit|stop: { data: unknown }"
+
+  state code_watchExample: string = "watch count {\n  console.log('Count changed to:', count)\n}\n\nwatch [firstName, lastName] {\n  fullName = firstName + ' ' + lastName\n}"
+
+  state code_refExample: string = "ref inputElement: HTMLInputElement\nref containerDiv: HTMLElement\n\nfn focus() {\n  inputElement?.focus()\n}"
+
+  state code_provideExample: string = "provide theme: string = 'dark'\nprovide apiUrl: string = 'https://api.example.com'"
+
+  state code_consumeExample: string = "consume theme: string\nconsume apiUrl: string\n\nfn useApi() {\n  fetch(apiUrl + '/data')\n}"
+
+  state code_typeExample: string = "type User = {\n  id: number\n  name: string\n  email: string\n}\n\ntype Status = 'pending' | 'success' | 'error'"
+
+  state code_importExample: string = "import { someFunction } from './utils.js'\nimport { Button } from './components/Button.csk'"
+
+  fn tr(k: string) { return window.__t(k) }
+</script>
+
+<template>
+  <!-- script ブロック -->
+  <section id="script-block" class="doc-section">
+    <h2>{{ tr('guideContent.script.scriptBlock.title') }}</h2>
+    <p>{{ tr('guideContent.script.scriptBlock.desc') }}</p>
+  </section>
+
+  <!-- script宣言 -->
+  <section id="script-declarations" class="doc-section">
+    <h2>{{ tr('guideContent.script.declarations.title') }}</h2>
+
+    <!-- state -->
+    <div id="state" class="subsection">
+      <h3>{{ tr('guideContent.script.state.title') }}</h3>
+      <p>{{ tr('guideContent.script.state.desc') }}</p>
+
+      <pre><code>{{ code_stateExample }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.script.state.featuresLabel') }}:</strong>
+        <ul>
+          <li>{{ tr('guideContent.script.state.features.f1') }}</li>
+          <li>{{ tr('guideContent.script.state.features.f2') }}</li>
+          <li>{{ tr('guideContent.script.state.features.f3') }}</li>
+          <li>{{ tr('guideContent.script.state.features.f4') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- prop -->
+    <div id="prop" class="subsection">
+      <h3>{{ tr('guideContent.script.prop.title') }}</h3>
+      <p>{{ tr('guideContent.script.prop.desc') }}</p>
+
+      <pre><code>{{ code_propExample }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.script.prop.featuresLabel') }}:</strong>
+        <ul>
+          <li>{{ tr('guideContent.script.prop.features.f1') }}</li>
+          <li>{{ tr('guideContent.script.prop.features.f2') }}</li>
+          <li>{{ tr('guideContent.script.prop.features.f3') }}</li>
+        </ul>
+      </div>
+
+      <p class="example-title">{{ tr('guideContent.script.prop.example') }}:</p>
+      <pre><code>&lt;MyComponent :title="'Hello'" :count="5" /&gt;</code></pre>
+    </div>
+
+    <!-- computed -->
+    <div id="computed" class="subsection">
+      <h3>{{ tr('guideContent.script.computed.title') }}</h3>
+      <p>{{ tr('guideContent.script.computed.desc') }}</p>
+
+      <pre><code>{{ code_computedExample }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.script.computed.featuresLabel') }}:</strong>
+        <ul>
+          <li>{{ tr('guideContent.script.computed.features.f1') }}</li>
+          <li>{{ tr('guideContent.script.computed.features.f2') }}</li>
+          <li>{{ tr('guideContent.script.computed.features.f3') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- fn -->
+    <div id="fn" class="subsection">
+      <h3>{{ tr('guideContent.script.fn.title') }}</h3>
+      <p>{{ tr('guideContent.script.fn.desc') }}</p>
+
+      <pre><code>{{ code_fnExample }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.script.fn.featuresLabel') }}:</strong>
+        <ul>
+          <li>{{ tr('guideContent.script.fn.features.f1') }}</li>
+          <li>{{ tr('guideContent.script.fn.features.f2') }}</li>
+          <li>{{ tr('guideContent.script.fn.features.f3') }}</li>
+          <li>{{ tr('guideContent.script.fn.features.f4') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- emit -->
+    <div id="emit" class="subsection">
+      <h3>{{ tr('guideContent.script.emit.title') }}</h3>
+      <p>{{ tr('guideContent.script.emit.desc') }}</p>
+
+      <pre><code>{{ code_emitExample }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.script.emit.modifiersLabel') }}:</strong>
+        <ul>
+          <li><code>|prevent</code>: {{ tr('guideContent.script.emit.modifiers.prevent') }}</li>
+          <li><code>|stop</code>: {{ tr('guideContent.script.emit.modifiers.stop') }}</li>
+        </ul>
+      </div>
+
+      <p class="example-title">{{ tr('guideContent.script.emit.example') }}:</p>
+      <pre><code>fn handleClick(x: number, y: number) {
+  click({ x, y })
+}</code></pre>
+    </div>
+
+    <!-- watch -->
+    <div id="watch" class="subsection">
+      <h3>{{ tr('guideContent.script.watch.title') }}</h3>
+      <p>{{ tr('guideContent.script.watch.desc') }}</p>
+
+      <pre><code>{{ code_watchExample }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.script.watch.usesLabel') }}:</strong>
+        <ul>
+          <li>{{ tr('guideContent.script.watch.uses.u1') }}</li>
+          <li>{{ tr('guideContent.script.watch.uses.u2') }}</li>
+          <li>{{ tr('guideContent.script.watch.uses.u3') }}</li>
+          <li>{{ tr('guideContent.script.watch.uses.u4') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ref -->
+    <div id="ref" class="subsection">
+      <h3>{{ tr('guideContent.script.ref.title') }}</h3>
+      <p>{{ tr('guideContent.script.ref.desc') }}</p>
+
+      <pre><code>{{ code_refExample }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.script.ref.usesLabel') }}:</strong>
+        <ul>
+          <li>{{ tr('guideContent.script.ref.uses.u1') }}</li>
+          <li>{{ tr('guideContent.script.ref.uses.u2') }}</li>
+          <li>{{ tr('guideContent.script.ref.uses.u3') }}</li>
+          <li>{{ tr('guideContent.script.ref.uses.u4') }}</li>
+        </ul>
+      </div>
+
+      <p class="example-title">{{ tr('guideContent.script.ref.inTemplate') }}:</p>
+      <pre><code>&lt;input ref="inputElement" type="text" /&gt;</code></pre>
+    </div>
+
+    <!-- provide/consume -->
+    <div id="provide-consume" class="subsection">
+      <h3>{{ tr('guideContent.script.provideConsume.title') }}</h3>
+      <p>{{ tr('guideContent.script.provideConsume.desc') }}</p>
+
+      <pre><code>{{ code_provideExample }}</code></pre>
+
+      <p class="example-title">{{ tr('guideContent.script.provideConsume.example') }}:</p>
+      <pre><code>{{ code_consumeExample }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.script.provideConsume.featuresLabel') }}:</strong>
+        <ul>
+          <li>{{ tr('guideContent.script.provideConsume.features.f1') }}</li>
+          <li>{{ tr('guideContent.script.provideConsume.features.f2') }}</li>
+          <li>{{ tr('guideContent.script.provideConsume.features.f3') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- type -->
+    <div id="type" class="subsection">
+      <h3>{{ tr('guideContent.script.type.title') }}</h3>
+      <p>{{ tr('guideContent.script.type.desc') }}</p>
+
+      <pre><code>{{ code_typeExample }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.script.type.usesLabel') }}:</strong>
+        <ul>
+          <li>{{ tr('guideContent.script.type.uses.u1') }}</li>
+          <li>{{ tr('guideContent.script.type.uses.u2') }}</li>
+          <li>{{ tr('guideContent.script.type.uses.u3') }}</li>
+          <li>{{ tr('guideContent.script.type.uses.u4') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- import -->
+    <div id="import" class="subsection">
+      <h3>{{ tr('guideContent.script.import.title') }}</h3>
+      <p>{{ tr('guideContent.script.import.desc') }}</p>
+
+      <pre><code>{{ code_importExample }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.script.import.featuresLabel') }}:</strong>
+        <ul>
+          <li>{{ tr('guideContent.script.import.features.f1') }}</li>
+          <li>{{ tr('guideContent.script.import.features.f2') }}</li>
+          <li>{{ tr('guideContent.script.import.features.f3') }}</li>
+          <li>{{ tr('guideContent.script.import.features.f4') }}</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</template>

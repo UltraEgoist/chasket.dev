@@ -1,0 +1,48 @@
+<meta>
+  name: csk-test-compile
+  shadow: none
+</meta>
+
+<script>
+  state exampleCompile: string = "const { compileOk, compileFail, csk } = require('./lib/chasket-test');\n\n// Success\nconst ok = compileOk('&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;hi&lt;/p&gt;&lt;/template&gt;');\nconsole.log(ok.success);  // true\nconsole.log(ok.output);   // JavaScript code\n\n// With file name\nconst r1 = compileOk(src, 'my-component.csk');\n\n// With options\nconst r2 = compileOk(src, 'test.csk', { strict: true });\n\n// Failure\nconst fail = compileFail('&lt;meta name=&quot;x&quot;&lt;/meta&gt;');  // bad syntax\nconsole.log(fail.success);  // false\nconsole.log(fail.diagnostics);  // [{ code, level, message, ... }]\n\n// Helper\nconst src = csk({\n  name: 'my-btn',\n  script: 'state disabled: boolean = false',\n  template: '&lt;button :disabled=&quot;disabled&quot;&gt;Click&lt;/button&gt;',\n  style: 'button { cursor: pointer; }',\n  meta: 'shadow: open'\n});\nconst r3 = compileOk(src);"
+</script>
+
+<template>
+  <!-- Compile Helpers -->
+  <section id="compile-helpers" class="doc-section">
+    <h2>コンパイルヘルパー</h2>
+
+    <div class="subsection">
+      <h3 id="compile-ok-fail">compileOk(src, fileName?, opts?) / compileFail(src, fileName?, opts?)</h3>
+      <p>Chasket ソースをコンパイルし、結果オブジェクトを返します。</p>
+      <div class="property">
+        <h4>戻り値</h4>
+        <pre><code>\{{
+  success: boolean,
+  output?: string,      // 生成されたJavaScriptコード
+  diagnostics: Array    // エラー、警告、情報
+}}</code></pre>
+      </div>
+      <div class="example-title">使用例</div>
+      <pre><code>{{ exampleCompile }}</code></pre>
+    </div>
+
+    <div class="subsection">
+      <h3 id="csk-helper">csk(opts)</h3>
+      <p>最小限の有効な Chasket ソースを生成するヘルパー関数です。</p>
+      <div class="property">
+        <h4>オプション</h4>
+        <ul>
+          <li><code>name</code> (string, 必須): コンポーネント名</li>
+          <li><code>script</code> (string, デフォルト: ''): スクリプトブロック内容</li>
+          <li><code>template</code> (string, デフォルト: '&lt;div&gt;test&lt;/div&gt;'): テンプレート</li>
+          <li><code>style</code> (string, デフォルト: ''): スタイルブロック内容</li>
+          <li><code>meta</code> (string, デフォルト: ''): 追加メタフィールド</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</template>
+
+<style>
+</style>

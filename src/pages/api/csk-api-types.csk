@@ -1,0 +1,61 @@
+<meta>
+  name: csk-api-types
+  shadow: none
+</meta>
+
+<script>
+  fn tr(k: string) { return window.__t(k) }
+
+  state code_typeExamples: string = "// primitive types\nstate name: string = 'John'\nstate age: number = 30\nstate active: boolean = true\nstate nothing: void\n\n// array types\nstate names: string[] = ['Alice', 'Bob']\nstate matrix: number[][] = [[1, 2], [3, 4]]\n\n// object type\nstate user: { name: string, age?: number } = { name: 'John' }\n\n// union type\nstate status: 'idle' | 'loading' | 'done' = 'idle'\n\n// literal type\nstate priority: 'low' | 'medium' | 'high' = 'medium'\n\n// generics (limited support)\nstate items: Array&lt;string&gt; = []\nstate map: Map&lt;string, number&gt; = new Map()"
+</script>
+
+<template>
+      <!-- Type System -->
+      <section id="type-system" class="doc-section">
+        <h2>{{ tr('apiContent.types.title') }}</h2>
+        <p>{{ tr('apiContent.types.description') }}</p>
+
+        <div class="subsection">
+          <h3>{{ tr('apiContent.types.supportedTypes') }}</h3>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.types.primitiveTypes') }}</h4>
+            <ul>
+              <li><code>string</code> — {{ tr('apiContent.types.typeString') }}</li>
+              <li><code>number</code> — {{ tr('apiContent.types.typeNumber') }}</li>
+              <li><code>boolean</code> — {{ tr('apiContent.types.typeBoolean') }}</li>
+              <li><code>void</code> — {{ tr('apiContent.types.typeVoid') }}</li>
+              <li><code>null</code> — {{ tr('apiContent.types.typeNull') }}</li>
+              <li><code>undefined</code> — {{ tr('apiContent.types.typeUndefined') }}</li>
+              <li><code>any</code> — {{ tr('apiContent.types.typeAny') }}</li>
+            </ul>
+          </div>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.types.compositeTypes') }}</h4>
+            <ul>
+              <li><code>string[]</code>, <code>number[][]</code> — {{ tr('apiContent.types.arrayType') }}</li>
+              <li><code>{ name: string, age: number }</code> — {{ tr('apiContent.types.objectType') }}</li>
+              <li><code>"pending" | "loading" | "done"</code> — {{ tr('apiContent.types.unionType') }}</li>
+              <li><code>"primary" | "secondary"</code> — {{ tr('apiContent.types.literalType') }}</li>
+              <li><code>Array&lt;T&gt;</code>, <code>Map&lt;K,V&gt;</code> — {{ tr('apiContent.types.genericsType') }}</li>
+            </ul>
+          </div>
+
+          <div class="property">
+            <h4>{{ tr('apiContent.types.exampleTitle') }}</h4>
+            <pre><code>{{ code_typeExamples }}</code></pre>
+          </div>
+
+          <div class="note">
+            <strong>{{ tr('apiContent.types.limitations') }}:</strong>
+            <ul>
+              <li>{{ tr('apiContent.types.limitFunctionTypes') }}</li>
+              <li>{{ tr('apiContent.types.limitComplexGenerics') }}</li>
+              <li>{{ tr('apiContent.types.limitConditionalTypes') }}</li>
+              <li>{{ tr('apiContent.types.limitMappedTypes') }}</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+</template>

@@ -1,0 +1,54 @@
+<meta>
+  name: csk-guide-communication
+  shadow: none
+</meta>
+
+<script>
+  state code_propsEmit: string = "// Parent.csk\n&lt;Counter :initial=\"5\" @change=\"handleCountChange\" /&gt;\n\n// Counter.csk\nprop initial: number = 0\nstate count: number = initial\nemit change: { value: number }\nfn increment() {\n  count = count + 1\n  change({ value: count })\n}"
+
+  state code_provideConsumeEx: string = "// App.csk\nprovide theme: string = 'dark'\n&lt;Layout /&gt;\n\n// Layout.csk\nconsume theme: string\nfn toggleTheme() {\n  theme = theme === 'dark' ? 'light' : 'dark'\n}"
+
+  fn tr(k: string) { return window.__t(k) }
+</script>
+
+<template>
+  <!-- コンポーネント間通信 -->
+  <section id="component-comm" class="doc-section">
+    <h2>{{ tr('guideContent.communication.title') }}</h2>
+    <p>{{ tr('guideContent.communication.desc') }}</p>
+
+    <div class="subsection">
+      <h3>{{ tr('guideContent.communication.propsEmit.title') }}</h3>
+      <p>{{ tr('guideContent.communication.propsEmit.desc') }}</p>
+
+      <pre><code>{{ code_propsEmit }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.communication.propsEmit.patternLabel') }}:</strong>
+        <ul>
+          <li>{{ tr('guideContent.communication.propsEmit.pattern.p1') }}</li>
+          <li>{{ tr('guideContent.communication.propsEmit.pattern.p2') }}</li>
+          <li>{{ tr('guideContent.communication.propsEmit.pattern.p3') }}</li>
+          <li>{{ tr('guideContent.communication.propsEmit.pattern.p4') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>{{ tr('guideContent.communication.provideConsume.title') }}</h3>
+      <p>{{ tr('guideContent.communication.provideConsume.desc') }}</p>
+
+      <pre><code>{{ code_provideConsumeEx }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.communication.provideConsume.usesLabel') }}:</strong>
+        <ul>
+          <li>{{ tr('guideContent.communication.provideConsume.uses.u1') }}</li>
+          <li>{{ tr('guideContent.communication.provideConsume.uses.u2') }}</li>
+          <li>{{ tr('guideContent.communication.provideConsume.uses.u3') }}</li>
+          <li>{{ tr('guideContent.communication.provideConsume.uses.u4') }}</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</template>

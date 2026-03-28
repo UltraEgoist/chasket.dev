@@ -1,0 +1,292 @@
+<meta>
+  name: csk-page-why
+  shadow: none
+</meta>
+
+<script>
+  // csk-page-why: Chasket の売り・差別化を訴求する専用ページ
+  // shadow: none — ライト DOM でスタイルを適用。
+  // i18n キーは why.* を使用。
+
+  fn tr(k: string) { return window.__t(k) }
+
+  state codeExample: string = "&lt;<span class=t>meta</span>&gt;\n  <span class=a>name</span>: <span class=s>my-counter</span>\n&lt;/<span class=t>meta</span>&gt;\n\n&lt;<span class=t>script</span>&gt;\n  <span class=k>state</span> <span class=v>count</span>: <span class=tp>number</span> = <span class=n>0</span>\n  <span class=k>fn</span> <span class=f>increment</span>() { <span class=v>count</span>++ }\n&lt;/<span class=t>script</span>&gt;\n\n&lt;<span class=t>template</span>&gt;\n  &lt;<span class=t>button</span> <span class=a>@click</span>=<span class=s>\"increment\"</span>&gt;\n    <span class=i>{{ count }}</span>\n  &lt;/<span class=t>button</span>&gt;\n&lt;/<span class=t>template</span>&gt;"
+
+  state codeOutput: string = "<span class=k>class</span> <span class=f>MyCounter</span> <span class=k>extends</span> <span class=tp>HTMLElement</span> {\n  #<span class=v>count</span> = <span class=n>0</span>;\n  <span class=f>connectedCallback</span>() { <span class=cm>/* ... */</span> }\n  #<span class=f>increment</span>() { <span class=k>this</span>.#<span class=v>count</span>++; }\n}\n<span class=f>customElements</span>.<span class=f>define</span>(<span class=s>'my-counter'</span>, <span class=f>MyCounter</span>);"
+</script>
+
+<template>
+  <div class="why-page">
+
+    <section class="why-hero">
+      <h1>{{ tr('why.heroHeadline') }}</h1>
+      <p class="why-hero-desc">{{ tr('why.heroDesc') }}</p>
+    </section>
+
+    <section class="why-demo">
+      <div class="why-demo-grid">
+        <div class="why-demo-card">
+          <div class="why-demo-label">Chasket (.csk)</div>
+          <pre><code>{{ codeExample }}</code></pre>
+        </div>
+        <div class="why-demo-arrow">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </div>
+        <div class="why-demo-card">
+          <div class="why-demo-label">Output (vanilla JS)</div>
+          <pre><code>{{ codeOutput }}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="why-sections">
+
+      <div class="why-card">
+        <div class="why-card-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--c-primary, #6C5CE7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+        </div>
+        <h2>{{ tr('why.section1Title') }}</h2>
+        <p>{{ tr('why.section1Desc') }}</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-card-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--c-success, #00B894)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path></svg>
+        </div>
+        <h2>{{ tr('why.section2Title') }}</h2>
+        <p>{{ tr('why.section2Desc') }}</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-card-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--c-warning, #FDCB6E)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <h2>{{ tr('why.section3Title') }}</h2>
+        <p>{{ tr('why.section3Desc') }}</p>
+      </div>
+
+      <div class="why-card">
+        <div class="why-card-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--c-info, #74B9FF)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"></path></svg>
+        </div>
+        <h2>{{ tr('why.section4Title') }}</h2>
+        <p>{{ tr('why.section4Desc') }}</p>
+      </div>
+
+      <div class="why-card why-card-future">
+        <div class="why-card-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--c-primary-light, #A29BFE)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
+        <h2>{{ tr('why.section5Title') }}</h2>
+        <p>{{ tr('why.section5Desc') }}</p>
+      </div>
+
+    </section>
+
+    <section class="why-cta">
+      <h2>{{ tr('why.ctaTitle') }}</h2>
+      <p>{{ tr('why.ctaDesc') }}</p>
+      <div class="why-cta-buttons">
+        <a href="#/guide" class="why-btn-primary">{{ tr('hero.getStarted') }}</a>
+        <a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer" class="why-btn-secondary">GitHub</a>
+      </div>
+    </section>
+
+  </div>
+</template>
+
+<style>
+  .why-page {
+    max-width: var(--max-w, 70rem);
+    margin: 0 auto;
+    padding: 4rem var(--space-page, 1.5rem) 6rem;
+    color: var(--c-text, #e4e4ed);
+  }
+
+  .why-hero {
+    text-align: center;
+    padding: 3rem 0 4rem;
+  }
+  .why-hero h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #6C5CE7, #00B894);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 1.25rem;
+  }
+  .why-hero-desc {
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    color: var(--c-text-dim, #9898ab);
+    max-width: 40rem;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .why-demo {
+    padding: 2rem 0 3rem;
+  }
+  .why-demo-grid {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+  .why-demo-card {
+    background: var(--c-surface, #1a1a26);
+    border: 1px solid var(--c-border, #2a2a3a);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    flex: 1;
+    max-width: 28rem;
+    overflow-x: auto;
+  }
+  .why-demo-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--c-text-dim, #9898ab);
+    margin-bottom: 0.75rem;
+  }
+  .why-demo-card pre {
+    margin: 0;
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+  .why-demo-card code {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    color: #dfe6e9;
+  }
+  /* Syntax Highlighting */
+  pre code .t  { color: #7c8aff; }
+  pre code .a  { color: #f8a5c2; }
+  pre code .s  { color: #55efc4; }
+  pre code .k  { color: #fd79a8; }
+  pre code .tp { color: #74b9ff; }
+  pre code .v  { color: #dfe6e9; }
+  pre code .f  { color: #ffeaa7; }
+  pre code .n  { color: #fab1a0; }
+  pre code .i  { color: #fdcb6e; }
+  pre code .c  { color: #e17055; }
+  pre code .d  { color: #a29bfe; }
+  pre code .cm { color: #636e72; }
+  pre code .cs { color: #81ecec; }
+  .why-demo-arrow {
+    color: var(--c-text-dim, #9898ab);
+    flex-shrink: 0;
+  }
+
+  .why-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 0;
+  }
+  .why-card {
+    background: var(--c-surface, #1a1a26);
+    border: 1px solid var(--c-border, #2a2a3a);
+    border-radius: 0.75rem;
+    padding: 2rem 2.5rem;
+    transition: border-color 0.2s;
+  }
+  .why-card:hover {
+    border-color: var(--c-primary, #6C5CE7);
+  }
+  .why-card-future {
+    border-style: dashed;
+    opacity: 0.85;
+  }
+  .why-card-icon {
+    margin-bottom: 1rem;
+  }
+  .why-card h2 {
+    font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+    letter-spacing: -0.02em;
+  }
+  .why-card p {
+    color: var(--c-text-dim, #9898ab);
+    line-height: 1.7;
+    font-size: clamp(0.9rem, 1.1vw, 1rem);
+    margin: 0;
+  }
+
+  .why-cta {
+    text-align: center;
+    padding: 4rem 0 2rem;
+  }
+  .why-cta h2 {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+  }
+  .why-cta p {
+    color: var(--c-text-dim, #9898ab);
+    margin: 0 0 2rem;
+    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  }
+  .why-cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .why-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, #6C5CE7, #00B894);
+    color: #fff;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: opacity 0.2s;
+  }
+  .why-btn-primary:hover { opacity: 0.9; }
+  .why-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 2rem;
+    background: var(--c-surface, #1a1a26);
+    color: var(--c-text, #e4e4ed);
+    border: 1px solid var(--c-border, #2a2a3a);
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+  }
+  .why-btn-secondary:hover { border-color: var(--c-primary-light, #a29bfe); }
+
+  .t { color: #7c8aff; }
+  .a { color: #f8a5c2; }
+  .s { color: #55efc4; }
+  .k { color: #fd79a8; }
+  .tp { color: #74b9ff; }
+  .v { color: #dfe6e9; }
+  .f { color: #ffeaa7; }
+  .n { color: #fab1a0; }
+  .i { color: #fdcb6e; }
+  .cm { color: #636e72; }
+
+  @media (max-width: 48rem) {
+    .why-demo-grid {
+      flex-direction: column;
+    }
+    .why-demo-card {
+      max-width: 100%;
+    }
+    .why-demo-arrow {
+      transform: rotate(90deg);
+    }
+    .why-card {
+      padding: 1.5rem;
+    }
+  }
+</style>

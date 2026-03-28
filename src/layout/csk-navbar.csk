@@ -1,0 +1,231 @@
+<meta>
+  name: "csk-navbar"
+  shadow: open
+</meta>
+
+<script>
+  state menuOpen: boolean = false
+  state scrolled: boolean = false
+
+  fn tr(k: string) { return window.__t(k) }
+
+  fn currentLang() { return window.__i18n_locale() }
+
+  fn switchLang() {
+    const next = window.__i18n_locale() === 'ja' ? 'en' : 'ja'
+    window.__i18n_setLocale(next)
+  }
+
+  fn toggleMenu() {
+    menuOpen = !menuOpen
+  }
+
+  fn closeMenu() {
+    menuOpen = false
+  }
+
+  fn handleScroll() {
+    scrolled = window.scrollY > 40
+  }
+
+  fn goFeatures() {
+    const el = document.getElementById("features")
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
+    menuOpen = false
+  }
+
+  fn goCode() {
+    const el = document.getElementById("code")
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
+    menuOpen = false
+  }
+
+  fn goEcosystem() {
+    const el = document.getElementById("ecosystem")
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
+    menuOpen = false
+  }
+
+  on mount {
+    window.addEventListener("scroll", () => { handleScroll() }, { passive: true })
+  }
+</script>
+
+<template>
+  <nav :class="scrolled ? 'nav scrolled' : 'nav'">
+    <div class="inner">
+      <a href="/" class="logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="8" fill="url(#ng)"></rect>
+          <path d="M9 22V10h3.2l3.8 7.5L19.8 10H23v12h-2.8v-7.4L17 21.2h-2L11.8 14.6V22H9z" fill="#fff"></path>
+          <defs><linearGradient id="ng" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#6C5CE7"></stop><stop offset="1" stop-color="#00B894"></stop></linearGradient></defs>
+        </svg>
+        <span>Chasket</span>
+      </a>
+
+      <div :class="menuOpen ? 'links open' : 'links'">
+        <a href="#/why" @click="closeMenu">{{ tr('nav.why') }}</a>
+        <a href="#/guide" @click="closeMenu">{{ tr('nav.guide') }}</a>
+        <a href="#/api" @click="closeMenu">{{ tr('nav.api') }}</a>
+        <a href="#/testing" @click="closeMenu">{{ tr('nav.testing') }}</a>
+        <a href="#ecosystem" @click|prevent="goEcosystem">{{ tr('nav.ecosystem') }}</a>
+        <a
+          href="https://github.com/UltraEgoist/chasket"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="gh-link"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path></svg>
+          GitHub
+        </a>
+        <button class="lang-btn" @click="switchLang" :aria-label="tr('nav.switchLang')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>
+          {{ currentLang() === 'ja' ? 'EN' : 'JA' }}
+        </button>
+      </div>
+
+      <button
+        class="toggle"
+        @click="toggleMenu"
+        :aria-label="tr('nav.toggleMenu')"
+      >
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</template>
+
+<style>
+  :host {
+    display: block;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+  }
+
+  .nav {
+    background: rgba(10, 10, 15, 0.82);
+    backdrop-filter: blur(1rem) saturate(1.6);
+    -webkit-backdrop-filter: blur(1rem) saturate(1.6);
+    border-bottom: 1px solid var(--c-border, #2a2a3a);
+    transition: border-color 0.3s;
+  }
+  .nav.scrolled {
+    border-bottom-color: rgba(42, 42, 58, 1);
+  }
+
+  .inner {
+    max-width: var(--max-w, 70rem);
+    margin: 0 auto;
+    padding: 0 var(--space-page, 1.5rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 3.75rem;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-weight: 700;
+    font-size: clamp(1.2rem, 1.6vw, 1.5rem);
+    letter-spacing: -0.02em;
+    color: var(--c-text, #e4e4ed);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .logo:hover { color: #fff; }
+  .logo svg { flex-shrink: 0; }
+
+  .links {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 2.5vw, 1.75rem);
+    font-size: clamp(0.8rem, 1vw, 0.9rem);
+  }
+  .links a {
+    color: var(--c-text-dim, #9898ab);
+    text-decoration: none;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+  .links a:hover { color: #fff; }
+
+  .gh-link {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0.375rem;
+    background: var(--c-surface, #1a1a26);
+    padding: 0.375rem 0.875rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--c-border, #2a2a3a);
+    font-size: clamp(0.75rem, 0.9vw, 0.85rem) !important;
+  }
+  .gh-link:hover {
+    border-color: var(--c-primary-light, #a29bfe);
+    color: #fff !important;
+  }
+
+  .lang-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    background: var(--c-surface, #1a1a26);
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--c-border, #2a2a3a);
+    font-size: clamp(0.75rem, 0.9vw, 0.85rem);
+    color: var(--c-text-dim, #9898ab);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    font-family: var(--font, sans-serif);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    min-height: 2.25rem;
+    white-space: nowrap;
+  }
+  .lang-btn:hover {
+    border-color: var(--c-primary-light, #a29bfe);
+    color: #fff;
+  }
+  .lang-btn svg { flex-shrink: 0; }
+
+  .toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .toggle span {
+    display: block;
+    width: 1.375rem;
+    height: 2px;
+    background: var(--c-text, #e4e4ed);
+    margin: 0.3125rem 0;
+    border-radius: 2px;
+    transition: 0.25s;
+  }
+
+  @media (max-width: 48rem) {
+    .links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 3.75rem; left: 0; right: 0;
+      background: rgba(10, 10, 15, 0.96);
+      padding: 1.25rem var(--space-page, 1.5rem);
+      gap: 1rem;
+      border-bottom: 1px solid var(--c-border, #2a2a3a);
+      backdrop-filter: blur(1rem);
+    }
+    .links.open { display: flex; }
+    .links a { padding: 0.5rem 0; font-size: 1rem; }
+    .toggle { display: flex; }
+  }
+</style>

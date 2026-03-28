@@ -1,0 +1,30 @@
+<meta>
+  name: csk-test-example
+  shadow: none
+</meta>
+
+<script>
+  state exampleFull: string = "const { suite, compileOk, csk } = require('./lib/chasket-test');\n\nsuite('Counter Component', t => {\n  let src;\n\n  t.beforeEach(() => {\n    src = csk({\n      name: 'my-counter',\n      script: '\n        state count: number = 0\n        fn increment() { count++; }\n        fn decrement() { count--; }\n      ',\n      template: '\n        &lt;div&gt;\n          &lt;p&gt;Count: {{ count }}&lt;/p&gt;\n          &lt;button @click=&quot;increment&quot;&gt;+&lt;/button&gt;\n          &lt;button @click=&quot;decrement&quot;&gt;-&lt;/button&gt;\n        &lt;/div&gt;\n      '\n    });\n  });\n\n  t.test('compiles successfully', () => {\n    const r = compileOk(src);\n    t.compileSuccess(r);\n    t.validJS(r);\n  });\n\n  t.test('has state and methods', () => {\n    const r = compileOk(src);\n    t.hasState(r, 'count');\n    t.outputIncludes(r, 'increment');\n    t.outputIncludes(r, 'decrement');\n  });\n\n  t.test('template includes buttons', () => {\n    const r = compileOk(src);\n    t.templateIncludes(r, '&lt;button');\n    t.templateIncludes(r, 'Count:');\n  });\n\n  t.test('interpolates count', () => {\n    const r = compileOk(src);\n    t.hasInterpolation(r, 'count');\n  });\n\n  t.afterEach(() => {\n    console.log('test complete');\n  });\n});\n\nsuite.run();"
+</script>
+
+<template>
+  <!-- Full Example -->
+  <section id="full-example" class="doc-section">
+    <h2>完全なテスト例</h2>
+    <p>以下は複数のアサーションを組み合わせた実践的なテスト例です。Counter コンポーネントの各側面をテストしています。</p>
+    <div class="example-title">完全なテスト例</div>
+    <pre><code>{{ exampleFull }}</code></pre>
+    <p>このテストは:</p>
+    <ul>
+      <li>コンポーネントがコンパイルされることを確認</li>
+      <li>生成される JavaScript が有効であることを確認</li>
+      <li>state と関数が含まれていることを確認</li>
+      <li>テンプレート構造を確認</li>
+      <li>補間が正しく処理されていることを確認</li>
+      <li>beforeEach / afterEach でセットアップ / クリーンアップを実行</li>
+    </ul>
+  </section>
+</template>
+
+<style>
+</style>
