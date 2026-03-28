@@ -1,8 +1,9 @@
-// Chasket Bundle - 2026-03-28T08:51:02.974Z
+// Chasket Bundle - 2026-03-28T10:36:24.439Z
 // 33 component(s)
 
-if (typeof window !== 'undefined') window.__chasketClasses = window.__chasketClasses || {};
-
+// Deferred registration queue: all classes are defined first,
+// then all customElements.define() calls happen at the end.
+// This ensures nested components work regardless of file order.
 const __chasketDefineQueue = [];
 
 // ── csk-footer.csk ──
@@ -40,25 +41,7 @@ class CskFooter extends HTMLElement {
       <style>:host{display:block;}.footer{padding:clamp(1.25rem, 2.5vw, 2rem) 0;border-top:1px solid var(--c-border, #2a2a3a);}.inner{max-width:var(--max-w, 70rem);margin:0 auto;padding:0 var(--space-page, 1.5rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;}.brand{display:flex;align-items:center;gap:0.5rem;font-weight:600;font-size:clamp(0.8rem, 1vw, 0.9rem);color:var(--c-text, #e4e4ed);}.copy{font-size:clamp(0.7rem, 0.9vw, 0.8rem);color:var(--c-text-dim, #9898ab);}@media (max-width:48rem){.inner{flex-direction:column;text-align:center;}}</style>
       <footer class="footer">
         <div class="inner">
-          <div class="brand">
-            <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
-              <rect width="32" height="32" rx="8" fill="url(#fg)">
-              </rect>
-              <path d="M9 22V10h3.2l3.8 7.5L19.8 10H23v12h-2.8v-7.4L17 21.2h-2L11.8 14.6V22H9z" fill="#fff">
-              </path>
-              <defs>
-                <linearGradient id="fg" x1="0" y1="0" x2="32" y2="32">
-                  <stop stop-color="#6C5CE7">
-                  </stop>
-                  <stop offset="1" stop-color="#00B894">
-                  </stop>
-                </linearGradient>
-              </defs>
-            </svg>
-            <span>
-              Chasket
-            </span>
-          </div>
+          <div class="brand"><svg width="22" height="22" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="url(#fg)"></rect><path d="M9 22V10h3.2l3.8 7.5L19.8 10H23v12h-2.8v-7.4L17 21.2h-2L11.8 14.6V22H9z" fill="#fff"></path><defs><linearGradient id="fg" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#6C5CE7"></stop><stop offset="1" stop-color="#00B894"></stop></linearGradient></defs></svg><span>Chasket</span></div>
           <p class="copy">
             ${this.#esc(this.#tr('footer.copyright'))}
           </p>
@@ -74,25 +57,7 @@ class CskFooter extends HTMLElement {
       <style>:host{display:block;}.footer{padding:clamp(1.25rem, 2.5vw, 2rem) 0;border-top:1px solid var(--c-border, #2a2a3a);}.inner{max-width:var(--max-w, 70rem);margin:0 auto;padding:0 var(--space-page, 1.5rem);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;}.brand{display:flex;align-items:center;gap:0.5rem;font-weight:600;font-size:clamp(0.8rem, 1vw, 0.9rem);color:var(--c-text, #e4e4ed);}.copy{font-size:clamp(0.7rem, 0.9vw, 0.8rem);color:var(--c-text-dim, #9898ab);}@media (max-width:48rem){.inner{flex-direction:column;text-align:center;}}</style>
       <footer class="footer">
         <div class="inner">
-          <div class="brand">
-            <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
-              <rect width="32" height="32" rx="8" fill="url(#fg)">
-              </rect>
-              <path d="M9 22V10h3.2l3.8 7.5L19.8 10H23v12h-2.8v-7.4L17 21.2h-2L11.8 14.6V22H9z" fill="#fff">
-              </path>
-              <defs>
-                <linearGradient id="fg" x1="0" y1="0" x2="32" y2="32">
-                  <stop stop-color="#6C5CE7">
-                  </stop>
-                  <stop offset="1" stop-color="#00B894">
-                  </stop>
-                </linearGradient>
-              </defs>
-            </svg>
-            <span>
-              Chasket
-            </span>
-          </div>
+          <div class="brand"><svg width="22" height="22" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="url(#fg)"></rect><path d="M9 22V10h3.2l3.8 7.5L19.8 10H23v12h-2.8v-7.4L17 21.2h-2L11.8 14.6V22H9z" fill="#fff"></path><defs><linearGradient id="fg" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#6C5CE7"></stop><stop offset="1" stop-color="#00B894"></stop></linearGradient></defs></svg><span>Chasket</span></div>
           <p class="copy">
             ${this.#esc(this.#tr('footer.copyright'))}
           </p>
@@ -128,6 +93,16 @@ class CskFooter extends HTMLElement {
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -285,70 +260,9 @@ class CskNavbar extends HTMLElement {
     tpl.innerHTML = `
       <style>:host{display:block;position:fixed;top:0;left:0;right:0;z-index:100;}.nav{background:rgba(10, 10, 15, 0.82);backdrop-filter:blur(1rem) saturate(1.6);-webkit-backdrop-filter:blur(1rem) saturate(1.6);border-bottom:1px solid var(--c-border, #2a2a3a);transition:border-color 0.3s;}.nav.scrolled{border-bottom-color:rgba(42, 42, 58, 1);}.inner{max-width:var(--max-w, 70rem);margin:0 auto;padding:0 var(--space-page, 1.5rem);display:flex;align-items:center;justify-content:space-between;height:3.75rem;}.logo{display:flex;align-items:center;gap:0.625rem;font-weight:700;font-size:clamp(1.2rem, 1.6vw, 1.5rem);letter-spacing:-0.02em;color:var(--c-text, #e4e4ed);text-decoration:none;transition:color 0.2s;}.logo:hover{color:#fff;}.logo svg{flex-shrink:0;}.links{display:flex;align-items:center;gap:clamp(1rem, 2.5vw, 1.75rem);font-size:clamp(0.8rem, 1vw, 0.9rem);}.links a{color:var(--c-text-dim, #9898ab);text-decoration:none;transition:color 0.2s;white-space:nowrap;}.links a:hover{color:#fff;}.gh-link{display:inline-flex !important;align-items:center;gap:0.375rem;background:var(--c-surface, #1a1a26);padding:0.375rem 0.875rem;border-radius:0.5rem;border:1px solid var(--c-border, #2a2a3a);font-size:clamp(0.75rem, 0.9vw, 0.85rem) !important;}.gh-link:hover{border-color:var(--c-primary-light, #a29bfe);color:#fff !important;}.lang-btn{display:inline-flex;align-items:center;gap:0.375rem;background:var(--c-surface, #1a1a26);padding:0.375rem 0.75rem;border-radius:0.5rem;border:1px solid var(--c-border, #2a2a3a);font-size:clamp(0.75rem, 0.9vw, 0.85rem);color:var(--c-text-dim, #9898ab);cursor:pointer;transition:border-color 0.2s, color 0.2s;font-family:var(--font, sans-serif);font-weight:600;letter-spacing:0.04em;min-height:2.25rem;white-space:nowrap;}.lang-btn:hover{border-color:var(--c-primary-light, #a29bfe);color:#fff;}.lang-btn svg{flex-shrink:0;}.toggle{display:none;background:none;border:none;cursor:pointer;padding:0.5rem;min-width:2.75rem;min-height:2.75rem;justify-content:center;align-items:center;}.toggle span{display:block;width:1.375rem;height:2px;background:var(--c-text, #e4e4ed);margin:0.3125rem 0;border-radius:2px;transition:0.25s;}@media (max-width:48rem){.links{display:none;flex-direction:column;position:absolute;top:3.75rem;left:0;right:0;background:rgba(10, 10, 15, 0.96);padding:1.25rem var(--space-page, 1.5rem);gap:1rem;border-bottom:1px solid var(--c-border, #2a2a3a);backdrop-filter:blur(1rem);}.links.open{display:flex;}.links a{padding:0.5rem 0;font-size:1rem;}.toggle{display:flex;}}</style>
       <nav class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#scrolled ? 'nav scrolled' : 'nav'))}">
-        <div class="inner">
-          <a href="/" class="logo">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-              <rect width="32" height="32" rx="8" fill="url(#ng)">
-              </rect>
-              <path d="M9 22V10h3.2l3.8 7.5L19.8 10H23v12h-2.8v-7.4L17 21.2h-2L11.8 14.6V22H9z" fill="#fff">
-              </path>
-              <defs>
-                <linearGradient id="ng" x1="0" y1="0" x2="32" y2="32">
-                  <stop stop-color="#6C5CE7">
-                  </stop>
-                  <stop offset="1" stop-color="#00B894">
-                  </stop>
-                </linearGradient>
-              </defs>
-            </svg>
-            <span>
-              Chasket
-            </span>
-          </a>
-          <div class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#menuOpen ? 'links open' : 'links'))}">
-            <a data-chasket-id="fl-0" href="#/why">
-              ${this.#esc(this.#tr('nav.why'))}
-            </a>
-            <a data-chasket-id="fl-1" href="#/guide">
-              ${this.#esc(this.#tr('nav.guide'))}
-            </a>
-            <a data-chasket-id="fl-2" href="#/api">
-              ${this.#esc(this.#tr('nav.api'))}
-            </a>
-            <a data-chasket-id="fl-3" href="#/testing">
-              ${this.#esc(this.#tr('nav.testing'))}
-            </a>
-            <a data-chasket-id="fl-4" href="#ecosystem">
-              ${this.#esc(this.#tr('nav.ecosystem'))}
-            </a>
-            <a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer" class="gh-link">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z">
-                </path>
-              </svg>
-              GitHub
-            </a>
-            <button data-chasket-id="fl-5" class="lang-btn" aria-label="${this.#escAttr(this.#tr('nav.switchLang'))}">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10">
-                </circle>
-                <line x1="2" y1="12" x2="22" y2="12">
-                </line>
-                <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z">
-                </path>
-              </svg>
-              ${this.#esc(this.#currentLang() === 'ja' ? 'EN' : 'JA')}
-            </button>
-          </div>
-          <button data-chasket-id="fl-6" class="toggle" aria-label="${this.#escAttr(this.#tr('nav.toggleMenu'))}">
-            <span>
-            </span>
-            <span>
-            </span>
-            <span>
-            </span>
-          </button>
-        </div>
+        <div class="inner"><a href="/" class="logo"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="url(#ng)"></rect><path d="M9 22V10h3.2l3.8 7.5L19.8 10H23v12h-2.8v-7.4L17 21.2h-2L11.8 14.6V22H9z" fill="#fff"></path><defs><linearGradient id="ng" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#6C5CE7"></stop><stop offset="1" stop-color="#00B894"></stop></linearGradient></defs></svg><span>Chasket</span></a><div class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#menuOpen ? 'links open' : 'links'))}"><a data-chasket-id="fl-0" href="#/why">${this.#esc(this.#tr('nav.why'))}</a><a data-chasket-id="fl-1" href="#/guide">${this.#esc(this.#tr('nav.guide'))}</a><a data-chasket-id="fl-2" href="#/api">${this.#esc(this.#tr('nav.api'))}</a><a data-chasket-id="fl-3" href="#/testing">${this.#esc(this.#tr('nav.testing'))}</a><a data-chasket-id="fl-4" href="#ecosystem">${this.#esc(this.#tr('nav.ecosystem'))}</a><a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer" class="gh-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path></svg>
+          GitHub
+        </a><button data-chasket-id="fl-5" class="lang-btn" aria-label="${this.#escAttr(this.#tr('nav.switchLang'))}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>${this.#esc(this.#currentLang() === 'ja' ? 'EN' : 'JA')}</button></div><button data-chasket-id="fl-6" class="toggle" aria-label="${this.#escAttr(this.#tr('nav.toggleMenu'))}"><span></span><span></span><span></span></button></div>
       </nav>
     `;
     this.#shadow.replaceChildren(tpl.content.cloneNode(true));
@@ -359,70 +273,9 @@ class CskNavbar extends HTMLElement {
     tpl.innerHTML = `
       <style>:host{display:block;position:fixed;top:0;left:0;right:0;z-index:100;}.nav{background:rgba(10, 10, 15, 0.82);backdrop-filter:blur(1rem) saturate(1.6);-webkit-backdrop-filter:blur(1rem) saturate(1.6);border-bottom:1px solid var(--c-border, #2a2a3a);transition:border-color 0.3s;}.nav.scrolled{border-bottom-color:rgba(42, 42, 58, 1);}.inner{max-width:var(--max-w, 70rem);margin:0 auto;padding:0 var(--space-page, 1.5rem);display:flex;align-items:center;justify-content:space-between;height:3.75rem;}.logo{display:flex;align-items:center;gap:0.625rem;font-weight:700;font-size:clamp(1.2rem, 1.6vw, 1.5rem);letter-spacing:-0.02em;color:var(--c-text, #e4e4ed);text-decoration:none;transition:color 0.2s;}.logo:hover{color:#fff;}.logo svg{flex-shrink:0;}.links{display:flex;align-items:center;gap:clamp(1rem, 2.5vw, 1.75rem);font-size:clamp(0.8rem, 1vw, 0.9rem);}.links a{color:var(--c-text-dim, #9898ab);text-decoration:none;transition:color 0.2s;white-space:nowrap;}.links a:hover{color:#fff;}.gh-link{display:inline-flex !important;align-items:center;gap:0.375rem;background:var(--c-surface, #1a1a26);padding:0.375rem 0.875rem;border-radius:0.5rem;border:1px solid var(--c-border, #2a2a3a);font-size:clamp(0.75rem, 0.9vw, 0.85rem) !important;}.gh-link:hover{border-color:var(--c-primary-light, #a29bfe);color:#fff !important;}.lang-btn{display:inline-flex;align-items:center;gap:0.375rem;background:var(--c-surface, #1a1a26);padding:0.375rem 0.75rem;border-radius:0.5rem;border:1px solid var(--c-border, #2a2a3a);font-size:clamp(0.75rem, 0.9vw, 0.85rem);color:var(--c-text-dim, #9898ab);cursor:pointer;transition:border-color 0.2s, color 0.2s;font-family:var(--font, sans-serif);font-weight:600;letter-spacing:0.04em;min-height:2.25rem;white-space:nowrap;}.lang-btn:hover{border-color:var(--c-primary-light, #a29bfe);color:#fff;}.lang-btn svg{flex-shrink:0;}.toggle{display:none;background:none;border:none;cursor:pointer;padding:0.5rem;min-width:2.75rem;min-height:2.75rem;justify-content:center;align-items:center;}.toggle span{display:block;width:1.375rem;height:2px;background:var(--c-text, #e4e4ed);margin:0.3125rem 0;border-radius:2px;transition:0.25s;}@media (max-width:48rem){.links{display:none;flex-direction:column;position:absolute;top:3.75rem;left:0;right:0;background:rgba(10, 10, 15, 0.96);padding:1.25rem var(--space-page, 1.5rem);gap:1rem;border-bottom:1px solid var(--c-border, #2a2a3a);backdrop-filter:blur(1rem);}.links.open{display:flex;}.links a{padding:0.5rem 0;font-size:1rem;}.toggle{display:flex;}}</style>
       <nav class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#scrolled ? 'nav scrolled' : 'nav'))}">
-        <div class="inner">
-          <a href="/" class="logo">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-              <rect width="32" height="32" rx="8" fill="url(#ng)">
-              </rect>
-              <path d="M9 22V10h3.2l3.8 7.5L19.8 10H23v12h-2.8v-7.4L17 21.2h-2L11.8 14.6V22H9z" fill="#fff">
-              </path>
-              <defs>
-                <linearGradient id="ng" x1="0" y1="0" x2="32" y2="32">
-                  <stop stop-color="#6C5CE7">
-                  </stop>
-                  <stop offset="1" stop-color="#00B894">
-                  </stop>
-                </linearGradient>
-              </defs>
-            </svg>
-            <span>
-              Chasket
-            </span>
-          </a>
-          <div class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#menuOpen ? 'links open' : 'links'))}">
-            <a data-chasket-id="fl-0" href="#/why">
-              ${this.#esc(this.#tr('nav.why'))}
-            </a>
-            <a data-chasket-id="fl-1" href="#/guide">
-              ${this.#esc(this.#tr('nav.guide'))}
-            </a>
-            <a data-chasket-id="fl-2" href="#/api">
-              ${this.#esc(this.#tr('nav.api'))}
-            </a>
-            <a data-chasket-id="fl-3" href="#/testing">
-              ${this.#esc(this.#tr('nav.testing'))}
-            </a>
-            <a data-chasket-id="fl-4" href="#ecosystem">
-              ${this.#esc(this.#tr('nav.ecosystem'))}
-            </a>
-            <a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer" class="gh-link">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z">
-                </path>
-              </svg>
-              GitHub
-            </a>
-            <button data-chasket-id="fl-5" class="lang-btn" aria-label="${this.#escAttr(this.#tr('nav.switchLang'))}">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10">
-                </circle>
-                <line x1="2" y1="12" x2="22" y2="12">
-                </line>
-                <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z">
-                </path>
-              </svg>
-              ${this.#esc(this.#currentLang() === 'ja' ? 'EN' : 'JA')}
-            </button>
-          </div>
-          <button data-chasket-id="fl-6" class="toggle" aria-label="${this.#escAttr(this.#tr('nav.toggleMenu'))}">
-            <span>
-            </span>
-            <span>
-            </span>
-            <span>
-            </span>
-          </button>
-        </div>
+        <div class="inner"><a href="/" class="logo"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="url(#ng)"></rect><path d="M9 22V10h3.2l3.8 7.5L19.8 10H23v12h-2.8v-7.4L17 21.2h-2L11.8 14.6V22H9z" fill="#fff"></path><defs><linearGradient id="ng" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#6C5CE7"></stop><stop offset="1" stop-color="#00B894"></stop></linearGradient></defs></svg><span>Chasket</span></a><div class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#menuOpen ? 'links open' : 'links'))}"><a data-chasket-id="fl-0" href="#/why">${this.#esc(this.#tr('nav.why'))}</a><a data-chasket-id="fl-1" href="#/guide">${this.#esc(this.#tr('nav.guide'))}</a><a data-chasket-id="fl-2" href="#/api">${this.#esc(this.#tr('nav.api'))}</a><a data-chasket-id="fl-3" href="#/testing">${this.#esc(this.#tr('nav.testing'))}</a><a data-chasket-id="fl-4" href="#ecosystem">${this.#esc(this.#tr('nav.ecosystem'))}</a><a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer" class="gh-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path></svg>
+          GitHub
+        </a><button data-chasket-id="fl-5" class="lang-btn" aria-label="${this.#escAttr(this.#tr('nav.switchLang'))}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>${this.#esc(this.#currentLang() === 'ja' ? 'EN' : 'JA')}</button></div><button data-chasket-id="fl-6" class="toggle" aria-label="${this.#escAttr(this.#tr('nav.toggleMenu'))}"><span></span><span></span><span></span></button></div>
       </nav>
     `;
     return tpl.content;
@@ -456,6 +309,16 @@ class CskNavbar extends HTMLElement {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
           continue;
         }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
+          continue;
+        }
         this.#patch(o, n);
       }
     }
@@ -465,7 +328,7 @@ class CskNavbar extends HTMLElement {
     {
       const el = this.#shadow.querySelector('[data-chasket-id="fl-0"]');
       if (el) {
-        const fn_click = (e) => { this.#closeMenu(e); this.#update(); };
+        const fn_click = (e) => { this.#closeMenu(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -473,7 +336,7 @@ class CskNavbar extends HTMLElement {
     {
       const el = this.#shadow.querySelector('[data-chasket-id="fl-1"]');
       if (el) {
-        const fn_click = (e) => { this.#closeMenu(e); this.#update(); };
+        const fn_click = (e) => { this.#closeMenu(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -481,7 +344,7 @@ class CskNavbar extends HTMLElement {
     {
       const el = this.#shadow.querySelector('[data-chasket-id="fl-2"]');
       if (el) {
-        const fn_click = (e) => { this.#closeMenu(e); this.#update(); };
+        const fn_click = (e) => { this.#closeMenu(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -489,7 +352,7 @@ class CskNavbar extends HTMLElement {
     {
       const el = this.#shadow.querySelector('[data-chasket-id="fl-3"]');
       if (el) {
-        const fn_click = (e) => { this.#closeMenu(e); this.#update(); };
+        const fn_click = (e) => { this.#closeMenu(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -497,7 +360,7 @@ class CskNavbar extends HTMLElement {
     {
       const el = this.#shadow.querySelector('[data-chasket-id="fl-4"]');
       if (el) {
-        const fn_click = (e) => { e.preventDefault(); this.#goEcosystem(e); this.#update(); };
+        const fn_click = (e) => { e.preventDefault(); this.#goEcosystem(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -505,7 +368,7 @@ class CskNavbar extends HTMLElement {
     {
       const el = this.#shadow.querySelector('[data-chasket-id="fl-5"]');
       if (el) {
-        const fn_click = (e) => { this.#switchLang(e); this.#update(); };
+        const fn_click = (e) => { this.#switchLang(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -513,7 +376,7 @@ class CskNavbar extends HTMLElement {
     {
       const el = this.#shadow.querySelector('[data-chasket-id="fl-6"]');
       if (el) {
-        const fn_click = (e) => { this.#toggleMenu(e); this.#update(); };
+        const fn_click = (e) => { this.#toggleMenu(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -588,6 +451,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-shell.csk ──
+
 (() => {
 "use strict";
 
@@ -713,6 +577,16 @@ class CskShell extends HTMLElement {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
           continue;
         }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
+          continue;
+        }
         this.#patch(o, n);
       }
     }
@@ -796,13 +670,13 @@ class CskApiCli extends HTMLElement {
   #_code_chasketInit = "chasket init my-project\ncd my-project\nnpm install\nchasket dev";
   get #code_chasketInit() { return this.#_code_chasketInit; }
   set #code_chasketInit(v) { this.#_code_chasketInit = v; this.#scheduleUpdate(); }
-  #_code_chasketDev = "chasket dev                    # port 5173 (default)\nchasket dev --port 3000      # custom port\nchasket dev --no-hmr         # disable HMR";
+  #_code_chasketDev = "chasket dev                    <span class=cm># port 5173 (default)</span>\nchasket dev --port <span class=n>3000</span>      <span class=cm># custom port</span>\nchasket dev --no-hmr         <span class=cm># disable HMR</span>";
   get #code_chasketDev() { return this.#_code_chasketDev; }
   set #code_chasketDev(v) { this.#_code_chasketDev = v; this.#scheduleUpdate(); }
-  #_code_chasketBuild = "chasket build                  # src/ → dist/\nchasket build src/pages       # specify directory";
+  #_code_chasketBuild = "chasket build                  <span class=cm># src/ → dist/</span>\nchasket build src/pages       <span class=cm># specify directory</span>";
   get #code_chasketBuild() { return this.#_code_chasketBuild; }
   set #code_chasketBuild(v) { this.#_code_chasketBuild = v; this.#scheduleUpdate(); }
-  #_code_chasketCheck = "chasket check                  # report type errors (no build)\nchasket check src/pages";
+  #_code_chasketCheck = "chasket check                  <span class=cm># report type errors (no build)</span>\nchasket check src/pages";
   get #code_chasketCheck() { return this.#_code_chasketCheck; }
   set #code_chasketCheck(v) { this.#_code_chasketCheck = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -858,33 +732,9 @@ class CskApiCli extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.cli.example'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_chasketInit)}</code>
-</pre>
+            <pre><code>${this.#code_chasketInit}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.cli.filesCreated'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                chasket.config.json -
-                ${this.#esc(this.#tr('apiContent.cli.projectConfig'))}
-              </li>
-              <li>
-                package.json -
-                ${this.#esc(this.#tr('apiContent.cli.npmPackage'))}
-              </li>
-              <li>
-                src/pages/ -
-                ${this.#esc(this.#tr('apiContent.cli.componentDir'))}
-              </li>
-              <li>
-                dist/ -
-                ${this.#esc(this.#tr('apiContent.cli.buildDir'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.cli.filesCreated'))}:</strong><ul><li>chasket.config.json - ${this.#esc(this.#tr('apiContent.cli.projectConfig'))}</li><li>package.json - ${this.#esc(this.#tr('apiContent.cli.npmPackage'))}</li><li>src/pages/ - ${this.#esc(this.#tr('apiContent.cli.componentDir'))}</li><li>dist/ - ${this.#esc(this.#tr('apiContent.cli.buildDir'))}</li></ul></div>
         </div>
         <div class="subsection">
           <h3>
@@ -905,57 +755,19 @@ class CskApiCli extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.cli.example'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_chasketDev)}</code>
-</pre>
+            <pre><code>${this.#code_chasketDev}</code></pre>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.cli.options'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  --port &lt;number&gt;
-                </code>
-                -
-                ${this.#esc(this.#tr('apiContent.cli.portOption'))}
-              </li>
-              <li>
-                <code>
-                  --no-hmr
-                </code>
-                -
-                ${this.#esc(this.#tr('apiContent.cli.noHmrOption'))}
-              </li>
-              <li>
-                <code>
-                  --host &lt;host&gt;
-                </code>
-                -
-                ${this.#esc(this.#tr('apiContent.cli.hostOption'))}
-              </li>
+              <li><code>--port &lt;number&gt;</code> - ${this.#esc(this.#tr('apiContent.cli.portOption'))}</li>
+              <li><code>--no-hmr</code> - ${this.#esc(this.#tr('apiContent.cli.noHmrOption'))}</li>
+              <li><code>--host &lt;host&gt;</code> - ${this.#esc(this.#tr('apiContent.cli.hostOption'))}</li>
             </ul>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.cli.features'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.autoFileWatch'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.hmr'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.sourceMap'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.autoReload'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.cli.features'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.cli.autoFileWatch'))}</li><li>${this.#esc(this.#tr('apiContent.cli.hmr'))}</li><li>${this.#esc(this.#tr('apiContent.cli.sourceMap'))}</li><li>${this.#esc(this.#tr('apiContent.cli.autoReload'))}</li></ul></div>
         </div>
         <div class="subsection">
           <h3>
@@ -976,57 +788,19 @@ class CskApiCli extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.cli.example'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_chasketBuild)}</code>
-</pre>
+            <pre><code>${this.#code_chasketBuild}</code></pre>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.cli.output'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  dist/components/
-                </code>
-                -
-                ${this.#esc(this.#tr('apiContent.cli.compiledComponents'))}
-              </li>
-              <li>
-                <code>
-                  dist/index.js
-                </code>
-                -
-                ${this.#esc(this.#tr('apiContent.cli.mainBundle'))}
-              </li>
-              <li>
-                <code>
-                  dist/index.d.ts
-                </code>
-                -
-                ${this.#esc(this.#tr('apiContent.cli.typeDefinitions'))}
-              </li>
+              <li><code>dist/components/</code> - ${this.#esc(this.#tr('apiContent.cli.compiledComponents'))}</li>
+              <li><code>dist/index.js</code> - ${this.#esc(this.#tr('apiContent.cli.mainBundle'))}</li>
+              <li><code>dist/index.d.ts</code> - ${this.#esc(this.#tr('apiContent.cli.typeDefinitions'))}</li>
             </ul>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.cli.optimizations'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.minification'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.treeShaking'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.cssBundling'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.sourceMapOptional'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.cli.optimizations'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.cli.minification'))}</li><li>${this.#esc(this.#tr('apiContent.cli.treeShaking'))}</li><li>${this.#esc(this.#tr('apiContent.cli.cssBundling'))}</li><li>${this.#esc(this.#tr('apiContent.cli.sourceMapOptional'))}</li></ul></div>
         </div>
         <div class="subsection">
           <h3>
@@ -1047,26 +821,9 @@ class CskApiCli extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.cli.example'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_chasketCheck)}</code>
-</pre>
+            <pre><code>${this.#code_chasketCheck}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.cli.purpose'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.checkCicdPurpose'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.checkErrorOnlyPurpose'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.checkFastValidation'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.cli.purpose'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.cli.checkCicdPurpose'))}</li><li>${this.#esc(this.#tr('apiContent.cli.checkErrorOnlyPurpose'))}</li><li>${this.#esc(this.#tr('apiContent.cli.checkFastValidation'))}</li></ul></div>
         </div>
       </section>
       <!-- CLI Options -->
@@ -1095,10 +852,7 @@ class CskApiCli extends HTMLElement {
             <tbody>
               <tr>
                 <td>
-                  <code>
-                    --port
-                  </code>
-                </td>
+<code>--port</code>                </td>
                 <td>
                   dev
                 </td>
@@ -1111,10 +865,7 @@ class CskApiCli extends HTMLElement {
               </tr>
               <tr>
                 <td>
-                  <code>
-                    --host
-                  </code>
-                </td>
+<code>--host</code>                </td>
                 <td>
                   dev
                 </td>
@@ -1127,10 +878,7 @@ class CskApiCli extends HTMLElement {
               </tr>
               <tr>
                 <td>
-                  <code>
-                    --no-hmr
-                  </code>
-                </td>
+<code>--no-hmr</code>                </td>
                 <td>
                   dev
                 </td>
@@ -1143,10 +891,7 @@ class CskApiCli extends HTMLElement {
               </tr>
               <tr>
                 <td>
-                  <code>
-                    --watch
-                  </code>
-                </td>
+<code>--watch</code>                </td>
                 <td>
                   build, check
                 </td>
@@ -1159,10 +904,7 @@ class CskApiCli extends HTMLElement {
               </tr>
               <tr>
                 <td>
-                  <code>
-                    --sourcemap
-                  </code>
-                </td>
+<code>--sourcemap</code>                </td>
                 <td>
                   build
                 </td>
@@ -1175,10 +917,7 @@ class CskApiCli extends HTMLElement {
               </tr>
               <tr>
                 <td>
-                  <code>
-                    --minify
-                  </code>
-                </td>
+<code>--minify</code>                </td>
                 <td>
                   build
                 </td>
@@ -1227,33 +966,9 @@ class CskApiCli extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.cli.example'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_chasketInit)}</code>
-</pre>
+            <pre><code>${this.#code_chasketInit}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.cli.filesCreated'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                chasket.config.json -
-                ${this.#esc(this.#tr('apiContent.cli.projectConfig'))}
-              </li>
-              <li>
-                package.json -
-                ${this.#esc(this.#tr('apiContent.cli.npmPackage'))}
-              </li>
-              <li>
-                src/pages/ -
-                ${this.#esc(this.#tr('apiContent.cli.componentDir'))}
-              </li>
-              <li>
-                dist/ -
-                ${this.#esc(this.#tr('apiContent.cli.buildDir'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.cli.filesCreated'))}:</strong><ul><li>chasket.config.json - ${this.#esc(this.#tr('apiContent.cli.projectConfig'))}</li><li>package.json - ${this.#esc(this.#tr('apiContent.cli.npmPackage'))}</li><li>src/pages/ - ${this.#esc(this.#tr('apiContent.cli.componentDir'))}</li><li>dist/ - ${this.#esc(this.#tr('apiContent.cli.buildDir'))}</li></ul></div>
         </div>
         <div class="subsection">
           <h3>
@@ -1274,57 +989,19 @@ class CskApiCli extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.cli.example'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_chasketDev)}</code>
-</pre>
+            <pre><code>${this.#code_chasketDev}</code></pre>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.cli.options'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  --port &lt;number&gt;
-                </code>
-                -
-                ${this.#esc(this.#tr('apiContent.cli.portOption'))}
-              </li>
-              <li>
-                <code>
-                  --no-hmr
-                </code>
-                -
-                ${this.#esc(this.#tr('apiContent.cli.noHmrOption'))}
-              </li>
-              <li>
-                <code>
-                  --host &lt;host&gt;
-                </code>
-                -
-                ${this.#esc(this.#tr('apiContent.cli.hostOption'))}
-              </li>
+              <li><code>--port &lt;number&gt;</code> - ${this.#esc(this.#tr('apiContent.cli.portOption'))}</li>
+              <li><code>--no-hmr</code> - ${this.#esc(this.#tr('apiContent.cli.noHmrOption'))}</li>
+              <li><code>--host &lt;host&gt;</code> - ${this.#esc(this.#tr('apiContent.cli.hostOption'))}</li>
             </ul>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.cli.features'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.autoFileWatch'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.hmr'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.sourceMap'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.autoReload'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.cli.features'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.cli.autoFileWatch'))}</li><li>${this.#esc(this.#tr('apiContent.cli.hmr'))}</li><li>${this.#esc(this.#tr('apiContent.cli.sourceMap'))}</li><li>${this.#esc(this.#tr('apiContent.cli.autoReload'))}</li></ul></div>
         </div>
         <div class="subsection">
           <h3>
@@ -1345,57 +1022,19 @@ class CskApiCli extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.cli.example'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_chasketBuild)}</code>
-</pre>
+            <pre><code>${this.#code_chasketBuild}</code></pre>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.cli.output'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  dist/components/
-                </code>
-                -
-                ${this.#esc(this.#tr('apiContent.cli.compiledComponents'))}
-              </li>
-              <li>
-                <code>
-                  dist/index.js
-                </code>
-                -
-                ${this.#esc(this.#tr('apiContent.cli.mainBundle'))}
-              </li>
-              <li>
-                <code>
-                  dist/index.d.ts
-                </code>
-                -
-                ${this.#esc(this.#tr('apiContent.cli.typeDefinitions'))}
-              </li>
+              <li><code>dist/components/</code> - ${this.#esc(this.#tr('apiContent.cli.compiledComponents'))}</li>
+              <li><code>dist/index.js</code> - ${this.#esc(this.#tr('apiContent.cli.mainBundle'))}</li>
+              <li><code>dist/index.d.ts</code> - ${this.#esc(this.#tr('apiContent.cli.typeDefinitions'))}</li>
             </ul>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.cli.optimizations'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.minification'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.treeShaking'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.cssBundling'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.sourceMapOptional'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.cli.optimizations'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.cli.minification'))}</li><li>${this.#esc(this.#tr('apiContent.cli.treeShaking'))}</li><li>${this.#esc(this.#tr('apiContent.cli.cssBundling'))}</li><li>${this.#esc(this.#tr('apiContent.cli.sourceMapOptional'))}</li></ul></div>
         </div>
         <div class="subsection">
           <h3>
@@ -1416,26 +1055,9 @@ class CskApiCli extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.cli.example'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_chasketCheck)}</code>
-</pre>
+            <pre><code>${this.#code_chasketCheck}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.cli.purpose'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.checkCicdPurpose'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.checkErrorOnlyPurpose'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.cli.checkFastValidation'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.cli.purpose'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.cli.checkCicdPurpose'))}</li><li>${this.#esc(this.#tr('apiContent.cli.checkErrorOnlyPurpose'))}</li><li>${this.#esc(this.#tr('apiContent.cli.checkFastValidation'))}</li></ul></div>
         </div>
       </section>
       <!-- CLI Options -->
@@ -1464,10 +1086,7 @@ class CskApiCli extends HTMLElement {
             <tbody>
               <tr>
                 <td>
-                  <code>
-                    --port
-                  </code>
-                </td>
+<code>--port</code>                </td>
                 <td>
                   dev
                 </td>
@@ -1480,10 +1099,7 @@ class CskApiCli extends HTMLElement {
               </tr>
               <tr>
                 <td>
-                  <code>
-                    --host
-                  </code>
-                </td>
+<code>--host</code>                </td>
                 <td>
                   dev
                 </td>
@@ -1496,10 +1112,7 @@ class CskApiCli extends HTMLElement {
               </tr>
               <tr>
                 <td>
-                  <code>
-                    --no-hmr
-                  </code>
-                </td>
+<code>--no-hmr</code>                </td>
                 <td>
                   dev
                 </td>
@@ -1512,10 +1125,7 @@ class CskApiCli extends HTMLElement {
               </tr>
               <tr>
                 <td>
-                  <code>
-                    --watch
-                  </code>
-                </td>
+<code>--watch</code>                </td>
                 <td>
                   build, check
                 </td>
@@ -1528,10 +1138,7 @@ class CskApiCli extends HTMLElement {
               </tr>
               <tr>
                 <td>
-                  <code>
-                    --sourcemap
-                  </code>
-                </td>
+<code>--sourcemap</code>                </td>
                 <td>
                   build
                 </td>
@@ -1544,10 +1151,7 @@ class CskApiCli extends HTMLElement {
               </tr>
               <tr>
                 <td>
-                  <code>
-                    --minify
-                  </code>
-                </td>
+<code>--minify</code>                </td>
                 <td>
                   build
                 </td>
@@ -1592,6 +1196,16 @@ class CskApiCli extends HTMLElement {
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -1674,16 +1288,16 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskApiCompiler extends HTMLElement {
-  #_code_compileBasic = "import { compile } from '@aspect/chasket'\n\nconst source = `\n&lt;meta&gt;\n  name: my-component\n&lt;/meta&gt;\n&lt;script&gt;\n  state count: number = 0\n&lt;/script&gt;\n&lt;template&gt;\n  &lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;/template&gt;\n`\n\nconst result = compile(source, 'my-component.csk', {\n  target: 'es2020'\n})\n\nif (result.success) {\n  console.log(result.output)\n}";
+  #_code_compileBasic = "<span class=k>import</span> { compile } <span class=k>from</span> <span class=s>'@aspect/chasket'</span>\n\n<span class=k>const</span> source = <span class=s>`\n&lt;meta&gt;\n  name: my-component\n&lt;/meta&gt;\n&lt;script&gt;\n  state count: number = 0\n&lt;/script&gt;\n&lt;template&gt;\n  &lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;/template&gt;\n`</span>\n\n<span class=k>const</span> result = <span class=f>compile</span>(source, <span class=s>'my-component.csk'</span>, {\n  target: <span class=s>'es2020'</span>\n})\n\n<span class=k>if</span> (result.success) {\n  console.<span class=f>log</span>(result.output)\n}";
   get #code_compileBasic() { return this.#_code_compileBasic; }
   set #code_compileBasic(v) { this.#_code_compileBasic = v; this.#scheduleUpdate(); }
-  #_code_compileOptions = "const options = {\n  target: 'es2020',           // &quot;es2020&quot; | &quot;es2021&quot; | &quot;esnext&quot;\n  bundle: true,               // embed CSS in JS\n  shadow: false,              // Shadow DOM or Light DOM\n  sourcemap: true,            // generate source maps\n  minify: false,              // enable in production\n  imports: {                  // external import mapping\n    'lodash': './libs/lodash.js'\n  }\n}";
+  #_code_compileOptions = "<span class=k>const</span> options = {\n  target: <span class=s>'es2020'</span>,           <span class=cm>// &quot;es2020&quot; | &quot;es2021&quot; | &quot;esnext&quot;</span>\n  bundle: <span class=n>true</span>,               <span class=cm>// embed CSS in JS</span>\n  shadow: <span class=n>false</span>,              <span class=cm>// Shadow DOM or </span>Light DOM\n  sourcemap: <span class=n>true</span>,            <span class=cm>// generate source maps</span>\n  minify: <span class=n>false</span>,              <span class=cm>// enable in production</span>\n  imports: {                  <span class=cm>// external import mapping</span>\n    <span class=s>'lodash'</span>: <span class=s>'./libs/lodash.js'</span>\n  }\n}";
   get #code_compileOptions() { return this.#_code_compileOptions; }
   set #code_compileOptions(v) { this.#_code_compileOptions = v; this.#scheduleUpdate(); }
-  #_code_splitBlocks = "import { splitBlocks } from '@aspect/chasket'\n\nconst source = `...csk file content...`\nconst blocks = splitBlocks(source)\n\nconsole.log(blocks.meta)      // meta block\nconsole.log(blocks.script)    // script block\nconsole.log(blocks.template)  // template block\nconsole.log(blocks.style)     // style block";
+  #_code_splitBlocks = "<span class=k>import</span> { splitBlocks } <span class=k>from</span> <span class=s>'@aspect/chasket'</span>\n\n<span class=k>const</span> source = <span class=s>`...csk file content...`</span>\n<span class=k>const</span> blocks = <span class=f>splitBlocks</span>(source)\n\nconsole.<span class=f>log</span>(blocks.meta)      <span class=cm>// meta block</span>\nconsole.<span class=f>log</span>(blocks.script)    <span class=cm>// script block</span>\nconsole.<span class=f>log</span>(blocks.template)  <span class=cm>// template block</span>\nconsole.<span class=f>log</span>(blocks.style)     <span class=cm>// style block</span>";
   get #code_splitBlocks() { return this.#_code_splitBlocks; }
   set #code_splitBlocks(v) { this.#_code_splitBlocks = v; this.#scheduleUpdate(); }
-  #_code_parseTemplate = "import { parseTemplateNodes } from '@aspect/chasket'\n\nconst html = `\n  &lt;div&gt;\n    &lt;p&gt;{{ name }}&lt;/p&gt;\n    &lt;button @click=&quot;handleClick&quot;&gt;Click&lt;/button&gt;\n  &lt;/div&gt;\n`\n\nconst ast = parseTemplateNodes(html)\nconsole.log(ast)  // node syntax tree";
+  #_code_parseTemplate = "<span class=k>import</span> { parseTemplateNodes } <span class=k>from</span> <span class=s>'@aspect/chasket'</span>\n\n<span class=k>const</span> html = <span class=s>`\n  &lt;div&gt;\n    &lt;p&gt;{{ name }}&lt;/p&gt;\n    &lt;button @click=&quot;handleClick&quot;&gt;Click&lt;/button&gt;\n  &lt;/div&gt;\n`</span>\n\n<span class=k>const</span> ast = <span class=f>parseTemplateNodes</span>(html)\nconsole.<span class=f>log</span>(ast)  <span class=cm>// node syntax tree</span>";
   get #code_parseTemplate() { return this.#_code_parseTemplate; }
   set #code_parseTemplate(v) { this.#_code_parseTemplate = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -1732,35 +1346,16 @@ class CskApiCompiler extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.compiler.signature'))}
             </h4>
-            <pre><code>compile(source: string, filename: string, options: CompileOptions): CompileResult</code>
-</pre>
+            <pre><code><span class=f>compile</span>(source: <span class=tp>string</span>, filename: <span class=tp>string</span>, options: CompileOptions): CompileResult</code></pre>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.compiler.parameters'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  source
-                </code>
-                (string) —
-                ${this.#esc(this.#tr('apiContent.compiler.paramSource'))}
-              </li>
-              <li>
-                <code>
-                  filename
-                </code>
-                (string) —
-                ${this.#esc(this.#tr('apiContent.compiler.paramFilename'))}
-              </li>
-              <li>
-                <code>
-                  options
-                </code>
-                (CompileOptions) —
-                ${this.#esc(this.#tr('apiContent.compiler.paramOptions'))}
-              </li>
+              <li><code>source</code> (string) — ${this.#esc(this.#tr('apiContent.compiler.paramSource'))}</li>
+              <li><code>filename</code> (string) — ${this.#esc(this.#tr('apiContent.compiler.paramFilename'))}</li>
+              <li><code>options</code> (CompileOptions) — ${this.#esc(this.#tr('apiContent.compiler.paramOptions'))}</li>
             </ul>
           </div>
           <div class="property">
@@ -1769,49 +1364,18 @@ class CskApiCompiler extends HTMLElement {
               (CompileResult)
             </h4>
             <ul>
-              <li>
-                <code>
-                  success
-                </code>
-                (boolean) —
-                ${this.#esc(this.#tr('apiContent.compiler.returnSuccess'))}
-              </li>
-              <li>
-                <code>
-                  output
-                </code>
-                (string) —
-                ${this.#esc(this.#tr('apiContent.compiler.returnOutput'))}
-              </li>
-              <li>
-                <code>
-                  dtsOutput
-                </code>
-                (string) —
-                ${this.#esc(this.#tr('apiContent.compiler.returnDts'))}
-              </li>
-              <li>
-                <code>
-                  diagnostics
-                </code>
-                (Diagnostic[]) —
-                ${this.#esc(this.#tr('apiContent.compiler.returnDiagnostics'))}
-              </li>
-              <li>
-                <code>
-                  meta
-                </code>
-                (object) —
-                ${this.#esc(this.#tr('apiContent.compiler.returnMeta'))}
-              </li>
+              <li><code>success</code> (boolean) — ${this.#esc(this.#tr('apiContent.compiler.returnSuccess'))}</li>
+              <li><code>output</code> (string) — ${this.#esc(this.#tr('apiContent.compiler.returnOutput'))}</li>
+              <li><code>dtsOutput</code> (string) — ${this.#esc(this.#tr('apiContent.compiler.returnDts'))}</li>
+              <li><code>diagnostics</code> (Diagnostic[]) — ${this.#esc(this.#tr('apiContent.compiler.returnDiagnostics'))}</li>
+              <li><code>meta</code> (object) — ${this.#esc(this.#tr('apiContent.compiler.returnMeta'))}</li>
             </ul>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.compiler.example'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_compileBasic)}</code>
-</pre>
+            <pre><code>${this.#code_compileBasic}</code></pre>
           </div>
         </div>
         <!-- splitBlocks() function -->
@@ -1826,33 +1390,15 @@ class CskApiCompiler extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.compiler.signature'))}
             </h4>
-            <pre><code>splitBlocks(source: string): { meta: string, script: string, template: string, style: string }</code>
-</pre>
+            <pre><code><span class=f>splitBlocks</span>(source: <span class=tp>string</span>): { meta: <span class=tp>string</span>, script: <span class=tp>string</span>, template: <span class=tp>string</span>, style: <span class=tp>string</span> }</code></pre>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.compiler.example'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_splitBlocks)}</code>
-</pre>
+            <pre><code>${this.#code_splitBlocks}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.compiler.purpose'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.compiler.splitBlocksUse1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.compiler.splitBlocksUse2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.compiler.splitBlocksUse3'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.compiler.purpose'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.compiler.splitBlocksUse1'))}</li><li>${this.#esc(this.#tr('apiContent.compiler.splitBlocksUse2'))}</li><li>${this.#esc(this.#tr('apiContent.compiler.splitBlocksUse3'))}</li></ul></div>
         </div>
         <!-- parseTemplateNodes() function -->
         <div class="subsection">
@@ -1866,40 +1412,15 @@ class CskApiCompiler extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.compiler.signature'))}
             </h4>
-            <pre><code>parseTemplateNodes(html: string): ASTNode[]</code>
-</pre>
+            <pre><code><span class=f>parseTemplateNodes</span>(html: <span class=tp>string</span>): ASTNode[]</code></pre>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.compiler.example'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_parseTemplate)}</code>
-</pre>
+            <pre><code>${this.#code_parseTemplate}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.compiler.astNodeTypes'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ElementNode —
-                ${this.#esc(this.#tr('apiContent.compiler.nodeTypeElement'))}
-              </li>
-              <li>
-                TextNode —
-                ${this.#esc(this.#tr('apiContent.compiler.nodeTypeText'))}
-              </li>
-              <li>
-                CommentNode —
-                ${this.#esc(this.#tr('apiContent.compiler.nodeTypeComment'))}
-              </li>
-              <li>
-                DirectiveNode —
-                ${this.#esc(this.#tr('apiContent.compiler.nodeTypeDirective'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.compiler.astNodeTypes'))}:</strong><ul><li>ElementNode — ${this.#esc(this.#tr('apiContent.compiler.nodeTypeElement'))}</li><li>TextNode — ${this.#esc(this.#tr('apiContent.compiler.nodeTypeText'))}</li><li>CommentNode — ${this.#esc(this.#tr('apiContent.compiler.nodeTypeComment'))}</li><li>DirectiveNode — ${this.#esc(this.#tr('apiContent.compiler.nodeTypeDirective'))}</li></ul></div>
         </div>
         <!-- CompileOptions Object -->
         <div class="subsection">
@@ -1910,58 +1431,8 @@ class CskApiCompiler extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('apiContent.compiler.compileOptionsDesc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_compileOptions)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.compiler.optionDetails'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                <code>
-                  target
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.compiler.optTarget'))}
-              </li>
-              <li>
-                <code>
-                  bundle
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.compiler.optBundle'))}
-              </li>
-              <li>
-                <code>
-                  shadow
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.compiler.optShadow'))}
-              </li>
-              <li>
-                <code>
-                  sourcemap
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.compiler.optSourcemap'))}
-              </li>
-              <li>
-                <code>
-                  minify
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.compiler.optMinify'))}
-              </li>
-              <li>
-                <code>
-                  imports
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.compiler.optImports'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_compileOptions}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.compiler.optionDetails'))}:</strong><ul><li><code>target</code> — ${this.#esc(this.#tr('apiContent.compiler.optTarget'))}</li><li><code>bundle</code> — ${this.#esc(this.#tr('apiContent.compiler.optBundle'))}</li><li><code>shadow</code> — ${this.#esc(this.#tr('apiContent.compiler.optShadow'))}</li><li><code>sourcemap</code> — ${this.#esc(this.#tr('apiContent.compiler.optSourcemap'))}</li><li><code>minify</code> — ${this.#esc(this.#tr('apiContent.compiler.optMinify'))}</li><li><code>imports</code> — ${this.#esc(this.#tr('apiContent.compiler.optImports'))}</li></ul></div>
         </div>
       </section>
     `;
@@ -1991,35 +1462,16 @@ class CskApiCompiler extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.compiler.signature'))}
             </h4>
-            <pre><code>compile(source: string, filename: string, options: CompileOptions): CompileResult</code>
-</pre>
+            <pre><code><span class=f>compile</span>(source: <span class=tp>string</span>, filename: <span class=tp>string</span>, options: CompileOptions): CompileResult</code></pre>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.compiler.parameters'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  source
-                </code>
-                (string) —
-                ${this.#esc(this.#tr('apiContent.compiler.paramSource'))}
-              </li>
-              <li>
-                <code>
-                  filename
-                </code>
-                (string) —
-                ${this.#esc(this.#tr('apiContent.compiler.paramFilename'))}
-              </li>
-              <li>
-                <code>
-                  options
-                </code>
-                (CompileOptions) —
-                ${this.#esc(this.#tr('apiContent.compiler.paramOptions'))}
-              </li>
+              <li><code>source</code> (string) — ${this.#esc(this.#tr('apiContent.compiler.paramSource'))}</li>
+              <li><code>filename</code> (string) — ${this.#esc(this.#tr('apiContent.compiler.paramFilename'))}</li>
+              <li><code>options</code> (CompileOptions) — ${this.#esc(this.#tr('apiContent.compiler.paramOptions'))}</li>
             </ul>
           </div>
           <div class="property">
@@ -2028,49 +1480,18 @@ class CskApiCompiler extends HTMLElement {
               (CompileResult)
             </h4>
             <ul>
-              <li>
-                <code>
-                  success
-                </code>
-                (boolean) —
-                ${this.#esc(this.#tr('apiContent.compiler.returnSuccess'))}
-              </li>
-              <li>
-                <code>
-                  output
-                </code>
-                (string) —
-                ${this.#esc(this.#tr('apiContent.compiler.returnOutput'))}
-              </li>
-              <li>
-                <code>
-                  dtsOutput
-                </code>
-                (string) —
-                ${this.#esc(this.#tr('apiContent.compiler.returnDts'))}
-              </li>
-              <li>
-                <code>
-                  diagnostics
-                </code>
-                (Diagnostic[]) —
-                ${this.#esc(this.#tr('apiContent.compiler.returnDiagnostics'))}
-              </li>
-              <li>
-                <code>
-                  meta
-                </code>
-                (object) —
-                ${this.#esc(this.#tr('apiContent.compiler.returnMeta'))}
-              </li>
+              <li><code>success</code> (boolean) — ${this.#esc(this.#tr('apiContent.compiler.returnSuccess'))}</li>
+              <li><code>output</code> (string) — ${this.#esc(this.#tr('apiContent.compiler.returnOutput'))}</li>
+              <li><code>dtsOutput</code> (string) — ${this.#esc(this.#tr('apiContent.compiler.returnDts'))}</li>
+              <li><code>diagnostics</code> (Diagnostic[]) — ${this.#esc(this.#tr('apiContent.compiler.returnDiagnostics'))}</li>
+              <li><code>meta</code> (object) — ${this.#esc(this.#tr('apiContent.compiler.returnMeta'))}</li>
             </ul>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.compiler.example'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_compileBasic)}</code>
-</pre>
+            <pre><code>${this.#code_compileBasic}</code></pre>
           </div>
         </div>
         <!-- splitBlocks() function -->
@@ -2085,33 +1506,15 @@ class CskApiCompiler extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.compiler.signature'))}
             </h4>
-            <pre><code>splitBlocks(source: string): { meta: string, script: string, template: string, style: string }</code>
-</pre>
+            <pre><code><span class=f>splitBlocks</span>(source: <span class=tp>string</span>): { meta: <span class=tp>string</span>, script: <span class=tp>string</span>, template: <span class=tp>string</span>, style: <span class=tp>string</span> }</code></pre>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.compiler.example'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_splitBlocks)}</code>
-</pre>
+            <pre><code>${this.#code_splitBlocks}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.compiler.purpose'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.compiler.splitBlocksUse1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.compiler.splitBlocksUse2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.compiler.splitBlocksUse3'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.compiler.purpose'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.compiler.splitBlocksUse1'))}</li><li>${this.#esc(this.#tr('apiContent.compiler.splitBlocksUse2'))}</li><li>${this.#esc(this.#tr('apiContent.compiler.splitBlocksUse3'))}</li></ul></div>
         </div>
         <!-- parseTemplateNodes() function -->
         <div class="subsection">
@@ -2125,40 +1528,15 @@ class CskApiCompiler extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.compiler.signature'))}
             </h4>
-            <pre><code>parseTemplateNodes(html: string): ASTNode[]</code>
-</pre>
+            <pre><code><span class=f>parseTemplateNodes</span>(html: <span class=tp>string</span>): ASTNode[]</code></pre>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.compiler.example'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_parseTemplate)}</code>
-</pre>
+            <pre><code>${this.#code_parseTemplate}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.compiler.astNodeTypes'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ElementNode —
-                ${this.#esc(this.#tr('apiContent.compiler.nodeTypeElement'))}
-              </li>
-              <li>
-                TextNode —
-                ${this.#esc(this.#tr('apiContent.compiler.nodeTypeText'))}
-              </li>
-              <li>
-                CommentNode —
-                ${this.#esc(this.#tr('apiContent.compiler.nodeTypeComment'))}
-              </li>
-              <li>
-                DirectiveNode —
-                ${this.#esc(this.#tr('apiContent.compiler.nodeTypeDirective'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.compiler.astNodeTypes'))}:</strong><ul><li>ElementNode — ${this.#esc(this.#tr('apiContent.compiler.nodeTypeElement'))}</li><li>TextNode — ${this.#esc(this.#tr('apiContent.compiler.nodeTypeText'))}</li><li>CommentNode — ${this.#esc(this.#tr('apiContent.compiler.nodeTypeComment'))}</li><li>DirectiveNode — ${this.#esc(this.#tr('apiContent.compiler.nodeTypeDirective'))}</li></ul></div>
         </div>
         <!-- CompileOptions Object -->
         <div class="subsection">
@@ -2169,58 +1547,8 @@ class CskApiCompiler extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('apiContent.compiler.compileOptionsDesc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_compileOptions)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.compiler.optionDetails'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                <code>
-                  target
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.compiler.optTarget'))}
-              </li>
-              <li>
-                <code>
-                  bundle
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.compiler.optBundle'))}
-              </li>
-              <li>
-                <code>
-                  shadow
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.compiler.optShadow'))}
-              </li>
-              <li>
-                <code>
-                  sourcemap
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.compiler.optSourcemap'))}
-              </li>
-              <li>
-                <code>
-                  minify
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.compiler.optMinify'))}
-              </li>
-              <li>
-                <code>
-                  imports
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.compiler.optImports'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_compileOptions}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.compiler.optionDetails'))}:</strong><ul><li><code>target</code> — ${this.#esc(this.#tr('apiContent.compiler.optTarget'))}</li><li><code>bundle</code> — ${this.#esc(this.#tr('apiContent.compiler.optBundle'))}</li><li><code>shadow</code> — ${this.#esc(this.#tr('apiContent.compiler.optShadow'))}</li><li><code>sourcemap</code> — ${this.#esc(this.#tr('apiContent.compiler.optSourcemap'))}</li><li><code>minify</code> — ${this.#esc(this.#tr('apiContent.compiler.optMinify'))}</li><li><code>imports</code> — ${this.#esc(this.#tr('apiContent.compiler.optImports'))}</li></ul></div>
         </div>
       </section>
     `;
@@ -2253,6 +1581,16 @@ class CskApiCompiler extends HTMLElement {
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -2335,7 +1673,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskApiConfig extends HTMLElement {
-  #_code_configBasic = "{\n  &quot;src&quot;: &quot;src&quot;,\n  &quot;outdir&quot;: &quot;dist&quot;,\n  &quot;target&quot;: &quot;es2020&quot;,\n  &quot;bundle&quot;: true,\n  &quot;shadow&quot;: true,\n  &quot;sourcemap&quot;: true,\n  &quot;minify&quot;: true\n}";
+  #_code_configBasic = "{\n  <span class=s>&quot;src&quot;</span>: <span class=s>&quot;src&quot;</span>,\n  <span class=s>&quot;outdir&quot;</span>: <span class=s>&quot;dist&quot;</span>,\n  <span class=s>&quot;target&quot;</span>: <span class=s>&quot;es2020&quot;</span>,\n  <span class=s>&quot;bundle&quot;</span>: <span class=n>true</span>,\n  <span class=s>&quot;shadow&quot;</span>: <span class=n>true</span>,\n  <span class=s>&quot;sourcemap&quot;</span>: <span class=n>true</span>,\n  <span class=s>&quot;minify&quot;</span>: <span class=n>true</span>\n}";
   get #code_configBasic() { return this.#_code_configBasic; }
   set #code_configBasic(v) { this.#_code_configBasic = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -2379,109 +1717,76 @@ class CskApiConfig extends HTMLElement {
           </h3>
           <div class="property">
             <h4>
-              <code>
-                src
-              </code>
-            </h4>
+<code>src</code>            </h4>
             <p>
               ${this.#esc(this.#tr('apiContent.config.srcDesc'))}
             </p>
-            <pre><code>"src": "src"</code>
-</pre>
+            <pre><code><span class=s>"src"</span>: <span class=s>"src"</span></code></pre>
           </div>
           <div class="property">
             <h4>
-              <code>
-                outdir
-              </code>
-            </h4>
+<code>outdir</code>            </h4>
             <p>
               ${this.#esc(this.#tr('apiContent.config.outdirDesc'))}
             </p>
-            <pre><code>"outdir": "dist"</code>
-</pre>
+            <pre><code><span class=s>"outdir"</span>: <span class=s>"dist"</span></code></pre>
           </div>
           <div class="property">
             <h4>
-              <code>
-                target
-              </code>
-            </h4>
+<code>target</code>            </h4>
             <p>
               ${this.#esc(this.#tr('apiContent.config.targetDesc'))}
             </p>
-            <pre><code>"target": "es2020"</code>
-</pre>
+            <pre><code><span class=s>"target"</span>: <span class=s>"es2020"</span></code></pre>
           </div>
           <div class="property">
             <h4>
-              <code>
-                bundle
-              </code>
-            </h4>
+<code>bundle</code>            </h4>
             <p>
               ${this.#esc(this.#tr('apiContent.config.bundleDesc'))}
             </p>
-            <pre><code>"bundle": true</code>
-</pre>
+            <pre><code><span class=s>"bundle"</span>: <span class=n>true</span></code></pre>
           </div>
           <div class="property">
             <h4>
-              <code>
-                shadow
-              </code>
-            </h4>
+<code>shadow</code>            </h4>
             <p>
               ${this.#esc(this.#tr('apiContent.config.shadowDesc'))}
             </p>
-            <pre><code>"shadow": true</code>
-</pre>
+            <pre><code><span class=s>"shadow"</span>: <span class=n>true</span></code></pre>
           </div>
           <div class="property">
             <h4>
-              <code>
-                sourcemap
-              </code>
-            </h4>
+<code>sourcemap</code>            </h4>
             <p>
               ${this.#esc(this.#tr('apiContent.config.sourcemapDesc'))}
             </p>
-            <pre><code>"sourcemap": true</code>
-</pre>
+            <pre><code><span class=s>"sourcemap"</span>: <span class=n>true</span></code></pre>
           </div>
           <div class="property">
             <h4>
-              <code>
-                minify
-              </code>
-            </h4>
+<code>minify</code>            </h4>
             <p>
               ${this.#esc(this.#tr('apiContent.config.minifyDesc'))}
             </p>
-            <pre><code>"minify": true</code>
-</pre>
+            <pre><code><span class=s>"minify"</span>: <span class=n>true</span></code></pre>
           </div>
           <div class="property">
             <h4>
-              <code>
-                imports
-              </code>
-            </h4>
+<code>imports</code>            </h4>
             <p>
               ${this.#esc(this.#tr('apiContent.config.importsDesc'))}
             </p>
-            <pre><code>"imports": {
-  "@": "./src",
-  "utils": "./src/utils"
-}</code>
-</pre>
+            <pre><code><span class=s>"imports"</span>: {
+  <span class=s>"@"</span>: <span class=s>"./src"</span>,
+  <span class=s>"utils"</span>: <span class=s>"./src/utils"</span>
+}</code></pre>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.config.exampleTitle'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_configBasic)}</code>
-</pre>
+            <pre><code>${this.#code_configBasic}</code></pre>
           </div>
         </div>
       </section>
@@ -2507,109 +1812,76 @@ class CskApiConfig extends HTMLElement {
           </h3>
           <div class="property">
             <h4>
-              <code>
-                src
-              </code>
-            </h4>
+<code>src</code>            </h4>
             <p>
               ${this.#esc(this.#tr('apiContent.config.srcDesc'))}
             </p>
-            <pre><code>"src": "src"</code>
-</pre>
+            <pre><code><span class=s>"src"</span>: <span class=s>"src"</span></code></pre>
           </div>
           <div class="property">
             <h4>
-              <code>
-                outdir
-              </code>
-            </h4>
+<code>outdir</code>            </h4>
             <p>
               ${this.#esc(this.#tr('apiContent.config.outdirDesc'))}
             </p>
-            <pre><code>"outdir": "dist"</code>
-</pre>
+            <pre><code><span class=s>"outdir"</span>: <span class=s>"dist"</span></code></pre>
           </div>
           <div class="property">
             <h4>
-              <code>
-                target
-              </code>
-            </h4>
+<code>target</code>            </h4>
             <p>
               ${this.#esc(this.#tr('apiContent.config.targetDesc'))}
             </p>
-            <pre><code>"target": "es2020"</code>
-</pre>
+            <pre><code><span class=s>"target"</span>: <span class=s>"es2020"</span></code></pre>
           </div>
           <div class="property">
             <h4>
-              <code>
-                bundle
-              </code>
-            </h4>
+<code>bundle</code>            </h4>
             <p>
               ${this.#esc(this.#tr('apiContent.config.bundleDesc'))}
             </p>
-            <pre><code>"bundle": true</code>
-</pre>
+            <pre><code><span class=s>"bundle"</span>: <span class=n>true</span></code></pre>
           </div>
           <div class="property">
             <h4>
-              <code>
-                shadow
-              </code>
-            </h4>
+<code>shadow</code>            </h4>
             <p>
               ${this.#esc(this.#tr('apiContent.config.shadowDesc'))}
             </p>
-            <pre><code>"shadow": true</code>
-</pre>
+            <pre><code><span class=s>"shadow"</span>: <span class=n>true</span></code></pre>
           </div>
           <div class="property">
             <h4>
-              <code>
-                sourcemap
-              </code>
-            </h4>
+<code>sourcemap</code>            </h4>
             <p>
               ${this.#esc(this.#tr('apiContent.config.sourcemapDesc'))}
             </p>
-            <pre><code>"sourcemap": true</code>
-</pre>
+            <pre><code><span class=s>"sourcemap"</span>: <span class=n>true</span></code></pre>
           </div>
           <div class="property">
             <h4>
-              <code>
-                minify
-              </code>
-            </h4>
+<code>minify</code>            </h4>
             <p>
               ${this.#esc(this.#tr('apiContent.config.minifyDesc'))}
             </p>
-            <pre><code>"minify": true</code>
-</pre>
+            <pre><code><span class=s>"minify"</span>: <span class=n>true</span></code></pre>
           </div>
           <div class="property">
             <h4>
-              <code>
-                imports
-              </code>
-            </h4>
+<code>imports</code>            </h4>
             <p>
               ${this.#esc(this.#tr('apiContent.config.importsDesc'))}
             </p>
-            <pre><code>"imports": {
-  "@": "./src",
-  "utils": "./src/utils"
-}</code>
-</pre>
+            <pre><code><span class=s>"imports"</span>: {
+  <span class=s>"@"</span>: <span class=s>"./src"</span>,
+  <span class=s>"utils"</span>: <span class=s>"./src/utils"</span>
+}</code></pre>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.config.exampleTitle'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_configBasic)}</code>
-</pre>
+            <pre><code>${this.#code_configBasic}</code></pre>
           </div>
         </div>
       </section>
@@ -2643,6 +1915,16 @@ class CskApiConfig extends HTMLElement {
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -2725,25 +2007,25 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskApiDiagnostics extends HTMLElement {
-  #_code_diagnostic_e0001 = "&lt;!-- csk-page-api.csk --&gt;\n&lt;meta&gt;\n  name: my-component\n&lt;/meta&gt;\n&lt;script&gt;\n  state count: number = 0\n&lt;/script&gt;\n&lt;!-- no template block --&gt;\n\n&lt;!-- fix: add template block --&gt;\n&lt;template&gt;\n  &lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;/template&gt;";
+  #_code_diagnostic_e0001 = "<span class=cm>&lt;!-- csk-page-api.csk --&gt;</span>\n<span class=t>&lt;meta</span><span class=t>&gt;</span>\n  name: my-component\n<span class=t>&lt;/meta</span><span class=t>&gt;</span>\n<span class=t>&lt;script</span><span class=t>&gt;</span>\n  <span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>\n<span class=t>&lt;/script</span><span class=t>&gt;</span>\n<span class=cm>&lt;!-- no template block --&gt;</span>\n\n<span class=cm>&lt;!-- fix: add template block --&gt;</span>\n<span class=t>&lt;template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ count }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=t>&lt;/template</span><span class=t>&gt;</span>";
   get #code_diagnostic_e0001() { return this.#_code_diagnostic_e0001; }
   set #code_diagnostic_e0001(v) { this.#_code_diagnostic_e0001 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_e0002 = "&lt;!-- invalid: no hyphens --&gt;\n&lt;meta&gt;\n  name: MyComponent\n&lt;/meta&gt;\n\n&lt;!-- fix: use kebab-case --&gt;\n&lt;meta&gt;\n  name: my-component\n&lt;/meta&gt;";
+  #_code_diagnostic_e0002 = "<span class=cm>&lt;!-- invalid: no hyphens --&gt;</span>\n<span class=t>&lt;meta</span><span class=t>&gt;</span>\n  name: MyComponent\n<span class=t>&lt;/meta</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- fix: use kebab-case --&gt;</span>\n<span class=t>&lt;meta</span><span class=t>&gt;</span>\n  name: my-component\n<span class=t>&lt;/meta</span><span class=t>&gt;</span>";
   get #code_diagnostic_e0002() { return this.#_code_diagnostic_e0002; }
   set #code_diagnostic_e0002(v) { this.#_code_diagnostic_e0002 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_e0003 = "state count: number = 0\nstate result: string = count + 10  // error: assigning number+number to string\n\n// fix:\nstate result: number = count + 10\n// or\nstate result: string = (count + 10).toString()";
+  #_code_diagnostic_e0003 = "<span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>\n<span class=k>state</span> result: <span class=tp>string</span> = count + <span class=n>10</span>  <span class=cm>// error: assigning number+number to string</span>\n\n<span class=cm>// fix:</span>\n<span class=k>state</span> result: <span class=tp>number</span> = count + <span class=n>10</span>\n<span class=cm>// or</span>\n<span class=k>state</span> result: <span class=tp>string</span> = (count + <span class=n>10</span>).<span class=f>toString</span>()";
   get #code_diagnostic_e0003() { return this.#_code_diagnostic_e0003; }
   set #code_diagnostic_e0003(v) { this.#_code_diagnostic_e0003 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_w0101 = "state count: number = 0   // warning: unused\nstate name: string = 'John'\n\n&lt;template&gt;\n  &lt;p&gt;{{ name }}&lt;/p&gt;\n&lt;/template&gt;\n\n// fix: use or remove count";
+  #_code_diagnostic_w0101 = "<span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>   <span class=cm>// warning: unused</span>\n<span class=k>state</span> name: <span class=tp>string</span> = <span class=s>'John'</span>\n\n<span class=t>&lt;template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ name }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=t>&lt;/template</span><span class=t>&gt;</span>\n\n<span class=cm>// fix: use or remove count</span>";
   get #code_diagnostic_w0101() { return this.#_code_diagnostic_w0101; }
   set #code_diagnostic_w0101(v) { this.#_code_diagnostic_w0101 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_w0201 = "&lt;!-- dangerous: inserting user input as HTML --&gt;\n&lt;div @html=\"userContent\"&gt;&lt;/div&gt;\n\n&lt;!-- safe: auto-escaped --&gt;\n&lt;div&gt;{{ userContent }}&lt;/div&gt;\n\n&lt;!-- fix: use only trusted HTML --&gt;\n&lt;div @html=\"sanitize(userContent)\"&gt;&lt;/div&gt;";
+  #_code_diagnostic_w0201 = "<span class=cm>&lt;!-- dangerous: inserting user input as HTML --&gt;</span>\n<span class=t>&lt;div</span> @html=\"userContent\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- safe: auto-escaped --&gt;</span>\n<span class=t>&lt;div</span><span class=t>&gt;</span><span class=i>{{ userContent }}</span><span class=t>&lt;/div</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- fix: use only trusted HTML --&gt;</span>\n<span class=t>&lt;div</span> @html=\"sanitize(userContent)\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>";
   get #code_diagnostic_w0201() { return this.#_code_diagnostic_w0201; }
   set #code_diagnostic_w0201(v) { this.#_code_diagnostic_w0201 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_w0202 = "&lt;!-- dangerous: dynamic URL injection --&gt;\n&lt;a :href=\"'https://' + userInput\"&gt;Link&lt;/a&gt;\n\n&lt;!-- fix: URL validation --&gt;\n&lt;a :href=\"isValidUrl(userInput) ? userInput : '#'\"&gt;Link&lt;/a&gt;";
+  #_code_diagnostic_w0202 = "<span class=cm>&lt;!-- dangerous: dynamic URL injection --&gt;</span>\n<span class=t>&lt;a</span> :href=\"'https://' + userInput\"<span class=t>&gt;</span>Link<span class=t>&lt;/a</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- fix: URL validation --&gt;</span>\n<span class=t>&lt;a</span> :href=\"isValidUrl(userInput) ? userInput : '#'\"<span class=t>&gt;</span>Link<span class=t>&lt;/a</span><span class=t>&gt;</span>";
   get #code_diagnostic_w0202() { return this.#_code_diagnostic_w0202; }
   set #code_diagnostic_w0202(v) { this.#_code_diagnostic_w0202 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_w0203 = "&lt;!-- duplicate ID warning --&gt;\n&lt;div id=\"header\"&gt;&lt;/div&gt;\n&lt;div id=\"header\"&gt;&lt;/div&gt;  &lt;!-- warning --&gt;\n\n&lt;!-- fix: use unique IDs --&gt;\n&lt;div id=\"header\"&gt;&lt;/div&gt;\n&lt;div id=\"main\"&gt;&lt;/div&gt;";
+  #_code_diagnostic_w0203 = "<span class=cm>&lt;!-- duplicate ID warning --&gt;</span>\n<span class=t>&lt;div</span> id=\"header\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>\n<span class=t>&lt;div</span> id=\"header\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>  <span class=cm>&lt;!-- warning --&gt;</span>\n\n<span class=cm>&lt;!-- fix: use unique IDs --&gt;</span>\n<span class=t>&lt;div</span> id=\"header\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>\n<span class=t>&lt;div</span> id=\"main\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>";
   get #code_diagnostic_w0203() { return this.#_code_diagnostic_w0203; }
   set #code_diagnostic_w0203(v) { this.#_code_diagnostic_w0203 = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -2799,8 +2081,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_diagnostic_e0001)}</code>
-</pre>
+            <pre><code>${this.#code_diagnostic_e0001}</code></pre>
           </div>
         </div>
         <div id="e0002" class="subsection">
@@ -2815,26 +2096,9 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_diagnostic_e0002)}</code>
-</pre>
+            <pre><code>${this.#code_diagnostic_e0002}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.diagnostics.kebabCaseConvention'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.kebabRule1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.kebabRule2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.kebabRule3'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.kebabCaseConvention'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.kebabRule1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.kebabRule2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.kebabRule3'))}</li></ul></div>
         </div>
         <div id="e0003" class="subsection">
           <h3>
@@ -2848,8 +2112,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_diagnostic_e0003)}</code>
-</pre>
+            <pre><code>${this.#code_diagnostic_e0003}</code></pre>
           </div>
         </div>
         <div id="e0004" class="subsection">
@@ -2922,26 +2185,9 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_diagnostic_w0101)}</code>
-</pre>
+            <pre><code>${this.#code_diagnostic_w0101}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.diagnostics.approaches'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach3'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.approaches'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach3'))}</li></ul></div>
         </div>
         <div id="w0201" class="subsection">
           <h3>
@@ -2955,26 +2201,9 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_diagnostic_w0201)}</code>
-</pre>
+            <pre><code>${this.#code_diagnostic_w0201}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.diagnostics.securityMeasures'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure3'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.securityMeasures'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure3'))}</li></ul></div>
         </div>
         <div id="w0202" class="subsection">
           <h3>
@@ -2988,26 +2217,9 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_diagnostic_w0202)}</code>
-</pre>
+            <pre><code>${this.#code_diagnostic_w0202}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.diagnostics.countermeasures'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure3'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.countermeasures'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure3'))}</li></ul></div>
         </div>
         <div id="w0203" class="subsection">
           <h3>
@@ -3021,26 +2233,9 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_diagnostic_w0203)}</code>
-</pre>
+            <pre><code>${this.#code_diagnostic_w0203}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.diagnostics.bestPractices'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice3'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.bestPractices'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice3'))}</li></ul></div>
         </div>
       </section>
     `;
@@ -3077,8 +2272,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_diagnostic_e0001)}</code>
-</pre>
+            <pre><code>${this.#code_diagnostic_e0001}</code></pre>
           </div>
         </div>
         <div id="e0002" class="subsection">
@@ -3093,26 +2287,9 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_diagnostic_e0002)}</code>
-</pre>
+            <pre><code>${this.#code_diagnostic_e0002}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.diagnostics.kebabCaseConvention'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.kebabRule1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.kebabRule2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.kebabRule3'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.kebabCaseConvention'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.kebabRule1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.kebabRule2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.kebabRule3'))}</li></ul></div>
         </div>
         <div id="e0003" class="subsection">
           <h3>
@@ -3126,8 +2303,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_diagnostic_e0003)}</code>
-</pre>
+            <pre><code>${this.#code_diagnostic_e0003}</code></pre>
           </div>
         </div>
         <div id="e0004" class="subsection">
@@ -3200,26 +2376,9 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_diagnostic_w0101)}</code>
-</pre>
+            <pre><code>${this.#code_diagnostic_w0101}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.diagnostics.approaches'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach3'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.approaches'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach3'))}</li></ul></div>
         </div>
         <div id="w0201" class="subsection">
           <h3>
@@ -3233,26 +2392,9 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_diagnostic_w0201)}</code>
-</pre>
+            <pre><code>${this.#code_diagnostic_w0201}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.diagnostics.securityMeasures'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure3'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.securityMeasures'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure3'))}</li></ul></div>
         </div>
         <div id="w0202" class="subsection">
           <h3>
@@ -3266,26 +2408,9 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_diagnostic_w0202)}</code>
-</pre>
+            <pre><code>${this.#code_diagnostic_w0202}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.diagnostics.countermeasures'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure3'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.countermeasures'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure3'))}</li></ul></div>
         </div>
         <div id="w0203" class="subsection">
           <h3>
@@ -3299,26 +2424,9 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_diagnostic_w0203)}</code>
-</pre>
+            <pre><code>${this.#code_diagnostic_w0203}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.diagnostics.bestPractices'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice3'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.bestPractices'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice3'))}</li></ul></div>
         </div>
       </section>
     `;
@@ -3351,6 +2459,16 @@ class CskApiDiagnostics extends HTMLElement {
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -3433,19 +2551,19 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskApiEcosystem extends HTMLElement {
-  #_code_router = "import { createRouter } from '@aspect/chasket-router'\n\nconst router = createRouter([\n  { path: '/', component: Home },\n  { path: '/about', component: About },\n  { path: '/posts/:id', component: PostDetail }\n])\n\nrouter.push('/')      // navigate\nconst route = router.current()  // current route";
+  #_code_router = "<span class=k>import</span> { createRouter } <span class=k>from</span> <span class=s>'@aspect/chasket-router'</span>\n\n<span class=k>const</span> router = <span class=f>createRouter</span>([\n  { path: <span class=s>'/'</span>, component: Home },\n  { path: <span class=s>'/about'</span>, component: About },\n  { path: <span class=s>'/posts/:id'</span>, component: PostDetail }\n])\n\nrouter.<span class=f>push</span>(<span class=s>'/'</span>)      <span class=cm>// navigate</span>\n<span class=k>const</span> route = router.<span class=f>current</span>()  <span class=cm>// current route</span>";
   get #code_router() { return this.#_code_router; }
   set #code_router(v) { this.#_code_router = v; this.#scheduleUpdate(); }
-  #_code_store = "import { createStore } from '@aspect/chasket-store'\n\nconst store = createStore({\n  state: { count: 0 },\n  actions: {\n    increment(state) { state.count++ }\n  },\n  getters: {\n    doubled: (state) => state.count * 2\n  }\n})\n\nstore.commit('increment')\nconsole.log(store.getters.doubled)";
+  #_code_store = "<span class=k>import</span> { createStore } <span class=k>from</span> <span class=s>'@aspect/chasket-store'</span>\n\n<span class=k>const</span> store = <span class=f>createStore</span>({\n  <span class=k>state</span>: { count: <span class=n>0</span> },\n  actions: {\n    <span class=f>increment</span>(<span class=k>state</span>) { <span class=k>state</span>.count++ }\n  },\n  getters: {\n    doubled: (<span class=k>state</span>) => <span class=k>state</span>.count * <span class=n>2</span>\n  }\n})\n\nstore.<span class=f>commit</span>(<span class=s>'increment'</span>)\nconsole.<span class=f>log</span>(store.getters.doubled)";
   get #code_store() { return this.#_code_store; }
   set #code_store(v) { this.#_code_store = v; this.#scheduleUpdate(); }
-  #_code_ssr = "import { renderToString, renderPage } from '@aspect/chasket-ssr'\n\n// render component to HTML string\nconst html = await renderToString(MyComponent, { prop1: 'value' })\n\n// render full page (with hydration)\nconst pageHtml = await renderPage(App, options)";
+  #_code_ssr = "<span class=k>import</span> { renderToString, renderPage } <span class=k>from</span> <span class=s>'@aspect/chasket-ssr'</span>\n\n<span class=cm>// render component to HTM</span>L string\n<span class=k>const</span> html = <span class=k>await</span> <span class=f>renderToString</span>(MyComponent, { prop1: <span class=s>'value'</span> })\n\n<span class=cm>// render full page (with hydration)</span>\n<span class=k>const</span> pageHtml = <span class=k>await</span> <span class=f>renderPage</span>(App, options)";
   get #code_ssr() { return this.#_code_ssr; }
   set #code_ssr(v) { this.#_code_ssr = v; this.#scheduleUpdate(); }
-  #_code_ui_components = "&lt;fl-button variant=\"primary\" @click=\"handleClick\"&gt;\n  Click me\n&lt;/fl-button&gt;\n\n&lt;fl-input :bind=\"username\" placeholder=\"Enter username\" /&gt;\n\n&lt;fl-card&gt;\n  &lt;fl-card-header&gt;Title&lt;/fl-card-header&gt;\n  &lt;fl-card-body&gt;Content&lt;/fl-card-body&gt;\n&lt;/fl-card&gt;\n\n&lt;fl-dialog :open=\"showDialog\" @close=\"showDialog = false\"&gt;\n  Dialog content\n&lt;/fl-dialog&gt;";
+  #_code_ui_components = "<span class=t>&lt;fl-button</span> variant=\"primary\" @click=\"handleClick\"<span class=t>&gt;</span>\n  Click me\n<span class=t>&lt;/fl-button</span><span class=t>&gt;</span>\n\n<span class=t>&lt;fl-input</span> :bind=\"username\" placeholder=\"Enter username\" <span class=t>/&gt;</span>\n\n<span class=t>&lt;fl-card</span><span class=t>&gt;</span>\n  <span class=t>&lt;fl-card-header</span><span class=t>&gt;</span>Title<span class=t>&lt;/fl-card-header</span><span class=t>&gt;</span>\n  <span class=t>&lt;fl-card-body</span><span class=t>&gt;</span>Content<span class=t>&lt;/fl-card-body</span><span class=t>&gt;</span>\n<span class=t>&lt;/fl-card</span><span class=t>&gt;</span>\n\n<span class=t>&lt;fl-dialog</span> :open=\"showDialog\" @close=\"showDialog = false\"<span class=t>&gt;</span>\n  Dialog content\n<span class=t>&lt;/fl-dialog</span><span class=t>&gt;</span>";
   get #code_ui_components() { return this.#_code_ui_components; }
   set #code_ui_components(v) { this.#_code_ui_components = v; this.#scheduleUpdate(); }
-  #_code_compilation_output = "// class generated by Chasket\nexport default class MyComponent extends HTMLElement {\n  #state = {}\n  #render() { /* render template */ }\n  #update() { /* detect changes */ }\n  #patch() { /* update DOM */ }\n  \n  get count() { return this.#state.count }\n  set count(value) {\n    this.#state.count = value\n    this.#scheduleUpdate()\n  }\n}";
+  #_code_compilation_output = "<span class=cm>// class generated by Chasket</span>\n<span class=k>export</span> <span class=k>default</span> <span class=k>class</span> MyComponent <span class=k>extends</span> HTMLElement {\n  <span class=cm>#state = {}</span>\n  <span class=cm>#render() { /* render template */ }</span>\n  <span class=cm>#update() { /* detect changes */ }</span>\n  <span class=cm>#patch() { /* update DOM */ }</span>\n  \n  get <span class=f>count</span>() { <span class=k>return</span> this.<span class=cm>#state.count }</span>\n  set <span class=f>count</span>(value) {\n    this.<span class=cm>#state.count = value</span>\n    this.<span class=cm>#scheduleUpdate()</span>\n  }\n}";
   get #code_compilation_output() { return this.#_code_compilation_output; }
   set #code_compilation_output(v) { this.#_code_compilation_output = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -3501,27 +2619,9 @@ class CskApiEcosystem extends HTMLElement {
               ${this.#esc(this.#tr('apiContent.ecosystem.mainFeatures'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  createRouter(routes)
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.routerFeature1'))}
-              </li>
-              <li>
-                <code>
-                  router.push(path)
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.routerFeature2'))}
-              </li>
-              <li>
-                <code>
-                  router.current()
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.routerFeature3'))}
-              </li>
+              <li><code>createRouter(routes)</code> — ${this.#esc(this.#tr('apiContent.ecosystem.routerFeature1'))}</li>
+              <li><code>router.push(path)</code> — ${this.#esc(this.#tr('apiContent.ecosystem.routerFeature2'))}</li>
+              <li><code>router.current()</code> — ${this.#esc(this.#tr('apiContent.ecosystem.routerFeature3'))}</li>
               <li>
                 ${this.#esc(this.#tr('apiContent.ecosystem.routerFeature4'))}
               </li>
@@ -3534,17 +2634,10 @@ class CskApiEcosystem extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.ecosystem.usageExample'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_router)}</code>
-</pre>
+            <pre><code>${this.#code_router}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.ecosystem.installation'))}
-              :
-            </strong>
-            <pre><code>npm install @aspect/chasket-router</code>
-</pre>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @aspect/chasket-router</code></pre>
+</div>
         </div>
         <div id="store" class="subsection">
           <h3>
@@ -3559,41 +2652,11 @@ class CskApiEcosystem extends HTMLElement {
               ${this.#esc(this.#tr('apiContent.ecosystem.mainFeatures'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  createStore(definition)
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature1'))}
-              </li>
-              <li>
-                <code>
-                  state
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature2'))}
-              </li>
-              <li>
-                <code>
-                  actions
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature3'))}
-              </li>
-              <li>
-                <code>
-                  getters
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature4'))}
-              </li>
-              <li>
-                <code>
-                  mutations
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature5'))}
-              </li>
+              <li><code>createStore(definition)</code> — ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature1'))}</li>
+              <li><code>state</code> — ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature2'))}</li>
+              <li><code>actions</code> — ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature3'))}</li>
+              <li><code>getters</code> — ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature4'))}</li>
+              <li><code>mutations</code> — ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature5'))}</li>
               <li>
                 ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature6'))}
               </li>
@@ -3603,17 +2666,10 @@ class CskApiEcosystem extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.ecosystem.usageExample'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_store)}</code>
-</pre>
+            <pre><code>${this.#code_store}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.ecosystem.installation'))}
-              :
-            </strong>
-            <pre><code>npm install @aspect/chasket-store</code>
-</pre>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @aspect/chasket-store</code></pre>
+</div>
         </div>
         <div id="ssr" class="subsection">
           <h3>
@@ -3628,20 +2684,8 @@ class CskApiEcosystem extends HTMLElement {
               ${this.#esc(this.#tr('apiContent.ecosystem.mainFeatures'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  renderToString(component, props)
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.ssrFeature1'))}
-              </li>
-              <li>
-                <code>
-                  renderPage(app, options)
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.ssrFeature2'))}
-              </li>
+              <li><code>renderToString(component, props)</code> — ${this.#esc(this.#tr('apiContent.ecosystem.ssrFeature1'))}</li>
+              <li><code>renderPage(app, options)</code> — ${this.#esc(this.#tr('apiContent.ecosystem.ssrFeature2'))}</li>
               <li>
                 ${this.#esc(this.#tr('apiContent.ecosystem.ssrFeature3'))}
               </li>
@@ -3654,17 +2698,10 @@ class CskApiEcosystem extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.ecosystem.usageExample'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_ssr)}</code>
-</pre>
+            <pre><code>${this.#code_ssr}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.ecosystem.installation'))}
-              :
-            </strong>
-            <pre><code>npm install @aspect/chasket-ssr</code>
-</pre>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @aspect/chasket-ssr</code></pre>
+</div>
         </div>
         <div id="ui" class="subsection">
           <h3>
@@ -3679,86 +2716,25 @@ class CskApiEcosystem extends HTMLElement {
               ${this.#esc(this.#tr('apiContent.ecosystem.providedComponents'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  &lt;fl-button&gt;
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.uiComp1'))}
-              </li>
-              <li>
-                <code>
-                  &lt;fl-input&gt;
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.uiComp2'))}
-              </li>
-              <li>
-                <code>
-                  &lt;fl-select&gt;
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.uiComp3'))}
-              </li>
-              <li>
-                <code>
-                  &lt;fl-card&gt;
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.uiComp4'))}
-              </li>
-              <li>
-                <code>
-                  &lt;fl-dialog&gt;
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.uiComp5'))}
-              </li>
-              <li>
-                <code>
-                  &lt;fl-badge&gt;
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.uiComp6'))}
-              </li>
-              <li>
-                <code>
-                  &lt;fl-alert&gt;
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.uiComp7'))}
-              </li>
-              <li>
-                <code>
-                  &lt;fl-tabs&gt;
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.uiComp8'))}
-              </li>
-              <li>
-                <code>
-                  &lt;fl-spinner&gt;
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.uiComp9'))}
-              </li>
+              <li><code>&lt;fl-button&gt;</code> — ${this.#esc(this.#tr('apiContent.ecosystem.uiComp1'))}</li>
+              <li><code>&lt;fl-input&gt;</code> — ${this.#esc(this.#tr('apiContent.ecosystem.uiComp2'))}</li>
+              <li><code>&lt;fl-select&gt;</code> — ${this.#esc(this.#tr('apiContent.ecosystem.uiComp3'))}</li>
+              <li><code>&lt;fl-card&gt;</code> — ${this.#esc(this.#tr('apiContent.ecosystem.uiComp4'))}</li>
+              <li><code>&lt;fl-dialog&gt;</code> — ${this.#esc(this.#tr('apiContent.ecosystem.uiComp5'))}</li>
+              <li><code>&lt;fl-badge&gt;</code> — ${this.#esc(this.#tr('apiContent.ecosystem.uiComp6'))}</li>
+              <li><code>&lt;fl-alert&gt;</code> — ${this.#esc(this.#tr('apiContent.ecosystem.uiComp7'))}</li>
+              <li><code>&lt;fl-tabs&gt;</code> — ${this.#esc(this.#tr('apiContent.ecosystem.uiComp8'))}</li>
+              <li><code>&lt;fl-spinner&gt;</code> — ${this.#esc(this.#tr('apiContent.ecosystem.uiComp9'))}</li>
             </ul>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.ecosystem.usageExample'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_ui_components)}</code>
-</pre>
+            <pre><code>${this.#code_ui_components}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.ecosystem.installation'))}
-              :
-            </strong>
-            <pre><code>npm install @aspect/chasket-ui</code>
-</pre>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @aspect/chasket-ui</code></pre>
+</div>
         </div>
         <div id="vite" class="subsection">
           <h3>
@@ -3787,14 +2763,8 @@ class CskApiEcosystem extends HTMLElement {
               </li>
             </ul>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.ecosystem.installation'))}
-              :
-            </strong>
-            <pre><code>npm install vite-plugin-chasket</code>
-</pre>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install vite-plugin-chasket</code></pre>
+</div>
         </div>
         <div id="lsp" class="subsection">
           <h3>
@@ -3829,14 +2799,8 @@ class CskApiEcosystem extends HTMLElement {
               </li>
             </ul>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.ecosystem.installation'))}
-              :
-            </strong>
-            <pre><code>npm install @aspect/chasket-lsp</code>
-</pre>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @aspect/chasket-lsp</code></pre>
+</div>
         </div>
         <div id="vscode" class="subsection">
           <h3>
@@ -3868,15 +2832,7 @@ class CskApiEcosystem extends HTMLElement {
               </li>
             </ul>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.ecosystem.installation'))}
-              :
-            </strong>
-            <p>
-              ${this.#esc(this.#tr('apiContent.ecosystem.vscodeInstallDesc'))}
-            </p>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><p>${this.#esc(this.#tr('apiContent.ecosystem.vscodeInstallDesc'))}</p></div>
         </div>
       </section>
       <!-- Compilation Output -->
@@ -3895,42 +2851,17 @@ class CskApiEcosystem extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.ecosystem.basicClassStructure'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_compilation_output)}</code>
-</pre>
+            <pre><code>${this.#code_compilation_output}</code></pre>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.ecosystem.mainMethods'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  #render()
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.methodRender'))}
-              </li>
-              <li>
-                <code>
-                  #update()
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.methodUpdate'))}
-              </li>
-              <li>
-                <code>
-                  #patch()
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.methodPatch'))}
-              </li>
-              <li>
-                <code>
-                  #scheduleUpdate()
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.methodSchedule'))}
-              </li>
+              <li><code>#render()</code> — ${this.#esc(this.#tr('apiContent.ecosystem.methodRender'))}</li>
+              <li><code>#update()</code> — ${this.#esc(this.#tr('apiContent.ecosystem.methodUpdate'))}</li>
+              <li><code>#patch()</code> — ${this.#esc(this.#tr('apiContent.ecosystem.methodPatch'))}</li>
+              <li><code>#scheduleUpdate()</code> — ${this.#esc(this.#tr('apiContent.ecosystem.methodSchedule'))}</li>
             </ul>
           </div>
           <div class="property">
@@ -3967,23 +2898,7 @@ class CskApiEcosystem extends HTMLElement {
               ${this.#esc(this.#tr('apiContent.ecosystem.eventBindingDesc'))}
             </p>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.ecosystem.performanceOptimization'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.ecosystem.optDomDiffing'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.ecosystem.optBatchProcessing'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.ecosystem.optReduceReflowRepaint'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.performanceOptimization'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.ecosystem.optDomDiffing'))}</li><li>${this.#esc(this.#tr('apiContent.ecosystem.optBatchProcessing'))}</li><li>${this.#esc(this.#tr('apiContent.ecosystem.optReduceReflowRepaint'))}</li></ul></div>
         </div>
         <div class="subsection">
           <h3>
@@ -4000,42 +2915,17 @@ class CskApiEcosystem extends HTMLElement {
   │   └── ...
   ├── index.js           # ${this.#esc(this.#tr('apiContent.ecosystem.mainBundle'))}
   ├── index.d.ts         # ${this.#esc(this.#tr('apiContent.ecosystem.typeDefinitions'))}
-  └── index.js.map       # ${this.#esc(this.#tr('apiContent.ecosystem.sourceMap'))}</code>
-</pre>
+  └── index.js.map       # ${this.#esc(this.#tr('apiContent.ecosystem.sourceMap'))}</code></pre>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.ecosystem.fileDescriptions'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  *.js
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.fileDesc1'))}
-              </li>
-              <li>
-                <code>
-                  *.js.map
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.fileDesc2'))}
-              </li>
-              <li>
-                <code>
-                  *.d.ts
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.fileDesc3'))}
-              </li>
-              <li>
-                <code>
-                  index.js
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.fileDesc4'))}
-              </li>
+              <li><code>*.js</code> — ${this.#esc(this.#tr('apiContent.ecosystem.fileDesc1'))}</li>
+              <li><code>*.js.map</code> — ${this.#esc(this.#tr('apiContent.ecosystem.fileDesc2'))}</li>
+              <li><code>*.d.ts</code> — ${this.#esc(this.#tr('apiContent.ecosystem.fileDesc3'))}</li>
+              <li><code>index.js</code> — ${this.#esc(this.#tr('apiContent.ecosystem.fileDesc4'))}</li>
             </ul>
           </div>
         </div>
@@ -4074,27 +2964,9 @@ class CskApiEcosystem extends HTMLElement {
               ${this.#esc(this.#tr('apiContent.ecosystem.mainFeatures'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  createRouter(routes)
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.routerFeature1'))}
-              </li>
-              <li>
-                <code>
-                  router.push(path)
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.routerFeature2'))}
-              </li>
-              <li>
-                <code>
-                  router.current()
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.routerFeature3'))}
-              </li>
+              <li><code>createRouter(routes)</code> — ${this.#esc(this.#tr('apiContent.ecosystem.routerFeature1'))}</li>
+              <li><code>router.push(path)</code> — ${this.#esc(this.#tr('apiContent.ecosystem.routerFeature2'))}</li>
+              <li><code>router.current()</code> — ${this.#esc(this.#tr('apiContent.ecosystem.routerFeature3'))}</li>
               <li>
                 ${this.#esc(this.#tr('apiContent.ecosystem.routerFeature4'))}
               </li>
@@ -4107,17 +2979,10 @@ class CskApiEcosystem extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.ecosystem.usageExample'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_router)}</code>
-</pre>
+            <pre><code>${this.#code_router}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.ecosystem.installation'))}
-              :
-            </strong>
-            <pre><code>npm install @aspect/chasket-router</code>
-</pre>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @aspect/chasket-router</code></pre>
+</div>
         </div>
         <div id="store" class="subsection">
           <h3>
@@ -4132,41 +2997,11 @@ class CskApiEcosystem extends HTMLElement {
               ${this.#esc(this.#tr('apiContent.ecosystem.mainFeatures'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  createStore(definition)
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature1'))}
-              </li>
-              <li>
-                <code>
-                  state
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature2'))}
-              </li>
-              <li>
-                <code>
-                  actions
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature3'))}
-              </li>
-              <li>
-                <code>
-                  getters
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature4'))}
-              </li>
-              <li>
-                <code>
-                  mutations
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature5'))}
-              </li>
+              <li><code>createStore(definition)</code> — ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature1'))}</li>
+              <li><code>state</code> — ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature2'))}</li>
+              <li><code>actions</code> — ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature3'))}</li>
+              <li><code>getters</code> — ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature4'))}</li>
+              <li><code>mutations</code> — ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature5'))}</li>
               <li>
                 ${this.#esc(this.#tr('apiContent.ecosystem.storeFeature6'))}
               </li>
@@ -4176,17 +3011,10 @@ class CskApiEcosystem extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.ecosystem.usageExample'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_store)}</code>
-</pre>
+            <pre><code>${this.#code_store}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.ecosystem.installation'))}
-              :
-            </strong>
-            <pre><code>npm install @aspect/chasket-store</code>
-</pre>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @aspect/chasket-store</code></pre>
+</div>
         </div>
         <div id="ssr" class="subsection">
           <h3>
@@ -4201,20 +3029,8 @@ class CskApiEcosystem extends HTMLElement {
               ${this.#esc(this.#tr('apiContent.ecosystem.mainFeatures'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  renderToString(component, props)
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.ssrFeature1'))}
-              </li>
-              <li>
-                <code>
-                  renderPage(app, options)
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.ssrFeature2'))}
-              </li>
+              <li><code>renderToString(component, props)</code> — ${this.#esc(this.#tr('apiContent.ecosystem.ssrFeature1'))}</li>
+              <li><code>renderPage(app, options)</code> — ${this.#esc(this.#tr('apiContent.ecosystem.ssrFeature2'))}</li>
               <li>
                 ${this.#esc(this.#tr('apiContent.ecosystem.ssrFeature3'))}
               </li>
@@ -4227,17 +3043,10 @@ class CskApiEcosystem extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.ecosystem.usageExample'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_ssr)}</code>
-</pre>
+            <pre><code>${this.#code_ssr}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.ecosystem.installation'))}
-              :
-            </strong>
-            <pre><code>npm install @aspect/chasket-ssr</code>
-</pre>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @aspect/chasket-ssr</code></pre>
+</div>
         </div>
         <div id="ui" class="subsection">
           <h3>
@@ -4252,86 +3061,25 @@ class CskApiEcosystem extends HTMLElement {
               ${this.#esc(this.#tr('apiContent.ecosystem.providedComponents'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  &lt;fl-button&gt;
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.uiComp1'))}
-              </li>
-              <li>
-                <code>
-                  &lt;fl-input&gt;
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.uiComp2'))}
-              </li>
-              <li>
-                <code>
-                  &lt;fl-select&gt;
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.uiComp3'))}
-              </li>
-              <li>
-                <code>
-                  &lt;fl-card&gt;
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.uiComp4'))}
-              </li>
-              <li>
-                <code>
-                  &lt;fl-dialog&gt;
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.uiComp5'))}
-              </li>
-              <li>
-                <code>
-                  &lt;fl-badge&gt;
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.uiComp6'))}
-              </li>
-              <li>
-                <code>
-                  &lt;fl-alert&gt;
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.uiComp7'))}
-              </li>
-              <li>
-                <code>
-                  &lt;fl-tabs&gt;
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.uiComp8'))}
-              </li>
-              <li>
-                <code>
-                  &lt;fl-spinner&gt;
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.uiComp9'))}
-              </li>
+              <li><code>&lt;fl-button&gt;</code> — ${this.#esc(this.#tr('apiContent.ecosystem.uiComp1'))}</li>
+              <li><code>&lt;fl-input&gt;</code> — ${this.#esc(this.#tr('apiContent.ecosystem.uiComp2'))}</li>
+              <li><code>&lt;fl-select&gt;</code> — ${this.#esc(this.#tr('apiContent.ecosystem.uiComp3'))}</li>
+              <li><code>&lt;fl-card&gt;</code> — ${this.#esc(this.#tr('apiContent.ecosystem.uiComp4'))}</li>
+              <li><code>&lt;fl-dialog&gt;</code> — ${this.#esc(this.#tr('apiContent.ecosystem.uiComp5'))}</li>
+              <li><code>&lt;fl-badge&gt;</code> — ${this.#esc(this.#tr('apiContent.ecosystem.uiComp6'))}</li>
+              <li><code>&lt;fl-alert&gt;</code> — ${this.#esc(this.#tr('apiContent.ecosystem.uiComp7'))}</li>
+              <li><code>&lt;fl-tabs&gt;</code> — ${this.#esc(this.#tr('apiContent.ecosystem.uiComp8'))}</li>
+              <li><code>&lt;fl-spinner&gt;</code> — ${this.#esc(this.#tr('apiContent.ecosystem.uiComp9'))}</li>
             </ul>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.ecosystem.usageExample'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_ui_components)}</code>
-</pre>
+            <pre><code>${this.#code_ui_components}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.ecosystem.installation'))}
-              :
-            </strong>
-            <pre><code>npm install @aspect/chasket-ui</code>
-</pre>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @aspect/chasket-ui</code></pre>
+</div>
         </div>
         <div id="vite" class="subsection">
           <h3>
@@ -4360,14 +3108,8 @@ class CskApiEcosystem extends HTMLElement {
               </li>
             </ul>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.ecosystem.installation'))}
-              :
-            </strong>
-            <pre><code>npm install vite-plugin-chasket</code>
-</pre>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install vite-plugin-chasket</code></pre>
+</div>
         </div>
         <div id="lsp" class="subsection">
           <h3>
@@ -4402,14 +3144,8 @@ class CskApiEcosystem extends HTMLElement {
               </li>
             </ul>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.ecosystem.installation'))}
-              :
-            </strong>
-            <pre><code>npm install @aspect/chasket-lsp</code>
-</pre>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @aspect/chasket-lsp</code></pre>
+</div>
         </div>
         <div id="vscode" class="subsection">
           <h3>
@@ -4441,15 +3177,7 @@ class CskApiEcosystem extends HTMLElement {
               </li>
             </ul>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.ecosystem.installation'))}
-              :
-            </strong>
-            <p>
-              ${this.#esc(this.#tr('apiContent.ecosystem.vscodeInstallDesc'))}
-            </p>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><p>${this.#esc(this.#tr('apiContent.ecosystem.vscodeInstallDesc'))}</p></div>
         </div>
       </section>
       <!-- Compilation Output -->
@@ -4468,42 +3196,17 @@ class CskApiEcosystem extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.ecosystem.basicClassStructure'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_compilation_output)}</code>
-</pre>
+            <pre><code>${this.#code_compilation_output}</code></pre>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.ecosystem.mainMethods'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  #render()
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.methodRender'))}
-              </li>
-              <li>
-                <code>
-                  #update()
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.methodUpdate'))}
-              </li>
-              <li>
-                <code>
-                  #patch()
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.methodPatch'))}
-              </li>
-              <li>
-                <code>
-                  #scheduleUpdate()
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.methodSchedule'))}
-              </li>
+              <li><code>#render()</code> — ${this.#esc(this.#tr('apiContent.ecosystem.methodRender'))}</li>
+              <li><code>#update()</code> — ${this.#esc(this.#tr('apiContent.ecosystem.methodUpdate'))}</li>
+              <li><code>#patch()</code> — ${this.#esc(this.#tr('apiContent.ecosystem.methodPatch'))}</li>
+              <li><code>#scheduleUpdate()</code> — ${this.#esc(this.#tr('apiContent.ecosystem.methodSchedule'))}</li>
             </ul>
           </div>
           <div class="property">
@@ -4540,23 +3243,7 @@ class CskApiEcosystem extends HTMLElement {
               ${this.#esc(this.#tr('apiContent.ecosystem.eventBindingDesc'))}
             </p>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.ecosystem.performanceOptimization'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.ecosystem.optDomDiffing'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.ecosystem.optBatchProcessing'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.ecosystem.optReduceReflowRepaint'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.performanceOptimization'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.ecosystem.optDomDiffing'))}</li><li>${this.#esc(this.#tr('apiContent.ecosystem.optBatchProcessing'))}</li><li>${this.#esc(this.#tr('apiContent.ecosystem.optReduceReflowRepaint'))}</li></ul></div>
         </div>
         <div class="subsection">
           <h3>
@@ -4573,42 +3260,17 @@ class CskApiEcosystem extends HTMLElement {
   │   └── ...
   ├── index.js           # ${this.#esc(this.#tr('apiContent.ecosystem.mainBundle'))}
   ├── index.d.ts         # ${this.#esc(this.#tr('apiContent.ecosystem.typeDefinitions'))}
-  └── index.js.map       # ${this.#esc(this.#tr('apiContent.ecosystem.sourceMap'))}</code>
-</pre>
+  └── index.js.map       # ${this.#esc(this.#tr('apiContent.ecosystem.sourceMap'))}</code></pre>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.ecosystem.fileDescriptions'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  *.js
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.fileDesc1'))}
-              </li>
-              <li>
-                <code>
-                  *.js.map
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.fileDesc2'))}
-              </li>
-              <li>
-                <code>
-                  *.d.ts
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.fileDesc3'))}
-              </li>
-              <li>
-                <code>
-                  index.js
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.ecosystem.fileDesc4'))}
-              </li>
+              <li><code>*.js</code> — ${this.#esc(this.#tr('apiContent.ecosystem.fileDesc1'))}</li>
+              <li><code>*.js.map</code> — ${this.#esc(this.#tr('apiContent.ecosystem.fileDesc2'))}</li>
+              <li><code>*.d.ts</code> — ${this.#esc(this.#tr('apiContent.ecosystem.fileDesc3'))}</li>
+              <li><code>index.js</code> — ${this.#esc(this.#tr('apiContent.ecosystem.fileDesc4'))}</li>
             </ul>
           </div>
         </div>
@@ -4643,6 +3305,16 @@ class CskApiEcosystem extends HTMLElement {
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -4725,7 +3397,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskApiTypes extends HTMLElement {
-  #_code_typeExamples = "// primitive types\nstate name: string = 'John'\nstate age: number = 30\nstate active: boolean = true\nstate nothing: void\n\n// array types\nstate names: string[] = ['Alice', 'Bob']\nstate matrix: number[][] = [[1, 2], [3, 4]]\n\n// object type\nstate user: { name: string, age?: number } = { name: 'John' }\n\n// union type\nstate status: 'idle' | 'loading' | 'done' = 'idle'\n\n// literal type\nstate priority: 'low' | 'medium' | 'high' = 'medium'\n\n// generics (limited support)\nstate items: Array&lt;string&gt; = []\nstate map: Map&lt;string, number&gt; = new Map()";
+  #_code_typeExamples = "<span class=cm>// primitive types</span>\n<span class=k>state</span> name: <span class=tp>string</span> = <span class=s>'John'</span>\n<span class=k>state</span> age: <span class=tp>number</span> = <span class=n>30</span>\n<span class=k>state</span> active: <span class=tp>boolean</span> = <span class=n>true</span>\n<span class=k>state</span> nothing: <span class=tp>void</span>\n\n<span class=cm>// array types</span>\n<span class=k>state</span> names: <span class=tp>string</span>[] = [<span class=s>'Alice'</span>, <span class=s>'Bob'</span>]\n<span class=k>state</span> matrix: <span class=tp>number</span>[][] = [[<span class=n>1</span>, <span class=n>2</span>], [<span class=n>3</span>, <span class=n>4</span>]]\n\n<span class=cm>// object type</span>\n<span class=k>state</span> user: { name: <span class=tp>string</span>, age?: <span class=tp>number</span> } = { name: <span class=s>'John'</span> }\n\n<span class=cm>// union type</span>\n<span class=k>state</span> status: <span class=s>'idle'</span> | <span class=s>'loading'</span> | <span class=s>'done'</span> = <span class=s>'idle'</span>\n\n<span class=cm>// literal type</span>\n<span class=k>state</span> priority: <span class=s>'low'</span> | <span class=s>'medium'</span> | <span class=s>'high'</span> = <span class=s>'medium'</span>\n\n<span class=cm>// generics (limited support)</span>\n<span class=k>state</span> items: Array<span class=t>&lt;string</span><span class=t>&gt;</span> = []\n<span class=k>state</span> map: Map&lt;string, number&gt; = <span class=k>new</span> <span class=f>Map</span>()";
   get #code_typeExamples() { return this.#_code_typeExamples; }
   set #code_typeExamples(v) { this.#_code_typeExamples = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -4771,55 +3443,13 @@ class CskApiTypes extends HTMLElement {
               ${this.#esc(this.#tr('apiContent.types.primitiveTypes'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  string
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.typeString'))}
-              </li>
-              <li>
-                <code>
-                  number
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.typeNumber'))}
-              </li>
-              <li>
-                <code>
-                  boolean
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.typeBoolean'))}
-              </li>
-              <li>
-                <code>
-                  void
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.typeVoid'))}
-              </li>
-              <li>
-                <code>
-                  null
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.typeNull'))}
-              </li>
-              <li>
-                <code>
-                  undefined
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.typeUndefined'))}
-              </li>
-              <li>
-                <code>
-                  any
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.typeAny'))}
-              </li>
+              <li><code>string</code> — ${this.#esc(this.#tr('apiContent.types.typeString'))}</li>
+              <li><code>number</code> — ${this.#esc(this.#tr('apiContent.types.typeNumber'))}</li>
+              <li><code>boolean</code> — ${this.#esc(this.#tr('apiContent.types.typeBoolean'))}</li>
+              <li><code>void</code> — ${this.#esc(this.#tr('apiContent.types.typeVoid'))}</li>
+              <li><code>null</code> — ${this.#esc(this.#tr('apiContent.types.typeNull'))}</li>
+              <li><code>undefined</code> — ${this.#esc(this.#tr('apiContent.types.typeUndefined'))}</li>
+              <li><code>any</code> — ${this.#esc(this.#tr('apiContent.types.typeAny'))}</li>
             </ul>
           </div>
           <div class="property">
@@ -4827,78 +3457,20 @@ class CskApiTypes extends HTMLElement {
               ${this.#esc(this.#tr('apiContent.types.compositeTypes'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  string[]
-                </code>
-                ,
-                <code>
-                  number[][]
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.arrayType'))}
-              </li>
-              <li>
-                <code>
-                  { name: string, age: number }
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.objectType'))}
-              </li>
-              <li>
-                <code>
-                  "pending" | "loading" | "done"
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.unionType'))}
-              </li>
-              <li>
-                <code>
-                  "primary" | "secondary"
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.literalType'))}
-              </li>
-              <li>
-                <code>
-                  Array&lt;T&gt;
-                </code>
-                ,
-                <code>
-                  Map&lt;K,V&gt;
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.genericsType'))}
-              </li>
+              <li><code>string[]</code>, <code>number[][]</code> — ${this.#esc(this.#tr('apiContent.types.arrayType'))}</li>
+              <li><code>{ name: string, age: number }</code> — ${this.#esc(this.#tr('apiContent.types.objectType'))}</li>
+              <li><code>"pending" | "loading" | "done"</code> — ${this.#esc(this.#tr('apiContent.types.unionType'))}</li>
+              <li><code>"primary" | "secondary"</code> — ${this.#esc(this.#tr('apiContent.types.literalType'))}</li>
+              <li><code>Array&lt;T&gt;</code>, <code>Map&lt;K,V&gt;</code> — ${this.#esc(this.#tr('apiContent.types.genericsType'))}</li>
             </ul>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.types.exampleTitle'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_typeExamples)}</code>
-</pre>
+            <pre><code>${this.#code_typeExamples}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.types.limitations'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.types.limitFunctionTypes'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.types.limitComplexGenerics'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.types.limitConditionalTypes'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.types.limitMappedTypes'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.types.limitations'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.types.limitFunctionTypes'))}</li><li>${this.#esc(this.#tr('apiContent.types.limitComplexGenerics'))}</li><li>${this.#esc(this.#tr('apiContent.types.limitConditionalTypes'))}</li><li>${this.#esc(this.#tr('apiContent.types.limitMappedTypes'))}</li></ul></div>
         </div>
       </section>
     `;
@@ -4925,55 +3497,13 @@ class CskApiTypes extends HTMLElement {
               ${this.#esc(this.#tr('apiContent.types.primitiveTypes'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  string
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.typeString'))}
-              </li>
-              <li>
-                <code>
-                  number
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.typeNumber'))}
-              </li>
-              <li>
-                <code>
-                  boolean
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.typeBoolean'))}
-              </li>
-              <li>
-                <code>
-                  void
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.typeVoid'))}
-              </li>
-              <li>
-                <code>
-                  null
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.typeNull'))}
-              </li>
-              <li>
-                <code>
-                  undefined
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.typeUndefined'))}
-              </li>
-              <li>
-                <code>
-                  any
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.typeAny'))}
-              </li>
+              <li><code>string</code> — ${this.#esc(this.#tr('apiContent.types.typeString'))}</li>
+              <li><code>number</code> — ${this.#esc(this.#tr('apiContent.types.typeNumber'))}</li>
+              <li><code>boolean</code> — ${this.#esc(this.#tr('apiContent.types.typeBoolean'))}</li>
+              <li><code>void</code> — ${this.#esc(this.#tr('apiContent.types.typeVoid'))}</li>
+              <li><code>null</code> — ${this.#esc(this.#tr('apiContent.types.typeNull'))}</li>
+              <li><code>undefined</code> — ${this.#esc(this.#tr('apiContent.types.typeUndefined'))}</li>
+              <li><code>any</code> — ${this.#esc(this.#tr('apiContent.types.typeAny'))}</li>
             </ul>
           </div>
           <div class="property">
@@ -4981,78 +3511,20 @@ class CskApiTypes extends HTMLElement {
               ${this.#esc(this.#tr('apiContent.types.compositeTypes'))}
             </h4>
             <ul>
-              <li>
-                <code>
-                  string[]
-                </code>
-                ,
-                <code>
-                  number[][]
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.arrayType'))}
-              </li>
-              <li>
-                <code>
-                  { name: string, age: number }
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.objectType'))}
-              </li>
-              <li>
-                <code>
-                  "pending" | "loading" | "done"
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.unionType'))}
-              </li>
-              <li>
-                <code>
-                  "primary" | "secondary"
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.literalType'))}
-              </li>
-              <li>
-                <code>
-                  Array&lt;T&gt;
-                </code>
-                ,
-                <code>
-                  Map&lt;K,V&gt;
-                </code>
-                —
-                ${this.#esc(this.#tr('apiContent.types.genericsType'))}
-              </li>
+              <li><code>string[]</code>, <code>number[][]</code> — ${this.#esc(this.#tr('apiContent.types.arrayType'))}</li>
+              <li><code>{ name: string, age: number }</code> — ${this.#esc(this.#tr('apiContent.types.objectType'))}</li>
+              <li><code>"pending" | "loading" | "done"</code> — ${this.#esc(this.#tr('apiContent.types.unionType'))}</li>
+              <li><code>"primary" | "secondary"</code> — ${this.#esc(this.#tr('apiContent.types.literalType'))}</li>
+              <li><code>Array&lt;T&gt;</code>, <code>Map&lt;K,V&gt;</code> — ${this.#esc(this.#tr('apiContent.types.genericsType'))}</li>
             </ul>
           </div>
           <div class="property">
             <h4>
               ${this.#esc(this.#tr('apiContent.types.exampleTitle'))}
             </h4>
-            <pre><code>${this.#esc(this.#code_typeExamples)}</code>
-</pre>
+            <pre><code>${this.#code_typeExamples}</code></pre>
           </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('apiContent.types.limitations'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('apiContent.types.limitFunctionTypes'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.types.limitComplexGenerics'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.types.limitConditionalTypes'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('apiContent.types.limitMappedTypes'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.types.limitations'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.types.limitFunctionTypes'))}</li><li>${this.#esc(this.#tr('apiContent.types.limitComplexGenerics'))}</li><li>${this.#esc(this.#tr('apiContent.types.limitConditionalTypes'))}</li><li>${this.#esc(this.#tr('apiContent.types.limitMappedTypes'))}</li></ul></div>
         </div>
       </section>
     `;
@@ -5085,6 +3557,16 @@ class CskApiTypes extends HTMLElement {
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -5163,6 +3645,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-page-api.csk ──
+
 (() => {
 "use strict";
 
@@ -5241,191 +3724,30 @@ class CskPageApi extends HTMLElement {
               ${this.#esc(this.#tr('api.toc'))}
             </h2>
             <button data-chasket-id="fl-0" class="sidebar-toggle">
-              <span class="toggle-icon">
-                ≡
-              </span>
-            </button>
+<span class="toggle-icon">≡</span>            </button>
           </div>
           <nav data-chasket-id="fl-1" class="toc">
             <ul>
               <li>
-                <a href="#cli-commands">
-                  ${this.#esc(this.#tr('api.sections.cliCommands'))}
-                </a>
-              </li>
+<a href="#cli-commands">${this.#esc(this.#tr('api.sections.cliCommands'))}</a>              </li>
               <li>
-                <a href="#cli-options">
-                  ${this.#esc(this.#tr('api.sections.cliOptions'))}
-                </a>
-              </li>
+<a href="#cli-options">${this.#esc(this.#tr('api.sections.cliOptions'))}</a>              </li>
               <li>
-                <a href="#config-file">
-                  ${this.#esc(this.#tr('api.sections.configFile'))}
-                </a>
-              </li>
+<a href="#config-file">${this.#esc(this.#tr('api.sections.configFile'))}</a>              </li>
               <li>
-                <a href="#compiler-api">
-                  ${this.#esc(this.#tr('api.sections.compilerApi'))}
-                </a>
-              </li>
+<a href="#compiler-api">${this.#esc(this.#tr('api.sections.compilerApi'))}</a>              </li>
+              <li><a href="#api-functions">${this.#esc(this.#tr('api.sections.apiFunctions'))}</a><ul><li><a href="#compile-fn">compile()</a></li><li><a href="#split-blocks">splitBlocks()</a></li><li><a href="#parse-template">parseTemplateNodes()</a></li></ul></li>
               <li>
-                <a href="#api-functions">
-                  ${this.#esc(this.#tr('api.sections.apiFunctions'))}
-                </a>
-                <ul>
-                  <li>
-                    <a href="#compile-fn">
-                      compile()
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#split-blocks">
-                      splitBlocks()
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#parse-template">
-                      parseTemplateNodes()
-                    </a>
-                  </li>
-                </ul>
-              </li>
+<a href="#type-system">${this.#esc(this.#tr('api.sections.typeSystem'))}</a>              </li>
               <li>
-                <a href="#type-system">
-                  ${this.#esc(this.#tr('api.sections.typeSystem'))}
-                </a>
-              </li>
+<a href="#diagnostics">${this.#esc(this.#tr('api.sections.diagnostics'))}</a>              </li>
+              <li><a href="#error-codes">${this.#esc(this.#tr('api.sections.errorCodes'))}</a><ul><li><a href="#e0001">E0001: ${this.#esc(this.#tr('api.sections.errors.e0001'))}</a></li><li><a href="#e0002">E0002: ${this.#esc(this.#tr('api.sections.errors.e0002'))}</a></li><li><a href="#e0003">E0003: ${this.#esc(this.#tr('api.sections.errors.e0003'))}</a></li><li><a href="#e0004">E0004: ${this.#esc(this.#tr('api.sections.errors.e0004'))}</a></li><li><a href="#e0301">E0301: ${this.#esc(this.#tr('api.sections.errors.e0301'))}</a></li><li><a href="#e0302">E0302: ${this.#esc(this.#tr('api.sections.errors.e0302'))}</a></li></ul></li>
+              <li><a href="#warning-codes">${this.#esc(this.#tr('api.sections.warningCodes'))}</a><ul><li><a href="#w0101">W0101: ${this.#esc(this.#tr('api.sections.warnings.w0101'))}</a></li><li><a href="#w0201">W0201: ${this.#esc(this.#tr('api.sections.warnings.w0201'))}</a></li><li><a href="#w0202">W0202: ${this.#esc(this.#tr('api.sections.warnings.w0202'))}</a></li><li><a href="#w0203">W0203: ${this.#esc(this.#tr('api.sections.warnings.w0203'))}</a></li></ul></li>
               <li>
-                <a href="#diagnostics">
-                  ${this.#esc(this.#tr('api.sections.diagnostics'))}
-                </a>
-              </li>
+<a href="#ecosystem">${this.#esc(this.#tr('api.sections.ecosystem'))}</a>              </li>
+              <li><a href="#official-packages">${this.#esc(this.#tr('api.sections.officialPackages'))}</a><ul><li><a href="#router">@aspect/chasket-router</a></li><li><a href="#store">@aspect/chasket-store</a></li><li><a href="#ssr">@aspect/chasket-ssr</a></li><li><a href="#ui">@aspect/chasket-ui</a></li><li><a href="#vite">vite-plugin-chasket</a></li><li><a href="#lsp">@aspect/chasket-lsp</a></li><li><a href="#vscode">@aspect/chasket-vscode</a></li></ul></li>
               <li>
-                <a href="#error-codes">
-                  ${this.#esc(this.#tr('api.sections.errorCodes'))}
-                </a>
-                <ul>
-                  <li>
-                    <a href="#e0001">
-                      E0001:
-                      ${this.#esc(this.#tr('api.sections.errors.e0001'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#e0002">
-                      E0002:
-                      ${this.#esc(this.#tr('api.sections.errors.e0002'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#e0003">
-                      E0003:
-                      ${this.#esc(this.#tr('api.sections.errors.e0003'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#e0004">
-                      E0004:
-                      ${this.#esc(this.#tr('api.sections.errors.e0004'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#e0301">
-                      E0301:
-                      ${this.#esc(this.#tr('api.sections.errors.e0301'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#e0302">
-                      E0302:
-                      ${this.#esc(this.#tr('api.sections.errors.e0302'))}
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="#warning-codes">
-                  ${this.#esc(this.#tr('api.sections.warningCodes'))}
-                </a>
-                <ul>
-                  <li>
-                    <a href="#w0101">
-                      W0101:
-                      ${this.#esc(this.#tr('api.sections.warnings.w0101'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#w0201">
-                      W0201:
-                      ${this.#esc(this.#tr('api.sections.warnings.w0201'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#w0202">
-                      W0202:
-                      ${this.#esc(this.#tr('api.sections.warnings.w0202'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#w0203">
-                      W0203:
-                      ${this.#esc(this.#tr('api.sections.warnings.w0203'))}
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="#ecosystem">
-                  ${this.#esc(this.#tr('api.sections.ecosystem'))}
-                </a>
-              </li>
-              <li>
-                <a href="#official-packages">
-                  ${this.#esc(this.#tr('api.sections.officialPackages'))}
-                </a>
-                <ul>
-                  <li>
-                    <a href="#router">
-                      @aspect/chasket-router
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#store">
-                      @aspect/chasket-store
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#ssr">
-                      @aspect/chasket-ssr
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#ui">
-                      @aspect/chasket-ui
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#vite">
-                      vite-plugin-chasket
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#lsp">
-                      @aspect/chasket-lsp
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#vscode">
-                      @aspect/chasket-vscode
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="#compilation-output">
-                  ${this.#esc(this.#tr('api.sections.compilationOutput'))}
-                </a>
-              </li>
+<a href="#compilation-output">${this.#esc(this.#tr('api.sections.compilationOutput'))}</a>              </li>
             </ul>
           </nav>
         </aside>
@@ -5474,191 +3796,30 @@ class CskPageApi extends HTMLElement {
               ${this.#esc(this.#tr('api.toc'))}
             </h2>
             <button data-chasket-id="fl-0" class="sidebar-toggle">
-              <span class="toggle-icon">
-                ≡
-              </span>
-            </button>
+<span class="toggle-icon">≡</span>            </button>
           </div>
           <nav data-chasket-id="fl-1" class="toc">
             <ul>
               <li>
-                <a href="#cli-commands">
-                  ${this.#esc(this.#tr('api.sections.cliCommands'))}
-                </a>
-              </li>
+<a href="#cli-commands">${this.#esc(this.#tr('api.sections.cliCommands'))}</a>              </li>
               <li>
-                <a href="#cli-options">
-                  ${this.#esc(this.#tr('api.sections.cliOptions'))}
-                </a>
-              </li>
+<a href="#cli-options">${this.#esc(this.#tr('api.sections.cliOptions'))}</a>              </li>
               <li>
-                <a href="#config-file">
-                  ${this.#esc(this.#tr('api.sections.configFile'))}
-                </a>
-              </li>
+<a href="#config-file">${this.#esc(this.#tr('api.sections.configFile'))}</a>              </li>
               <li>
-                <a href="#compiler-api">
-                  ${this.#esc(this.#tr('api.sections.compilerApi'))}
-                </a>
-              </li>
+<a href="#compiler-api">${this.#esc(this.#tr('api.sections.compilerApi'))}</a>              </li>
+              <li><a href="#api-functions">${this.#esc(this.#tr('api.sections.apiFunctions'))}</a><ul><li><a href="#compile-fn">compile()</a></li><li><a href="#split-blocks">splitBlocks()</a></li><li><a href="#parse-template">parseTemplateNodes()</a></li></ul></li>
               <li>
-                <a href="#api-functions">
-                  ${this.#esc(this.#tr('api.sections.apiFunctions'))}
-                </a>
-                <ul>
-                  <li>
-                    <a href="#compile-fn">
-                      compile()
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#split-blocks">
-                      splitBlocks()
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#parse-template">
-                      parseTemplateNodes()
-                    </a>
-                  </li>
-                </ul>
-              </li>
+<a href="#type-system">${this.#esc(this.#tr('api.sections.typeSystem'))}</a>              </li>
               <li>
-                <a href="#type-system">
-                  ${this.#esc(this.#tr('api.sections.typeSystem'))}
-                </a>
-              </li>
+<a href="#diagnostics">${this.#esc(this.#tr('api.sections.diagnostics'))}</a>              </li>
+              <li><a href="#error-codes">${this.#esc(this.#tr('api.sections.errorCodes'))}</a><ul><li><a href="#e0001">E0001: ${this.#esc(this.#tr('api.sections.errors.e0001'))}</a></li><li><a href="#e0002">E0002: ${this.#esc(this.#tr('api.sections.errors.e0002'))}</a></li><li><a href="#e0003">E0003: ${this.#esc(this.#tr('api.sections.errors.e0003'))}</a></li><li><a href="#e0004">E0004: ${this.#esc(this.#tr('api.sections.errors.e0004'))}</a></li><li><a href="#e0301">E0301: ${this.#esc(this.#tr('api.sections.errors.e0301'))}</a></li><li><a href="#e0302">E0302: ${this.#esc(this.#tr('api.sections.errors.e0302'))}</a></li></ul></li>
+              <li><a href="#warning-codes">${this.#esc(this.#tr('api.sections.warningCodes'))}</a><ul><li><a href="#w0101">W0101: ${this.#esc(this.#tr('api.sections.warnings.w0101'))}</a></li><li><a href="#w0201">W0201: ${this.#esc(this.#tr('api.sections.warnings.w0201'))}</a></li><li><a href="#w0202">W0202: ${this.#esc(this.#tr('api.sections.warnings.w0202'))}</a></li><li><a href="#w0203">W0203: ${this.#esc(this.#tr('api.sections.warnings.w0203'))}</a></li></ul></li>
               <li>
-                <a href="#diagnostics">
-                  ${this.#esc(this.#tr('api.sections.diagnostics'))}
-                </a>
-              </li>
+<a href="#ecosystem">${this.#esc(this.#tr('api.sections.ecosystem'))}</a>              </li>
+              <li><a href="#official-packages">${this.#esc(this.#tr('api.sections.officialPackages'))}</a><ul><li><a href="#router">@aspect/chasket-router</a></li><li><a href="#store">@aspect/chasket-store</a></li><li><a href="#ssr">@aspect/chasket-ssr</a></li><li><a href="#ui">@aspect/chasket-ui</a></li><li><a href="#vite">vite-plugin-chasket</a></li><li><a href="#lsp">@aspect/chasket-lsp</a></li><li><a href="#vscode">@aspect/chasket-vscode</a></li></ul></li>
               <li>
-                <a href="#error-codes">
-                  ${this.#esc(this.#tr('api.sections.errorCodes'))}
-                </a>
-                <ul>
-                  <li>
-                    <a href="#e0001">
-                      E0001:
-                      ${this.#esc(this.#tr('api.sections.errors.e0001'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#e0002">
-                      E0002:
-                      ${this.#esc(this.#tr('api.sections.errors.e0002'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#e0003">
-                      E0003:
-                      ${this.#esc(this.#tr('api.sections.errors.e0003'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#e0004">
-                      E0004:
-                      ${this.#esc(this.#tr('api.sections.errors.e0004'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#e0301">
-                      E0301:
-                      ${this.#esc(this.#tr('api.sections.errors.e0301'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#e0302">
-                      E0302:
-                      ${this.#esc(this.#tr('api.sections.errors.e0302'))}
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="#warning-codes">
-                  ${this.#esc(this.#tr('api.sections.warningCodes'))}
-                </a>
-                <ul>
-                  <li>
-                    <a href="#w0101">
-                      W0101:
-                      ${this.#esc(this.#tr('api.sections.warnings.w0101'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#w0201">
-                      W0201:
-                      ${this.#esc(this.#tr('api.sections.warnings.w0201'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#w0202">
-                      W0202:
-                      ${this.#esc(this.#tr('api.sections.warnings.w0202'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#w0203">
-                      W0203:
-                      ${this.#esc(this.#tr('api.sections.warnings.w0203'))}
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="#ecosystem">
-                  ${this.#esc(this.#tr('api.sections.ecosystem'))}
-                </a>
-              </li>
-              <li>
-                <a href="#official-packages">
-                  ${this.#esc(this.#tr('api.sections.officialPackages'))}
-                </a>
-                <ul>
-                  <li>
-                    <a href="#router">
-                      @aspect/chasket-router
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#store">
-                      @aspect/chasket-store
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#ssr">
-                      @aspect/chasket-ssr
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#ui">
-                      @aspect/chasket-ui
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#vite">
-                      vite-plugin-chasket
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#lsp">
-                      @aspect/chasket-lsp
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#vscode">
-                      @aspect/chasket-vscode
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="#compilation-output">
-                  ${this.#esc(this.#tr('api.sections.compilationOutput'))}
-                </a>
-              </li>
+<a href="#compilation-output">${this.#esc(this.#tr('api.sections.compilationOutput'))}</a>              </li>
             </ul>
           </nav>
         </aside>
@@ -5723,6 +3884,16 @@ class CskPageApi extends HTMLElement {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
           continue;
         }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
+          continue;
+        }
         this.#patch(o, n);
       }
     }
@@ -5732,7 +3903,7 @@ class CskPageApi extends HTMLElement {
     {
       const el = this.querySelector('[data-chasket-id="fl-0"]');
       if (el) {
-        const fn_click = (e) => { this.#toggleSidebar(e); this.#update(); };
+        const fn_click = (e) => { this.#toggleSidebar(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -5740,7 +3911,7 @@ class CskPageApi extends HTMLElement {
     {
       const el = this.querySelector('[data-chasket-id="fl-1"]');
       if (el) {
-        const fn_click = (e) => { this.#handleTocClick(e); this.#update(); };
+        const fn_click = (e) => { this.#handleTocClick(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -5819,10 +3990,10 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskGuideCommunication extends HTMLElement {
-  #_code_propsEmit = "// Parent.csk\n&lt;Counter :initial=\"5\" @change=\"handleCountChange\" /&gt;\n\n// Counter.csk\nprop initial: number = 0\nstate count: number = initial\nemit change: { value: number }\nfn increment() {\n  count = count + 1\n  change({ value: count })\n}";
+  #_code_propsEmit = "<span class=cm>// Parent.csk</span>\n<span class=t>&lt;Counter</span> :initial=\"5\" @change=\"handleCountChange\" <span class=t>/&gt;</span>\n\n<span class=cm>// Counter.csk</span>\n<span class=k>prop</span> initial: <span class=tp>number</span> = <span class=n>0</span>\n<span class=k>state</span> count: <span class=tp>number</span> = initial\n<span class=k>emit</span> change: { value: <span class=tp>number</span> }\n<span class=k>fn</span> <span class=f>increment</span>() {\n  count = count + <span class=n>1</span>\n  <span class=f>change</span>({ value: count })\n}";
   get #code_propsEmit() { return this.#_code_propsEmit; }
   set #code_propsEmit(v) { this.#_code_propsEmit = v; this.#scheduleUpdate(); }
-  #_code_provideConsumeEx = "// App.csk\nprovide theme: string = 'dark'\n&lt;Layout /&gt;\n\n// Layout.csk\nconsume theme: string\nfn toggleTheme() {\n  theme = theme === 'dark' ? 'light' : 'dark'\n}";
+  #_code_provideConsumeEx = "<span class=cm>// App.csk</span>\n<span class=k>provide</span> theme: <span class=tp>string</span> = <span class=s>'dark'</span>\n<span class=t>&lt;Layout</span> <span class=t>/&gt;</span>\n\n<span class=cm>// </span>Layout.csk\n<span class=k>consume</span> theme: <span class=tp>string</span>\n<span class=k>fn</span> <span class=f>toggleTheme</span>() {\n  theme = theme === <span class=s>'dark'</span> ? <span class=s>'light'</span> : <span class=s>'dark'</span>\n}";
   get #code_provideConsumeEx() { return this.#_code_provideConsumeEx; }
   set #code_provideConsumeEx(v) { this.#_code_provideConsumeEx = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -5866,28 +4037,8 @@ class CskGuideCommunication extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.communication.propsEmit.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_propsEmit)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.communication.propsEmit.patternLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.communication.propsEmit.pattern.p1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.communication.propsEmit.pattern.p2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.communication.propsEmit.pattern.p3'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.communication.propsEmit.pattern.p4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_propsEmit}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.communication.propsEmit.patternLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.communication.propsEmit.pattern.p1'))}</li><li>${this.#esc(this.#tr('guideContent.communication.propsEmit.pattern.p2'))}</li><li>${this.#esc(this.#tr('guideContent.communication.propsEmit.pattern.p3'))}</li><li>${this.#esc(this.#tr('guideContent.communication.propsEmit.pattern.p4'))}</li></ul></div>
         </div>
         <div class="subsection">
           <h3>
@@ -5896,28 +4047,8 @@ class CskGuideCommunication extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.communication.provideConsume.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_provideConsumeEx)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.communication.provideConsume.usesLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.communication.provideConsume.uses.u1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.communication.provideConsume.uses.u2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.communication.provideConsume.uses.u3'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.communication.provideConsume.uses.u4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_provideConsumeEx}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.communication.provideConsume.usesLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.communication.provideConsume.uses.u1'))}</li><li>${this.#esc(this.#tr('guideContent.communication.provideConsume.uses.u2'))}</li><li>${this.#esc(this.#tr('guideContent.communication.provideConsume.uses.u3'))}</li><li>${this.#esc(this.#tr('guideContent.communication.provideConsume.uses.u4'))}</li></ul></div>
         </div>
       </section>
     `;
@@ -5942,28 +4073,8 @@ class CskGuideCommunication extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.communication.propsEmit.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_propsEmit)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.communication.propsEmit.patternLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.communication.propsEmit.pattern.p1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.communication.propsEmit.pattern.p2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.communication.propsEmit.pattern.p3'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.communication.propsEmit.pattern.p4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_propsEmit}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.communication.propsEmit.patternLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.communication.propsEmit.pattern.p1'))}</li><li>${this.#esc(this.#tr('guideContent.communication.propsEmit.pattern.p2'))}</li><li>${this.#esc(this.#tr('guideContent.communication.propsEmit.pattern.p3'))}</li><li>${this.#esc(this.#tr('guideContent.communication.propsEmit.pattern.p4'))}</li></ul></div>
         </div>
         <div class="subsection">
           <h3>
@@ -5972,28 +4083,8 @@ class CskGuideCommunication extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.communication.provideConsume.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_provideConsumeEx)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.communication.provideConsume.usesLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.communication.provideConsume.uses.u1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.communication.provideConsume.uses.u2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.communication.provideConsume.uses.u3'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.communication.provideConsume.uses.u4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_provideConsumeEx}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.communication.provideConsume.usesLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.communication.provideConsume.uses.u1'))}</li><li>${this.#esc(this.#tr('guideContent.communication.provideConsume.uses.u2'))}</li><li>${this.#esc(this.#tr('guideContent.communication.provideConsume.uses.u3'))}</li><li>${this.#esc(this.#tr('guideContent.communication.provideConsume.uses.u4'))}</li></ul></div>
         </div>
       </section>
     `;
@@ -6026,6 +4117,16 @@ class CskGuideCommunication extends HTMLElement {
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -6108,7 +4209,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskGuideFileStructure extends HTMLElement {
-  #_code_fileStructure = "&lt;meta&gt;\n  name: component-name\n  shadow: true\n&lt;/meta&gt;\n\n&lt;script&gt;\n  state count: number = 0\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;/template&gt;\n\n&lt;style&gt;\n  p { color: white; }\n&lt;/style&gt;";
+  #_code_fileStructure = "<span class=t>&lt;meta</span><span class=t>&gt;</span>\n  name: component-name\n  shadow: <span class=n>true</span>\n<span class=t>&lt;/meta</span><span class=t>&gt;</span>\n\n<span class=t>&lt;script</span><span class=t>&gt;</span>\n  <span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>\n<span class=t>&lt;/script</span><span class=t>&gt;</span>\n\n<span class=t>&lt;template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ count }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=t>&lt;/template</span><span class=t>&gt;</span>\n\n<span class=t>&lt;style</span><span class=t>&gt;</span>\n  p { color: white; }\n<span class=t>&lt;/style</span><span class=t>&gt;</span>";
   get #code_fileStructure() { return this.#_code_fileStructure; }
   set #code_fileStructure(v) { this.#_code_fileStructure = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -6152,15 +4253,8 @@ class CskGuideFileStructure extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.fileStructure.fourBlocks.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_fileStructure)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.fileStructure.fourBlocks.noteLabel'))}
-              :
-            </strong>
-            ${this.#esc(this.#tr('guideContent.fileStructure.fourBlocks.noteText'))}
-          </div>
+          <pre><code>${this.#code_fileStructure}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.fileStructure.fourBlocks.noteLabel'))}:</strong>${this.#esc(this.#tr('guideContent.fileStructure.fourBlocks.noteText'))}</div>
         </div>
       </section>
       <!-- meta ブロック -->
@@ -6177,47 +4271,29 @@ class CskGuideFileStructure extends HTMLElement {
           </h3>
           <div class="property">
             <h4>
-              <code>
-                name
-              </code>
-            </h4>
+<code>name</code>            </h4>
             <p>
               ${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.name.desc'))}
             </p>
-            <pre><code>name: my-counter</code>
-</pre>
+            <pre><code>name: my-counter</code></pre>
           </div>
           <div class="property">
             <h4>
-              <code>
-                shadow
-              </code>
-            </h4>
+<code>shadow</code>            </h4>
             <p>
               ${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.desc'))}
             </p>
-            <pre><code>shadow: true    &lt;!-- Shadow DOM --&gt;
-shadow: none    &lt;!-- Light DOM with scoping --&gt;</code>
-</pre>
-            <p class="note-text">
-              <strong>
-                ${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.hint'))}
-                :
-              </strong>
-              ${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.hintText'))}
-            </p>
+            <pre><code>shadow: <span class=n>true</span>    <span class=cm>&lt;!-- Shadow DOM --&gt;</span>
+shadow: none    <span class=cm>&lt;!-- Light DOM with scoping --&gt;</span></code></pre>
+            <p class="note-text"><strong>${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.hint'))}:</strong>${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.hintText'))}</p>
           </div>
           <div class="property">
             <h4>
-              <code>
-                form
-              </code>
-            </h4>
+<code>form</code>            </h4>
             <p>
               ${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.form.desc'))}
             </p>
-            <pre><code>form: true</code>
-</pre>
+            <pre><code>form: <span class=n>true</span></code></pre>
           </div>
         </div>
       </section>
@@ -6243,15 +4319,8 @@ shadow: none    &lt;!-- Light DOM with scoping --&gt;</code>
           <p>
             ${this.#esc(this.#tr('guideContent.fileStructure.fourBlocks.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_fileStructure)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.fileStructure.fourBlocks.noteLabel'))}
-              :
-            </strong>
-            ${this.#esc(this.#tr('guideContent.fileStructure.fourBlocks.noteText'))}
-          </div>
+          <pre><code>${this.#code_fileStructure}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.fileStructure.fourBlocks.noteLabel'))}:</strong>${this.#esc(this.#tr('guideContent.fileStructure.fourBlocks.noteText'))}</div>
         </div>
       </section>
       <!-- meta ブロック -->
@@ -6268,47 +4337,29 @@ shadow: none    &lt;!-- Light DOM with scoping --&gt;</code>
           </h3>
           <div class="property">
             <h4>
-              <code>
-                name
-              </code>
-            </h4>
+<code>name</code>            </h4>
             <p>
               ${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.name.desc'))}
             </p>
-            <pre><code>name: my-counter</code>
-</pre>
+            <pre><code>name: my-counter</code></pre>
           </div>
           <div class="property">
             <h4>
-              <code>
-                shadow
-              </code>
-            </h4>
+<code>shadow</code>            </h4>
             <p>
               ${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.desc'))}
             </p>
-            <pre><code>shadow: true    &lt;!-- Shadow DOM --&gt;
-shadow: none    &lt;!-- Light DOM with scoping --&gt;</code>
-</pre>
-            <p class="note-text">
-              <strong>
-                ${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.hint'))}
-                :
-              </strong>
-              ${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.hintText'))}
-            </p>
+            <pre><code>shadow: <span class=n>true</span>    <span class=cm>&lt;!-- Shadow DOM --&gt;</span>
+shadow: none    <span class=cm>&lt;!-- Light DOM with scoping --&gt;</span></code></pre>
+            <p class="note-text"><strong>${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.hint'))}:</strong>${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.hintText'))}</p>
           </div>
           <div class="property">
             <h4>
-              <code>
-                form
-              </code>
-            </h4>
+<code>form</code>            </h4>
             <p>
               ${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.form.desc'))}
             </p>
-            <pre><code>form: true</code>
-</pre>
+            <pre><code>form: <span class=n>true</span></code></pre>
           </div>
         </div>
       </section>
@@ -6342,6 +4393,16 @@ shadow: none    &lt;!-- Light DOM with scoping --&gt;</code>
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -6424,37 +4485,37 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskGuideScript extends HTMLElement {
-  #_code_stateExample = "state count: number = 0\nstate name: string = 'John'\nstate items: array&lt;string&gt; = ['a', 'b']\nstate visible: boolean = true";
+  #_code_stateExample = "<span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>\n<span class=k>state</span> name: <span class=tp>string</span> = <span class=s>'John'</span>\n<span class=k>state</span> items: array<span class=t>&lt;string</span><span class=t>&gt;</span> = [<span class=s>'a'</span>, <span class=s>'b'</span>]\n<span class=k>state</span> visible: <span class=tp>boolean</span> = <span class=n>true</span>";
   get #code_stateExample() { return this.#_code_stateExample; }
   set #code_stateExample(v) { this.#_code_stateExample = v; this.#scheduleUpdate(); }
-  #_code_propExample = "prop title: string = 'Default Title'\nprop count: number\nprop items: array&lt;unknown&gt;";
+  #_code_propExample = "<span class=k>prop</span> title: <span class=tp>string</span> = <span class=s>'Default Title'</span>\n<span class=k>prop</span> count: <span class=tp>number</span>\n<span class=k>prop</span> items: array<span class=t>&lt;unknown</span><span class=t>&gt;</span>";
   get #code_propExample() { return this.#_code_propExample; }
   set #code_propExample(v) { this.#_code_propExample = v; this.#scheduleUpdate(); }
-  #_code_computedExample = "computed doubleCount: number = count * 2\ncomputed fullName: string = firstName + ' ' + lastName";
+  #_code_computedExample = "<span class=k>computed</span> doubleCount: <span class=tp>number</span> = count * <span class=n>2</span>\n<span class=k>computed</span> fullName: <span class=tp>string</span> = firstName + <span class=s>' '</span> + lastName";
   get #code_computedExample() { return this.#_code_computedExample; }
   set #code_computedExample(v) { this.#_code_computedExample = v; this.#scheduleUpdate(); }
-  #_code_fnExample = "fn increment() {\n  count = count + 1\n}\n\nfn async fetchData() {\n  const response = await fetch('/api/data')\n  return response.json()\n}";
+  #_code_fnExample = "<span class=k>fn</span> <span class=f>increment</span>() {\n  count = count + <span class=n>1</span>\n}\n\n<span class=k>fn</span> <span class=k>async</span> <span class=f>fetchData</span>() {\n  <span class=k>const</span> response = <span class=k>await</span> <span class=f>fetch</span>(<span class=s>'/api/data'</span>)\n  <span class=k>return</span> response.<span class=f>json</span>()\n}";
   get #code_fnExample() { return this.#_code_fnExample; }
   set #code_fnExample(v) { this.#_code_fnExample = v; this.#scheduleUpdate(); }
-  #_code_emitExample = "emit click: { x: number, y: number }\nemit change|prevent: { value: string }\nemit submit|stop: { data: unknown }";
+  #_code_emitExample = "<span class=k>emit</span> click: { x: <span class=tp>number</span>, y: <span class=tp>number</span> }\n<span class=k>emit</span> change|prevent: { value: <span class=tp>string</span> }\n<span class=k>emit</span> submit|stop: { data: unknown }";
   get #code_emitExample() { return this.#_code_emitExample; }
   set #code_emitExample(v) { this.#_code_emitExample = v; this.#scheduleUpdate(); }
-  #_code_watchExample = "watch count {\n  console.log('Count changed to:', count)\n}\n\nwatch [firstName, lastName] {\n  fullName = firstName + ' ' + lastName\n}";
+  #_code_watchExample = "<span class=k>watch</span> count {\n  console.<span class=f>log</span>(<span class=s>'Count changed to:'</span>, count)\n}\n\n<span class=k>watch</span> [firstName, lastName] {\n  fullName = firstName + <span class=s>' '</span> + lastName\n}";
   get #code_watchExample() { return this.#_code_watchExample; }
   set #code_watchExample(v) { this.#_code_watchExample = v; this.#scheduleUpdate(); }
-  #_code_refExample = "ref inputElement: HTMLInputElement\nref containerDiv: HTMLElement\n\nfn focus() {\n  inputElement?.focus()\n}";
+  #_code_refExample = "ref inputElement: HTMLInputElement\nref containerDiv: HTMLElement\n\n<span class=k>fn</span> <span class=f>focus</span>() {\n  inputElement?.<span class=f>focus</span>()\n}";
   get #code_refExample() { return this.#_code_refExample; }
   set #code_refExample(v) { this.#_code_refExample = v; this.#scheduleUpdate(); }
-  #_code_provideExample = "provide theme: string = 'dark'\nprovide apiUrl: string = 'https://api.example.com'";
+  #_code_provideExample = "<span class=k>provide</span> theme: <span class=tp>string</span> = <span class=s>'dark'</span>\n<span class=k>provide</span> apiUrl: <span class=tp>string</span> = <span class=s>'https://api.example.com'</span>";
   get #code_provideExample() { return this.#_code_provideExample; }
   set #code_provideExample(v) { this.#_code_provideExample = v; this.#scheduleUpdate(); }
-  #_code_consumeExample = "consume theme: string\nconsume apiUrl: string\n\nfn useApi() {\n  fetch(apiUrl + '/data')\n}";
+  #_code_consumeExample = "<span class=k>consume</span> theme: <span class=tp>string</span>\n<span class=k>consume</span> apiUrl: <span class=tp>string</span>\n\n<span class=k>fn</span> <span class=f>useApi</span>() {\n  <span class=f>fetch</span>(apiUrl + <span class=s>'/data'</span>)\n}";
   get #code_consumeExample() { return this.#_code_consumeExample; }
   set #code_consumeExample(v) { this.#_code_consumeExample = v; this.#scheduleUpdate(); }
-  #_code_typeExample = "type User = {\n  id: number\n  name: string\n  email: string\n}\n\ntype Status = 'pending' | 'success' | 'error'";
+  #_code_typeExample = "type User = {\n  id: <span class=tp>number</span>\n  name: <span class=tp>string</span>\n  email: <span class=tp>string</span>\n}\n\ntype Status = <span class=s>'pending'</span> | <span class=s>'success'</span> | <span class=s>'error'</span>";
   get #code_typeExample() { return this.#_code_typeExample; }
   set #code_typeExample(v) { this.#_code_typeExample = v; this.#scheduleUpdate(); }
-  #_code_importExample = "import { someFunction } from './utils.js'\nimport { Button } from './components/Button.csk'";
+  #_code_importExample = "<span class=k>import</span> { someFunction } <span class=k>from</span> <span class=s>'./utils.js'</span>\n<span class=k>import</span> { Button } <span class=k>from</span> <span class=s>'./components/Button.csk'</span>";
   get #code_importExample() { return this.#_code_importExample; }
   set #code_importExample(v) { this.#_code_importExample = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -6505,28 +4566,8 @@ class CskGuideScript extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.script.state.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_stateExample)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.script.state.featuresLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.state.features.f1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.state.features.f2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.state.features.f3'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.state.features.f4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_stateExample}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.script.state.featuresLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.script.state.features.f1'))}</li><li>${this.#esc(this.#tr('guideContent.script.state.features.f2'))}</li><li>${this.#esc(this.#tr('guideContent.script.state.features.f3'))}</li><li>${this.#esc(this.#tr('guideContent.script.state.features.f4'))}</li></ul></div>
         </div>
         <!-- prop -->
         <div id="prop" class="subsection">
@@ -6536,31 +4577,13 @@ class CskGuideScript extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.script.prop.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_propExample)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.script.prop.featuresLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.prop.features.f1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.prop.features.f2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.prop.features.f3'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_propExample}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.script.prop.featuresLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.script.prop.features.f1'))}</li><li>${this.#esc(this.#tr('guideContent.script.prop.features.f2'))}</li><li>${this.#esc(this.#tr('guideContent.script.prop.features.f3'))}</li></ul></div>
           <p class="example-title">
             ${this.#esc(this.#tr('guideContent.script.prop.example'))}
             :
           </p>
-          <pre><code>&lt;MyComponent :title="'Hello'" :count="5" /&gt;</code>
-</pre>
+          <pre><code><span class=t>&lt;MyComponent</span> <span class=d>:title</span>=<span class=s>"'Hello'"</span> <span class=d>:count</span>=<span class=s>"5"</span> <span class=t>/&gt;</span></code></pre>
         </div>
         <!-- computed -->
         <div id="computed" class="subsection">
@@ -6570,25 +4593,8 @@ class CskGuideScript extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.script.computed.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_computedExample)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.script.computed.featuresLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.computed.features.f1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.computed.features.f2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.computed.features.f3'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_computedExample}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.script.computed.featuresLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.script.computed.features.f1'))}</li><li>${this.#esc(this.#tr('guideContent.script.computed.features.f2'))}</li><li>${this.#esc(this.#tr('guideContent.script.computed.features.f3'))}</li></ul></div>
         </div>
         <!-- fn -->
         <div id="fn" class="subsection">
@@ -6598,28 +4604,8 @@ class CskGuideScript extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.script.fn.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_fnExample)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.script.fn.featuresLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.fn.features.f1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.fn.features.f2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.fn.features.f3'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.fn.features.f4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_fnExample}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.script.fn.featuresLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.script.fn.features.f1'))}</li><li>${this.#esc(this.#tr('guideContent.script.fn.features.f2'))}</li><li>${this.#esc(this.#tr('guideContent.script.fn.features.f3'))}</li><li>${this.#esc(this.#tr('guideContent.script.fn.features.f4'))}</li></ul></div>
         </div>
         <!-- emit -->
         <div id="emit" class="subsection">
@@ -6629,38 +4615,15 @@ class CskGuideScript extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.script.emit.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_emitExample)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.script.emit.modifiersLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                <code>
-                  |prevent
-                </code>
-                :
-                ${this.#esc(this.#tr('guideContent.script.emit.modifiers.prevent'))}
-              </li>
-              <li>
-                <code>
-                  |stop
-                </code>
-                :
-                ${this.#esc(this.#tr('guideContent.script.emit.modifiers.stop'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_emitExample}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.script.emit.modifiersLabel'))}:</strong><ul><li><code>|prevent</code>: ${this.#esc(this.#tr('guideContent.script.emit.modifiers.prevent'))}</li><li><code>|stop</code>: ${this.#esc(this.#tr('guideContent.script.emit.modifiers.stop'))}</li></ul></div>
           <p class="example-title">
             ${this.#esc(this.#tr('guideContent.script.emit.example'))}
             :
           </p>
-          <pre><code>fn handleClick(x: number, y: number) {
-  click({ x, y })
-}</code>
-</pre>
+          <pre><code><span class=k>fn</span> <span class=f>handleClick</span>(x: <span class=tp>number</span>, y: <span class=tp>number</span>) {
+  <span class=f>click</span>({ x, y })
+}</code></pre>
         </div>
         <!-- watch -->
         <div id="watch" class="subsection">
@@ -6670,28 +4633,8 @@ class CskGuideScript extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.script.watch.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_watchExample)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.script.watch.usesLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.watch.uses.u1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.watch.uses.u2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.watch.uses.u3'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.watch.uses.u4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_watchExample}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.script.watch.usesLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.script.watch.uses.u1'))}</li><li>${this.#esc(this.#tr('guideContent.script.watch.uses.u2'))}</li><li>${this.#esc(this.#tr('guideContent.script.watch.uses.u3'))}</li><li>${this.#esc(this.#tr('guideContent.script.watch.uses.u4'))}</li></ul></div>
         </div>
         <!-- ref -->
         <div id="ref" class="subsection">
@@ -6701,34 +4644,13 @@ class CskGuideScript extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.script.ref.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_refExample)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.script.ref.usesLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.ref.uses.u1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.ref.uses.u2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.ref.uses.u3'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.ref.uses.u4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_refExample}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.script.ref.usesLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.script.ref.uses.u1'))}</li><li>${this.#esc(this.#tr('guideContent.script.ref.uses.u2'))}</li><li>${this.#esc(this.#tr('guideContent.script.ref.uses.u3'))}</li><li>${this.#esc(this.#tr('guideContent.script.ref.uses.u4'))}</li></ul></div>
           <p class="example-title">
             ${this.#esc(this.#tr('guideContent.script.ref.inTemplate'))}
             :
           </p>
-          <pre><code>&lt;input ref="inputElement" type="text" /&gt;</code>
-</pre>
+          <pre><code><span class=t>&lt;input</span> <span class=a>ref</span>=<span class=s>"inputElement"</span> <span class=a>type</span>=<span class=s>"text"</span> <span class=t>/&gt;</span></code></pre>
         </div>
         <!-- provide/consume -->
         <div id="provide-consume" class="subsection">
@@ -6738,31 +4660,13 @@ class CskGuideScript extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.script.provideConsume.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_provideExample)}</code>
-</pre>
+          <pre><code>${this.#code_provideExample}</code></pre>
           <p class="example-title">
             ${this.#esc(this.#tr('guideContent.script.provideConsume.example'))}
             :
           </p>
-          <pre><code>${this.#esc(this.#code_consumeExample)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.script.provideConsume.featuresLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.provideConsume.features.f1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.provideConsume.features.f2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.provideConsume.features.f3'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_consumeExample}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.script.provideConsume.featuresLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.script.provideConsume.features.f1'))}</li><li>${this.#esc(this.#tr('guideContent.script.provideConsume.features.f2'))}</li><li>${this.#esc(this.#tr('guideContent.script.provideConsume.features.f3'))}</li></ul></div>
         </div>
         <!-- type -->
         <div id="type" class="subsection">
@@ -6772,28 +4676,8 @@ class CskGuideScript extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.script.type.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_typeExample)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.script.type.usesLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.type.uses.u1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.type.uses.u2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.type.uses.u3'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.type.uses.u4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_typeExample}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.script.type.usesLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.script.type.uses.u1'))}</li><li>${this.#esc(this.#tr('guideContent.script.type.uses.u2'))}</li><li>${this.#esc(this.#tr('guideContent.script.type.uses.u3'))}</li><li>${this.#esc(this.#tr('guideContent.script.type.uses.u4'))}</li></ul></div>
         </div>
         <!-- import -->
         <div id="import" class="subsection">
@@ -6803,28 +4687,8 @@ class CskGuideScript extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.script.import.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_importExample)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.script.import.featuresLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.import.features.f1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.import.features.f2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.import.features.f3'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.import.features.f4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_importExample}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.script.import.featuresLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.script.import.features.f1'))}</li><li>${this.#esc(this.#tr('guideContent.script.import.features.f2'))}</li><li>${this.#esc(this.#tr('guideContent.script.import.features.f3'))}</li><li>${this.#esc(this.#tr('guideContent.script.import.features.f4'))}</li></ul></div>
         </div>
       </section>
     `;
@@ -6856,28 +4720,8 @@ class CskGuideScript extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.script.state.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_stateExample)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.script.state.featuresLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.state.features.f1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.state.features.f2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.state.features.f3'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.state.features.f4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_stateExample}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.script.state.featuresLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.script.state.features.f1'))}</li><li>${this.#esc(this.#tr('guideContent.script.state.features.f2'))}</li><li>${this.#esc(this.#tr('guideContent.script.state.features.f3'))}</li><li>${this.#esc(this.#tr('guideContent.script.state.features.f4'))}</li></ul></div>
         </div>
         <!-- prop -->
         <div id="prop" class="subsection">
@@ -6887,31 +4731,13 @@ class CskGuideScript extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.script.prop.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_propExample)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.script.prop.featuresLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.prop.features.f1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.prop.features.f2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.prop.features.f3'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_propExample}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.script.prop.featuresLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.script.prop.features.f1'))}</li><li>${this.#esc(this.#tr('guideContent.script.prop.features.f2'))}</li><li>${this.#esc(this.#tr('guideContent.script.prop.features.f3'))}</li></ul></div>
           <p class="example-title">
             ${this.#esc(this.#tr('guideContent.script.prop.example'))}
             :
           </p>
-          <pre><code>&lt;MyComponent :title="'Hello'" :count="5" /&gt;</code>
-</pre>
+          <pre><code><span class=t>&lt;MyComponent</span> <span class=d>:title</span>=<span class=s>"'Hello'"</span> <span class=d>:count</span>=<span class=s>"5"</span> <span class=t>/&gt;</span></code></pre>
         </div>
         <!-- computed -->
         <div id="computed" class="subsection">
@@ -6921,25 +4747,8 @@ class CskGuideScript extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.script.computed.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_computedExample)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.script.computed.featuresLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.computed.features.f1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.computed.features.f2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.computed.features.f3'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_computedExample}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.script.computed.featuresLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.script.computed.features.f1'))}</li><li>${this.#esc(this.#tr('guideContent.script.computed.features.f2'))}</li><li>${this.#esc(this.#tr('guideContent.script.computed.features.f3'))}</li></ul></div>
         </div>
         <!-- fn -->
         <div id="fn" class="subsection">
@@ -6949,28 +4758,8 @@ class CskGuideScript extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.script.fn.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_fnExample)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.script.fn.featuresLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.fn.features.f1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.fn.features.f2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.fn.features.f3'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.fn.features.f4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_fnExample}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.script.fn.featuresLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.script.fn.features.f1'))}</li><li>${this.#esc(this.#tr('guideContent.script.fn.features.f2'))}</li><li>${this.#esc(this.#tr('guideContent.script.fn.features.f3'))}</li><li>${this.#esc(this.#tr('guideContent.script.fn.features.f4'))}</li></ul></div>
         </div>
         <!-- emit -->
         <div id="emit" class="subsection">
@@ -6980,38 +4769,15 @@ class CskGuideScript extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.script.emit.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_emitExample)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.script.emit.modifiersLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                <code>
-                  |prevent
-                </code>
-                :
-                ${this.#esc(this.#tr('guideContent.script.emit.modifiers.prevent'))}
-              </li>
-              <li>
-                <code>
-                  |stop
-                </code>
-                :
-                ${this.#esc(this.#tr('guideContent.script.emit.modifiers.stop'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_emitExample}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.script.emit.modifiersLabel'))}:</strong><ul><li><code>|prevent</code>: ${this.#esc(this.#tr('guideContent.script.emit.modifiers.prevent'))}</li><li><code>|stop</code>: ${this.#esc(this.#tr('guideContent.script.emit.modifiers.stop'))}</li></ul></div>
           <p class="example-title">
             ${this.#esc(this.#tr('guideContent.script.emit.example'))}
             :
           </p>
-          <pre><code>fn handleClick(x: number, y: number) {
-  click({ x, y })
-}</code>
-</pre>
+          <pre><code><span class=k>fn</span> <span class=f>handleClick</span>(x: <span class=tp>number</span>, y: <span class=tp>number</span>) {
+  <span class=f>click</span>({ x, y })
+}</code></pre>
         </div>
         <!-- watch -->
         <div id="watch" class="subsection">
@@ -7021,28 +4787,8 @@ class CskGuideScript extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.script.watch.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_watchExample)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.script.watch.usesLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.watch.uses.u1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.watch.uses.u2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.watch.uses.u3'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.watch.uses.u4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_watchExample}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.script.watch.usesLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.script.watch.uses.u1'))}</li><li>${this.#esc(this.#tr('guideContent.script.watch.uses.u2'))}</li><li>${this.#esc(this.#tr('guideContent.script.watch.uses.u3'))}</li><li>${this.#esc(this.#tr('guideContent.script.watch.uses.u4'))}</li></ul></div>
         </div>
         <!-- ref -->
         <div id="ref" class="subsection">
@@ -7052,34 +4798,13 @@ class CskGuideScript extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.script.ref.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_refExample)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.script.ref.usesLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.ref.uses.u1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.ref.uses.u2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.ref.uses.u3'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.ref.uses.u4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_refExample}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.script.ref.usesLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.script.ref.uses.u1'))}</li><li>${this.#esc(this.#tr('guideContent.script.ref.uses.u2'))}</li><li>${this.#esc(this.#tr('guideContent.script.ref.uses.u3'))}</li><li>${this.#esc(this.#tr('guideContent.script.ref.uses.u4'))}</li></ul></div>
           <p class="example-title">
             ${this.#esc(this.#tr('guideContent.script.ref.inTemplate'))}
             :
           </p>
-          <pre><code>&lt;input ref="inputElement" type="text" /&gt;</code>
-</pre>
+          <pre><code><span class=t>&lt;input</span> <span class=a>ref</span>=<span class=s>"inputElement"</span> <span class=a>type</span>=<span class=s>"text"</span> <span class=t>/&gt;</span></code></pre>
         </div>
         <!-- provide/consume -->
         <div id="provide-consume" class="subsection">
@@ -7089,31 +4814,13 @@ class CskGuideScript extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.script.provideConsume.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_provideExample)}</code>
-</pre>
+          <pre><code>${this.#code_provideExample}</code></pre>
           <p class="example-title">
             ${this.#esc(this.#tr('guideContent.script.provideConsume.example'))}
             :
           </p>
-          <pre><code>${this.#esc(this.#code_consumeExample)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.script.provideConsume.featuresLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.provideConsume.features.f1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.provideConsume.features.f2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.provideConsume.features.f3'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_consumeExample}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.script.provideConsume.featuresLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.script.provideConsume.features.f1'))}</li><li>${this.#esc(this.#tr('guideContent.script.provideConsume.features.f2'))}</li><li>${this.#esc(this.#tr('guideContent.script.provideConsume.features.f3'))}</li></ul></div>
         </div>
         <!-- type -->
         <div id="type" class="subsection">
@@ -7123,28 +4830,8 @@ class CskGuideScript extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.script.type.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_typeExample)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.script.type.usesLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.type.uses.u1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.type.uses.u2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.type.uses.u3'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.type.uses.u4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_typeExample}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.script.type.usesLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.script.type.uses.u1'))}</li><li>${this.#esc(this.#tr('guideContent.script.type.uses.u2'))}</li><li>${this.#esc(this.#tr('guideContent.script.type.uses.u3'))}</li><li>${this.#esc(this.#tr('guideContent.script.type.uses.u4'))}</li></ul></div>
         </div>
         <!-- import -->
         <div id="import" class="subsection">
@@ -7154,28 +4841,8 @@ class CskGuideScript extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.script.import.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_importExample)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.script.import.featuresLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.import.features.f1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.import.features.f2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.import.features.f3'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.script.import.features.f4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_importExample}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.script.import.featuresLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.script.import.features.f1'))}</li><li>${this.#esc(this.#tr('guideContent.script.import.features.f2'))}</li><li>${this.#esc(this.#tr('guideContent.script.import.features.f3'))}</li><li>${this.#esc(this.#tr('guideContent.script.import.features.f4'))}</li></ul></div>
         </div>
       </section>
     `;
@@ -7208,6 +4875,16 @@ class CskGuideScript extends HTMLElement {
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -7290,7 +4967,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskGuideSecurity extends HTMLElement {
-  #_code_xssExample = "&lt;!-- Safe: auto-escaped --&gt;\n&lt;p&gt;{{ userInput }}&lt;/p&gt;\n\n&lt;!-- Dangerous: allows script injection --&gt;\n&lt;div @html=\"userInput\"&gt;&lt;/div&gt;\n\n&lt;!-- Safe: URL validation --&gt;\n&lt;a :href=\"isValidUrl(link) ? link : '#'\"&gt;Link&lt;/a&gt;";
+  #_code_xssExample = "<span class=cm>&lt;!-- Safe: auto-escaped --&gt;</span>\n<span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ userInput }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- Dangerous: allows script injection --&gt;</span>\n<span class=t>&lt;div</span> @html=\"userInput\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- Safe: URL validation --&gt;</span>\n<span class=t>&lt;a</span> :href=\"isValidUrl(link) ? link : '#'\"<span class=t>&gt;</span>Link<span class=t>&lt;/a</span><span class=t>&gt;</span>";
   get #code_xssExample() { return this.#_code_xssExample; }
   set #code_xssExample(v) { this.#_code_xssExample = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -7334,16 +5011,8 @@ class CskGuideSecurity extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.security.autoEscape.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_xssExample)}</code>
-</pre>
-          <div class="warning">
-            <strong>
-              ⚠️
-              ${this.#esc(this.#tr('guideContent.security.autoEscape.warningLabel'))}
-              :
-            </strong>
-            ${this.#esc(this.#tr('guideContent.security.autoEscape.warningText'))}
-          </div>
+          <pre><code>${this.#code_xssExample}</code></pre>
+          <div class="warning"><strong>⚠️ ${this.#esc(this.#tr('guideContent.security.autoEscape.warningLabel'))}:</strong>${this.#esc(this.#tr('guideContent.security.autoEscape.warningText'))}</div>
         </div>
         <div class="subsection">
           <h3>
@@ -7352,43 +5021,20 @@ class CskGuideSecurity extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.security.urlValidation.desc'))}
           </p>
-          <pre><code>fn isValidUrl(url: string): boolean {
+          <pre><code><span class=k>fn</span> <span class=f>isValidUrl</span>(url: <span class=tp>string</span>): <span class=tp>boolean</span> {
   try {
-    const parsed = new URL(url)
-    return ['http:', 'https:'].includes(parsed.protocol)
+    <span class=k>const</span> parsed = <span class=k>new</span> <span class=f>URL</span>(url)
+    <span class=k>return</span> [<span class=s>'http:'</span>, <span class=s>'https:'</span>].<span class=f>includes</span>(parsed.protocol)
   } catch {
-    return false
+    <span class=k>return</span> <span class=n>false</span>
   }
-}</code>
-</pre>
+}</code></pre>
         </div>
         <div class="subsection">
           <h3>
             ${this.#esc(this.#tr('guideContent.security.bestPractices.title'))}
           </h3>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.security.bestPractices.label'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.security.bestPractices.items.i1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.security.bestPractices.items.i2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.security.bestPractices.items.i3'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.security.bestPractices.items.i4'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.security.bestPractices.items.i5'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.security.bestPractices.label'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.security.bestPractices.items.i1'))}</li><li>${this.#esc(this.#tr('guideContent.security.bestPractices.items.i2'))}</li><li>${this.#esc(this.#tr('guideContent.security.bestPractices.items.i3'))}</li><li>${this.#esc(this.#tr('guideContent.security.bestPractices.items.i4'))}</li><li>${this.#esc(this.#tr('guideContent.security.bestPractices.items.i5'))}</li></ul></div>
         </div>
       </section>
       <!-- まとめ -->
@@ -7399,26 +5045,7 @@ class CskGuideSecurity extends HTMLElement {
         <p>
           ${this.#esc(this.#tr('guideContent.summary.desc'))}
         </p>
-        <div class="note">
-          <strong>
-            ${this.#esc(this.#tr('guideContent.summary.nextStepsLabel'))}
-            :
-          </strong>
-          <ul>
-            <li>
-              ${this.#esc(this.#tr('guideContent.summary.nextSteps.s1'))}
-            </li>
-            <li>
-              ${this.#esc(this.#tr('guideContent.summary.nextSteps.s2'))}
-            </li>
-            <li>
-              ${this.#esc(this.#tr('guideContent.summary.nextSteps.s3'))}
-            </li>
-            <li>
-              ${this.#esc(this.#tr('guideContent.summary.nextSteps.s4'))}
-            </li>
-          </ul>
-        </div>
+        <div class="note"><strong>${this.#esc(this.#tr('guideContent.summary.nextStepsLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.summary.nextSteps.s1'))}</li><li>${this.#esc(this.#tr('guideContent.summary.nextSteps.s2'))}</li><li>${this.#esc(this.#tr('guideContent.summary.nextSteps.s3'))}</li><li>${this.#esc(this.#tr('guideContent.summary.nextSteps.s4'))}</li></ul></div>
       </section>
     `;
     this.replaceChildren(tpl.content.cloneNode(true));
@@ -7442,16 +5069,8 @@ class CskGuideSecurity extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.security.autoEscape.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_xssExample)}</code>
-</pre>
-          <div class="warning">
-            <strong>
-              ⚠️
-              ${this.#esc(this.#tr('guideContent.security.autoEscape.warningLabel'))}
-              :
-            </strong>
-            ${this.#esc(this.#tr('guideContent.security.autoEscape.warningText'))}
-          </div>
+          <pre><code>${this.#code_xssExample}</code></pre>
+          <div class="warning"><strong>⚠️ ${this.#esc(this.#tr('guideContent.security.autoEscape.warningLabel'))}:</strong>${this.#esc(this.#tr('guideContent.security.autoEscape.warningText'))}</div>
         </div>
         <div class="subsection">
           <h3>
@@ -7460,43 +5079,20 @@ class CskGuideSecurity extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.security.urlValidation.desc'))}
           </p>
-          <pre><code>fn isValidUrl(url: string): boolean {
+          <pre><code><span class=k>fn</span> <span class=f>isValidUrl</span>(url: <span class=tp>string</span>): <span class=tp>boolean</span> {
   try {
-    const parsed = new URL(url)
-    return ['http:', 'https:'].includes(parsed.protocol)
+    <span class=k>const</span> parsed = <span class=k>new</span> <span class=f>URL</span>(url)
+    <span class=k>return</span> [<span class=s>'http:'</span>, <span class=s>'https:'</span>].<span class=f>includes</span>(parsed.protocol)
   } catch {
-    return false
+    <span class=k>return</span> <span class=n>false</span>
   }
-}</code>
-</pre>
+}</code></pre>
         </div>
         <div class="subsection">
           <h3>
             ${this.#esc(this.#tr('guideContent.security.bestPractices.title'))}
           </h3>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.security.bestPractices.label'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.security.bestPractices.items.i1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.security.bestPractices.items.i2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.security.bestPractices.items.i3'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.security.bestPractices.items.i4'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.security.bestPractices.items.i5'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.security.bestPractices.label'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.security.bestPractices.items.i1'))}</li><li>${this.#esc(this.#tr('guideContent.security.bestPractices.items.i2'))}</li><li>${this.#esc(this.#tr('guideContent.security.bestPractices.items.i3'))}</li><li>${this.#esc(this.#tr('guideContent.security.bestPractices.items.i4'))}</li><li>${this.#esc(this.#tr('guideContent.security.bestPractices.items.i5'))}</li></ul></div>
         </div>
       </section>
       <!-- まとめ -->
@@ -7507,26 +5103,7 @@ class CskGuideSecurity extends HTMLElement {
         <p>
           ${this.#esc(this.#tr('guideContent.summary.desc'))}
         </p>
-        <div class="note">
-          <strong>
-            ${this.#esc(this.#tr('guideContent.summary.nextStepsLabel'))}
-            :
-          </strong>
-          <ul>
-            <li>
-              ${this.#esc(this.#tr('guideContent.summary.nextSteps.s1'))}
-            </li>
-            <li>
-              ${this.#esc(this.#tr('guideContent.summary.nextSteps.s2'))}
-            </li>
-            <li>
-              ${this.#esc(this.#tr('guideContent.summary.nextSteps.s3'))}
-            </li>
-            <li>
-              ${this.#esc(this.#tr('guideContent.summary.nextSteps.s4'))}
-            </li>
-          </ul>
-        </div>
+        <div class="note"><strong>${this.#esc(this.#tr('guideContent.summary.nextStepsLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.summary.nextSteps.s1'))}</li><li>${this.#esc(this.#tr('guideContent.summary.nextSteps.s2'))}</li><li>${this.#esc(this.#tr('guideContent.summary.nextSteps.s3'))}</li><li>${this.#esc(this.#tr('guideContent.summary.nextSteps.s4'))}</li></ul></div>
       </section>
     `;
     return tpl.content;
@@ -7558,6 +5135,16 @@ class CskGuideSecurity extends HTMLElement {
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -7640,10 +5227,10 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskGuideStyle extends HTMLElement {
-  #_code_styling = ":host {\n  display: block;\n  --my-color: var(--c-primary);\n}\n\n:host(.dark) {\n  --my-color: var(--c-accent);\n}\n\np {\n  color: var(--my-color);\n  font-family: var(--font);\n}";
+  #_code_styling = ":host {\n  display: block;\n  --my-color: <span class=k>var</span>(--c-primary);\n}\n\n:<span class=f>host</span>(.dark) {\n  --my-color: <span class=k>var</span>(--c-accent);\n}\n\np {\n  color: <span class=k>var</span>(--my-color);\n  font-family: <span class=k>var</span>(--font);\n}";
   get #code_styling() { return this.#_code_styling; }
   set #code_styling(v) { this.#_code_styling = v; this.#scheduleUpdate(); }
-  #_code_shadowScope = "/* CSS is automatically scoped */\np { color: white; }";
+  #_code_shadowScope = "<span class=cm>/* CSS is automatically scoped */</span>\np { color: white; }";
   get #code_shadowScope() { return this.#_code_shadowScope; }
   set #code_shadowScope(v) { this.#_code_shadowScope = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -7691,35 +5278,13 @@ class CskGuideStyle extends HTMLElement {
             ${this.#esc(this.#tr('guideContent.style.scoping.shadowDOM'))}
             :
           </p>
-          <pre><code>${this.#esc(this.#code_shadowScope)}</code>
-</pre>
+          <pre><code>${this.#code_shadowScope}</code></pre>
           <p class="example-title">
             ${this.#esc(this.#tr('guideContent.style.scoping.lightDOM'))}
             :
           </p>
-          <pre><code>${this.#esc(this.#code_styling)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.style.scoping.featuresLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                <code>
-                  :host
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.style.scoping.features.f1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.style.scoping.features.f2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.style.scoping.features.f3'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_styling}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.style.scoping.featuresLabel'))}:</strong><ul><li><code>:host</code> - ${this.#esc(this.#tr('guideContent.style.scoping.features.f1'))}</li><li>${this.#esc(this.#tr('guideContent.style.scoping.features.f2'))}</li><li>${this.#esc(this.#tr('guideContent.style.scoping.features.f3'))}</li></ul></div>
         </div>
         <div class="subsection">
           <h3>
@@ -7728,77 +5293,7 @@ class CskGuideStyle extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.style.customProps.desc'))}
           </p>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.style.customProps.availableLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                <code>
-                  --c-bg
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.style.customProps.props.p1'))}
-              </li>
-              <li>
-                <code>
-                  --c-text
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.style.customProps.props.p2'))}
-              </li>
-              <li>
-                <code>
-                  --c-text-dim
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.style.customProps.props.p3'))}
-              </li>
-              <li>
-                <code>
-                  --c-border
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.style.customProps.props.p4'))}
-              </li>
-              <li>
-                <code>
-                  --c-bg-code
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.style.customProps.props.p5'))}
-              </li>
-              <li>
-                <code>
-                  --c-primary
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.style.customProps.props.p6'))}
-              </li>
-              <li>
-                <code>
-                  --c-accent
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.style.customProps.props.p7'))}
-              </li>
-              <li>
-                <code>
-                  --font
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.style.customProps.props.p8'))}
-              </li>
-              <li>
-                <code>
-                  --mono
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.style.customProps.props.p9'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.style.customProps.availableLabel'))}:</strong><ul><li><code>--c-bg</code> - ${this.#esc(this.#tr('guideContent.style.customProps.props.p1'))}</li><li><code>--c-text</code> - ${this.#esc(this.#tr('guideContent.style.customProps.props.p2'))}</li><li><code>--c-text-dim</code> - ${this.#esc(this.#tr('guideContent.style.customProps.props.p3'))}</li><li><code>--c-border</code> - ${this.#esc(this.#tr('guideContent.style.customProps.props.p4'))}</li><li><code>--c-bg-code</code> - ${this.#esc(this.#tr('guideContent.style.customProps.props.p5'))}</li><li><code>--c-primary</code> - ${this.#esc(this.#tr('guideContent.style.customProps.props.p6'))}</li><li><code>--c-accent</code> - ${this.#esc(this.#tr('guideContent.style.customProps.props.p7'))}</li><li><code>--font</code> - ${this.#esc(this.#tr('guideContent.style.customProps.props.p8'))}</li><li><code>--mono</code> - ${this.#esc(this.#tr('guideContent.style.customProps.props.p9'))}</li></ul></div>
         </div>
       </section>
     `;
@@ -7827,35 +5322,13 @@ class CskGuideStyle extends HTMLElement {
             ${this.#esc(this.#tr('guideContent.style.scoping.shadowDOM'))}
             :
           </p>
-          <pre><code>${this.#esc(this.#code_shadowScope)}</code>
-</pre>
+          <pre><code>${this.#code_shadowScope}</code></pre>
           <p class="example-title">
             ${this.#esc(this.#tr('guideContent.style.scoping.lightDOM'))}
             :
           </p>
-          <pre><code>${this.#esc(this.#code_styling)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.style.scoping.featuresLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                <code>
-                  :host
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.style.scoping.features.f1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.style.scoping.features.f2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.style.scoping.features.f3'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_styling}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.style.scoping.featuresLabel'))}:</strong><ul><li><code>:host</code> - ${this.#esc(this.#tr('guideContent.style.scoping.features.f1'))}</li><li>${this.#esc(this.#tr('guideContent.style.scoping.features.f2'))}</li><li>${this.#esc(this.#tr('guideContent.style.scoping.features.f3'))}</li></ul></div>
         </div>
         <div class="subsection">
           <h3>
@@ -7864,77 +5337,7 @@ class CskGuideStyle extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.style.customProps.desc'))}
           </p>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.style.customProps.availableLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                <code>
-                  --c-bg
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.style.customProps.props.p1'))}
-              </li>
-              <li>
-                <code>
-                  --c-text
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.style.customProps.props.p2'))}
-              </li>
-              <li>
-                <code>
-                  --c-text-dim
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.style.customProps.props.p3'))}
-              </li>
-              <li>
-                <code>
-                  --c-border
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.style.customProps.props.p4'))}
-              </li>
-              <li>
-                <code>
-                  --c-bg-code
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.style.customProps.props.p5'))}
-              </li>
-              <li>
-                <code>
-                  --c-primary
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.style.customProps.props.p6'))}
-              </li>
-              <li>
-                <code>
-                  --c-accent
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.style.customProps.props.p7'))}
-              </li>
-              <li>
-                <code>
-                  --font
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.style.customProps.props.p8'))}
-              </li>
-              <li>
-                <code>
-                  --mono
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.style.customProps.props.p9'))}
-              </li>
-            </ul>
-          </div>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.style.customProps.availableLabel'))}:</strong><ul><li><code>--c-bg</code> - ${this.#esc(this.#tr('guideContent.style.customProps.props.p1'))}</li><li><code>--c-text</code> - ${this.#esc(this.#tr('guideContent.style.customProps.props.p2'))}</li><li><code>--c-text-dim</code> - ${this.#esc(this.#tr('guideContent.style.customProps.props.p3'))}</li><li><code>--c-border</code> - ${this.#esc(this.#tr('guideContent.style.customProps.props.p4'))}</li><li><code>--c-bg-code</code> - ${this.#esc(this.#tr('guideContent.style.customProps.props.p5'))}</li><li><code>--c-primary</code> - ${this.#esc(this.#tr('guideContent.style.customProps.props.p6'))}</li><li><code>--c-accent</code> - ${this.#esc(this.#tr('guideContent.style.customProps.props.p7'))}</li><li><code>--font</code> - ${this.#esc(this.#tr('guideContent.style.customProps.props.p8'))}</li><li><code>--mono</code> - ${this.#esc(this.#tr('guideContent.style.customProps.props.p9'))}</li></ul></div>
         </div>
       </section>
     `;
@@ -7967,6 +5370,16 @@ class CskGuideStyle extends HTMLElement {
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -8049,31 +5462,31 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskGuideTemplate extends HTMLElement {
-  #_code_interpolation = "&lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;p&gt;{{ firstName + ' ' + lastName }}&lt;/p&gt;\n&lt;p&gt;{{ formatDate(date) }}&lt;/p&gt;";
+  #_code_interpolation = "<span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ count }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ firstName + ' ' + lastName }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ formatDate(date) }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>";
   get #code_interpolation() { return this.#_code_interpolation; }
   set #code_interpolation(v) { this.#_code_interpolation = v; this.#scheduleUpdate(); }
-  #_code_dynamicAttr = "&lt;div :class=\"isActive ? 'active' : ''\"&gt;\n  &lt;a :href=\"'/posts/' + postId\"&gt;View&lt;/a&gt;\n  &lt;img :src=\"imageUrl\" :alt=\"imageName\" /&gt;\n&lt;/div&gt;";
+  #_code_dynamicAttr = "<span class=t>&lt;div</span> :class=\"isActive ? 'active' : ''\"<span class=t>&gt;</span>\n  <span class=t>&lt;a</span> :href=\"'/posts/' + postId\"<span class=t>&gt;</span>View<span class=t>&lt;/a</span><span class=t>&gt;</span>\n  <span class=t>&lt;img</span> :src=\"imageUrl\" :alt=\"imageName\" <span class=t>/&gt;</span>\n<span class=t>&lt;/div</span><span class=t>&gt;</span>";
   get #code_dynamicAttr() { return this.#_code_dynamicAttr; }
   set #code_dynamicAttr(v) { this.#_code_dynamicAttr = v; this.#scheduleUpdate(); }
-  #_code_twoWayBinding = "&lt;input :bind=\"name\" type=\"text\" /&gt;\n&lt;textarea :bind=\"description\"&gt;&lt;/textarea&gt;\n&lt;!-- name and description update automatically --&gt;";
+  #_code_twoWayBinding = "<span class=t>&lt;input</span> :bind=\"name\" type=\"text\" <span class=t>/&gt;</span>\n<span class=t>&lt;textarea</span> :bind=\"description\"<span class=t>&gt;</span><span class=t>&lt;/textarea</span><span class=t>&gt;</span>\n<span class=cm>&lt;!-- name and description update automatically --&gt;</span>";
   get #code_twoWayBinding() { return this.#_code_twoWayBinding; }
   set #code_twoWayBinding(v) { this.#_code_twoWayBinding = v; this.#scheduleUpdate(); }
-  #_code_eventHandling = "&lt;button @click=\"increment\"&gt;Count: {{ count }}&lt;/button&gt;\n&lt;form @submit|prevent=\"handleSubmit\"&gt;\n  &lt;input @keydown|enter=\"handleEnter\" /&gt;\n  &lt;button @click|stop=\"handleClick\"&gt;Click&lt;/button&gt;\n&lt;/form&gt;";
+  #_code_eventHandling = "<span class=t>&lt;button</span> @click=\"increment\"<span class=t>&gt;</span>Count: <span class=i>{{ count }}</span><span class=t>&lt;/button</span><span class=t>&gt;</span>\n<span class=t>&lt;form</span> @submit|prevent=\"handleSubmit\"<span class=t>&gt;</span>\n  <span class=t>&lt;input</span> @keydown|enter=\"handleEnter\" <span class=t>/&gt;</span>\n  <span class=t>&lt;button</span> @click|stop=\"handleClick\"<span class=t>&gt;</span>Click<span class=t>&lt;/button</span><span class=t>&gt;</span>\n<span class=t>&lt;/form</span><span class=t>&gt;</span>";
   get #code_eventHandling() { return this.#_code_eventHandling; }
   set #code_eventHandling(v) { this.#_code_eventHandling = v; this.#scheduleUpdate(); }
-  #_code_conditional = "&lt;#if condition=\"isLoggedIn\"&gt;\n  &lt;p&gt;Welcome, {{ username }}!&lt;/p&gt;\n&lt;#else if condition=\"loading\"&gt;\n  &lt;p&gt;Loading...&lt;/p&gt;\n&lt;#else&gt;\n  &lt;p&gt;Please log in&lt;/p&gt;\n&lt;/#if&gt;";
+  #_code_conditional = "<span class=c>&lt;#if condition=\"isLoggedIn\"&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span>Welcome, <span class=i>{{ username }}</span>!<span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=c>&lt;#else if condition=\"loading\"&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span>Loading...<span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=c>&lt;#else&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span>Please log <span class=k>in</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n&lt;/<span class=cm>#if&gt;</span>";
   get #code_conditional() { return this.#_code_conditional; }
   set #code_conditional(v) { this.#_code_conditional = v; this.#scheduleUpdate(); }
-  #_code_loop = "&lt;#for each=\"item\" of=\"items\" key=\"item.id\"&gt;\n  &lt;div&gt;\n    &lt;h3&gt;{{ item.name }}&lt;/h3&gt;\n    &lt;p&gt;{{ item.description }}&lt;/p&gt;\n  &lt;/div&gt;\n&lt;#empty&gt;\n  &lt;p&gt;No items found&lt;/p&gt;\n&lt;/#for&gt;";
+  #_code_loop = "<span class=c>&lt;#for each=\"item\" of=\"items\" key=\"item.id\"&gt;</span>\n  <span class=t>&lt;div</span><span class=t>&gt;</span>\n    <span class=t>&lt;h3</span><span class=t>&gt;</span><span class=i>{{ item.name }}</span><span class=t>&lt;/h3</span><span class=t>&gt;</span>\n    <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ item.description }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n  <span class=t>&lt;/div</span><span class=t>&gt;</span>\n<span class=c>&lt;#empty&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span>No items found<span class=t>&lt;/p</span><span class=t>&gt;</span>\n&lt;/<span class=cm>#for&gt;</span>";
   get #code_loop() { return this.#_code_loop; }
   set #code_loop(v) { this.#_code_loop = v; this.#scheduleUpdate(); }
-  #_code_html = "&lt;div @html=\"richContent\"&gt;&lt;/div&gt;\n&lt;!-- Renders: rawHtmlString (use only with trusted content!) --&gt;";
+  #_code_html = "<span class=t>&lt;div</span> @html=\"richContent\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>\n<span class=cm>&lt;!-- Renders: rawHtmlString (use only with trusted content!) --&gt;</span>";
   get #code_html() { return this.#_code_html; }
   set #code_html(v) { this.#_code_html = v; this.#scheduleUpdate(); }
-  #_code_slot = "&lt;div class=\"card\"&gt;\n  &lt;slot name=\"header\"&gt;&lt;/slot&gt;\n  &lt;slot&gt;&lt;/slot&gt;\n  &lt;slot name=\"footer\"&gt;&lt;/slot&gt;\n&lt;/div&gt;";
+  #_code_slot = "<span class=t>&lt;div</span> class=\"card\"<span class=t>&gt;</span>\n  <span class=t>&lt;slot</span> name=\"header\"<span class=t>&gt;</span><span class=t>&lt;/slot</span><span class=t>&gt;</span>\n  <span class=t>&lt;slot</span><span class=t>&gt;</span><span class=t>&lt;/slot</span><span class=t>&gt;</span>\n  <span class=t>&lt;slot</span> name=\"footer\"<span class=t>&gt;</span><span class=t>&lt;/slot</span><span class=t>&gt;</span>\n<span class=t>&lt;/div</span><span class=t>&gt;</span>";
   get #code_slot() { return this.#_code_slot; }
   set #code_slot(v) { this.#_code_slot = v; this.#scheduleUpdate(); }
-  #_code_slotUsage = "&lt;Card&gt;\n  &lt;template #header&gt;\n    &lt;h2&gt;Title&lt;/h2&gt;\n  &lt;/template&gt;\n  &lt;p&gt;Main content&lt;/p&gt;\n  &lt;template #footer&gt;\n    &lt;button&gt;Close&lt;/button&gt;\n  &lt;/template&gt;\n&lt;/Card&gt;";
+  #_code_slotUsage = "<span class=t>&lt;Card</span><span class=t>&gt;</span>\n  <span class=t>&lt;template</span> #header<span class=t>&gt;</span>\n    <span class=t>&lt;h2</span><span class=t>&gt;</span>Title<span class=t>&lt;/h2</span><span class=t>&gt;</span>\n  <span class=t>&lt;/template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span>Main content<span class=t>&lt;/p</span><span class=t>&gt;</span>\n  <span class=t>&lt;template</span> #footer<span class=t>&gt;</span>\n    <span class=t>&lt;button</span><span class=t>&gt;</span>Close<span class=t>&lt;/button</span><span class=t>&gt;</span>\n  <span class=t>&lt;/template</span><span class=t>&gt;</span>\n<span class=t>&lt;/Card</span><span class=t>&gt;</span>";
   get #code_slotUsage() { return this.#_code_slotUsage; }
   set #code_slotUsage(v) { this.#_code_slotUsage = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -8124,25 +5537,8 @@ class CskGuideTemplate extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.template.interpolation.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_interpolation)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.template.interpolation.featuresLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.template.interpolation.features.f1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.template.interpolation.features.f2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.template.interpolation.features.f3'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_interpolation}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.template.interpolation.featuresLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.template.interpolation.features.f1'))}</li><li>${this.#esc(this.#tr('guideContent.template.interpolation.features.f2'))}</li><li>${this.#esc(this.#tr('guideContent.template.interpolation.features.f3'))}</li></ul></div>
         </div>
         <!-- 動的属性 -->
         <div id="dynamic-attr" class="subsection">
@@ -8152,44 +5548,8 @@ class CskGuideTemplate extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.template.dynamicAttr.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_dynamicAttr)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.template.dynamicAttr.commonLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                <code>
-                  :class
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.dynamicAttr.common.c1'))}
-              </li>
-              <li>
-                <code>
-                  :href
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.dynamicAttr.common.c2'))}
-              </li>
-              <li>
-                <code>
-                  :src
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.dynamicAttr.common.c3'))}
-              </li>
-              <li>
-                <code>
-                  :disabled
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.dynamicAttr.common.c4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_dynamicAttr}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.template.dynamicAttr.commonLabel'))}:</strong><ul><li><code>:class</code> - ${this.#esc(this.#tr('guideContent.template.dynamicAttr.common.c1'))}</li><li><code>:href</code> - ${this.#esc(this.#tr('guideContent.template.dynamicAttr.common.c2'))}</li><li><code>:src</code> - ${this.#esc(this.#tr('guideContent.template.dynamicAttr.common.c3'))}</li><li><code>:disabled</code> - ${this.#esc(this.#tr('guideContent.template.dynamicAttr.common.c4'))}</li></ul></div>
         </div>
         <!-- 双方向バインディング -->
         <div id="two-way" class="subsection">
@@ -8199,31 +5559,8 @@ class CskGuideTemplate extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.template.twoWay.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_twoWayBinding)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.template.twoWay.supportedLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                &lt;input type="text"&gt;
-              </li>
-              <li>
-                &lt;textarea&gt;
-              </li>
-              <li>
-                &lt;select&gt;
-              </li>
-              <li>
-                &lt;input type="checkbox"&gt;
-              </li>
-              <li>
-                &lt;input type="radio"&gt;
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_twoWayBinding}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.template.twoWay.supportedLabel'))}:</strong><ul><li>&lt;input type="text"&gt;</li><li>&lt;textarea&gt;</li><li>&lt;select&gt;</li><li>&lt;input type="checkbox"&gt;</li><li>&lt;input type="radio"&gt;</li></ul></div>
         </div>
         <!-- イベントハンドリング -->
         <div id="events" class="subsection">
@@ -8233,102 +5570,9 @@ class CskGuideTemplate extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.template.events.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_eventHandling)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.template.events.modifiersLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                <code>
-                  |prevent
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.events.modifiers.prevent'))}
-              </li>
-              <li>
-                <code>
-                  |stop
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.events.modifiers.stop'))}
-              </li>
-              <li>
-                <code>
-                  |enter
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.events.modifiers.enter'))}
-              </li>
-              <li>
-                <code>
-                  |escape
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.events.modifiers.escape'))}
-              </li>
-              <li>
-                <code>
-                  |space
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.events.modifiers.space'))}
-              </li>
-            </ul>
-          </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.template.events.commonLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                <code>
-                  @click
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.events.common.c1'))}
-              </li>
-              <li>
-                <code>
-                  @submit
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.events.common.c2'))}
-              </li>
-              <li>
-                <code>
-                  @change
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.events.common.c3'))}
-              </li>
-              <li>
-                <code>
-                  @keydown
-                </code>
-                ,
-                <code>
-                  @keyup
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.events.common.c4'))}
-              </li>
-              <li>
-                <code>
-                  @focus
-                </code>
-                ,
-                <code>
-                  @blur
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.events.common.c5'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_eventHandling}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.template.events.modifiersLabel'))}:</strong><ul><li><code>|prevent</code> - ${this.#esc(this.#tr('guideContent.template.events.modifiers.prevent'))}</li><li><code>|stop</code> - ${this.#esc(this.#tr('guideContent.template.events.modifiers.stop'))}</li><li><code>|enter</code> - ${this.#esc(this.#tr('guideContent.template.events.modifiers.enter'))}</li><li><code>|escape</code> - ${this.#esc(this.#tr('guideContent.template.events.modifiers.escape'))}</li><li><code>|space</code> - ${this.#esc(this.#tr('guideContent.template.events.modifiers.space'))}</li></ul></div>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.template.events.commonLabel'))}:</strong><ul><li><code>@click</code> - ${this.#esc(this.#tr('guideContent.template.events.common.c1'))}</li><li><code>@submit</code> - ${this.#esc(this.#tr('guideContent.template.events.common.c2'))}</li><li><code>@change</code> - ${this.#esc(this.#tr('guideContent.template.events.common.c3'))}</li><li><code>@keydown</code>, <code>@keyup</code> - ${this.#esc(this.#tr('guideContent.template.events.common.c4'))}</li><li><code>@focus</code>, <code>@blur</code> - ${this.#esc(this.#tr('guideContent.template.events.common.c5'))}</li></ul></div>
         </div>
         <!-- 条件分岐 -->
         <div id="conditionals" class="subsection">
@@ -8338,44 +5582,8 @@ class CskGuideTemplate extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.template.conditionals.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_conditional)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.template.conditionals.syntaxLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                <code>
-                  &lt;#if condition="..."&gt;
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.conditionals.syntax.s1'))}
-              </li>
-              <li>
-                <code>
-                  &lt;#else if condition="..."&gt;
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.conditionals.syntax.s2'))}
-              </li>
-              <li>
-                <code>
-                  &lt;#else&gt;
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.conditionals.syntax.s3'))}
-              </li>
-              <li>
-                <code>
-                  &lt;/#if&gt;
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.conditionals.syntax.s4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_conditional}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.template.conditionals.syntaxLabel'))}:</strong><ul><li><code>&lt;#if condition="..."&gt;</code> - ${this.#esc(this.#tr('guideContent.template.conditionals.syntax.s1'))}</li><li><code>&lt;#else if condition="..."&gt;</code> - ${this.#esc(this.#tr('guideContent.template.conditionals.syntax.s2'))}</li><li><code>&lt;#else&gt;</code> - ${this.#esc(this.#tr('guideContent.template.conditionals.syntax.s3'))}</li><li><code>&lt;/#if&gt;</code> - ${this.#esc(this.#tr('guideContent.template.conditionals.syntax.s4'))}</li></ul></div>
         </div>
         <!-- ループ -->
         <div id="loops" class="subsection">
@@ -8385,44 +5593,8 @@ class CskGuideTemplate extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.template.loops.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_loop)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.template.loops.attributesLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                <code>
-                  each="variable"
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.loops.attributes.a1'))}
-              </li>
-              <li>
-                <code>
-                  of="array"
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.loops.attributes.a2'))}
-              </li>
-              <li>
-                <code>
-                  key="item.id"
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.loops.attributes.a3'))}
-              </li>
-              <li>
-                <code>
-                  &lt;#empty&gt;
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.loops.attributes.a4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_loop}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.template.loops.attributesLabel'))}:</strong><ul><li><code>each="variable"</code> - ${this.#esc(this.#tr('guideContent.template.loops.attributes.a1'))}</li><li><code>of="array"</code> - ${this.#esc(this.#tr('guideContent.template.loops.attributes.a2'))}</li><li><code>key="item.id"</code> - ${this.#esc(this.#tr('guideContent.template.loops.attributes.a3'))}</li><li><code>&lt;#empty&gt;</code> - ${this.#esc(this.#tr('guideContent.template.loops.attributes.a4'))}</li></ul></div>
         </div>
         <!-- HTML出力 -->
         <div id="html-output" class="subsection">
@@ -8432,16 +5604,8 @@ class CskGuideTemplate extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.template.htmlOutput.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_html)}</code>
-</pre>
-          <div class="warning">
-            <strong>
-              ⚠️
-              ${this.#esc(this.#tr('guideContent.template.htmlOutput.warningLabel'))}
-              :
-            </strong>
-            ${this.#esc(this.#tr('guideContent.template.htmlOutput.warningText'))}
-          </div>
+          <pre><code>${this.#code_html}</code></pre>
+          <div class="warning"><strong>⚠️ ${this.#esc(this.#tr('guideContent.template.htmlOutput.warningLabel'))}:</strong>${this.#esc(this.#tr('guideContent.template.htmlOutput.warningText'))}</div>
         </div>
         <!-- スロット -->
         <div id="slots" class="subsection">
@@ -8455,43 +5619,13 @@ class CskGuideTemplate extends HTMLElement {
             ${this.#esc(this.#tr('guideContent.template.slots.componentDef'))}
             :
           </p>
-          <pre><code>${this.#esc(this.#code_slot)}</code>
-</pre>
+          <pre><code>${this.#code_slot}</code></pre>
           <p class="example-title">
             ${this.#esc(this.#tr('guideContent.template.slots.componentUsage'))}
             :
           </p>
-          <pre><code>${this.#esc(this.#code_slotUsage)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.template.slots.typesLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                <code>
-                  &lt;slot&gt;
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.slots.types.t1'))}
-              </li>
-              <li>
-                <code>
-                  &lt;slot name="..."&gt;
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.slots.types.t2'))}
-              </li>
-              <li>
-                <code>
-                  &lt;template #name&gt;
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.slots.types.t3'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_slotUsage}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.template.slots.typesLabel'))}:</strong><ul><li><code>&lt;slot&gt;</code> - ${this.#esc(this.#tr('guideContent.template.slots.types.t1'))}</li><li><code>&lt;slot name="..."&gt;</code> - ${this.#esc(this.#tr('guideContent.template.slots.types.t2'))}</li><li><code>&lt;template #name&gt;</code> - ${this.#esc(this.#tr('guideContent.template.slots.types.t3'))}</li></ul></div>
         </div>
       </section>
     `;
@@ -8523,25 +5657,8 @@ class CskGuideTemplate extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.template.interpolation.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_interpolation)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.template.interpolation.featuresLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                ${this.#esc(this.#tr('guideContent.template.interpolation.features.f1'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.template.interpolation.features.f2'))}
-              </li>
-              <li>
-                ${this.#esc(this.#tr('guideContent.template.interpolation.features.f3'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_interpolation}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.template.interpolation.featuresLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.template.interpolation.features.f1'))}</li><li>${this.#esc(this.#tr('guideContent.template.interpolation.features.f2'))}</li><li>${this.#esc(this.#tr('guideContent.template.interpolation.features.f3'))}</li></ul></div>
         </div>
         <!-- 動的属性 -->
         <div id="dynamic-attr" class="subsection">
@@ -8551,44 +5668,8 @@ class CskGuideTemplate extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.template.dynamicAttr.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_dynamicAttr)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.template.dynamicAttr.commonLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                <code>
-                  :class
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.dynamicAttr.common.c1'))}
-              </li>
-              <li>
-                <code>
-                  :href
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.dynamicAttr.common.c2'))}
-              </li>
-              <li>
-                <code>
-                  :src
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.dynamicAttr.common.c3'))}
-              </li>
-              <li>
-                <code>
-                  :disabled
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.dynamicAttr.common.c4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_dynamicAttr}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.template.dynamicAttr.commonLabel'))}:</strong><ul><li><code>:class</code> - ${this.#esc(this.#tr('guideContent.template.dynamicAttr.common.c1'))}</li><li><code>:href</code> - ${this.#esc(this.#tr('guideContent.template.dynamicAttr.common.c2'))}</li><li><code>:src</code> - ${this.#esc(this.#tr('guideContent.template.dynamicAttr.common.c3'))}</li><li><code>:disabled</code> - ${this.#esc(this.#tr('guideContent.template.dynamicAttr.common.c4'))}</li></ul></div>
         </div>
         <!-- 双方向バインディング -->
         <div id="two-way" class="subsection">
@@ -8598,31 +5679,8 @@ class CskGuideTemplate extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.template.twoWay.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_twoWayBinding)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.template.twoWay.supportedLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                &lt;input type="text"&gt;
-              </li>
-              <li>
-                &lt;textarea&gt;
-              </li>
-              <li>
-                &lt;select&gt;
-              </li>
-              <li>
-                &lt;input type="checkbox"&gt;
-              </li>
-              <li>
-                &lt;input type="radio"&gt;
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_twoWayBinding}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.template.twoWay.supportedLabel'))}:</strong><ul><li>&lt;input type="text"&gt;</li><li>&lt;textarea&gt;</li><li>&lt;select&gt;</li><li>&lt;input type="checkbox"&gt;</li><li>&lt;input type="radio"&gt;</li></ul></div>
         </div>
         <!-- イベントハンドリング -->
         <div id="events" class="subsection">
@@ -8632,102 +5690,9 @@ class CskGuideTemplate extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.template.events.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_eventHandling)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.template.events.modifiersLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                <code>
-                  |prevent
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.events.modifiers.prevent'))}
-              </li>
-              <li>
-                <code>
-                  |stop
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.events.modifiers.stop'))}
-              </li>
-              <li>
-                <code>
-                  |enter
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.events.modifiers.enter'))}
-              </li>
-              <li>
-                <code>
-                  |escape
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.events.modifiers.escape'))}
-              </li>
-              <li>
-                <code>
-                  |space
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.events.modifiers.space'))}
-              </li>
-            </ul>
-          </div>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.template.events.commonLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                <code>
-                  @click
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.events.common.c1'))}
-              </li>
-              <li>
-                <code>
-                  @submit
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.events.common.c2'))}
-              </li>
-              <li>
-                <code>
-                  @change
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.events.common.c3'))}
-              </li>
-              <li>
-                <code>
-                  @keydown
-                </code>
-                ,
-                <code>
-                  @keyup
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.events.common.c4'))}
-              </li>
-              <li>
-                <code>
-                  @focus
-                </code>
-                ,
-                <code>
-                  @blur
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.events.common.c5'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_eventHandling}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.template.events.modifiersLabel'))}:</strong><ul><li><code>|prevent</code> - ${this.#esc(this.#tr('guideContent.template.events.modifiers.prevent'))}</li><li><code>|stop</code> - ${this.#esc(this.#tr('guideContent.template.events.modifiers.stop'))}</li><li><code>|enter</code> - ${this.#esc(this.#tr('guideContent.template.events.modifiers.enter'))}</li><li><code>|escape</code> - ${this.#esc(this.#tr('guideContent.template.events.modifiers.escape'))}</li><li><code>|space</code> - ${this.#esc(this.#tr('guideContent.template.events.modifiers.space'))}</li></ul></div>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.template.events.commonLabel'))}:</strong><ul><li><code>@click</code> - ${this.#esc(this.#tr('guideContent.template.events.common.c1'))}</li><li><code>@submit</code> - ${this.#esc(this.#tr('guideContent.template.events.common.c2'))}</li><li><code>@change</code> - ${this.#esc(this.#tr('guideContent.template.events.common.c3'))}</li><li><code>@keydown</code>, <code>@keyup</code> - ${this.#esc(this.#tr('guideContent.template.events.common.c4'))}</li><li><code>@focus</code>, <code>@blur</code> - ${this.#esc(this.#tr('guideContent.template.events.common.c5'))}</li></ul></div>
         </div>
         <!-- 条件分岐 -->
         <div id="conditionals" class="subsection">
@@ -8737,44 +5702,8 @@ class CskGuideTemplate extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.template.conditionals.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_conditional)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.template.conditionals.syntaxLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                <code>
-                  &lt;#if condition="..."&gt;
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.conditionals.syntax.s1'))}
-              </li>
-              <li>
-                <code>
-                  &lt;#else if condition="..."&gt;
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.conditionals.syntax.s2'))}
-              </li>
-              <li>
-                <code>
-                  &lt;#else&gt;
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.conditionals.syntax.s3'))}
-              </li>
-              <li>
-                <code>
-                  &lt;/#if&gt;
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.conditionals.syntax.s4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_conditional}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.template.conditionals.syntaxLabel'))}:</strong><ul><li><code>&lt;#if condition="..."&gt;</code> - ${this.#esc(this.#tr('guideContent.template.conditionals.syntax.s1'))}</li><li><code>&lt;#else if condition="..."&gt;</code> - ${this.#esc(this.#tr('guideContent.template.conditionals.syntax.s2'))}</li><li><code>&lt;#else&gt;</code> - ${this.#esc(this.#tr('guideContent.template.conditionals.syntax.s3'))}</li><li><code>&lt;/#if&gt;</code> - ${this.#esc(this.#tr('guideContent.template.conditionals.syntax.s4'))}</li></ul></div>
         </div>
         <!-- ループ -->
         <div id="loops" class="subsection">
@@ -8784,44 +5713,8 @@ class CskGuideTemplate extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.template.loops.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_loop)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.template.loops.attributesLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                <code>
-                  each="variable"
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.loops.attributes.a1'))}
-              </li>
-              <li>
-                <code>
-                  of="array"
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.loops.attributes.a2'))}
-              </li>
-              <li>
-                <code>
-                  key="item.id"
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.loops.attributes.a3'))}
-              </li>
-              <li>
-                <code>
-                  &lt;#empty&gt;
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.loops.attributes.a4'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_loop}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.template.loops.attributesLabel'))}:</strong><ul><li><code>each="variable"</code> - ${this.#esc(this.#tr('guideContent.template.loops.attributes.a1'))}</li><li><code>of="array"</code> - ${this.#esc(this.#tr('guideContent.template.loops.attributes.a2'))}</li><li><code>key="item.id"</code> - ${this.#esc(this.#tr('guideContent.template.loops.attributes.a3'))}</li><li><code>&lt;#empty&gt;</code> - ${this.#esc(this.#tr('guideContent.template.loops.attributes.a4'))}</li></ul></div>
         </div>
         <!-- HTML出力 -->
         <div id="html-output" class="subsection">
@@ -8831,16 +5724,8 @@ class CskGuideTemplate extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.template.htmlOutput.desc'))}
           </p>
-          <pre><code>${this.#esc(this.#code_html)}</code>
-</pre>
-          <div class="warning">
-            <strong>
-              ⚠️
-              ${this.#esc(this.#tr('guideContent.template.htmlOutput.warningLabel'))}
-              :
-            </strong>
-            ${this.#esc(this.#tr('guideContent.template.htmlOutput.warningText'))}
-          </div>
+          <pre><code>${this.#code_html}</code></pre>
+          <div class="warning"><strong>⚠️ ${this.#esc(this.#tr('guideContent.template.htmlOutput.warningLabel'))}:</strong>${this.#esc(this.#tr('guideContent.template.htmlOutput.warningText'))}</div>
         </div>
         <!-- スロット -->
         <div id="slots" class="subsection">
@@ -8854,43 +5739,13 @@ class CskGuideTemplate extends HTMLElement {
             ${this.#esc(this.#tr('guideContent.template.slots.componentDef'))}
             :
           </p>
-          <pre><code>${this.#esc(this.#code_slot)}</code>
-</pre>
+          <pre><code>${this.#code_slot}</code></pre>
           <p class="example-title">
             ${this.#esc(this.#tr('guideContent.template.slots.componentUsage'))}
             :
           </p>
-          <pre><code>${this.#esc(this.#code_slotUsage)}</code>
-</pre>
-          <div class="note">
-            <strong>
-              ${this.#esc(this.#tr('guideContent.template.slots.typesLabel'))}
-              :
-            </strong>
-            <ul>
-              <li>
-                <code>
-                  &lt;slot&gt;
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.slots.types.t1'))}
-              </li>
-              <li>
-                <code>
-                  &lt;slot name="..."&gt;
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.slots.types.t2'))}
-              </li>
-              <li>
-                <code>
-                  &lt;template #name&gt;
-                </code>
-                -
-                ${this.#esc(this.#tr('guideContent.template.slots.types.t3'))}
-              </li>
-            </ul>
-          </div>
+          <pre><code>${this.#code_slotUsage}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.template.slots.typesLabel'))}:</strong><ul><li><code>&lt;slot&gt;</code> - ${this.#esc(this.#tr('guideContent.template.slots.types.t1'))}</li><li><code>&lt;slot name="..."&gt;</code> - ${this.#esc(this.#tr('guideContent.template.slots.types.t2'))}</li><li><code>&lt;template #name&gt;</code> - ${this.#esc(this.#tr('guideContent.template.slots.types.t3'))}</li></ul></div>
         </div>
       </section>
     `;
@@ -8923,6 +5778,16 @@ class CskGuideTemplate extends HTMLElement {
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -9001,6 +5866,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-page-guide.csk ──
+
 (() => {
 "use strict";
 
@@ -9079,152 +5945,26 @@ class CskPageGuide extends HTMLElement {
               ${this.#esc(this.#tr('guide.toc'))}
             </h2>
             <button data-chasket-id="fl-0" class="sidebar-toggle">
-              <span class="toggle-icon">
-                ≡
-              </span>
-            </button>
+<span class="toggle-icon">≡</span>            </button>
           </div>
           <nav data-chasket-id="fl-1" class="toc">
             <ul>
               <li>
-                <a href="#file-structure">
-                  ${this.#esc(this.#tr('guide.sections.fileStructure'))}
-                </a>
-              </li>
+<a href="#file-structure">${this.#esc(this.#tr('guide.sections.fileStructure'))}</a>              </li>
               <li>
-                <a href="#meta-block">
-                  ${this.#esc(this.#tr('guide.sections.metaBlock'))}
-                </a>
-              </li>
+<a href="#meta-block">${this.#esc(this.#tr('guide.sections.metaBlock'))}</a>              </li>
               <li>
-                <a href="#script-block">
-                  ${this.#esc(this.#tr('guide.sections.scriptBlock'))}
-                </a>
-              </li>
+<a href="#script-block">${this.#esc(this.#tr('guide.sections.scriptBlock'))}</a>              </li>
+              <li><a href="#script-declarations">${this.#esc(this.#tr('guide.sections.scriptDeclarations'))}</a><ul><li><a href="#state">${this.#esc(this.#tr('guide.toc_items.state'))}</a></li><li><a href="#prop">${this.#esc(this.#tr('guide.toc_items.prop'))}</a></li><li><a href="#computed">${this.#esc(this.#tr('guide.toc_items.computed'))}</a></li><li><a href="#fn">${this.#esc(this.#tr('guide.toc_items.fn'))}</a></li><li><a href="#emit">${this.#esc(this.#tr('guide.toc_items.emit'))}</a></li><li><a href="#watch">${this.#esc(this.#tr('guide.toc_items.watch'))}</a></li><li><a href="#ref">${this.#esc(this.#tr('guide.toc_items.ref'))}</a></li><li><a href="#provide-consume">${this.#esc(this.#tr('guide.toc_items.provideConsume'))}</a></li><li><a href="#type">${this.#esc(this.#tr('guide.toc_items.type'))}</a></li><li><a href="#import">${this.#esc(this.#tr('guide.toc_items.import'))}</a></li></ul></li>
               <li>
-                <a href="#script-declarations">
-                  ${this.#esc(this.#tr('guide.sections.scriptDeclarations'))}
-                </a>
-                <ul>
-                  <li>
-                    <a href="#state">
-                      ${this.#esc(this.#tr('guide.toc_items.state'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#prop">
-                      ${this.#esc(this.#tr('guide.toc_items.prop'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#computed">
-                      ${this.#esc(this.#tr('guide.toc_items.computed'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#fn">
-                      ${this.#esc(this.#tr('guide.toc_items.fn'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#emit">
-                      ${this.#esc(this.#tr('guide.toc_items.emit'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#watch">
-                      ${this.#esc(this.#tr('guide.toc_items.watch'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#ref">
-                      ${this.#esc(this.#tr('guide.toc_items.ref'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#provide-consume">
-                      ${this.#esc(this.#tr('guide.toc_items.provideConsume'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#type">
-                      ${this.#esc(this.#tr('guide.toc_items.type'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#import">
-                      ${this.#esc(this.#tr('guide.toc_items.import'))}
-                    </a>
-                  </li>
-                </ul>
-              </li>
+<a href="#template-block">${this.#esc(this.#tr('guide.sections.templateBlock'))}</a>              </li>
+              <li><a href="#template-syntax">${this.#esc(this.#tr('guide.sections.templateSyntax'))}</a><ul><li><a href="#interpolation">${this.#esc(this.#tr('guide.toc_items.interpolation'))}</a></li><li><a href="#dynamic-attr">${this.#esc(this.#tr('guide.toc_items.dynamicAttr'))}</a></li><li><a href="#two-way">${this.#esc(this.#tr('guide.toc_items.twoWay'))}</a></li><li><a href="#events">${this.#esc(this.#tr('guide.toc_items.events'))}</a></li><li><a href="#conditionals">${this.#esc(this.#tr('guide.toc_items.conditionals'))}</a></li><li><a href="#loops">${this.#esc(this.#tr('guide.toc_items.loops'))}</a></li><li><a href="#html-output">${this.#esc(this.#tr('guide.toc_items.htmlOutput'))}</a></li><li><a href="#slots">${this.#esc(this.#tr('guide.toc_items.slots'))}</a></li></ul></li>
               <li>
-                <a href="#template-block">
-                  ${this.#esc(this.#tr('guide.sections.templateBlock'))}
-                </a>
-              </li>
+<a href="#style-block">${this.#esc(this.#tr('guide.sections.styleBlock'))}</a>              </li>
               <li>
-                <a href="#template-syntax">
-                  ${this.#esc(this.#tr('guide.sections.templateSyntax'))}
-                </a>
-                <ul>
-                  <li>
-                    <a href="#interpolation">
-                      ${this.#esc(this.#tr('guide.toc_items.interpolation'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#dynamic-attr">
-                      ${this.#esc(this.#tr('guide.toc_items.dynamicAttr'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#two-way">
-                      ${this.#esc(this.#tr('guide.toc_items.twoWay'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#events">
-                      ${this.#esc(this.#tr('guide.toc_items.events'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#conditionals">
-                      ${this.#esc(this.#tr('guide.toc_items.conditionals'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#loops">
-                      ${this.#esc(this.#tr('guide.toc_items.loops'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#html-output">
-                      ${this.#esc(this.#tr('guide.toc_items.htmlOutput'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#slots">
-                      ${this.#esc(this.#tr('guide.toc_items.slots'))}
-                    </a>
-                  </li>
-                </ul>
-              </li>
+<a href="#component-comm">${this.#esc(this.#tr('guide.sections.componentComm'))}</a>              </li>
               <li>
-                <a href="#style-block">
-                  ${this.#esc(this.#tr('guide.sections.styleBlock'))}
-                </a>
-              </li>
-              <li>
-                <a href="#component-comm">
-                  ${this.#esc(this.#tr('guide.sections.componentComm'))}
-                </a>
-              </li>
-              <li>
-                <a href="#security">
-                  ${this.#esc(this.#tr('guide.sections.security'))}
-                </a>
-              </li>
+<a href="#security">${this.#esc(this.#tr('guide.sections.security'))}</a>              </li>
             </ul>
           </nav>
         </aside>
@@ -9264,152 +6004,26 @@ class CskPageGuide extends HTMLElement {
               ${this.#esc(this.#tr('guide.toc'))}
             </h2>
             <button data-chasket-id="fl-0" class="sidebar-toggle">
-              <span class="toggle-icon">
-                ≡
-              </span>
-            </button>
+<span class="toggle-icon">≡</span>            </button>
           </div>
           <nav data-chasket-id="fl-1" class="toc">
             <ul>
               <li>
-                <a href="#file-structure">
-                  ${this.#esc(this.#tr('guide.sections.fileStructure'))}
-                </a>
-              </li>
+<a href="#file-structure">${this.#esc(this.#tr('guide.sections.fileStructure'))}</a>              </li>
               <li>
-                <a href="#meta-block">
-                  ${this.#esc(this.#tr('guide.sections.metaBlock'))}
-                </a>
-              </li>
+<a href="#meta-block">${this.#esc(this.#tr('guide.sections.metaBlock'))}</a>              </li>
               <li>
-                <a href="#script-block">
-                  ${this.#esc(this.#tr('guide.sections.scriptBlock'))}
-                </a>
-              </li>
+<a href="#script-block">${this.#esc(this.#tr('guide.sections.scriptBlock'))}</a>              </li>
+              <li><a href="#script-declarations">${this.#esc(this.#tr('guide.sections.scriptDeclarations'))}</a><ul><li><a href="#state">${this.#esc(this.#tr('guide.toc_items.state'))}</a></li><li><a href="#prop">${this.#esc(this.#tr('guide.toc_items.prop'))}</a></li><li><a href="#computed">${this.#esc(this.#tr('guide.toc_items.computed'))}</a></li><li><a href="#fn">${this.#esc(this.#tr('guide.toc_items.fn'))}</a></li><li><a href="#emit">${this.#esc(this.#tr('guide.toc_items.emit'))}</a></li><li><a href="#watch">${this.#esc(this.#tr('guide.toc_items.watch'))}</a></li><li><a href="#ref">${this.#esc(this.#tr('guide.toc_items.ref'))}</a></li><li><a href="#provide-consume">${this.#esc(this.#tr('guide.toc_items.provideConsume'))}</a></li><li><a href="#type">${this.#esc(this.#tr('guide.toc_items.type'))}</a></li><li><a href="#import">${this.#esc(this.#tr('guide.toc_items.import'))}</a></li></ul></li>
               <li>
-                <a href="#script-declarations">
-                  ${this.#esc(this.#tr('guide.sections.scriptDeclarations'))}
-                </a>
-                <ul>
-                  <li>
-                    <a href="#state">
-                      ${this.#esc(this.#tr('guide.toc_items.state'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#prop">
-                      ${this.#esc(this.#tr('guide.toc_items.prop'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#computed">
-                      ${this.#esc(this.#tr('guide.toc_items.computed'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#fn">
-                      ${this.#esc(this.#tr('guide.toc_items.fn'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#emit">
-                      ${this.#esc(this.#tr('guide.toc_items.emit'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#watch">
-                      ${this.#esc(this.#tr('guide.toc_items.watch'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#ref">
-                      ${this.#esc(this.#tr('guide.toc_items.ref'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#provide-consume">
-                      ${this.#esc(this.#tr('guide.toc_items.provideConsume'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#type">
-                      ${this.#esc(this.#tr('guide.toc_items.type'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#import">
-                      ${this.#esc(this.#tr('guide.toc_items.import'))}
-                    </a>
-                  </li>
-                </ul>
-              </li>
+<a href="#template-block">${this.#esc(this.#tr('guide.sections.templateBlock'))}</a>              </li>
+              <li><a href="#template-syntax">${this.#esc(this.#tr('guide.sections.templateSyntax'))}</a><ul><li><a href="#interpolation">${this.#esc(this.#tr('guide.toc_items.interpolation'))}</a></li><li><a href="#dynamic-attr">${this.#esc(this.#tr('guide.toc_items.dynamicAttr'))}</a></li><li><a href="#two-way">${this.#esc(this.#tr('guide.toc_items.twoWay'))}</a></li><li><a href="#events">${this.#esc(this.#tr('guide.toc_items.events'))}</a></li><li><a href="#conditionals">${this.#esc(this.#tr('guide.toc_items.conditionals'))}</a></li><li><a href="#loops">${this.#esc(this.#tr('guide.toc_items.loops'))}</a></li><li><a href="#html-output">${this.#esc(this.#tr('guide.toc_items.htmlOutput'))}</a></li><li><a href="#slots">${this.#esc(this.#tr('guide.toc_items.slots'))}</a></li></ul></li>
               <li>
-                <a href="#template-block">
-                  ${this.#esc(this.#tr('guide.sections.templateBlock'))}
-                </a>
-              </li>
+<a href="#style-block">${this.#esc(this.#tr('guide.sections.styleBlock'))}</a>              </li>
               <li>
-                <a href="#template-syntax">
-                  ${this.#esc(this.#tr('guide.sections.templateSyntax'))}
-                </a>
-                <ul>
-                  <li>
-                    <a href="#interpolation">
-                      ${this.#esc(this.#tr('guide.toc_items.interpolation'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#dynamic-attr">
-                      ${this.#esc(this.#tr('guide.toc_items.dynamicAttr'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#two-way">
-                      ${this.#esc(this.#tr('guide.toc_items.twoWay'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#events">
-                      ${this.#esc(this.#tr('guide.toc_items.events'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#conditionals">
-                      ${this.#esc(this.#tr('guide.toc_items.conditionals'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#loops">
-                      ${this.#esc(this.#tr('guide.toc_items.loops'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#html-output">
-                      ${this.#esc(this.#tr('guide.toc_items.htmlOutput'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#slots">
-                      ${this.#esc(this.#tr('guide.toc_items.slots'))}
-                    </a>
-                  </li>
-                </ul>
-              </li>
+<a href="#component-comm">${this.#esc(this.#tr('guide.sections.componentComm'))}</a>              </li>
               <li>
-                <a href="#style-block">
-                  ${this.#esc(this.#tr('guide.sections.styleBlock'))}
-                </a>
-              </li>
-              <li>
-                <a href="#component-comm">
-                  ${this.#esc(this.#tr('guide.sections.componentComm'))}
-                </a>
-              </li>
-              <li>
-                <a href="#security">
-                  ${this.#esc(this.#tr('guide.sections.security'))}
-                </a>
-              </li>
+<a href="#security">${this.#esc(this.#tr('guide.sections.security'))}</a>              </li>
             </ul>
           </nav>
         </aside>
@@ -9465,6 +6079,16 @@ class CskPageGuide extends HTMLElement {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
           continue;
         }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
+          continue;
+        }
         this.#patch(o, n);
       }
     }
@@ -9474,7 +6098,7 @@ class CskPageGuide extends HTMLElement {
     {
       const el = this.querySelector('[data-chasket-id="fl-0"]');
       if (el) {
-        const fn_click = (e) => { this.#toggleSidebar(e); this.#update(); };
+        const fn_click = (e) => { this.#toggleSidebar(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -9482,7 +6106,7 @@ class CskPageGuide extends HTMLElement {
     {
       const el = this.querySelector('[data-chasket-id="fl-1"]');
       if (el) {
-        const fn_click = (e) => { this.#handleTocClick(e); this.#update(); };
+        const fn_click = (e) => { this.#handleTocClick(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -9680,25 +6304,14 @@ class CskCodeDemo extends HTMLElement {
                   <div class="file">
                     counter.csk
                   </div>
-                  <pre><code>${this.#esc(this.#codeCounter)}</code>
-</pre>
+                  <pre><code>${this.#codeCounter}</code></pre>
                 </div>
                 <div class="preview">
                   <div class="preview-label">
                     ${this.#esc(this.#tr('codeDemo.preview'))}
                   </div>
                   <div class="preview-body">
-                    <div class="demo-counter">
-                      <button data-chasket-id="fl-3" class="dbtn">
-                        -
-                      </button>
-                      <span class="dcount">
-                        ${this.#esc(this.#demoCount)}
-                      </span>
-                      <button data-chasket-id="fl-4" class="dbtn">
-                        +
-                      </button>
-                    </div>
+                    <div class="demo-counter"><button data-chasket-id="fl-3" class="dbtn">-</button><span class="dcount">${this.#esc(this.#demoCount)}</span><button data-chasket-id="fl-4" class="dbtn">+</button></div>
                   </div>
                 </div>
               </div>
@@ -9709,8 +6322,7 @@ class CskCodeDemo extends HTMLElement {
                   <div class="file">
                     todo.csk
                   </div>
-                  <pre><code>${this.#esc(this.#codeTodo)}</code>
-</pre>
+                  <pre><code>${this.#codeTodo}</code></pre>
                 </div>
                 <div class="preview">
                   <div class="preview-label">
@@ -9726,14 +6338,7 @@ class CskCodeDemo extends HTMLElement {
                       </div>
                       <ul class="dlist">
                         ${this.#todoItems.length > 0 ? this.#todoItems.map((item, index) => `
-                          <li class="ditem">
-                            <span>
-                              ${this.#esc(item)}
-                            </span>
-                            <button data-chasket-id="fl-7-${index}" class="dremove">
-                              x
-                            </button>
-                          </li>
+                          <li class="ditem"><span>${this.#esc(item)}</span><button data-chasket-id="fl-7-${index}" class="dremove">x</button></li>
                         `).join('') : `
                           <li class="dempty">
                             ${this.#esc(this.#tr('codeDemo.todoEmpty'))}
@@ -9751,8 +6356,7 @@ class CskCodeDemo extends HTMLElement {
                   <div class="file">
                     user-card.csk
                   </div>
-                  <pre><code>${this.#esc(this.#codeFetch)}</code>
-</pre>
+                  <pre><code>${this.#codeFetch}</code></pre>
                 </div>
                 <div class="preview">
                   <div class="preview-label">
@@ -9813,25 +6417,14 @@ class CskCodeDemo extends HTMLElement {
                   <div class="file">
                     counter.csk
                   </div>
-                  <pre><code>${this.#esc(this.#codeCounter)}</code>
-</pre>
+                  <pre><code>${this.#codeCounter}</code></pre>
                 </div>
                 <div class="preview">
                   <div class="preview-label">
                     ${this.#esc(this.#tr('codeDemo.preview'))}
                   </div>
                   <div class="preview-body">
-                    <div class="demo-counter">
-                      <button data-chasket-id="fl-3" class="dbtn">
-                        -
-                      </button>
-                      <span class="dcount">
-                        ${this.#esc(this.#demoCount)}
-                      </span>
-                      <button data-chasket-id="fl-4" class="dbtn">
-                        +
-                      </button>
-                    </div>
+                    <div class="demo-counter"><button data-chasket-id="fl-3" class="dbtn">-</button><span class="dcount">${this.#esc(this.#demoCount)}</span><button data-chasket-id="fl-4" class="dbtn">+</button></div>
                   </div>
                 </div>
               </div>
@@ -9842,8 +6435,7 @@ class CskCodeDemo extends HTMLElement {
                   <div class="file">
                     todo.csk
                   </div>
-                  <pre><code>${this.#esc(this.#codeTodo)}</code>
-</pre>
+                  <pre><code>${this.#codeTodo}</code></pre>
                 </div>
                 <div class="preview">
                   <div class="preview-label">
@@ -9859,14 +6451,7 @@ class CskCodeDemo extends HTMLElement {
                       </div>
                       <ul class="dlist">
                         ${this.#todoItems.length > 0 ? this.#todoItems.map((item, index) => `
-                          <li class="ditem">
-                            <span>
-                              ${this.#esc(item)}
-                            </span>
-                            <button data-chasket-id="fl-7-${index}" class="dremove">
-                              x
-                            </button>
-                          </li>
+                          <li class="ditem"><span>${this.#esc(item)}</span><button data-chasket-id="fl-7-${index}" class="dremove">x</button></li>
                         `).join('') : `
                           <li class="dempty">
                             ${this.#esc(this.#tr('codeDemo.todoEmpty'))}
@@ -9884,8 +6469,7 @@ class CskCodeDemo extends HTMLElement {
                   <div class="file">
                     user-card.csk
                   </div>
-                  <pre><code>${this.#esc(this.#codeFetch)}</code>
-</pre>
+                  <pre><code>${this.#codeFetch}</code></pre>
                 </div>
                 <div class="preview">
                   <div class="preview-label">
@@ -9942,6 +6526,16 @@ class CskCodeDemo extends HTMLElement {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
           continue;
         }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
+          continue;
+        }
         this.#patch(o, n);
       }
     }
@@ -9951,7 +6545,7 @@ class CskCodeDemo extends HTMLElement {
     {
       const el = this.#shadow.querySelector('[data-chasket-id="fl-0"]');
       if (el) {
-        const fn_click = (e) => { this.#setCounter(e); this.#update(); };
+        const fn_click = (e) => { this.#setCounter(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -9959,7 +6553,7 @@ class CskCodeDemo extends HTMLElement {
     {
       const el = this.#shadow.querySelector('[data-chasket-id="fl-1"]');
       if (el) {
-        const fn_click = (e) => { this.#setTodo(e); this.#update(); };
+        const fn_click = (e) => { this.#setTodo(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -9967,7 +6561,7 @@ class CskCodeDemo extends HTMLElement {
     {
       const el = this.#shadow.querySelector('[data-chasket-id="fl-2"]');
       if (el) {
-        const fn_click = (e) => { this.#setFetch(e); this.#update(); };
+        const fn_click = (e) => { this.#setFetch(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -9975,7 +6569,7 @@ class CskCodeDemo extends HTMLElement {
     {
       const el = this.#shadow.querySelector('[data-chasket-id="fl-3"]');
       if (el) {
-        const fn_click = (e) => { this.#dec(e); this.#update(); };
+        const fn_click = (e) => { this.#dec(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -9983,7 +6577,7 @@ class CskCodeDemo extends HTMLElement {
     {
       const el = this.#shadow.querySelector('[data-chasket-id="fl-4"]');
       if (el) {
-        const fn_click = (e) => { this.#inc(e); this.#update(); };
+        const fn_click = (e) => { this.#inc(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -9991,7 +6585,7 @@ class CskCodeDemo extends HTMLElement {
     {
       const el = this.#shadow.querySelector('[data-chasket-id="fl-5"]');
       if (el) {
-        const fn_keydown = (e) => { if (e.key !== 'Enter') return; this.#addTodo(e); this.#update(); };
+        const fn_keydown = (e) => { if (e.key !== 'Enter') return; this.#addTodo(e); this.#scheduleUpdate(); };
         el.addEventListener('keydown', fn_keydown);
         this.#listeners.push([el, 'keydown', fn_keydown]);
         const fn_input = (e) => { this.#todoText = e.target.value; this.#updateKeepFocus(el); };
@@ -10002,7 +6596,7 @@ class CskCodeDemo extends HTMLElement {
     {
       const el = this.#shadow.querySelector('[data-chasket-id="fl-6"]');
       if (el) {
-        const fn_click = (e) => { this.#addTodo(e); this.#update(); };
+        const fn_click = (e) => { this.#addTodo(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -10010,7 +6604,7 @@ class CskCodeDemo extends HTMLElement {
     // Loop event binding: fl-7
     this.#shadow.querySelectorAll('[data-chasket-id^="fl-7-"]').forEach(el => {
       const __idx = parseInt(el.getAttribute('data-chasket-id').split('-').pop(), 10);
-      const fn_click = (e) => { this.#removeTodo(__idx); this.#update(); };
+      const fn_click = (e) => { this.#removeTodo(__idx); this.#scheduleUpdate(); };
       el.addEventListener('click', fn_click);
       this.#listeners.push([el, 'click', fn_click]);
     });
@@ -10155,10 +6749,7 @@ class CskComparison extends HTMLElement {
                     ${this.#esc(this.#tr('comparison.runtimeSize'))}
                   </td>
                   <td class="hl">
-                    <strong>
-                      0 KB
-                    </strong>
-                  </td>
+<strong>0 KB</strong>                  </td>
                   <td>
                     ~40 KB
                   </td>
@@ -10344,10 +6935,7 @@ class CskComparison extends HTMLElement {
                     ${this.#esc(this.#tr('comparison.runtimeSize'))}
                   </td>
                   <td class="hl">
-                    <strong>
-                      0 KB
-                    </strong>
-                  </td>
+<strong>0 KB</strong>                  </td>
                   <td>
                     ~40 KB
                   </td>
@@ -10518,6 +7106,16 @@ class CskComparison extends HTMLElement {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
           continue;
         }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
+          continue;
+        }
         this.#patch(o, n);
       }
     }
@@ -10644,43 +7242,21 @@ class CskCta extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('cta.subtitle'))}
           </p>
-          <div class="install">
-            <code>
-              npx chasket init my-app
-            </code>
-            <button data-chasket-id="fl-0" class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#copied ? 'copy copied' : 'copy'))}" aria-label="${this.#escAttr(this.#tr('cta.copyLabel'))}">
-              ${this.#copied ? `
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="20 6 9 17 4 12">
-                  </polyline>
-                </svg>
-              ` : `
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="9" y="9" width="13" height="13" rx="2">
-                  </rect>
-                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1">
-                  </path>
-                </svg>
-              `}
-            </button>
-          </div>
-          <div class="links">
-            <a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer">
-              ${this.#esc(this.#tr('cta.github'))}
-            </a>
-            <span class="sep">
-              ·
-            </span>
-            <a href="https://github.com/UltraEgoist/chasket/tree/main/docs" target="_blank" rel="noopener noreferrer">
-              ${this.#esc(this.#tr('cta.docs'))}
-            </a>
-            <span class="sep">
-              ·
-            </span>
-            <a href="https://github.com/UltraEgoist/chasket/tree/main/examples" target="_blank" rel="noopener noreferrer">
-              ${this.#esc(this.#tr('cta.examples'))}
-            </a>
-          </div>
+          <div class="install"><code>npx chasket init my-app</code><button data-chasket-id="fl-0" class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#copied ? 'copy copied' : 'copy'))}" aria-label="${this.#escAttr(this.#tr('cta.copyLabel'))}">${this.#copied ? `
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <polyline points="20 6 9 17 4 12">
+    </polyline>
+  </svg>
+` : `
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <rect x="9" y="9" width="13" height="13" rx="2">
+    </rect>
+    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1">
+    </path>
+  </svg>
+`}
+</button></div>
+          <div class="links"><a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer">${this.#esc(this.#tr('cta.github'))}</a><span class="sep">·</span><a href="https://github.com/UltraEgoist/chasket/tree/main/docs" target="_blank" rel="noopener noreferrer">${this.#esc(this.#tr('cta.docs'))}</a><span class="sep">·</span><a href="https://github.com/UltraEgoist/chasket/tree/main/examples" target="_blank" rel="noopener noreferrer">${this.#esc(this.#tr('cta.examples'))}</a></div>
         </div>
       </section>
     `;
@@ -10699,43 +7275,21 @@ class CskCta extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('cta.subtitle'))}
           </p>
-          <div class="install">
-            <code>
-              npx chasket init my-app
-            </code>
-            <button data-chasket-id="fl-0" class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#copied ? 'copy copied' : 'copy'))}" aria-label="${this.#escAttr(this.#tr('cta.copyLabel'))}">
-              ${this.#copied ? `
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="20 6 9 17 4 12">
-                  </polyline>
-                </svg>
-              ` : `
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="9" y="9" width="13" height="13" rx="2">
-                  </rect>
-                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1">
-                  </path>
-                </svg>
-              `}
-            </button>
-          </div>
-          <div class="links">
-            <a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer">
-              ${this.#esc(this.#tr('cta.github'))}
-            </a>
-            <span class="sep">
-              ·
-            </span>
-            <a href="https://github.com/UltraEgoist/chasket/tree/main/docs" target="_blank" rel="noopener noreferrer">
-              ${this.#esc(this.#tr('cta.docs'))}
-            </a>
-            <span class="sep">
-              ·
-            </span>
-            <a href="https://github.com/UltraEgoist/chasket/tree/main/examples" target="_blank" rel="noopener noreferrer">
-              ${this.#esc(this.#tr('cta.examples'))}
-            </a>
-          </div>
+          <div class="install"><code>npx chasket init my-app</code><button data-chasket-id="fl-0" class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#copied ? 'copy copied' : 'copy'))}" aria-label="${this.#escAttr(this.#tr('cta.copyLabel'))}">${this.#copied ? `
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <polyline points="20 6 9 17 4 12">
+    </polyline>
+  </svg>
+` : `
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <rect x="9" y="9" width="13" height="13" rx="2">
+    </rect>
+    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1">
+    </path>
+  </svg>
+`}
+</button></div>
+          <div class="links"><a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer">${this.#esc(this.#tr('cta.github'))}</a><span class="sep">·</span><a href="https://github.com/UltraEgoist/chasket/tree/main/docs" target="_blank" rel="noopener noreferrer">${this.#esc(this.#tr('cta.docs'))}</a><span class="sep">·</span><a href="https://github.com/UltraEgoist/chasket/tree/main/examples" target="_blank" rel="noopener noreferrer">${this.#esc(this.#tr('cta.examples'))}</a></div>
         </div>
       </section>
     `;
@@ -10770,6 +7324,16 @@ class CskCta extends HTMLElement {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
           continue;
         }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
+          continue;
+        }
         this.#patch(o, n);
       }
     }
@@ -10779,7 +7343,7 @@ class CskCta extends HTMLElement {
     {
       const el = this.#shadow.querySelector('[data-chasket-id="fl-0"]');
       if (el) {
-        const fn_click = (e) => { this.#copyCmd(e); this.#update(); };
+        const fn_click = (e) => { this.#copyCmd(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -10897,162 +7461,14 @@ class CskEcosystem extends HTMLElement {
             </p>
           </div>
           <div class="grid">
-            <div class="card">
-              <div class="icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="3">
-                  </circle>
-                  <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z">
-                  </path>
-                </svg>
-              </div>
-              <h3>
-                chasket-cli
-              </h3>
-              <p>
-                ${this.#esc(this.#tr('ecosystem.cli'))}
-              </p>
-              <code class="install">
-                npm i @aspect/chasket
-              </code>
-            </div>
-            <div class="card">
-              <div class="icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5">
-                  </path>
-                </svg>
-              </div>
-              <h3>
-                chasket-router
-              </h3>
-              <p>
-                ${this.#esc(this.#tr('ecosystem.router'))}
-              </p>
-              <code class="install">
-                npm i @aspect/chasket-router
-              </code>
-            </div>
-            <div class="card">
-              <div class="icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z">
-                  </path>
-                  <polyline points="3.27 6.96 12 12.01 20.73 6.96">
-                  </polyline>
-                  <line x1="12" y1="22.08" x2="12" y2="12">
-                  </line>
-                </svg>
-              </div>
-              <h3>
-                chasket-store
-              </h3>
-              <p>
-                ${this.#esc(this.#tr('ecosystem.store'))}
-              </p>
-              <code class="install">
-                npm i @aspect/chasket-store
-              </code>
-            </div>
-            <div class="card">
-              <div class="icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="2" y="3" width="20" height="14" rx="2">
-                  </rect>
-                  <line x1="8" y1="21" x2="16" y2="21">
-                  </line>
-                  <line x1="12" y1="17" x2="12" y2="21">
-                  </line>
-                </svg>
-              </div>
-              <h3>
-                chasket-ssr
-              </h3>
-              <p>
-                ${this.#esc(this.#tr('ecosystem.ssr'))}
-              </p>
-              <code class="install">
-                npm i @aspect/chasket-ssr
-              </code>
-            </div>
-            <div class="card">
-              <div class="icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="3" y="3" width="7" height="7">
-                  </rect>
-                  <rect x="14" y="3" width="7" height="7">
-                  </rect>
-                  <rect x="14" y="14" width="7" height="7">
-                  </rect>
-                  <rect x="3" y="14" width="7" height="7">
-                  </rect>
-                </svg>
-              </div>
-              <h3>
-                chasket-ui
-              </h3>
-              <p>
-                ${this.#esc(this.#tr('ecosystem.ui'))}
-              </p>
-              <code class="install">
-                npm i @aspect/chasket-ui
-              </code>
-            </div>
-            <div class="card">
-              <div class="icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="4 17 10 11 4 5">
-                  </polyline>
-                  <line x1="12" y1="19" x2="20" y2="19">
-                  </line>
-                </svg>
-              </div>
-              <h3>
-                vite-plugin-chasket
-              </h3>
-              <p>
-                ${this.#esc(this.#tr('ecosystem.vite'))}
-              </p>
-              <code class="install">
-                npm i vite-plugin-chasket
-              </code>
-            </div>
-            <div class="card">
-              <div class="icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z">
-                  </path>
-                  <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z">
-                  </path>
-                </svg>
-              </div>
-              <h3>
-                chasket-lsp
-              </h3>
-              <p>
-                ${this.#esc(this.#tr('ecosystem.lsp'))}
-              </p>
-              <code class="install">
-                npm i @aspect/chasket-lsp
-              </code>
-            </div>
-            <div class="card">
-              <div class="icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2">
-                  </path>
-                </svg>
-              </div>
-              <h3>
-                chasket-vscode
-              </h3>
-              <p>
-                ${this.#esc(this.#tr('ecosystem.vscode'))}
-              </p>
-              <span class="install vs">
-                VS Code Marketplace
-              </span>
-            </div>
+            <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"></path></svg></div><h3>chasket-cli</h3><p>${this.#esc(this.#tr('ecosystem.cli'))}</p><code class="install">npm i @aspect/chasket</code></div>
+            <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"></path></svg></div><h3>chasket-router</h3><p>${this.#esc(this.#tr('ecosystem.router'))}</p><code class="install">npm i @aspect/chasket-router</code></div>
+            <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div><h3>chasket-store</h3><p>${this.#esc(this.#tr('ecosystem.store'))}</p><code class="install">npm i @aspect/chasket-store</code></div>
+            <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div><h3>chasket-ssr</h3><p>${this.#esc(this.#tr('ecosystem.ssr'))}</p><code class="install">npm i @aspect/chasket-ssr</code></div>
+            <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></div><h3>chasket-ui</h3><p>${this.#esc(this.#tr('ecosystem.ui'))}</p><code class="install">npm i @aspect/chasket-ui</code></div>
+            <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg></div><h3>vite-plugin-chasket</h3><p>${this.#esc(this.#tr('ecosystem.vite'))}</p><code class="install">npm i vite-plugin-chasket</code></div>
+            <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path></svg></div><h3>chasket-lsp</h3><p>${this.#esc(this.#tr('ecosystem.lsp'))}</p><code class="install">npm i @aspect/chasket-lsp</code></div>
+            <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"></path></svg></div><h3>chasket-vscode</h3><p>${this.#esc(this.#tr('ecosystem.vscode'))}</p><span class="install vs">VS Code Marketplace</span></div>
           </div>
         </div>
       </section>
@@ -11075,162 +7491,14 @@ class CskEcosystem extends HTMLElement {
             </p>
           </div>
           <div class="grid">
-            <div class="card">
-              <div class="icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="3">
-                  </circle>
-                  <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z">
-                  </path>
-                </svg>
-              </div>
-              <h3>
-                chasket-cli
-              </h3>
-              <p>
-                ${this.#esc(this.#tr('ecosystem.cli'))}
-              </p>
-              <code class="install">
-                npm i @aspect/chasket
-              </code>
-            </div>
-            <div class="card">
-              <div class="icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5">
-                  </path>
-                </svg>
-              </div>
-              <h3>
-                chasket-router
-              </h3>
-              <p>
-                ${this.#esc(this.#tr('ecosystem.router'))}
-              </p>
-              <code class="install">
-                npm i @aspect/chasket-router
-              </code>
-            </div>
-            <div class="card">
-              <div class="icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z">
-                  </path>
-                  <polyline points="3.27 6.96 12 12.01 20.73 6.96">
-                  </polyline>
-                  <line x1="12" y1="22.08" x2="12" y2="12">
-                  </line>
-                </svg>
-              </div>
-              <h3>
-                chasket-store
-              </h3>
-              <p>
-                ${this.#esc(this.#tr('ecosystem.store'))}
-              </p>
-              <code class="install">
-                npm i @aspect/chasket-store
-              </code>
-            </div>
-            <div class="card">
-              <div class="icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="2" y="3" width="20" height="14" rx="2">
-                  </rect>
-                  <line x1="8" y1="21" x2="16" y2="21">
-                  </line>
-                  <line x1="12" y1="17" x2="12" y2="21">
-                  </line>
-                </svg>
-              </div>
-              <h3>
-                chasket-ssr
-              </h3>
-              <p>
-                ${this.#esc(this.#tr('ecosystem.ssr'))}
-              </p>
-              <code class="install">
-                npm i @aspect/chasket-ssr
-              </code>
-            </div>
-            <div class="card">
-              <div class="icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="3" y="3" width="7" height="7">
-                  </rect>
-                  <rect x="14" y="3" width="7" height="7">
-                  </rect>
-                  <rect x="14" y="14" width="7" height="7">
-                  </rect>
-                  <rect x="3" y="14" width="7" height="7">
-                  </rect>
-                </svg>
-              </div>
-              <h3>
-                chasket-ui
-              </h3>
-              <p>
-                ${this.#esc(this.#tr('ecosystem.ui'))}
-              </p>
-              <code class="install">
-                npm i @aspect/chasket-ui
-              </code>
-            </div>
-            <div class="card">
-              <div class="icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="4 17 10 11 4 5">
-                  </polyline>
-                  <line x1="12" y1="19" x2="20" y2="19">
-                  </line>
-                </svg>
-              </div>
-              <h3>
-                vite-plugin-chasket
-              </h3>
-              <p>
-                ${this.#esc(this.#tr('ecosystem.vite'))}
-              </p>
-              <code class="install">
-                npm i vite-plugin-chasket
-              </code>
-            </div>
-            <div class="card">
-              <div class="icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z">
-                  </path>
-                  <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z">
-                  </path>
-                </svg>
-              </div>
-              <h3>
-                chasket-lsp
-              </h3>
-              <p>
-                ${this.#esc(this.#tr('ecosystem.lsp'))}
-              </p>
-              <code class="install">
-                npm i @aspect/chasket-lsp
-              </code>
-            </div>
-            <div class="card">
-              <div class="icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2">
-                  </path>
-                </svg>
-              </div>
-              <h3>
-                chasket-vscode
-              </h3>
-              <p>
-                ${this.#esc(this.#tr('ecosystem.vscode'))}
-              </p>
-              <span class="install vs">
-                VS Code Marketplace
-              </span>
-            </div>
+            <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"></path></svg></div><h3>chasket-cli</h3><p>${this.#esc(this.#tr('ecosystem.cli'))}</p><code class="install">npm i @aspect/chasket</code></div>
+            <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"></path></svg></div><h3>chasket-router</h3><p>${this.#esc(this.#tr('ecosystem.router'))}</p><code class="install">npm i @aspect/chasket-router</code></div>
+            <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div><h3>chasket-store</h3><p>${this.#esc(this.#tr('ecosystem.store'))}</p><code class="install">npm i @aspect/chasket-store</code></div>
+            <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div><h3>chasket-ssr</h3><p>${this.#esc(this.#tr('ecosystem.ssr'))}</p><code class="install">npm i @aspect/chasket-ssr</code></div>
+            <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></div><h3>chasket-ui</h3><p>${this.#esc(this.#tr('ecosystem.ui'))}</p><code class="install">npm i @aspect/chasket-ui</code></div>
+            <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg></div><h3>vite-plugin-chasket</h3><p>${this.#esc(this.#tr('ecosystem.vite'))}</p><code class="install">npm i vite-plugin-chasket</code></div>
+            <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path></svg></div><h3>chasket-lsp</h3><p>${this.#esc(this.#tr('ecosystem.lsp'))}</p><code class="install">npm i @aspect/chasket-lsp</code></div>
+            <div class="card"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"></path></svg></div><h3>chasket-vscode</h3><p>${this.#esc(this.#tr('ecosystem.vscode'))}</p><span class="install vs">VS Code Marketplace</span></div>
           </div>
         </div>
       </section>
@@ -11264,6 +7532,16 @@ class CskEcosystem extends HTMLElement {
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -11429,8 +7707,7 @@ class CskFeatures extends HTMLElement {
                 ${this.#esc(this.#tr('features.reactivity.desc'))}
               </p>
               <div class="snippet">
-                <pre><code>${this.#esc(this.#codeReactivity)}</code>
-</pre>
+                <pre><code>${this.#codeReactivity}</code></pre>
               </div>
             </div>
             <div class="card">
@@ -11449,8 +7726,7 @@ class CskFeatures extends HTMLElement {
                 ${this.#esc(this.#tr('features.templates.desc'))}
               </p>
               <div class="snippet">
-                <pre><code>${this.#esc(this.#codeTemplate)}</code>
-</pre>
+                <pre><code>${this.#codeTemplate}</code></pre>
               </div>
             </div>
             <div class="card">
@@ -11467,8 +7743,7 @@ class CskFeatures extends HTMLElement {
                 ${this.#esc(this.#tr('features.compileCheck.desc'))}
               </p>
               <div class="snippet">
-                <pre><code>${this.#esc(this.#codeCompile)}</code>
-</pre>
+                <pre><code>${this.#codeCompile}</code></pre>
               </div>
             </div>
             <div class="card">
@@ -11487,8 +7762,7 @@ class CskFeatures extends HTMLElement {
                 ${this.#esc(this.#tr('features.xss.desc'))}
               </p>
               <div class="snippet">
-                <pre><code>${this.#esc(this.#codeXss)}</code>
-</pre>
+                <pre><code>${this.#codeXss}</code></pre>
               </div>
             </div>
             <div class="card">
@@ -11507,8 +7781,7 @@ class CskFeatures extends HTMLElement {
                 ${this.#esc(this.#tr('features.scopedStyles.desc'))}
               </p>
               <div class="snippet">
-                <pre><code>${this.#esc(this.#codeScoped)}</code>
-</pre>
+                <pre><code>${this.#codeScoped}</code></pre>
               </div>
             </div>
             <div class="card">
@@ -11525,8 +7798,7 @@ class CskFeatures extends HTMLElement {
                 ${this.#esc(this.#tr('features.customEvents.desc'))}
               </p>
               <div class="snippet">
-                <pre><code>${this.#esc(this.#codeEvents)}</code>
-</pre>
+                <pre><code>${this.#codeEvents}</code></pre>
               </div>
             </div>
           </div>
@@ -11565,8 +7837,7 @@ class CskFeatures extends HTMLElement {
                 ${this.#esc(this.#tr('features.reactivity.desc'))}
               </p>
               <div class="snippet">
-                <pre><code>${this.#esc(this.#codeReactivity)}</code>
-</pre>
+                <pre><code>${this.#codeReactivity}</code></pre>
               </div>
             </div>
             <div class="card">
@@ -11585,8 +7856,7 @@ class CskFeatures extends HTMLElement {
                 ${this.#esc(this.#tr('features.templates.desc'))}
               </p>
               <div class="snippet">
-                <pre><code>${this.#esc(this.#codeTemplate)}</code>
-</pre>
+                <pre><code>${this.#codeTemplate}</code></pre>
               </div>
             </div>
             <div class="card">
@@ -11603,8 +7873,7 @@ class CskFeatures extends HTMLElement {
                 ${this.#esc(this.#tr('features.compileCheck.desc'))}
               </p>
               <div class="snippet">
-                <pre><code>${this.#esc(this.#codeCompile)}</code>
-</pre>
+                <pre><code>${this.#codeCompile}</code></pre>
               </div>
             </div>
             <div class="card">
@@ -11623,8 +7892,7 @@ class CskFeatures extends HTMLElement {
                 ${this.#esc(this.#tr('features.xss.desc'))}
               </p>
               <div class="snippet">
-                <pre><code>${this.#esc(this.#codeXss)}</code>
-</pre>
+                <pre><code>${this.#codeXss}</code></pre>
               </div>
             </div>
             <div class="card">
@@ -11643,8 +7911,7 @@ class CskFeatures extends HTMLElement {
                 ${this.#esc(this.#tr('features.scopedStyles.desc'))}
               </p>
               <div class="snippet">
-                <pre><code>${this.#esc(this.#codeScoped)}</code>
-</pre>
+                <pre><code>${this.#codeScoped}</code></pre>
               </div>
             </div>
             <div class="card">
@@ -11661,8 +7928,7 @@ class CskFeatures extends HTMLElement {
                 ${this.#esc(this.#tr('features.customEvents.desc'))}
               </p>
               <div class="snippet">
-                <pre><code>${this.#esc(this.#codeEvents)}</code>
-</pre>
+                <pre><code>${this.#codeEvents}</code></pre>
               </div>
             </div>
           </div>
@@ -11698,6 +7964,16 @@ class CskFeatures extends HTMLElement {
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -11825,49 +8101,28 @@ class CskHero extends HTMLElement {
           <div class="badge">
             ${this.#esc(this.#tr('hero.badge'))}
           </div>
-          <h1>
-            ${this.#esc(this.#tr('hero.titleLine1'))}
-            <br />
-            <span class="gradient">
-              ${this.#esc(this.#tr('hero.titleHighlight'))}
-            </span>
-            ${this.#esc(this.#tr('hero.titleLine2Suffix'))}
-          </h1>
+          <h1>${this.#esc(this.#tr('hero.titleLine1'))}<br />
+<span class="gradient">${this.#esc(this.#tr('hero.titleHighlight'))}</span>${this.#esc(this.#tr('hero.titleLine2Suffix'))}</h1>
           <p class="subtitle">
             ${this.#esc(this.#tr('hero.subtitle'))}
           </p>
-          <div class="actions">
-            <a href="#code" class="btn-primary">
-              ${this.#esc(this.#tr('hero.getStarted'))}
-            </a>
-            <a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer" class="btn-secondary">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z">
-                </path>
-              </svg>
-              GitHub
-            </a>
-          </div>
-          <div class="install">
-            <code>
-              npx chasket init my-app
-            </code>
-            <button data-chasket-id="fl-0" class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#copied ? 'copy copied' : 'copy'))}" aria-label="${this.#escAttr(this.#tr('hero.copyLabel'))}">
-              ${this.#copied ? `
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="20 6 9 17 4 12">
-                  </polyline>
-                </svg>
-              ` : `
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="9" y="9" width="13" height="13" rx="2">
-                  </rect>
-                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1">
-                  </path>
-                </svg>
-              `}
-            </button>
-          </div>
+          <div class="actions"><a href="#code" class="btn-primary">${this.#esc(this.#tr('hero.getStarted'))}</a><a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer" class="btn-secondary"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path></svg>
+          GitHub
+        </a></div>
+          <div class="install"><code>npx chasket init my-app</code><button data-chasket-id="fl-0" class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#copied ? 'copy copied' : 'copy'))}" aria-label="${this.#escAttr(this.#tr('hero.copyLabel'))}">${this.#copied ? `
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <polyline points="20 6 9 17 4 12">
+    </polyline>
+  </svg>
+` : `
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <rect x="9" y="9" width="13" height="13" rx="2">
+    </rect>
+    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1">
+    </path>
+  </svg>
+`}
+</button></div>
         </div>
       </section>
     `;
@@ -11885,49 +8140,28 @@ class CskHero extends HTMLElement {
           <div class="badge">
             ${this.#esc(this.#tr('hero.badge'))}
           </div>
-          <h1>
-            ${this.#esc(this.#tr('hero.titleLine1'))}
-            <br />
-            <span class="gradient">
-              ${this.#esc(this.#tr('hero.titleHighlight'))}
-            </span>
-            ${this.#esc(this.#tr('hero.titleLine2Suffix'))}
-          </h1>
+          <h1>${this.#esc(this.#tr('hero.titleLine1'))}<br />
+<span class="gradient">${this.#esc(this.#tr('hero.titleHighlight'))}</span>${this.#esc(this.#tr('hero.titleLine2Suffix'))}</h1>
           <p class="subtitle">
             ${this.#esc(this.#tr('hero.subtitle'))}
           </p>
-          <div class="actions">
-            <a href="#code" class="btn-primary">
-              ${this.#esc(this.#tr('hero.getStarted'))}
-            </a>
-            <a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer" class="btn-secondary">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z">
-                </path>
-              </svg>
-              GitHub
-            </a>
-          </div>
-          <div class="install">
-            <code>
-              npx chasket init my-app
-            </code>
-            <button data-chasket-id="fl-0" class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#copied ? 'copy copied' : 'copy'))}" aria-label="${this.#escAttr(this.#tr('hero.copyLabel'))}">
-              ${this.#copied ? `
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="20 6 9 17 4 12">
-                  </polyline>
-                </svg>
-              ` : `
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="9" y="9" width="13" height="13" rx="2">
-                  </rect>
-                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1">
-                  </path>
-                </svg>
-              `}
-            </button>
-          </div>
+          <div class="actions"><a href="#code" class="btn-primary">${this.#esc(this.#tr('hero.getStarted'))}</a><a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer" class="btn-secondary"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path></svg>
+          GitHub
+        </a></div>
+          <div class="install"><code>npx chasket init my-app</code><button data-chasket-id="fl-0" class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#copied ? 'copy copied' : 'copy'))}" aria-label="${this.#escAttr(this.#tr('hero.copyLabel'))}">${this.#copied ? `
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <polyline points="20 6 9 17 4 12">
+    </polyline>
+  </svg>
+` : `
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <rect x="9" y="9" width="13" height="13" rx="2">
+    </rect>
+    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1">
+    </path>
+  </svg>
+`}
+</button></div>
         </div>
       </section>
     `;
@@ -11962,6 +8196,16 @@ class CskHero extends HTMLElement {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
           continue;
         }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
+          continue;
+        }
         this.#patch(o, n);
       }
     }
@@ -11971,7 +8215,7 @@ class CskHero extends HTMLElement {
     {
       const el = this.#shadow.querySelector('[data-chasket-id="fl-0"]');
       if (el) {
-        const fn_click = (e) => { this.#copyCmd(e); this.#update(); };
+        const fn_click = (e) => { this.#copyCmd(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -12250,6 +8494,16 @@ class CskHighlights extends HTMLElement {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
           continue;
         }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
+          continue;
+        }
         this.#patch(o, n);
       }
     }
@@ -12326,6 +8580,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-page-home.csk ──
+
 (() => {
 "use strict";
 
@@ -12411,6 +8666,16 @@ class CskPageHome extends HTMLElement {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
           continue;
         }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
+          continue;
+        }
         this.#patch(o, n);
       }
     }
@@ -12487,6 +8752,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-page-testing.csk ──
+
 (() => {
 "use strict";
 
@@ -12565,109 +8831,21 @@ class CskPageTesting extends HTMLElement {
               ${this.#esc(this.#tr('testing.toc'))}
             </h2>
             <button data-chasket-id="fl-0" class="sidebar-toggle">
-              <span class="toggle-icon">
-                ≡
-              </span>
-            </button>
+<span class="toggle-icon">≡</span>            </button>
           </div>
           <nav data-chasket-id="fl-1" class="toc">
             <ul>
               <li>
-                <a href="#overview">
-                  ${this.#esc(this.#tr('testing.sections.overview'))}
-                </a>
-              </li>
+<a href="#overview">${this.#esc(this.#tr('testing.sections.overview'))}</a>              </li>
               <li>
-                <a href="#install">
-                  ${this.#esc(this.#tr('testing.sections.install'))}
-                </a>
-              </li>
+<a href="#install">${this.#esc(this.#tr('testing.sections.install'))}</a>              </li>
               <li>
-                <a href="#quickstart">
-                  ${this.#esc(this.#tr('testing.sections.quickstart'))}
-                </a>
-              </li>
+<a href="#quickstart">${this.#esc(this.#tr('testing.sections.quickstart'))}</a>              </li>
+              <li><a href="#api-reference">${this.#esc(this.#tr('testing.sections.apiReference'))}</a><ul><li><a href="#api-suite">${this.#esc(this.#tr('testing.toc_items.suite'))}</a></li><li><a href="#api-test">${this.#esc(this.#tr('testing.toc_items.test'))}</a></li><li><a href="#api-lifecycle">${this.#esc(this.#tr('testing.toc_items.lifecycle'))}</a></li></ul></li>
+              <li><a href="#compile-helpers">${this.#esc(this.#tr('testing.sections.compileHelpers'))}</a><ul><li><a href="#compile-ok-fail">${this.#esc(this.#tr('testing.toc_items.compileOkFail'))}</a></li><li><a href="#csk-helper">${this.#esc(this.#tr('testing.toc_items.cskHelper'))}</a></li></ul></li>
+              <li><a href="#assertions">${this.#esc(this.#tr('testing.sections.assertions'))}</a><ul><li><a href="#assert-basic">${this.#esc(this.#tr('testing.toc_items.basic'))}</a></li><li><a href="#assert-compile">${this.#esc(this.#tr('testing.toc_items.compile'))}</a></li><li><a href="#assert-output">${this.#esc(this.#tr('testing.toc_items.output'))}</a></li><li><a href="#assert-template">${this.#esc(this.#tr('testing.toc_items.template'))}</a></li><li><a href="#assert-state">${this.#esc(this.#tr('testing.toc_items.state'))}</a></li><li><a href="#assert-diag">${this.#esc(this.#tr('testing.toc_items.diagnostics'))}</a></li></ul></li>
               <li>
-                <a href="#api-reference">
-                  ${this.#esc(this.#tr('testing.sections.apiReference'))}
-                </a>
-                <ul>
-                  <li>
-                    <a href="#api-suite">
-                      ${this.#esc(this.#tr('testing.toc_items.suite'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#api-test">
-                      ${this.#esc(this.#tr('testing.toc_items.test'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#api-lifecycle">
-                      ${this.#esc(this.#tr('testing.toc_items.lifecycle'))}
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="#compile-helpers">
-                  ${this.#esc(this.#tr('testing.sections.compileHelpers'))}
-                </a>
-                <ul>
-                  <li>
-                    <a href="#compile-ok-fail">
-                      ${this.#esc(this.#tr('testing.toc_items.compileOkFail'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#csk-helper">
-                      ${this.#esc(this.#tr('testing.toc_items.cskHelper'))}
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="#assertions">
-                  ${this.#esc(this.#tr('testing.sections.assertions'))}
-                </a>
-                <ul>
-                  <li>
-                    <a href="#assert-basic">
-                      ${this.#esc(this.#tr('testing.toc_items.basic'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#assert-compile">
-                      ${this.#esc(this.#tr('testing.toc_items.compile'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#assert-output">
-                      ${this.#esc(this.#tr('testing.toc_items.output'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#assert-template">
-                      ${this.#esc(this.#tr('testing.toc_items.template'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#assert-state">
-                      ${this.#esc(this.#tr('testing.toc_items.state'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#assert-diag">
-                      ${this.#esc(this.#tr('testing.toc_items.diagnostics'))}
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="#full-example">
-                  ${this.#esc(this.#tr('testing.sections.fullExample'))}
-                </a>
-              </li>
+<a href="#full-example">${this.#esc(this.#tr('testing.sections.fullExample'))}</a>              </li>
             </ul>
           </nav>
         </aside>
@@ -12706,109 +8884,21 @@ class CskPageTesting extends HTMLElement {
               ${this.#esc(this.#tr('testing.toc'))}
             </h2>
             <button data-chasket-id="fl-0" class="sidebar-toggle">
-              <span class="toggle-icon">
-                ≡
-              </span>
-            </button>
+<span class="toggle-icon">≡</span>            </button>
           </div>
           <nav data-chasket-id="fl-1" class="toc">
             <ul>
               <li>
-                <a href="#overview">
-                  ${this.#esc(this.#tr('testing.sections.overview'))}
-                </a>
-              </li>
+<a href="#overview">${this.#esc(this.#tr('testing.sections.overview'))}</a>              </li>
               <li>
-                <a href="#install">
-                  ${this.#esc(this.#tr('testing.sections.install'))}
-                </a>
-              </li>
+<a href="#install">${this.#esc(this.#tr('testing.sections.install'))}</a>              </li>
               <li>
-                <a href="#quickstart">
-                  ${this.#esc(this.#tr('testing.sections.quickstart'))}
-                </a>
-              </li>
+<a href="#quickstart">${this.#esc(this.#tr('testing.sections.quickstart'))}</a>              </li>
+              <li><a href="#api-reference">${this.#esc(this.#tr('testing.sections.apiReference'))}</a><ul><li><a href="#api-suite">${this.#esc(this.#tr('testing.toc_items.suite'))}</a></li><li><a href="#api-test">${this.#esc(this.#tr('testing.toc_items.test'))}</a></li><li><a href="#api-lifecycle">${this.#esc(this.#tr('testing.toc_items.lifecycle'))}</a></li></ul></li>
+              <li><a href="#compile-helpers">${this.#esc(this.#tr('testing.sections.compileHelpers'))}</a><ul><li><a href="#compile-ok-fail">${this.#esc(this.#tr('testing.toc_items.compileOkFail'))}</a></li><li><a href="#csk-helper">${this.#esc(this.#tr('testing.toc_items.cskHelper'))}</a></li></ul></li>
+              <li><a href="#assertions">${this.#esc(this.#tr('testing.sections.assertions'))}</a><ul><li><a href="#assert-basic">${this.#esc(this.#tr('testing.toc_items.basic'))}</a></li><li><a href="#assert-compile">${this.#esc(this.#tr('testing.toc_items.compile'))}</a></li><li><a href="#assert-output">${this.#esc(this.#tr('testing.toc_items.output'))}</a></li><li><a href="#assert-template">${this.#esc(this.#tr('testing.toc_items.template'))}</a></li><li><a href="#assert-state">${this.#esc(this.#tr('testing.toc_items.state'))}</a></li><li><a href="#assert-diag">${this.#esc(this.#tr('testing.toc_items.diagnostics'))}</a></li></ul></li>
               <li>
-                <a href="#api-reference">
-                  ${this.#esc(this.#tr('testing.sections.apiReference'))}
-                </a>
-                <ul>
-                  <li>
-                    <a href="#api-suite">
-                      ${this.#esc(this.#tr('testing.toc_items.suite'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#api-test">
-                      ${this.#esc(this.#tr('testing.toc_items.test'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#api-lifecycle">
-                      ${this.#esc(this.#tr('testing.toc_items.lifecycle'))}
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="#compile-helpers">
-                  ${this.#esc(this.#tr('testing.sections.compileHelpers'))}
-                </a>
-                <ul>
-                  <li>
-                    <a href="#compile-ok-fail">
-                      ${this.#esc(this.#tr('testing.toc_items.compileOkFail'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#csk-helper">
-                      ${this.#esc(this.#tr('testing.toc_items.cskHelper'))}
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="#assertions">
-                  ${this.#esc(this.#tr('testing.sections.assertions'))}
-                </a>
-                <ul>
-                  <li>
-                    <a href="#assert-basic">
-                      ${this.#esc(this.#tr('testing.toc_items.basic'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#assert-compile">
-                      ${this.#esc(this.#tr('testing.toc_items.compile'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#assert-output">
-                      ${this.#esc(this.#tr('testing.toc_items.output'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#assert-template">
-                      ${this.#esc(this.#tr('testing.toc_items.template'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#assert-state">
-                      ${this.#esc(this.#tr('testing.toc_items.state'))}
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#assert-diag">
-                      ${this.#esc(this.#tr('testing.toc_items.diagnostics'))}
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="#full-example">
-                  ${this.#esc(this.#tr('testing.sections.fullExample'))}
-                </a>
-              </li>
+<a href="#full-example">${this.#esc(this.#tr('testing.sections.fullExample'))}</a>              </li>
             </ul>
           </nav>
         </aside>
@@ -12863,6 +8953,16 @@ class CskPageTesting extends HTMLElement {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
           continue;
         }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
+          continue;
+        }
         this.#patch(o, n);
       }
     }
@@ -12872,7 +8972,7 @@ class CskPageTesting extends HTMLElement {
     {
       const el = this.querySelector('[data-chasket-id="fl-0"]');
       if (el) {
-        const fn_click = (e) => { this.#toggleSidebar(e); this.#update(); };
+        const fn_click = (e) => { this.#toggleSidebar(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -12880,7 +8980,7 @@ class CskPageTesting extends HTMLElement {
     {
       const el = this.querySelector('[data-chasket-id="fl-1"]');
       if (el) {
-        const fn_click = (e) => { this.#handleTocClick(e); this.#update(); };
+        const fn_click = (e) => { this.#handleTocClick(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -12959,7 +9059,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskTestApi extends HTMLElement {
-  #_exampleAPI = "const { suite, compileOk, csk } = require('./lib/chasket-test');\n\nsuite('API Usage', t => {\n  t.beforeEach(() => {\n    console.log('setup');\n  });\n\n  t.test('test 1', () => {\n    const r = compileOk('&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;&lt;/p&gt;&lt;/template&gt;');\n    t.compileSuccess(r);\n  });\n\n  t.xtest('skipped test', () => {\n    // This test is skipped\n  });\n\n  t.afterEach(() => {\n    console.log('teardown');\n  });\n});\n\nsuite.run();";
+  #_exampleAPI = "<span class=k>const</span> { suite, compileOk, csk } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=f>suite</span>(<span class=s>'API Usage'</span>, t => {\n  t.<span class=f>beforeEach</span>(() => {\n    console.<span class=f>log</span>(<span class=s>'setup'</span>);\n  });\n\n  t.<span class=f>test</span>(<span class=s>'test 1'</span>, () => {\n    <span class=k>const</span> r = <span class=f>compileOk</span>(<span class=s>'&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;&lt;/p&gt;&lt;/template&gt;'</span>);\n    t.<span class=f>compileSuccess</span>(r);\n  });\n\n  t.<span class=f>xtest</span>(<span class=s>'skipped test'</span>, () => {\n    <span class=cm>// This test is skipped</span>\n  });\n\n  t.<span class=f>afterEach</span>(() => {\n    console.<span class=f>log</span>(<span class=s>'teardown'</span>);\n  });\n});\n\nsuite.<span class=f>run</span>();";
   get #exampleAPI() { return this.#_exampleAPI; }
   set #exampleAPI(v) { this.#_exampleAPI = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -12993,13 +9093,7 @@ class CskTestApi extends HTMLElement {
           <h3 id="api-suite">
             suite(name, setupFn)
           </h3>
-          <p>
-            テストスイートを定義します。
-            <code>
-              setupFn
-            </code>
-            はテストコンテキストを受け取り、テストを登録します。
-          </p>
+          <p>テストスイートを定義します。<code>setupFn</code> はテストコンテキストを受け取り、テストを登録します。</p>
           <div class="property">
             <h4>
               suite.run(opts?)
@@ -13008,45 +9102,22 @@ class CskTestApi extends HTMLElement {
               すべての登録済みスイートを実行し、結果をコンソール出力します。
             </p>
             <p>
-              <strong>
-                オプション:
-              </strong>
-            </p>
+<strong>オプション:</strong>            </p>
             <ul>
-              <li>
-                <code>
-                  filter
-                </code>
-                (string): スイート名またはテスト名に一致するもののみ実行
-              </li>
-              <li>
-                <code>
-                  verbose
-                </code>
-                (boolean): 詳細出力（デフォルト: true）
-              </li>
+              <li><code>filter</code> (string): スイート名またはテスト名に一致するもののみ実行</li>
+              <li><code>verbose</code> (boolean): 詳細出力（デフォルト: true）</li>
             </ul>
           </div>
           <div class="example-title">
             使用例
           </div>
-          <pre><code>${this.#esc(this.#exampleAPI)}</code>
-</pre>
+          <pre><code>${this.#exampleAPI}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="api-test">
             test(name, fn) / xtest(name, fn)
           </h3>
-          <p>
-            <code>
-              test()
-            </code>
-            は実行するテストを登録します。
-            <code>
-              xtest()
-            </code>
-            は同じですがテストをスキップします。
-          </p>
+          <p><code>test()</code> は実行するテストを登録します。<code>xtest()</code> は同じですがテストをスキップします。</p>
           <p>
             各テスト関数はテストコンテキストで利用可能なアサーションにアクセスできます。
           </p>
@@ -13058,9 +9129,8 @@ class CskTestApi extends HTMLElement {
           <p>
             各テスト前後に実行するセットアップ / クリーンアップ関数を登録します。
           </p>
-          <pre><code>t.beforeEach(() => {{ /* setup */ }});
-t.afterEach(() => {{ /* cleanup */ }});</code>
-</pre>
+          <pre><code>t.<span class=f>beforeEach</span>(() => <span class=i>{{ /* setup */ }}</span>);
+t.<span class=f>afterEach</span>(() => <span class=i>{{ /* cleanup */ }}</span>);</code></pre>
         </div>
       </section>
     `;
@@ -13079,13 +9149,7 @@ t.afterEach(() => {{ /* cleanup */ }});</code>
           <h3 id="api-suite">
             suite(name, setupFn)
           </h3>
-          <p>
-            テストスイートを定義します。
-            <code>
-              setupFn
-            </code>
-            はテストコンテキストを受け取り、テストを登録します。
-          </p>
+          <p>テストスイートを定義します。<code>setupFn</code> はテストコンテキストを受け取り、テストを登録します。</p>
           <div class="property">
             <h4>
               suite.run(opts?)
@@ -13094,45 +9158,22 @@ t.afterEach(() => {{ /* cleanup */ }});</code>
               すべての登録済みスイートを実行し、結果をコンソール出力します。
             </p>
             <p>
-              <strong>
-                オプション:
-              </strong>
-            </p>
+<strong>オプション:</strong>            </p>
             <ul>
-              <li>
-                <code>
-                  filter
-                </code>
-                (string): スイート名またはテスト名に一致するもののみ実行
-              </li>
-              <li>
-                <code>
-                  verbose
-                </code>
-                (boolean): 詳細出力（デフォルト: true）
-              </li>
+              <li><code>filter</code> (string): スイート名またはテスト名に一致するもののみ実行</li>
+              <li><code>verbose</code> (boolean): 詳細出力（デフォルト: true）</li>
             </ul>
           </div>
           <div class="example-title">
             使用例
           </div>
-          <pre><code>${this.#esc(this.#exampleAPI)}</code>
-</pre>
+          <pre><code>${this.#exampleAPI}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="api-test">
             test(name, fn) / xtest(name, fn)
           </h3>
-          <p>
-            <code>
-              test()
-            </code>
-            は実行するテストを登録します。
-            <code>
-              xtest()
-            </code>
-            は同じですがテストをスキップします。
-          </p>
+          <p><code>test()</code> は実行するテストを登録します。<code>xtest()</code> は同じですがテストをスキップします。</p>
           <p>
             各テスト関数はテストコンテキストで利用可能なアサーションにアクセスできます。
           </p>
@@ -13144,9 +9185,8 @@ t.afterEach(() => {{ /* cleanup */ }});</code>
           <p>
             各テスト前後に実行するセットアップ / クリーンアップ関数を登録します。
           </p>
-          <pre><code>t.beforeEach(() => {{ /* setup */ }});
-t.afterEach(() => {{ /* cleanup */ }});</code>
-</pre>
+          <pre><code>t.<span class=f>beforeEach</span>(() => <span class=i>{{ /* setup */ }}</span>);
+t.<span class=f>afterEach</span>(() => <span class=i>{{ /* cleanup */ }}</span>);</code></pre>
         </div>
       </section>
     `;
@@ -13179,6 +9219,16 @@ t.afterEach(() => {{ /* cleanup */ }});</code>
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -13261,19 +9311,19 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskTestAssertions extends HTMLElement {
-  #_exampleAssert = "const { suite, compileOk } = require('./lib/chasket-test');\n\nsuite('Assertions', t => {\n  t.test('basic assertions', () => {\n    t.assert(true, 'is truthy');\n    t.eq(5, 5, 'values equal');\n    t.deepEq({ a: 1 }, { a: 1 }, 'deep equal');\n    t.includes('hello world', 'world', 'includes substring');\n    t.notIncludes('hello', 'xyz', 'excludes substring');\n    t.matches('test123', /\\\\d+/, 'matches regex');\n    t.throws(() => { throw new Error('oops'); }, 'function throws');\n  });\n});\n\nsuite.run();";
+  #_exampleAssert = "<span class=k>const</span> { suite, compileOk } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=f>suite</span>(<span class=s>'Assertions'</span>, t => {\n  t.<span class=f>test</span>(<span class=s>'basic assertions'</span>, () => {\n    t.<span class=f>assert</span>(<span class=n>true</span>, <span class=s>'is truthy'</span>);\n    t.<span class=f>eq</span>(<span class=n>5</span>, <span class=n>5</span>, <span class=s>'values equal'</span>);\n    t.<span class=f>deepEq</span>({ a: <span class=n>1</span> }, { a: <span class=n>1</span> }, <span class=s>'deep equal'</span>);\n    t.<span class=f>includes</span>(<span class=s>'hello world'</span>, <span class=s>'world'</span>, <span class=s>'includes substring'</span>);\n    t.<span class=f>notIncludes</span>(<span class=s>'hello'</span>, <span class=s>'xyz'</span>, <span class=s>'excludes substring'</span>);\n    t.<span class=f>matches</span>(<span class=s>'test123'</span>, /\\\\d+/, <span class=s>'matches regex'</span>);\n    t.<span class=f>throws</span>(() => { throw <span class=k>new</span> <span class=f>Error</span>(<span class=s>'oops'</span>); }, <span class=s>'function throws'</span>);\n  });\n});\n\nsuite.<span class=f>run</span>();";
   get #exampleAssert() { return this.#_exampleAssert; }
   set #exampleAssert(v) { this.#_exampleAssert = v; this.#scheduleUpdate(); }
-  #_exampleOutput = "const { suite, compileOk, csk } = require('./lib/chasket-test');\n\nsuite('Output Assertions', t => {\n  t.test('verify output', () => {\n    const src = csk({\n      name: 'my-comp',\n      script: 'state msg: string = &quot;hello&quot;',\n      template: '&lt;p&gt;{{ msg }}&lt;/p&gt;'\n    });\n    const r = compileOk(src);\n\n    t.compileSuccess(r);\n    t.validJS(r);\n    t.outputIncludes(r, 'hello');\n    t.outputNotIncludes(r, 'world');\n    t.hasInterpolation(r, 'msg');\n  });\n});\n\nsuite.run();";
+  #_exampleOutput = "<span class=k>const</span> { suite, compileOk, csk } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=f>suite</span>(<span class=s>'Output Assertions'</span>, t => {\n  t.<span class=f>test</span>(<span class=s>'verify output'</span>, () => {\n    <span class=k>const</span> src = <span class=f>csk</span>({\n      name: <span class=s>'my-comp'</span>,\n      script: <span class=s>'state msg: string = &quot;hello&quot;'</span>,\n      template: <span class=s>'&lt;p&gt;{{ msg }}&lt;/p&gt;'</span>\n    });\n    <span class=k>const</span> r = <span class=f>compileOk</span>(src);\n\n    t.<span class=f>compileSuccess</span>(r);\n    t.<span class=f>validJS</span>(r);\n    t.<span class=f>outputIncludes</span>(r, <span class=s>'hello'</span>);\n    t.<span class=f>outputNotIncludes</span>(r, <span class=s>'world'</span>);\n    t.<span class=f>hasInterpolation</span>(r, <span class=s>'msg'</span>);\n  });\n});\n\nsuite.<span class=f>run</span>();";
   get #exampleOutput() { return this.#_exampleOutput; }
   set #exampleOutput(v) { this.#_exampleOutput = v; this.#scheduleUpdate(); }
-  #_exampleTemplate = "const { suite, compileOk, csk } = require('./lib/chasket-test');\n\nsuite('Template Assertions', t => {\n  t.test('check template output', () => {\n    const src = csk({\n      name: 'my-list',\n      template: '&lt;ul&gt;&lt;#for item of items&gt;&lt;li&gt;{{ item }}&lt;/li&gt;&lt;/#for&gt;&lt;/ul&gt;'\n    });\n    const r = compileOk(src);\n\n    const tpl = t.getTemplate(r);\n    console.log(tpl);  // the extracted template string\n\n    t.templateIncludes(r, '&lt;ul&gt;');\n    t.templateNotIncludes(r, 'invalid');\n  });\n});\n\nsuite.run();";
+  #_exampleTemplate = "<span class=k>const</span> { suite, compileOk, csk } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=f>suite</span>(<span class=s>'Template Assertions'</span>, t => {\n  t.<span class=f>test</span>(<span class=s>'check template output'</span>, () => {\n    <span class=k>const</span> src = <span class=f>csk</span>({\n      name: <span class=s>'my-list'</span>,\n      template: <span class=s>'&lt;ul&gt;&lt;#for item of items&gt;&lt;li&gt;{{ item }}&lt;/li&gt;&lt;/#for&gt;&lt;/ul&gt;'</span>\n    });\n    <span class=k>const</span> r = <span class=f>compileOk</span>(src);\n\n    <span class=k>const</span> tpl = t.<span class=f>getTemplate</span>(r);\n    console.<span class=f>log</span>(tpl);  <span class=cm>// the extracted template string</span>\n\n    t.<span class=f>templateIncludes</span>(r, <span class=s>'&lt;ul&gt;'</span>);\n    t.<span class=f>templateNotIncludes</span>(r, <span class=s>'invalid'</span>);\n  });\n});\n\nsuite.<span class=f>run</span>();";
   get #exampleTemplate() { return this.#_exampleTemplate; }
   set #exampleTemplate(v) { this.#_exampleTemplate = v; this.#scheduleUpdate(); }
-  #_exampleState = "const { suite, compileOk, csk } = require('./lib/chasket-test');\n\nsuite('Lifecycle & State', t => {\n  t.test('state and lifecycle', () => {\n    const src = csk({\n      name: 'my-comp',\n      script: '\n        state count: number = 0\n        watch count { console.log(&apos;changed&apos;); }\n        fn increment() { count++; }\n        on mount { console.log(&apos;mounted&apos;); }\n        on unmount { console.log(&apos;unmounted&apos;); }\n      '\n    });\n    const r = compileOk(src);\n\n    t.hasState(r, 'count');\n    t.hasWatch(r, 'count');\n    t.hasOnMount(r, 'console.log');\n    t.hasOnUnmount(r, 'console.log');\n  });\n});\n\nsuite.run();";
+  #_exampleState = "<span class=k>const</span> { suite, compileOk, csk } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=f>suite</span>(<span class=s>'Lifecycle & State'</span>, t => {\n  t.<span class=f>test</span>(<span class=s>'state and lifecycle'</span>, () => {\n    <span class=k>const</span> src = <span class=f>csk</span>({\n      name: <span class=s>'my-comp'</span>,\n      script: <span class=s>'\n        state count: number = 0\n        watch count { console.log(&apos;changed&apos;); }\n        fn increment() { count++; }\n        on mount { console.log(&apos;mounted&apos;); }\n        on unmount { console.log(&apos;unmounted&apos;); }\n      '</span>\n    });\n    <span class=k>const</span> r = <span class=f>compileOk</span>(src);\n\n    t.<span class=f>hasState</span>(r, <span class=s>'count'</span>);\n    t.<span class=f>hasWatch</span>(r, <span class=s>'count'</span>);\n    t.<span class=f>hasOnMount</span>(r, <span class=s>'console.log'</span>);\n    t.<span class=f>hasOnUnmount</span>(r, <span class=s>'console.log'</span>);\n  });\n});\n\nsuite.<span class=f>run</span>();";
   get #exampleState() { return this.#_exampleState; }
   set #exampleState(v) { this.#_exampleState = v; this.#scheduleUpdate(); }
-  #_exampleDiag = "const { suite, compileFail } = require('./lib/chasket-test');\n\nsuite('Diagnostics', t => {\n  t.test('diagnostic checks', () => {\n    const src = '&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;{{ unknown }}&lt;/p&gt;&lt;/template&gt;';\n    const r = compileFail(src);\n\n    t.compileFails(r);\n    t.hasDiag(r, 'E0301');  // undefined variable\n    t.hasDiag(r, 'E0301', 'error');  // with level\n    t.noDiag(r, 'E0302');\n    t.diagCount(r, 'error', 1);\n  });\n});\n\nsuite.run();";
+  #_exampleDiag = "<span class=k>const</span> { suite, compileFail } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=f>suite</span>(<span class=s>'Diagnostics'</span>, t => {\n  t.<span class=f>test</span>(<span class=s>'diagnostic checks'</span>, () => {\n    <span class=k>const</span> src = <span class=s>'&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;{{ unknown }}&lt;/p&gt;&lt;/template&gt;'</span>;\n    <span class=k>const</span> r = <span class=f>compileFail</span>(src);\n\n    t.<span class=f>compileFails</span>(r);\n    t.<span class=f>hasDiag</span>(r, <span class=s>'E0301'</span>);  <span class=cm>// undefined variable</span>\n    t.<span class=f>hasDiag</span>(r, <span class=s>'E0301'</span>, <span class=s>'error'</span>);  <span class=cm>// with level</span>\n    t.<span class=f>noDiag</span>(r, <span class=s>'E0302'</span>);\n    t.<span class=f>diagCount</span>(r, <span class=s>'error'</span>, <span class=n>1</span>);\n  });\n});\n\nsuite.<span class=f>run</span>();";
   get #exampleDiag() { return this.#_exampleDiag; }
   set #exampleDiag(v) { this.#_exampleDiag = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -13366,8 +9416,7 @@ class CskTestAssertions extends HTMLElement {
           <div class="example-title">
             使用例
           </div>
-          <pre><code>${this.#esc(this.#exampleAssert)}</code>
-</pre>
+          <pre><code>${this.#exampleAssert}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-compile">
@@ -13393,13 +9442,7 @@ class CskTestAssertions extends HTMLElement {
             <h4>
               validJS(result, msg)
             </h4>
-            <p>
-              出力が有効な JavaScript であることを検証します（
-              <code>
-                new Function()
-              </code>
-              で検証）。
-            </p>
+            <p>出力が有効な JavaScript であることを検証します（<code>new Function()</code> で検証）。</p>
           </div>
         </div>
         <div class="subsection">
@@ -13425,8 +9468,7 @@ class CskTestAssertions extends HTMLElement {
           <div class="example-title">
             使用例
           </div>
-          <pre><code>${this.#esc(this.#exampleOutput)}</code>
-</pre>
+          <pre><code>${this.#exampleOutput}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-template">
@@ -13459,8 +9501,7 @@ class CskTestAssertions extends HTMLElement {
           <div class="example-title">
             使用例
           </div>
-          <pre><code>${this.#esc(this.#exampleTemplate)}</code>
-</pre>
+          <pre><code>${this.#exampleTemplate}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-state">
@@ -13486,41 +9527,24 @@ class CskTestAssertions extends HTMLElement {
             <h4>
               hasOnMount(result, bodySubstring, msg)
             </h4>
-            <p>
-              <code>
-                connectedCallback()
-              </code>
-              が指定部分文字列を含むことを検証します。
-            </p>
+            <p><code>connectedCallback()</code> が指定部分文字列を含むことを検証します。</p>
           </div>
           <div class="property">
             <h4>
               hasOnUnmount(result, bodySubstring, msg)
             </h4>
-            <p>
-              <code>
-                disconnectedCallback()
-              </code>
-              が指定部分文字列を含むことを検証します。
-            </p>
+            <p><code>disconnectedCallback()</code> が指定部分文字列を含むことを検証します。</p>
           </div>
           <div class="property">
             <h4>
               hasInterpolation(result, varName, msg)
             </h4>
-            <p>
-              変数が補間される（
-              <code>
-                this.#esc(this.#varName)
-              </code>
-              パターン）ことを検証します。
-            </p>
+            <p>変数が補間される（<code>this.#esc(this.#varName)</code> パターン）ことを検証します。</p>
           </div>
           <div class="example-title">
             使用例
           </div>
-          <pre><code>${this.#esc(this.#exampleState)}</code>
-</pre>
+          <pre><code>${this.#exampleState}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-diag">
@@ -13530,13 +9554,7 @@ class CskTestAssertions extends HTMLElement {
             <h4>
               hasDiag(result, code, level?, msg)
             </h4>
-            <p>
-              指定コード（例: 'E0301'）の診断が存在することを検証します。オプションで
-              <code>
-                level
-              </code>
-              （'error', 'warning', 'info'）でフィルタリング可能です。
-            </p>
+            <p>指定コード（例: 'E0301'）の診断が存在することを検証します。オプションで <code>level</code>（'error', 'warning', 'info'）でフィルタリング可能です。</p>
           </div>
           <div class="property">
             <h4>
@@ -13557,8 +9575,7 @@ class CskTestAssertions extends HTMLElement {
           <div class="example-title">
             使用例
           </div>
-          <pre><code>${this.#esc(this.#exampleDiag)}</code>
-</pre>
+          <pre><code>${this.#exampleDiag}</code></pre>
         </div>
       </section>
     `;
@@ -13636,8 +9653,7 @@ class CskTestAssertions extends HTMLElement {
           <div class="example-title">
             使用例
           </div>
-          <pre><code>${this.#esc(this.#exampleAssert)}</code>
-</pre>
+          <pre><code>${this.#exampleAssert}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-compile">
@@ -13663,13 +9679,7 @@ class CskTestAssertions extends HTMLElement {
             <h4>
               validJS(result, msg)
             </h4>
-            <p>
-              出力が有効な JavaScript であることを検証します（
-              <code>
-                new Function()
-              </code>
-              で検証）。
-            </p>
+            <p>出力が有効な JavaScript であることを検証します（<code>new Function()</code> で検証）。</p>
           </div>
         </div>
         <div class="subsection">
@@ -13695,8 +9705,7 @@ class CskTestAssertions extends HTMLElement {
           <div class="example-title">
             使用例
           </div>
-          <pre><code>${this.#esc(this.#exampleOutput)}</code>
-</pre>
+          <pre><code>${this.#exampleOutput}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-template">
@@ -13729,8 +9738,7 @@ class CskTestAssertions extends HTMLElement {
           <div class="example-title">
             使用例
           </div>
-          <pre><code>${this.#esc(this.#exampleTemplate)}</code>
-</pre>
+          <pre><code>${this.#exampleTemplate}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-state">
@@ -13756,41 +9764,24 @@ class CskTestAssertions extends HTMLElement {
             <h4>
               hasOnMount(result, bodySubstring, msg)
             </h4>
-            <p>
-              <code>
-                connectedCallback()
-              </code>
-              が指定部分文字列を含むことを検証します。
-            </p>
+            <p><code>connectedCallback()</code> が指定部分文字列を含むことを検証します。</p>
           </div>
           <div class="property">
             <h4>
               hasOnUnmount(result, bodySubstring, msg)
             </h4>
-            <p>
-              <code>
-                disconnectedCallback()
-              </code>
-              が指定部分文字列を含むことを検証します。
-            </p>
+            <p><code>disconnectedCallback()</code> が指定部分文字列を含むことを検証します。</p>
           </div>
           <div class="property">
             <h4>
               hasInterpolation(result, varName, msg)
             </h4>
-            <p>
-              変数が補間される（
-              <code>
-                this.#esc(this.#varName)
-              </code>
-              パターン）ことを検証します。
-            </p>
+            <p>変数が補間される（<code>this.#esc(this.#varName)</code> パターン）ことを検証します。</p>
           </div>
           <div class="example-title">
             使用例
           </div>
-          <pre><code>${this.#esc(this.#exampleState)}</code>
-</pre>
+          <pre><code>${this.#exampleState}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-diag">
@@ -13800,13 +9791,7 @@ class CskTestAssertions extends HTMLElement {
             <h4>
               hasDiag(result, code, level?, msg)
             </h4>
-            <p>
-              指定コード（例: 'E0301'）の診断が存在することを検証します。オプションで
-              <code>
-                level
-              </code>
-              （'error', 'warning', 'info'）でフィルタリング可能です。
-            </p>
+            <p>指定コード（例: 'E0301'）の診断が存在することを検証します。オプションで <code>level</code>（'error', 'warning', 'info'）でフィルタリング可能です。</p>
           </div>
           <div class="property">
             <h4>
@@ -13827,8 +9812,7 @@ class CskTestAssertions extends HTMLElement {
           <div class="example-title">
             使用例
           </div>
-          <pre><code>${this.#esc(this.#exampleDiag)}</code>
-</pre>
+          <pre><code>${this.#exampleDiag}</code></pre>
         </div>
       </section>
     `;
@@ -13861,6 +9845,16 @@ class CskTestAssertions extends HTMLElement {
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -13943,7 +9937,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskTestCompile extends HTMLElement {
-  #_exampleCompile = "const { compileOk, compileFail, csk } = require('./lib/chasket-test');\n\n// Success\nconst ok = compileOk('&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;hi&lt;/p&gt;&lt;/template&gt;');\nconsole.log(ok.success);  // true\nconsole.log(ok.output);   // JavaScript code\n\n// With file name\nconst r1 = compileOk(src, 'my-component.csk');\n\n// With options\nconst r2 = compileOk(src, 'test.csk', { strict: true });\n\n// Failure\nconst fail = compileFail('&lt;meta name=&quot;x&quot;&lt;/meta&gt;');  // bad syntax\nconsole.log(fail.success);  // false\nconsole.log(fail.diagnostics);  // [{ code, level, message, ... }]\n\n// Helper\nconst src = csk({\n  name: 'my-btn',\n  script: 'state disabled: boolean = false',\n  template: '&lt;button :disabled=&quot;disabled&quot;&gt;Click&lt;/button&gt;',\n  style: 'button { cursor: pointer; }',\n  meta: 'shadow: open'\n});\nconst r3 = compileOk(src);";
+  #_exampleCompile = "<span class=k>const</span> { compileOk, compileFail, csk } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=cm>// Success</span>\n<span class=k>const</span> ok = <span class=f>compileOk</span>(<span class=s>'&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;hi&lt;/p&gt;&lt;/template&gt;'</span>);\nconsole.<span class=f>log</span>(ok.success);  <span class=cm>// true</span>\nconsole.<span class=f>log</span>(ok.output);   <span class=cm>// JavaScript code</span>\n\n<span class=cm>// With file name</span>\n<span class=k>const</span> r1 = <span class=f>compileOk</span>(src, <span class=s>'my-component.csk'</span>);\n\n<span class=cm>// With options</span>\n<span class=k>const</span> r2 = <span class=f>compileOk</span>(src, <span class=s>'test.csk'</span>, { strict: <span class=n>true</span> });\n\n<span class=cm>// Failure</span>\n<span class=k>const</span> fail = <span class=f>compileFail</span>(<span class=s>'&lt;meta name=&quot;x&quot;&lt;/meta&gt;'</span>);  <span class=cm>// bad syntax</span>\nconsole.<span class=f>log</span>(fail.success);  <span class=cm>// false</span>\nconsole.<span class=f>log</span>(fail.diagnostics);  <span class=cm>// [{ code, level, message, ... }]</span>\n\n<span class=cm>// Helper</span>\n<span class=k>const</span> src = <span class=f>csk</span>({\n  name: <span class=s>'my-btn'</span>,\n  script: <span class=s>'state disabled: boolean = false'</span>,\n  template: <span class=s>'&lt;button :disabled=&quot;disabled&quot;&gt;Click&lt;/button&gt;'</span>,\n  style: <span class=s>'button { cursor: pointer; }'</span>,\n  meta: <span class=s>'shadow: open'</span>\n});\n<span class=k>const</span> r3 = <span class=f>compileOk</span>(src);";
   get #exampleCompile() { return this.#_exampleCompile; }
   set #exampleCompile(v) { this.#_exampleCompile = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -13984,18 +9978,16 @@ class CskTestCompile extends HTMLElement {
             <h4>
               戻り値
             </h4>
-            <pre><code>{{
+            <pre><code><span class=i>{{
   success: boolean,
   output?: string,      // 生成されたJavaScriptコード
   diagnostics: Array    // エラー、警告、情報
-}}</code>
-</pre>
+}}</span></code></pre>
           </div>
           <div class="example-title">
             使用例
           </div>
-          <pre><code>${this.#esc(this.#exampleCompile)}</code>
-</pre>
+          <pre><code>${this.#exampleCompile}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="csk-helper">
@@ -14009,36 +10001,11 @@ class CskTestCompile extends HTMLElement {
               オプション
             </h4>
             <ul>
-              <li>
-                <code>
-                  name
-                </code>
-                (string, 必須): コンポーネント名
-              </li>
-              <li>
-                <code>
-                  script
-                </code>
-                (string, デフォルト: ''): スクリプトブロック内容
-              </li>
-              <li>
-                <code>
-                  template
-                </code>
-                (string, デフォルト: '&lt;div&gt;test&lt;/div&gt;'): テンプレート
-              </li>
-              <li>
-                <code>
-                  style
-                </code>
-                (string, デフォルト: ''): スタイルブロック内容
-              </li>
-              <li>
-                <code>
-                  meta
-                </code>
-                (string, デフォルト: ''): 追加メタフィールド
-              </li>
+              <li><code>name</code> (string, 必須): コンポーネント名</li>
+              <li><code>script</code> (string, デフォルト: ''): スクリプトブロック内容</li>
+              <li><code>template</code> (string, デフォルト: '&lt;div&gt;test&lt;/div&gt;'): テンプレート</li>
+              <li><code>style</code> (string, デフォルト: ''): スタイルブロック内容</li>
+              <li><code>meta</code> (string, デフォルト: ''): 追加メタフィールド</li>
             </ul>
           </div>
         </div>
@@ -14066,18 +10033,16 @@ class CskTestCompile extends HTMLElement {
             <h4>
               戻り値
             </h4>
-            <pre><code>{{
+            <pre><code><span class=i>{{
   success: boolean,
   output?: string,      // 生成されたJavaScriptコード
   diagnostics: Array    // エラー、警告、情報
-}}</code>
-</pre>
+}}</span></code></pre>
           </div>
           <div class="example-title">
             使用例
           </div>
-          <pre><code>${this.#esc(this.#exampleCompile)}</code>
-</pre>
+          <pre><code>${this.#exampleCompile}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="csk-helper">
@@ -14091,36 +10056,11 @@ class CskTestCompile extends HTMLElement {
               オプション
             </h4>
             <ul>
-              <li>
-                <code>
-                  name
-                </code>
-                (string, 必須): コンポーネント名
-              </li>
-              <li>
-                <code>
-                  script
-                </code>
-                (string, デフォルト: ''): スクリプトブロック内容
-              </li>
-              <li>
-                <code>
-                  template
-                </code>
-                (string, デフォルト: '&lt;div&gt;test&lt;/div&gt;'): テンプレート
-              </li>
-              <li>
-                <code>
-                  style
-                </code>
-                (string, デフォルト: ''): スタイルブロック内容
-              </li>
-              <li>
-                <code>
-                  meta
-                </code>
-                (string, デフォルト: ''): 追加メタフィールド
-              </li>
+              <li><code>name</code> (string, 必須): コンポーネント名</li>
+              <li><code>script</code> (string, デフォルト: ''): スクリプトブロック内容</li>
+              <li><code>template</code> (string, デフォルト: '&lt;div&gt;test&lt;/div&gt;'): テンプレート</li>
+              <li><code>style</code> (string, デフォルト: ''): スタイルブロック内容</li>
+              <li><code>meta</code> (string, デフォルト: ''): 追加メタフィールド</li>
             </ul>
           </div>
         </div>
@@ -14155,6 +10095,16 @@ class CskTestCompile extends HTMLElement {
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -14237,7 +10187,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskTestExample extends HTMLElement {
-  #_exampleFull = "const { suite, compileOk, csk } = require('./lib/chasket-test');\n\nsuite('Counter Component', t => {\n  let src;\n\n  t.beforeEach(() => {\n    src = csk({\n      name: 'my-counter',\n      script: '\n        state count: number = 0\n        fn increment() { count++; }\n        fn decrement() { count--; }\n      ',\n      template: '\n        &lt;div&gt;\n          &lt;p&gt;Count: {{ count }}&lt;/p&gt;\n          &lt;button @click=&quot;increment&quot;&gt;+&lt;/button&gt;\n          &lt;button @click=&quot;decrement&quot;&gt;-&lt;/button&gt;\n        &lt;/div&gt;\n      '\n    });\n  });\n\n  t.test('compiles successfully', () => {\n    const r = compileOk(src);\n    t.compileSuccess(r);\n    t.validJS(r);\n  });\n\n  t.test('has state and methods', () => {\n    const r = compileOk(src);\n    t.hasState(r, 'count');\n    t.outputIncludes(r, 'increment');\n    t.outputIncludes(r, 'decrement');\n  });\n\n  t.test('template includes buttons', () => {\n    const r = compileOk(src);\n    t.templateIncludes(r, '&lt;button');\n    t.templateIncludes(r, 'Count:');\n  });\n\n  t.test('interpolates count', () => {\n    const r = compileOk(src);\n    t.hasInterpolation(r, 'count');\n  });\n\n  t.afterEach(() => {\n    console.log('test complete');\n  });\n});\n\nsuite.run();";
+  #_exampleFull = "<span class=k>const</span> { suite, compileOk, csk } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=f>suite</span>(<span class=s>'Counter Component'</span>, t => {\n  <span class=k>let</span> src;\n\n  t.<span class=f>beforeEach</span>(() => {\n    src = <span class=f>csk</span>({\n      name: <span class=s>'my-counter'</span>,\n      script: <span class=s>'\n        state count: number = 0\n        fn increment() { count++; }\n        fn decrement() { count--; }\n      '</span>,\n      template: <span class=s>'\n        &lt;div&gt;\n          &lt;p&gt;Count: {{ count }}&lt;/p&gt;\n          &lt;button @click=&quot;increment&quot;&gt;+&lt;/button&gt;\n          &lt;button @click=&quot;decrement&quot;&gt;-&lt;/button&gt;\n        &lt;/div&gt;\n      '</span>\n    });\n  });\n\n  t.<span class=f>test</span>(<span class=s>'compiles successfully'</span>, () => {\n    <span class=k>const</span> r = <span class=f>compileOk</span>(src);\n    t.<span class=f>compileSuccess</span>(r);\n    t.<span class=f>validJS</span>(r);\n  });\n\n  t.<span class=f>test</span>(<span class=s>'has state and methods'</span>, () => {\n    <span class=k>const</span> r = <span class=f>compileOk</span>(src);\n    t.<span class=f>hasState</span>(r, <span class=s>'count'</span>);\n    t.<span class=f>outputIncludes</span>(r, <span class=s>'increment'</span>);\n    t.<span class=f>outputIncludes</span>(r, <span class=s>'decrement'</span>);\n  });\n\n  t.<span class=f>test</span>(<span class=s>'template includes buttons'</span>, () => {\n    <span class=k>const</span> r = <span class=f>compileOk</span>(src);\n    t.<span class=f>templateIncludes</span>(r, <span class=s>'&lt;button'</span>);\n    t.<span class=f>templateIncludes</span>(r, <span class=s>'Count:'</span>);\n  });\n\n  t.<span class=f>test</span>(<span class=s>'interpolates count'</span>, () => {\n    <span class=k>const</span> r = <span class=f>compileOk</span>(src);\n    t.<span class=f>hasInterpolation</span>(r, <span class=s>'count'</span>);\n  });\n\n  t.<span class=f>afterEach</span>(() => {\n    console.<span class=f>log</span>(<span class=s>'test complete'</span>);\n  });\n});\n\nsuite.<span class=f>run</span>();";
   get #exampleFull() { return this.#_exampleFull; }
   set #exampleFull(v) { this.#_exampleFull = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -14273,8 +10223,7 @@ class CskTestExample extends HTMLElement {
         <div class="example-title">
           完全なテスト例
         </div>
-        <pre><code>${this.#esc(this.#exampleFull)}</code>
-</pre>
+        <pre><code>${this.#exampleFull}</code></pre>
         <p>
           このテストは:
         </p>
@@ -14317,8 +10266,7 @@ class CskTestExample extends HTMLElement {
         <div class="example-title">
           完全なテスト例
         </div>
-        <pre><code>${this.#esc(this.#exampleFull)}</code>
-</pre>
+        <pre><code>${this.#exampleFull}</code></pre>
         <p>
           このテストは:
         </p>
@@ -14373,6 +10321,16 @@ class CskTestExample extends HTMLElement {
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -14455,13 +10413,13 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskTestOverview extends HTMLElement {
-  #_exampleOverview = "const { suite, compileOk, assert } = require('./lib/chasket-test');\n\nsuite('My Component Tests', t => {\n  t.test('basic compile', () => {\n    const r = compileOk('&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;hi&lt;/p&gt;&lt;/template&gt;');\n    t.assert(r.success, 'compiles');\n    t.outputIncludes(r, 'hi');\n  });\n});\n\nsuite.run();";
+  #_exampleOverview = "<span class=k>const</span> { suite, compileOk, assert } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=f>suite</span>(<span class=s>'My Component Tests'</span>, t => {\n  t.<span class=f>test</span>(<span class=s>'basic compile'</span>, () => {\n    <span class=k>const</span> r = <span class=f>compileOk</span>(<span class=s>'&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;hi&lt;/p&gt;&lt;/template&gt;'</span>);\n    t.<span class=f>assert</span>(r.success, <span class=s>'compiles'</span>);\n    t.<span class=f>outputIncludes</span>(r, <span class=s>'hi'</span>);\n  });\n});\n\nsuite.<span class=f>run</span>();";
   get #exampleOverview() { return this.#_exampleOverview; }
   set #exampleOverview(v) { this.#_exampleOverview = v; this.#scheduleUpdate(); }
-  #_exampleSetup = "const { suite, compileOk, compileFail, csk } = require('./lib/chasket-test');\n\n// Simple compile check\nconst src = '&lt;meta&gt;name: &quot;test&quot;&lt;/meta&gt;&lt;template&gt;&lt;div&gt;content&lt;/div&gt;&lt;/template&gt;';\nconst result = compileOk(src);\nconsole.log(result.success);  // true\nconsole.log(result.output);   // generated JS code\nconsole.log(result.diagnostics);  // [ ]";
+  #_exampleSetup = "<span class=k>const</span> { suite, compileOk, compileFail, csk } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=cm>// Simple compile check</span>\n<span class=k>const</span> src = <span class=s>'&lt;meta&gt;name: &quot;test&quot;&lt;/meta&gt;&lt;template&gt;&lt;div&gt;content&lt;/div&gt;&lt;/template&gt;'</span>;\n<span class=k>const</span> result = <span class=f>compileOk</span>(src);\nconsole.<span class=f>log</span>(result.success);  <span class=cm>// true</span>\nconsole.<span class=f>log</span>(result.output);   <span class=cm>// generated JS code</span>\nconsole.<span class=f>log</span>(result.diagnostics);  <span class=cm>// [ ]</span>";
   get #exampleSetup() { return this.#_exampleSetup; }
   set #exampleSetup(v) { this.#_exampleSetup = v; this.#scheduleUpdate(); }
-  #_exampleQuick = "const { suite, compileOk, csk } = require('./lib/chasket-test');\n\nsuite('Counter Component', t => {\n  t.test('compiles with state', () => {\n    const src = csk({\n      name: 'my-counter',\n      script: 'state count: number = 0',\n      template: '&lt;button @click=&quot;count++&quot;&gt;{{ count }}&lt;/button&gt;'\n    });\n    const r = compileOk(src);\n    t.compileSuccess(r);\n    t.hasState(r, 'count');\n    t.outputIncludes(r, 'count++');\n  });\n});\n\nsuite.run();";
+  #_exampleQuick = "<span class=k>const</span> { suite, compileOk, csk } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=f>suite</span>(<span class=s>'Counter Component'</span>, t => {\n  t.<span class=f>test</span>(<span class=s>'compiles with state'</span>, () => {\n    <span class=k>const</span> src = <span class=f>csk</span>({\n      name: <span class=s>'my-counter'</span>,\n      script: <span class=s>'state count: number = 0'</span>,\n      template: <span class=s>'&lt;button @click=&quot;count++&quot;&gt;{{ count }}&lt;/button&gt;'</span>\n    });\n    <span class=k>const</span> r = <span class=f>compileOk</span>(src);\n    t.<span class=f>compileSuccess</span>(r);\n    t.<span class=f>hasState</span>(r, <span class=s>'count'</span>);\n    t.<span class=f>outputIncludes</span>(r, <span class=s>'count++'</span>);\n  });\n});\n\nsuite.<span class=f>run</span>();";
   get #exampleQuick() { return this.#_exampleQuick; }
   set #exampleQuick(v) { this.#_exampleQuick = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -14520,8 +10478,7 @@ class CskTestOverview extends HTMLElement {
         <div class="example-title">
           概要
         </div>
-        <pre><code>${this.#esc(this.#exampleOverview)}</code>
-</pre>
+        <pre><code>${this.#exampleOverview}</code></pre>
       </section>
       <!-- Installation / Setup -->
       <section id="install" class="doc-section">
@@ -14538,8 +10495,7 @@ class CskTestOverview extends HTMLElement {
           <p>
             テストファイルから以下の形式でインポートします:
           </p>
-          <pre><code>const {{ suite, compileOk, compileFail, csk }} = require('./lib/chasket-test');</code>
-</pre>
+          <pre><code><span class=k>const</span> <span class=i>{{ suite, compileOk, compileFail, csk }}</span> = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);</code></pre>
         </div>
         <p class="note-text">
           chasket-test はコンパイラの場所を自動検出し、相対パスの候補から探索します。
@@ -14547,8 +10503,7 @@ class CskTestOverview extends HTMLElement {
         <div class="example-title">
           セットアップ例
         </div>
-        <pre><code>${this.#esc(this.#exampleSetup)}</code>
-</pre>
+        <pre><code>${this.#exampleSetup}</code></pre>
       </section>
       <!-- Quick Start -->
       <section id="quickstart" class="doc-section">
@@ -14561,39 +10516,18 @@ class CskTestOverview extends HTMLElement {
         <div class="example-title">
           基本的な使用方法
         </div>
-        <pre><code>${this.#esc(this.#exampleQuick)}</code>
-</pre>
+        <pre><code>${this.#exampleQuick}</code></pre>
         <p>
           この例では:
         </p>
         <ul>
-          <li>
-            <code>
-              suite()
-            </code>
-            でテストスイートを定義
-          </li>
-          <li>
-            <code>
-              csk()
-            </code>
-            でコンポーネントソースを構築
-          </li>
-          <li>
-            <code>
-              compileOk()
-            </code>
-            でコンパイル
-          </li>
+          <li><code>suite()</code> でテストスイートを定義</li>
+          <li><code>csk()</code> でコンポーネントソースを構築</li>
+          <li><code>compileOk()</code> でコンパイル</li>
           <li>
             アサーション群で出力を検証
           </li>
-          <li>
-            <code>
-              suite.run()
-            </code>
-            でテストを実行
-          </li>
+          <li><code>suite.run()</code> でテストを実行</li>
         </ul>
       </section>
     `;
@@ -14637,8 +10571,7 @@ class CskTestOverview extends HTMLElement {
         <div class="example-title">
           概要
         </div>
-        <pre><code>${this.#esc(this.#exampleOverview)}</code>
-</pre>
+        <pre><code>${this.#exampleOverview}</code></pre>
       </section>
       <!-- Installation / Setup -->
       <section id="install" class="doc-section">
@@ -14655,8 +10588,7 @@ class CskTestOverview extends HTMLElement {
           <p>
             テストファイルから以下の形式でインポートします:
           </p>
-          <pre><code>const {{ suite, compileOk, compileFail, csk }} = require('./lib/chasket-test');</code>
-</pre>
+          <pre><code><span class=k>const</span> <span class=i>{{ suite, compileOk, compileFail, csk }}</span> = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);</code></pre>
         </div>
         <p class="note-text">
           chasket-test はコンパイラの場所を自動検出し、相対パスの候補から探索します。
@@ -14664,8 +10596,7 @@ class CskTestOverview extends HTMLElement {
         <div class="example-title">
           セットアップ例
         </div>
-        <pre><code>${this.#esc(this.#exampleSetup)}</code>
-</pre>
+        <pre><code>${this.#exampleSetup}</code></pre>
       </section>
       <!-- Quick Start -->
       <section id="quickstart" class="doc-section">
@@ -14678,39 +10609,18 @@ class CskTestOverview extends HTMLElement {
         <div class="example-title">
           基本的な使用方法
         </div>
-        <pre><code>${this.#esc(this.#exampleQuick)}</code>
-</pre>
+        <pre><code>${this.#exampleQuick}</code></pre>
         <p>
           この例では:
         </p>
         <ul>
-          <li>
-            <code>
-              suite()
-            </code>
-            でテストスイートを定義
-          </li>
-          <li>
-            <code>
-              csk()
-            </code>
-            でコンポーネントソースを構築
-          </li>
-          <li>
-            <code>
-              compileOk()
-            </code>
-            でコンパイル
-          </li>
+          <li><code>suite()</code> でテストスイートを定義</li>
+          <li><code>csk()</code> でコンポーネントソースを構築</li>
+          <li><code>compileOk()</code> でコンパイル</li>
           <li>
             アサーション群で出力を検証
           </li>
-          <li>
-            <code>
-              suite.run()
-            </code>
-            でテストを実行
-          </li>
+          <li><code>suite.run()</code> でテストを実行</li>
         </ul>
       </section>
     `;
@@ -14743,6 +10653,16 @@ class CskTestOverview extends HTMLElement {
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -14873,8 +10793,7 @@ class CskPageWhy extends HTMLElement {
               <div class="why-demo-label">
                 Chasket (.csk)
               </div>
-              <pre><code>${this.#esc(this.#codeExample)}</code>
-</pre>
+              <pre><code>${this.#codeExample}</code></pre>
             </div>
             <div class="why-demo-arrow">
               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -14888,8 +10807,7 @@ class CskPageWhy extends HTMLElement {
               <div class="why-demo-label">
                 Output (vanilla JS)
               </div>
-              <pre><code>${this.#esc(this.#codeOutput)}</code>
-</pre>
+              <pre><code>${this.#codeOutput}</code></pre>
             </div>
           </div>
         </section>
@@ -14978,14 +10896,7 @@ class CskPageWhy extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('why.ctaDesc'))}
           </p>
-          <div class="why-cta-buttons">
-            <a href="#/guide" class="why-btn-primary">
-              ${this.#esc(this.#tr('hero.getStarted'))}
-            </a>
-            <a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer" class="why-btn-secondary">
-              GitHub
-            </a>
-          </div>
+          <div class="why-cta-buttons"><a href="#/guide" class="why-btn-primary">${this.#esc(this.#tr('hero.getStarted'))}</a><a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer" class="why-btn-secondary">GitHub</a></div>
         </section>
       </div>
     `;
@@ -15011,8 +10922,7 @@ class CskPageWhy extends HTMLElement {
               <div class="why-demo-label">
                 Chasket (.csk)
               </div>
-              <pre><code>${this.#esc(this.#codeExample)}</code>
-</pre>
+              <pre><code>${this.#codeExample}</code></pre>
             </div>
             <div class="why-demo-arrow">
               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -15026,8 +10936,7 @@ class CskPageWhy extends HTMLElement {
               <div class="why-demo-label">
                 Output (vanilla JS)
               </div>
-              <pre><code>${this.#esc(this.#codeOutput)}</code>
-</pre>
+              <pre><code>${this.#codeOutput}</code></pre>
             </div>
           </div>
         </section>
@@ -15116,14 +11025,7 @@ class CskPageWhy extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('why.ctaDesc'))}
           </p>
-          <div class="why-cta-buttons">
-            <a href="#/guide" class="why-btn-primary">
-              ${this.#esc(this.#tr('hero.getStarted'))}
-            </a>
-            <a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer" class="why-btn-secondary">
-              GitHub
-            </a>
-          </div>
+          <div class="why-cta-buttons"><a href="#/guide" class="why-btn-primary">${this.#esc(this.#tr('hero.getStarted'))}</a><a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer" class="why-btn-secondary">GitHub</a></div>
         </section>
       </div>
     `;
@@ -15156,6 +11058,16 @@ class CskPageWhy extends HTMLElement {
         }
         if (o.tagName === 'STYLE') {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
           continue;
         }
         this.#patch(o, n);
@@ -15268,7 +11180,7 @@ class CskCopyBtn extends HTMLElement {
 
   attributeChangedCallback(name, oldVal, newVal) {
     if (oldVal === newVal) return;
-    if (name === 'text') { this.#prop_text = newVal || ''; this.#update(); }
+    if (name === 'text') { this.#prop_text = newVal || ''; this.#scheduleUpdate(); }
   }
 
   #prop_text = "";
@@ -15356,6 +11268,16 @@ class CskCopyBtn extends HTMLElement {
           if (o.textContent !== n.textContent) o.textContent = n.textContent;
           continue;
         }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
+          continue;
+        }
         this.#patch(o, n);
       }
     }
@@ -15365,7 +11287,7 @@ class CskCopyBtn extends HTMLElement {
     {
       const el = this.#shadow.querySelector('[data-chasket-id="fl-0"]');
       if (el) {
-        const fn_click = (e) => { this.#copy(e); this.#update(); };
+        const fn_click = (e) => { this.#copy(e); this.#scheduleUpdate(); };
         el.addEventListener('click', fn_click);
         this.#listeners.push([el, 'click', fn_click]);
       }
@@ -15439,6 +11361,30 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 
 })();
 
-__chasketDefineQueue.forEach(([tag, cls]) => {
-  if (!customElements.get(tag)) customElements.define(tag, cls);
-});
+// Register components in dependency order (children before parents)
+(function() {
+  const tags = new Set(__chasketDefineQueue.map(([t]) => t));
+  const tagIdx = new Map(__chasketDefineQueue.map(([t], i) => [t, i]));
+  // Detect child custom elements from class source code
+  const deps = __chasketDefineQueue.map(([tag, cls]) => {
+    const src = cls.toString();
+    const children = [];
+    tags.forEach(t => { if (t !== tag && src.includes('<' + t)) children.push(t); });
+    return children;
+  });
+  // Topological sort (Kahn's algorithm): children defined before parents
+  const deg = deps.map(d => d.filter(t => tagIdx.has(t)).length);
+  const q = []; deg.forEach((d, i) => { if (d === 0) q.push(i); });
+  const order = [];
+  while (q.length) {
+    const i = q.shift(); order.push(i);
+    const myTag = __chasketDefineQueue[i][0];
+    deps.forEach((d, j) => { if (d.includes(myTag) && --deg[j] === 0) q.push(j); });
+  }
+  // Append any remaining (cyclic) in original order
+  for (let i = 0; i < __chasketDefineQueue.length; i++) if (!order.includes(i)) order.push(i);
+  order.forEach(i => {
+    const [tag, cls] = __chasketDefineQueue[i];
+    if (!customElements.get(tag)) customElements.define(tag, cls);
+  });
+})();
