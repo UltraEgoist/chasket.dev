@@ -10,34 +10,34 @@
 <template>
   <!-- Compile Helpers -->
   <section id="compile-helpers" class="doc-section">
-    <h2>コンパイルヘルパー</h2>
+    <h2>${window.__t('testContent.compile.title')}</h2>
 
     <div class="subsection">
       <h3 id="compile-ok-fail">compileOk(src, fileName?, opts?) / compileFail(src, fileName?, opts?)</h3>
-      <p>Chasket ソースをコンパイルし、結果オブジェクトを返します。</p>
+      <p>${window.__t('testContent.compile.compileDesc')}</p>
       <div class="property">
-        <h4>戻り値</h4>
+        <h4>${window.__t('testContent.compile.returnValue')}</h4>
         <pre><code>\{{
   success: boolean,
-  output?: string,      // 生成されたJavaScriptコード
-  diagnostics: Array    // エラー、警告、情報
+  output?: string,      // ${window.__t('testContent.compile.generatedJS')}
+  diagnostics: Array    // ${window.__t('testContent.compile.errorWarnInfo')}
 }}</code></pre>
       </div>
-      <div class="example-title">使用例</div>
+      <div class="example-title">${window.__t('testContent.compile.usageExample')}</div>
       <pre><code>{{ exampleCompile }}</code></pre>
     </div>
 
     <div class="subsection">
       <h3 id="csk-helper">csk(opts)</h3>
-      <p>最小限の有効な Chasket ソースを生成するヘルパー関数です。</p>
+      <p>${window.__t('testContent.compile.cskHelperDesc')}</p>
       <div class="property">
-        <h4>オプション</h4>
+        <h4>${window.__t('testContent.compile.options')}</h4>
         <ul>
-          <li><code>name</code> (string, 必須): コンポーネント名</li>
-          <li><code>script</code> (string, デフォルト: ''): スクリプトブロック内容</li>
-          <li><code>template</code> (string, デフォルト: '&lt;div&gt;test&lt;/div&gt;'): テンプレート</li>
-          <li><code>style</code> (string, デフォルト: ''): スタイルブロック内容</li>
-          <li><code>meta</code> (string, デフォルト: ''): 追加メタフィールド</li>
+          <li><code>name</code> (string, ${window.__t('testContent.compile.nameOption')})</li>
+          <li><code>script</code> (string, ${window.__t('testContent.compile.scriptOption')})</li>
+          <li><code>template</code> (string, ${window.__t('testContent.compile.templateOption')})</li>
+          <li><code>style</code> (string, ${window.__t('testContent.compile.styleOption')})</li>
+          <li><code>meta</code> (string, ${window.__t('testContent.compile.metaOption')})</li>
         </ul>
       </div>
     </div>
