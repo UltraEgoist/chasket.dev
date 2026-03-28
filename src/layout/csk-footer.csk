@@ -11,10 +11,12 @@
   <footer class="footer">
     <div class="inner">
       <div class="brand">
-        <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
-          <rect width="32" height="32" rx="8" fill="url(#fg)"></rect>
-          <path d="M9 22V10h3.2l3.8 7.5L19.8 10H23v12h-2.8v-7.4L17 21.2h-2L11.8 14.6V22H9z" fill="#fff"></path>
-          <defs><linearGradient id="fg" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#6C5CE7"></stop><stop offset="1" stop-color="#00B894"></stop></linearGradient></defs>
+        <svg width="22" height="22" viewBox="0 0 64 64" fill="none">
+          <defs><linearGradient id="fg" x1="4" y1="6" x2="48" y2="58" gradientUnits="userSpaceOnUse"><stop stop-color="#6C5CE7"></stop><stop offset="1" stop-color="#00B894"></stop></linearGradient></defs>
+          <rect x="4" y="6" width="42" height="50" rx="8" fill="url(#fg)" fill-opacity="0.7" stroke="url(#fg)" stroke-width="3.5"></rect>
+          <rect x="12" y="24" width="20" height="14" rx="4" stroke="#fff" stroke-width="2" stroke-opacity="0.4" stroke-dasharray="3 3"></rect>
+          <line x1="34" y1="40" x2="54" y2="12" stroke="#8B7CF6" stroke-width="4.5" stroke-linecap="round"></line>
+          <path d="M54 12l1.5-5-5 1.5z" fill="#55efc4"></path>
         </svg>
         <span>Chasket</span>
       </div>
