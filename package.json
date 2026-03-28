@@ -5,7 +5,8 @@
   "description": "Official documentation site for Chasket — built with Chasket",
   "scripts": {
     "build": "chasket build && node scripts/postbuild.js",
-    "dev": "chasket dev"
+    "dev": "chasket build && node scripts/postbuild.js && chasket dev",
+    "preview": "chasket build && node scripts/postbuild.js"
   },
   "devDependencies": {
     "@aspect/chasket": "github:UltraEgoist/chasket#main"
