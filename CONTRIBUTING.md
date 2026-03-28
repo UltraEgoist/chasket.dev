@@ -137,3 +137,15 @@ src/
 - Node.js 18+
 - Chasket CLI (`@aspect/chasket`)
 - 外部ランタイム依存なし
+
+### ローカルの chasket リポを使う場合
+
+chasket コンパイラをローカルで開発中の場合、npm のオーバーライドで切り替えられます。
+
+```bash
+# package.json を直接編集せず、npm link を使用
+cd ../chasket/chasket-cli && npm link
+cd ../chasket.dev && npm link @aspect/chasket
+```
+
+`package.json` の `devDependencies` は GitHub リポ参照のままにしてください。`file:` パスはコミットしないでください。

@@ -8,7 +8,7 @@
     "dev": "chasket dev"
   },
   "devDependencies": {
-    "@aspect/chasket": "file:../chasket/chasket-cli"
+    "@aspect/chasket": "github:UltraEgoist/chasket#main"
   },
   "repository": {
     "type": "git",
