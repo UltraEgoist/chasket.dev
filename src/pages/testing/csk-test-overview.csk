@@ -14,48 +14,48 @@
 <template>
   <!-- Overview -->
   <section id="overview" class="doc-section">
-    <h2>概要</h2>
-    <p>chasket-test は Chasket コンパイラの出力検証を簡潔に記述するための、ゼロ依存のテストユーティリティライブラリです。Node.js 標準機能のみを使用しており、外部パッケージに依存していません。</p>
-    <p>テストランナーと充実したアサーション群により、コンポーネントの以下をテストできます:</p>
+    <h2>${window.__t('testContent.overview.exampleTitle')}</h2>
+    <p>${window.__t('testContent.overview.desc1')}</p>
+    <p>${window.__t('testContent.overview.desc2')}</p>
     <ul>
-      <li>コンパイルの成功 / 失敗</li>
-      <li>生成される JavaScript コードの検証</li>
-      <li>テンプレート出力の確認</li>
-      <li>state、watch、ライフサイクルフック</li>
-      <li>診断情報（エラー、警告）</li>
-      <li>補間と属性バインディング</li>
+      <li>${window.__t('testContent.overview.item1')}</li>
+      <li>${window.__t('testContent.overview.item2')}</li>
+      <li>${window.__t('testContent.overview.item3')}</li>
+      <li>${window.__t('testContent.overview.item4')}</li>
+      <li>${window.__t('testContent.overview.item5')}</li>
+      <li>${window.__t('testContent.overview.item6')}</li>
     </ul>
-    <div class="example-title">概要</div>
+    <div class="example-title">${window.__t('testContent.overview.exampleTitle')}</div>
     <pre><code>{{ exampleOverview }}</code></pre>
   </section>
 
   <!-- Installation / Setup -->
   <section id="install" class="doc-section">
-    <h2>セットアップ</h2>
-    <p>chasket-test は Chasket リポジトリに含まれています。以下の方法でアクセスできます:</p>
+    <h2>${window.__t('testContent.overview.setupTitle')}</h2>
+    <p>${window.__t('testContent.overview.setupDesc')}</p>
     <div class="property">
-      <h4>ローカル開発</h4>
-      <p>テストファイルから以下の形式でインポートします:</p>
+      <h4>${window.__t('testContent.overview.localDev')}</h4>
+      <p>${window.__t('testContent.overview.importDesc')}</p>
       <pre><code>const \{{ suite, compileOk, compileFail, csk }} = require('./lib/chasket-test');</code></pre>
     </div>
-    <p class="note-text">chasket-test はコンパイラの場所を自動検出し、相対パスの候補から探索します。</p>
-    <div class="example-title">セットアップ例</div>
+    <p class="note-text">${window.__t('testContent.overview.autoDetect')}</p>
+    <div class="example-title">${window.__t('testContent.overview.setupExampleTitle')}</div>
     <pre><code>{{ exampleSetup }}</code></pre>
   </section>
 
   <!-- Quick Start -->
   <section id="quickstart" class="doc-section">
-    <h2>クイックスタート</h2>
-    <p>最小限のテストを実行する例:</p>
-    <div class="example-title">基本的な使用方法</div>
+    <h2>${window.__t('testContent.overview.quickstartTitle')}</h2>
+    <p>${window.__t('testContent.overview.quickstartDesc')}</p>
+    <div class="example-title">${window.__t('testContent.overview.basicUsageTitle')}</div>
     <pre><code>{{ exampleQuick }}</code></pre>
-    <p>この例では:</p>
+    <p>${window.__t('testContent.overview.exampleInThisCase')}</p>
     <ul>
-      <li><code>suite()</code> でテストスイートを定義</li>
-      <li><code>csk()</code> でコンポーネントソースを構築</li>
-      <li><code>compileOk()</code> でコンパイル</li>
-      <li>アサーション群で出力を検証</li>
-      <li><code>suite.run()</code> でテストを実行</li>
+      <li>${window.__t('testContent.overview.item7')}</li>
+      <li>${window.__t('testContent.overview.item8')}</li>
+      <li>${window.__t('testContent.overview.item9')}</li>
+      <li>${window.__t('testContent.overview.item10')}</li>
+      <li>${window.__t('testContent.overview.item11')}</li>
     </ul>
   </section>
 </template>

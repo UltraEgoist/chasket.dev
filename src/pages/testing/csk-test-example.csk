@@ -10,18 +10,18 @@
 <template>
   <!-- Full Example -->
   <section id="full-example" class="doc-section">
-    <h2>完全なテスト例</h2>
-    <p>以下は複数のアサーションを組み合わせた実践的なテスト例です。Counter コンポーネントの各側面をテストしています。</p>
-    <div class="example-title">完全なテスト例</div>
+    <h2>${window.__t('testContent.example.title')}</h2>
+    <p>${window.__t('testContent.example.desc')}</p>
+    <div class="example-title">${window.__t('testContent.example.fullExampleTitle')}</div>
     <pre><code>{{ exampleFull }}</code></pre>
-    <p>このテストは:</p>
+    <p>${window.__t('testContent.example.thisTestVerifies')}</p>
     <ul>
-      <li>コンポーネントがコンパイルされることを確認</li>
-      <li>生成される JavaScript が有効であることを確認</li>
-      <li>state と関数が含まれていることを確認</li>
-      <li>テンプレート構造を確認</li>
-      <li>補間が正しく処理されていることを確認</li>
-      <li>beforeEach / afterEach でセットアップ / クリーンアップを実行</li>
+      <li>${window.__t('testContent.example.item1')}</li>
+      <li>${window.__t('testContent.example.item2')}</li>
+      <li>${window.__t('testContent.example.item3')}</li>
+      <li>${window.__t('testContent.example.item4')}</li>
+      <li>${window.__t('testContent.example.item5')}</li>
+      <li>${window.__t('testContent.example.item6')}</li>
     </ul>
   </section>
 </template>

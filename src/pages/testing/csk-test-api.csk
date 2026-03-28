@@ -10,33 +10,33 @@
 <template>
   <!-- API Reference -->
   <section id="api-reference" class="doc-section">
-    <h2>API リファレンス</h2>
+    <h2>${window.__t('testContent.api.title')}</h2>
 
     <div class="subsection">
       <h3 id="api-suite">suite(name, setupFn)</h3>
-      <p>テストスイートを定義します。<code>setupFn</code> はテストコンテキストを受け取り、テストを登録します。</p>
+      <p>${window.__t('testContent.api.suiteDesc')}</p>
       <div class="property">
         <h4>suite.run(opts?)</h4>
-        <p>すべての登録済みスイートを実行し、結果をコンソール出力します。</p>
-        <p><strong>オプション:</strong></p>
+        <p>${window.__t('testContent.api.suiteRunDesc')}</p>
+        <p><strong>${window.__t('testContent.api.options')}</strong></p>
         <ul>
-          <li><code>filter</code> (string): スイート名またはテスト名に一致するもののみ実行</li>
-          <li><code>verbose</code> (boolean): 詳細出力（デフォルト: true）</li>
+          <li><code>filter</code> (string): ${window.__t('testContent.api.filterOption')}</li>
+          <li><code>verbose</code> (boolean): ${window.__t('testContent.api.verboseOption')}</li>
         </ul>
       </div>
-      <div class="example-title">使用例</div>
+      <div class="example-title">${window.__t('testContent.api.usageExample')}</div>
       <pre><code>{{ exampleAPI }}</code></pre>
     </div>
 
     <div class="subsection">
       <h3 id="api-test">test(name, fn) / xtest(name, fn)</h3>
-      <p><code>test()</code> は実行するテストを登録します。<code>xtest()</code> は同じですがテストをスキップします。</p>
-      <p>各テスト関数はテストコンテキストで利用可能なアサーションにアクセスできます。</p>
+      <p>${window.__t('testContent.api.testDesc')}</p>
+      <p>${window.__t('testContent.api.testFuncDesc')}</p>
     </div>
 
     <div class="subsection">
       <h3 id="api-lifecycle">beforeEach(fn) / afterEach(fn)</h3>
-      <p>各テスト前後に実行するセットアップ / クリーンアップ関数を登録します。</p>
+      <p>${window.__t('testContent.api.lifecycleDesc')}</p>
       <pre><code>t.beforeEach(() => \{{ /* setup */ }});
 t.afterEach(() => \{{ /* cleanup */ }});</code></pre>
     </div>
