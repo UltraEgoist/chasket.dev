@@ -56,11 +56,10 @@
     <div class="inner">
       <a href="/" class="logo">
         <svg width="28" height="28" viewBox="0 0 64 64" fill="none">
-          <defs><linearGradient id="ng" x1="4" y1="6" x2="48" y2="58" gradientUnits="userSpaceOnUse"><stop stop-color="#6C5CE7"></stop><stop offset="1" stop-color="#00B894"></stop></linearGradient></defs>
-          <rect x="4" y="6" width="42" height="50" rx="8" fill="url(#ng)" fill-opacity="0.7" stroke="url(#ng)" stroke-width="3.5"></rect>
-          <rect x="12" y="24" width="20" height="14" rx="4" stroke="#fff" stroke-width="2" stroke-opacity="0.4" stroke-dasharray="3 3"></rect>
-          <line x1="34" y1="40" x2="54" y2="12" stroke="#8B7CF6" stroke-width="4.5" stroke-linecap="round"></line>
-          <path d="M54 12l1.5-5-5 1.5z" fill="#55efc4"></path>
+          <defs><linearGradient id="ng" x1="4" y1="6" x2="48" y2="58" gradientUnits="userSpaceOnUse"><stop stop-color="#2EBCB0"></stop><stop offset="1" stop-color="#FF7170"></stop></linearGradient></defs>
+          <rect x="4" y="6" width="42" height="50" rx="8" fill="url(#ng)" fill-opacity="0.9" stroke="url(#ng)" stroke-width="3.5"></rect>
+          <rect x="12" y="24" width="20" height="14" rx="4" stroke="#fff" stroke-width="2" stroke-opacity="0.5" stroke-dasharray="3 3"></rect>
+          <line x1="34" y1="40" x2="54" y2="12" stroke="#E8A243" stroke-width="5.5" stroke-linecap="round"></line>
         </svg>
         <span>Chasket</span>
       </a>
