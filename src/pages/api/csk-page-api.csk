@@ -103,13 +103,13 @@
           <li>
             <a href="#official-packages">{{ tr('api.sections.officialPackages') }}</a>
             <ul>
-              <li><a href="#router">@aspect/chasket-router</a></li>
-              <li><a href="#store">@aspect/chasket-store</a></li>
-              <li><a href="#ssr">@aspect/chasket-ssr</a></li>
-              <li><a href="#ui">@aspect/chasket-ui</a></li>
+              <li><a href="#router">@chasket/chasket-router</a></li>
+              <li><a href="#store">@chasket/chasket-store</a></li>
+              <li><a href="#ssr">@chasket/chasket-ssr</a></li>
+              <li><a href="#ui">@chasket/chasket-ui</a></li>
               <li><a href="#vite">vite-plugin-chasket</a></li>
-              <li><a href="#lsp">@aspect/chasket-lsp</a></li>
-              <li><a href="#vscode">@aspect/chasket-vscode</a></li>
+              <li><a href="#lsp">@chasket/chasket-lsp</a></li>
+              <li><a href="#vscode">@chasket/chasket-vscode</a></li>
             </ul>
           </li>
           <li><a href="#compilation-output">{{ tr('api.sections.compilationOutput') }}</a></li>

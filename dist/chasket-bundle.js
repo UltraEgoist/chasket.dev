@@ -1,4 +1,4 @@
-// Chasket Bundle - 2026-03-28T12:48:48.376Z
+// Chasket Bundle - 2026-03-28T15:55:18.008Z
 // 33 component(s)
 
 // Deferred registration queue: all classes are defined first,
@@ -1288,16 +1288,16 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskApiCompiler extends HTMLElement {
-  #_code_compileBasic = "<span class=k>import</span> { compile } <span class=k>from</span> <span class=s>'@aspect/chasket'</span>\n\n<span class=k>const</span> source = <span class=s>`\n&lt;meta&gt;\n  name: my-component\n&lt;/meta&gt;\n&lt;script&gt;\n  state count: number = 0\n&lt;/script&gt;\n&lt;template&gt;\n  &lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;/template&gt;\n`</span>\n\n<span class=k>const</span> result = <span class=f>compile</span>(source, <span class=s>'my-component.csk'</span>, {\n  target: <span class=s>'es2020'</span>\n})\n\n<span class=k>if</span> (result.success) {\n  console.<span class=f>log</span>(result.output)\n}";
+  #_code_compileBasic = "<span class=k>import</span> { compile } <span class=k>from</span> <span class=s>'@chasket/chasket'</span>\n\n<span class=k>const</span> source = <span class=s>`\n&lt;meta&gt;\n  name: my-component\n&lt;/meta&gt;\n&lt;script&gt;\n  state count: number = 0\n&lt;/script&gt;\n&lt;template&gt;\n  &lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;/template&gt;\n`</span>\n\n<span class=k>const</span> result = <span class=f>compile</span>(source, <span class=s>'my-component.csk'</span>, {\n  target: <span class=s>'es2020'</span>\n})\n\n<span class=k>if</span> (result.success) {\n  console.<span class=f>log</span>(result.output)\n}";
   get #code_compileBasic() { return this.#_code_compileBasic; }
   set #code_compileBasic(v) { this.#_code_compileBasic = v; this.#scheduleUpdate(); }
   #_code_compileOptions = "<span class=k>const</span> options = {\n  target: <span class=s>'es2020'</span>,           <span class=cm>// &quot;es2020&quot; | &quot;es2021&quot; | &quot;esnext&quot;</span>\n  bundle: <span class=n>true</span>,               <span class=cm>// embed CSS in JS</span>\n  shadow: <span class=n>false</span>,              <span class=cm>// Shadow DOM or </span>Light DOM\n  sourcemap: <span class=n>true</span>,            <span class=cm>// generate source maps</span>\n  minify: <span class=n>false</span>,              <span class=cm>// enable in production</span>\n  imports: {                  <span class=cm>// external import mapping</span>\n    <span class=s>'lodash'</span>: <span class=s>'./libs/lodash.js'</span>\n  }\n}";
   get #code_compileOptions() { return this.#_code_compileOptions; }
   set #code_compileOptions(v) { this.#_code_compileOptions = v; this.#scheduleUpdate(); }
-  #_code_splitBlocks = "<span class=k>import</span> { splitBlocks } <span class=k>from</span> <span class=s>'@aspect/chasket'</span>\n\n<span class=k>const</span> source = <span class=s>`...csk file content...`</span>\n<span class=k>const</span> blocks = <span class=f>splitBlocks</span>(source)\n\nconsole.<span class=f>log</span>(blocks.meta)      <span class=cm>// meta block</span>\nconsole.<span class=f>log</span>(blocks.script)    <span class=cm>// script block</span>\nconsole.<span class=f>log</span>(blocks.template)  <span class=cm>// template block</span>\nconsole.<span class=f>log</span>(blocks.style)     <span class=cm>// style block</span>";
+  #_code_splitBlocks = "<span class=k>import</span> { splitBlocks } <span class=k>from</span> <span class=s>'@chasket/chasket'</span>\n\n<span class=k>const</span> source = <span class=s>`...csk file content...`</span>\n<span class=k>const</span> blocks = <span class=f>splitBlocks</span>(source)\n\nconsole.<span class=f>log</span>(blocks.meta)      <span class=cm>// meta block</span>\nconsole.<span class=f>log</span>(blocks.script)    <span class=cm>// script block</span>\nconsole.<span class=f>log</span>(blocks.template)  <span class=cm>// template block</span>\nconsole.<span class=f>log</span>(blocks.style)     <span class=cm>// style block</span>";
   get #code_splitBlocks() { return this.#_code_splitBlocks; }
   set #code_splitBlocks(v) { this.#_code_splitBlocks = v; this.#scheduleUpdate(); }
-  #_code_parseTemplate = "<span class=k>import</span> { parseTemplateNodes } <span class=k>from</span> <span class=s>'@aspect/chasket'</span>\n\n<span class=k>const</span> html = <span class=s>`\n  &lt;div&gt;\n    &lt;p&gt;{{ name }}&lt;/p&gt;\n    &lt;button @click=&quot;handleClick&quot;&gt;Click&lt;/button&gt;\n  &lt;/div&gt;\n`</span>\n\n<span class=k>const</span> ast = <span class=f>parseTemplateNodes</span>(html)\nconsole.<span class=f>log</span>(ast)  <span class=cm>// node syntax tree</span>";
+  #_code_parseTemplate = "<span class=k>import</span> { parseTemplateNodes } <span class=k>from</span> <span class=s>'@chasket/chasket'</span>\n\n<span class=k>const</span> html = <span class=s>`\n  &lt;div&gt;\n    &lt;p&gt;{{ name }}&lt;/p&gt;\n    &lt;button @click=&quot;handleClick&quot;&gt;Click&lt;/button&gt;\n  &lt;/div&gt;\n`</span>\n\n<span class=k>const</span> ast = <span class=f>parseTemplateNodes</span>(html)\nconsole.<span class=f>log</span>(ast)  <span class=cm>// node syntax tree</span>";
   get #code_parseTemplate() { return this.#_code_parseTemplate; }
   set #code_parseTemplate(v) { this.#_code_parseTemplate = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -2551,13 +2551,13 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskApiEcosystem extends HTMLElement {
-  #_code_router = "<span class=k>import</span> { createRouter } <span class=k>from</span> <span class=s>'@aspect/chasket-router'</span>\n\n<span class=k>const</span> router = <span class=f>createRouter</span>([\n  { path: <span class=s>'/'</span>, component: Home },\n  { path: <span class=s>'/about'</span>, component: About },\n  { path: <span class=s>'/posts/:id'</span>, component: PostDetail }\n])\n\nrouter.<span class=f>push</span>(<span class=s>'/'</span>)      <span class=cm>// navigate</span>\n<span class=k>const</span> route = router.<span class=f>current</span>()  <span class=cm>// current route</span>";
+  #_code_router = "<span class=k>import</span> { createRouter } <span class=k>from</span> <span class=s>'@chasket/chasket-router'</span>\n\n<span class=k>const</span> router = <span class=f>createRouter</span>([\n  { path: <span class=s>'/'</span>, component: Home },\n  { path: <span class=s>'/about'</span>, component: About },\n  { path: <span class=s>'/posts/:id'</span>, component: PostDetail }\n])\n\nrouter.<span class=f>push</span>(<span class=s>'/'</span>)      <span class=cm>// navigate</span>\n<span class=k>const</span> route = router.<span class=f>current</span>()  <span class=cm>// current route</span>";
   get #code_router() { return this.#_code_router; }
   set #code_router(v) { this.#_code_router = v; this.#scheduleUpdate(); }
-  #_code_store = "<span class=k>import</span> { createStore } <span class=k>from</span> <span class=s>'@aspect/chasket-store'</span>\n\n<span class=k>const</span> store = <span class=f>createStore</span>({\n  <span class=k>state</span>: { count: <span class=n>0</span> },\n  actions: {\n    <span class=f>increment</span>(<span class=k>state</span>) { <span class=k>state</span>.count++ }\n  },\n  getters: {\n    doubled: (<span class=k>state</span>) => <span class=k>state</span>.count * <span class=n>2</span>\n  }\n})\n\nstore.<span class=f>commit</span>(<span class=s>'increment'</span>)\nconsole.<span class=f>log</span>(store.getters.doubled)";
+  #_code_store = "<span class=k>import</span> { createStore } <span class=k>from</span> <span class=s>'@chasket/chasket-store'</span>\n\n<span class=k>const</span> store = <span class=f>createStore</span>({\n  <span class=k>state</span>: { count: <span class=n>0</span> },\n  actions: {\n    <span class=f>increment</span>(<span class=k>state</span>) { <span class=k>state</span>.count++ }\n  },\n  getters: {\n    doubled: (<span class=k>state</span>) => <span class=k>state</span>.count * <span class=n>2</span>\n  }\n})\n\nstore.<span class=f>commit</span>(<span class=s>'increment'</span>)\nconsole.<span class=f>log</span>(store.getters.doubled)";
   get #code_store() { return this.#_code_store; }
   set #code_store(v) { this.#_code_store = v; this.#scheduleUpdate(); }
-  #_code_ssr = "<span class=k>import</span> { renderToString, renderPage } <span class=k>from</span> <span class=s>'@aspect/chasket-ssr'</span>\n\n<span class=cm>// render component to HTM</span>L string\n<span class=k>const</span> html = <span class=k>await</span> <span class=f>renderToString</span>(MyComponent, { prop1: <span class=s>'value'</span> })\n\n<span class=cm>// render full page (with hydration)</span>\n<span class=k>const</span> pageHtml = <span class=k>await</span> <span class=f>renderPage</span>(App, options)";
+  #_code_ssr = "<span class=k>import</span> { renderToString, renderPage } <span class=k>from</span> <span class=s>'@chasket/chasket-ssr'</span>\n\n<span class=cm>// render component to HTM</span>L string\n<span class=k>const</span> html = <span class=k>await</span> <span class=f>renderToString</span>(MyComponent, { prop1: <span class=s>'value'</span> })\n\n<span class=cm>// render full page (with hydration)</span>\n<span class=k>const</span> pageHtml = <span class=k>await</span> <span class=f>renderPage</span>(App, options)";
   get #code_ssr() { return this.#_code_ssr; }
   set #code_ssr(v) { this.#_code_ssr = v; this.#scheduleUpdate(); }
   #_code_ui_components = "<span class=t>&lt;fl-button</span> variant=\"primary\" @click=\"handleClick\"<span class=t>&gt;</span>\n  Click me\n<span class=t>&lt;/fl-button</span><span class=t>&gt;</span>\n\n<span class=t>&lt;fl-input</span> :bind=\"username\" placeholder=\"Enter username\" <span class=t>/&gt;</span>\n\n<span class=t>&lt;fl-card</span><span class=t>&gt;</span>\n  <span class=t>&lt;fl-card-header</span><span class=t>&gt;</span>Title<span class=t>&lt;/fl-card-header</span><span class=t>&gt;</span>\n  <span class=t>&lt;fl-card-body</span><span class=t>&gt;</span>Content<span class=t>&lt;/fl-card-body</span><span class=t>&gt;</span>\n<span class=t>&lt;/fl-card</span><span class=t>&gt;</span>\n\n<span class=t>&lt;fl-dialog</span> :open=\"showDialog\" @close=\"showDialog = false\"<span class=t>&gt;</span>\n  Dialog content\n<span class=t>&lt;/fl-dialog</span><span class=t>&gt;</span>";
@@ -2608,7 +2608,7 @@ class CskApiEcosystem extends HTMLElement {
         </h2>
         <div id="router" class="subsection">
           <h3>
-            @aspect/chasket-router —
+            @chasket/chasket-router —
             ${this.#esc(this.#tr('apiContent.ecosystem.routerTitle'))}
           </h3>
           <p>
@@ -2636,12 +2636,12 @@ class CskApiEcosystem extends HTMLElement {
             </h4>
             <pre><code>${this.#code_router}</code></pre>
           </div>
-          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @aspect/chasket-router</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @chasket/chasket-router</code></pre>
 </div>
         </div>
         <div id="store" class="subsection">
           <h3>
-            @aspect/chasket-store —
+            @chasket/chasket-store —
             ${this.#esc(this.#tr('apiContent.ecosystem.storeTitle'))}
           </h3>
           <p>
@@ -2668,12 +2668,12 @@ class CskApiEcosystem extends HTMLElement {
             </h4>
             <pre><code>${this.#code_store}</code></pre>
           </div>
-          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @aspect/chasket-store</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @chasket/chasket-store</code></pre>
 </div>
         </div>
         <div id="ssr" class="subsection">
           <h3>
-            @aspect/chasket-ssr —
+            @chasket/chasket-ssr —
             ${this.#esc(this.#tr('apiContent.ecosystem.ssrTitle'))}
           </h3>
           <p>
@@ -2700,12 +2700,12 @@ class CskApiEcosystem extends HTMLElement {
             </h4>
             <pre><code>${this.#code_ssr}</code></pre>
           </div>
-          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @aspect/chasket-ssr</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @chasket/chasket-ssr</code></pre>
 </div>
         </div>
         <div id="ui" class="subsection">
           <h3>
-            @aspect/chasket-ui —
+            @chasket/chasket-ui —
             ${this.#esc(this.#tr('apiContent.ecosystem.uiTitle'))}
           </h3>
           <p>
@@ -2733,7 +2733,7 @@ class CskApiEcosystem extends HTMLElement {
             </h4>
             <pre><code>${this.#code_ui_components}</code></pre>
           </div>
-          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @aspect/chasket-ui</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @chasket/chasket-ui</code></pre>
 </div>
         </div>
         <div id="vite" class="subsection">
@@ -2768,7 +2768,7 @@ class CskApiEcosystem extends HTMLElement {
         </div>
         <div id="lsp" class="subsection">
           <h3>
-            @aspect/chasket-lsp —
+            @chasket/chasket-lsp —
             ${this.#esc(this.#tr('apiContent.ecosystem.lspTitle'))}
           </h3>
           <p>
@@ -2799,12 +2799,12 @@ class CskApiEcosystem extends HTMLElement {
               </li>
             </ul>
           </div>
-          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @aspect/chasket-lsp</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @chasket/chasket-lsp</code></pre>
 </div>
         </div>
         <div id="vscode" class="subsection">
           <h3>
-            @aspect/chasket-vscode —
+            @chasket/chasket-vscode —
             ${this.#esc(this.#tr('apiContent.ecosystem.vscodeTitle'))}
           </h3>
           <p>
@@ -2953,7 +2953,7 @@ class CskApiEcosystem extends HTMLElement {
         </h2>
         <div id="router" class="subsection">
           <h3>
-            @aspect/chasket-router —
+            @chasket/chasket-router —
             ${this.#esc(this.#tr('apiContent.ecosystem.routerTitle'))}
           </h3>
           <p>
@@ -2981,12 +2981,12 @@ class CskApiEcosystem extends HTMLElement {
             </h4>
             <pre><code>${this.#code_router}</code></pre>
           </div>
-          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @aspect/chasket-router</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @chasket/chasket-router</code></pre>
 </div>
         </div>
         <div id="store" class="subsection">
           <h3>
-            @aspect/chasket-store —
+            @chasket/chasket-store —
             ${this.#esc(this.#tr('apiContent.ecosystem.storeTitle'))}
           </h3>
           <p>
@@ -3013,12 +3013,12 @@ class CskApiEcosystem extends HTMLElement {
             </h4>
             <pre><code>${this.#code_store}</code></pre>
           </div>
-          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @aspect/chasket-store</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @chasket/chasket-store</code></pre>
 </div>
         </div>
         <div id="ssr" class="subsection">
           <h3>
-            @aspect/chasket-ssr —
+            @chasket/chasket-ssr —
             ${this.#esc(this.#tr('apiContent.ecosystem.ssrTitle'))}
           </h3>
           <p>
@@ -3045,12 +3045,12 @@ class CskApiEcosystem extends HTMLElement {
             </h4>
             <pre><code>${this.#code_ssr}</code></pre>
           </div>
-          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @aspect/chasket-ssr</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @chasket/chasket-ssr</code></pre>
 </div>
         </div>
         <div id="ui" class="subsection">
           <h3>
-            @aspect/chasket-ui —
+            @chasket/chasket-ui —
             ${this.#esc(this.#tr('apiContent.ecosystem.uiTitle'))}
           </h3>
           <p>
@@ -3078,7 +3078,7 @@ class CskApiEcosystem extends HTMLElement {
             </h4>
             <pre><code>${this.#code_ui_components}</code></pre>
           </div>
-          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @aspect/chasket-ui</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @chasket/chasket-ui</code></pre>
 </div>
         </div>
         <div id="vite" class="subsection">
@@ -3113,7 +3113,7 @@ class CskApiEcosystem extends HTMLElement {
         </div>
         <div id="lsp" class="subsection">
           <h3>
-            @aspect/chasket-lsp —
+            @chasket/chasket-lsp —
             ${this.#esc(this.#tr('apiContent.ecosystem.lspTitle'))}
           </h3>
           <p>
@@ -3144,12 +3144,12 @@ class CskApiEcosystem extends HTMLElement {
               </li>
             </ul>
           </div>
-          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @aspect/chasket-lsp</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><pre><code>npm install @chasket/chasket-lsp</code></pre>
 </div>
         </div>
         <div id="vscode" class="subsection">
           <h3>
-            @aspect/chasket-vscode —
+            @chasket/chasket-vscode —
             ${this.#esc(this.#tr('apiContent.ecosystem.vscodeTitle'))}
           </h3>
           <p>
@@ -3745,7 +3745,7 @@ class CskPageApi extends HTMLElement {
               <li><a href="#warning-codes">${this.#esc(this.#tr('api.sections.warningCodes'))}</a><ul><li><a href="#w0101">W0101: ${this.#esc(this.#tr('api.sections.warnings.w0101'))}</a></li><li><a href="#w0201">W0201: ${this.#esc(this.#tr('api.sections.warnings.w0201'))}</a></li><li><a href="#w0202">W0202: ${this.#esc(this.#tr('api.sections.warnings.w0202'))}</a></li><li><a href="#w0203">W0203: ${this.#esc(this.#tr('api.sections.warnings.w0203'))}</a></li></ul></li>
               <li>
 <a href="#ecosystem">${this.#esc(this.#tr('api.sections.ecosystem'))}</a>              </li>
-              <li><a href="#official-packages">${this.#esc(this.#tr('api.sections.officialPackages'))}</a><ul><li><a href="#router">@aspect/chasket-router</a></li><li><a href="#store">@aspect/chasket-store</a></li><li><a href="#ssr">@aspect/chasket-ssr</a></li><li><a href="#ui">@aspect/chasket-ui</a></li><li><a href="#vite">vite-plugin-chasket</a></li><li><a href="#lsp">@aspect/chasket-lsp</a></li><li><a href="#vscode">@aspect/chasket-vscode</a></li></ul></li>
+              <li><a href="#official-packages">${this.#esc(this.#tr('api.sections.officialPackages'))}</a><ul><li><a href="#router">@chasket/chasket-router</a></li><li><a href="#store">@chasket/chasket-store</a></li><li><a href="#ssr">@chasket/chasket-ssr</a></li><li><a href="#ui">@chasket/chasket-ui</a></li><li><a href="#vite">vite-plugin-chasket</a></li><li><a href="#lsp">@chasket/chasket-lsp</a></li><li><a href="#vscode">@chasket/chasket-vscode</a></li></ul></li>
               <li>
 <a href="#compilation-output">${this.#esc(this.#tr('api.sections.compilationOutput'))}</a>              </li>
             </ul>
@@ -3817,7 +3817,7 @@ class CskPageApi extends HTMLElement {
               <li><a href="#warning-codes">${this.#esc(this.#tr('api.sections.warningCodes'))}</a><ul><li><a href="#w0101">W0101: ${this.#esc(this.#tr('api.sections.warnings.w0101'))}</a></li><li><a href="#w0201">W0201: ${this.#esc(this.#tr('api.sections.warnings.w0201'))}</a></li><li><a href="#w0202">W0202: ${this.#esc(this.#tr('api.sections.warnings.w0202'))}</a></li><li><a href="#w0203">W0203: ${this.#esc(this.#tr('api.sections.warnings.w0203'))}</a></li></ul></li>
               <li>
 <a href="#ecosystem">${this.#esc(this.#tr('api.sections.ecosystem'))}</a>              </li>
-              <li><a href="#official-packages">${this.#esc(this.#tr('api.sections.officialPackages'))}</a><ul><li><a href="#router">@aspect/chasket-router</a></li><li><a href="#store">@aspect/chasket-store</a></li><li><a href="#ssr">@aspect/chasket-ssr</a></li><li><a href="#ui">@aspect/chasket-ui</a></li><li><a href="#vite">vite-plugin-chasket</a></li><li><a href="#lsp">@aspect/chasket-lsp</a></li><li><a href="#vscode">@aspect/chasket-vscode</a></li></ul></li>
+              <li><a href="#official-packages">${this.#esc(this.#tr('api.sections.officialPackages'))}</a><ul><li><a href="#router">@chasket/chasket-router</a></li><li><a href="#store">@chasket/chasket-store</a></li><li><a href="#ssr">@chasket/chasket-ssr</a></li><li><a href="#ui">@chasket/chasket-ui</a></li><li><a href="#vite">vite-plugin-chasket</a></li><li><a href="#lsp">@chasket/chasket-lsp</a></li><li><a href="#vscode">@chasket/chasket-vscode</a></li></ul></li>
               <li>
 <a href="#compilation-output">${this.#esc(this.#tr('api.sections.compilationOutput'))}</a>              </li>
             </ul>
@@ -7461,13 +7461,13 @@ class CskEcosystem extends HTMLElement {
             </p>
           </div>
           <div class="grid">
-            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"></path></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-cli</h3><p>${this.#esc(this.#tr('ecosystem.cli'))}</p><code class="install">npm i @aspect/chasket</code></div>
-            <div class="card coming"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"></path></svg></div><span class="badge soon">${this.#esc(this.#tr('ecosystem.comingSoon'))}</span></div><h3>chasket-router</h3><p>${this.#esc(this.#tr('ecosystem.router'))}</p><span class="install muted">@aspect/chasket-router</span></div>
-            <div class="card coming"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div><span class="badge soon">${this.#esc(this.#tr('ecosystem.comingSoon'))}</span></div><h3>chasket-store</h3><p>${this.#esc(this.#tr('ecosystem.store'))}</p><span class="install muted">@aspect/chasket-store</span></div>
-            <div class="card coming"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div><span class="badge soon">${this.#esc(this.#tr('ecosystem.comingSoon'))}</span></div><h3>chasket-ssr</h3><p>${this.#esc(this.#tr('ecosystem.ssr'))}</p><span class="install muted">@aspect/chasket-ssr</span></div>
-            <div class="card coming"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></div><span class="badge soon">${this.#esc(this.#tr('ecosystem.comingSoon'))}</span></div><h3>chasket-ui</h3><p>${this.#esc(this.#tr('ecosystem.ui'))}</p><span class="install muted">@aspect/chasket-ui</span></div>
-            <div class="card coming"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg></div><span class="badge soon">${this.#esc(this.#tr('ecosystem.comingSoon'))}</span></div><h3>vite-plugin-chasket</h3><p>${this.#esc(this.#tr('ecosystem.vite'))}</p><span class="install muted">vite-plugin-chasket</span></div>
-            <div class="card coming"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path></svg></div><span class="badge soon">${this.#esc(this.#tr('ecosystem.comingSoon'))}</span></div><h3>chasket-lsp</h3><p>${this.#esc(this.#tr('ecosystem.lsp'))}</p><span class="install muted">@aspect/chasket-lsp</span></div>
+            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"></path></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-cli</h3><p>${this.#esc(this.#tr('ecosystem.cli'))}</p><code class="install">npm i @chasket/chasket</code></div>
+            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"></path></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-router</h3><p>${this.#esc(this.#tr('ecosystem.router'))}</p><code class="install">npm i @chasket/chasket-router</code></div>
+            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-store</h3><p>${this.#esc(this.#tr('ecosystem.store'))}</p><code class="install">npm i @chasket/chasket-store</code></div>
+            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-ssr</h3><p>${this.#esc(this.#tr('ecosystem.ssr'))}</p><code class="install">npm i @chasket/chasket-ssr</code></div>
+            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-ui</h3><p>${this.#esc(this.#tr('ecosystem.ui'))}</p><code class="install">npm i @chasket/chasket-ui</code></div>
+            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>vite-plugin-chasket</h3><p>${this.#esc(this.#tr('ecosystem.vite'))}</p><code class="install">npm i @chasket/vite-plugin-chasket</code></div>
+            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-lsp</h3><p>${this.#esc(this.#tr('ecosystem.lsp'))}</p><code class="install">npm i @chasket/chasket-lsp</code></div>
             <div class="card coming"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"></path></svg></div><span class="badge soon">${this.#esc(this.#tr('ecosystem.comingSoon'))}</span></div><h3>chasket-vscode</h3><p>${this.#esc(this.#tr('ecosystem.vscode'))}</p><span class="install muted vs">VS Code Marketplace</span></div>
           </div>
         </div>
@@ -7491,13 +7491,13 @@ class CskEcosystem extends HTMLElement {
             </p>
           </div>
           <div class="grid">
-            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"></path></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-cli</h3><p>${this.#esc(this.#tr('ecosystem.cli'))}</p><code class="install">npm i @aspect/chasket</code></div>
-            <div class="card coming"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"></path></svg></div><span class="badge soon">${this.#esc(this.#tr('ecosystem.comingSoon'))}</span></div><h3>chasket-router</h3><p>${this.#esc(this.#tr('ecosystem.router'))}</p><span class="install muted">@aspect/chasket-router</span></div>
-            <div class="card coming"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div><span class="badge soon">${this.#esc(this.#tr('ecosystem.comingSoon'))}</span></div><h3>chasket-store</h3><p>${this.#esc(this.#tr('ecosystem.store'))}</p><span class="install muted">@aspect/chasket-store</span></div>
-            <div class="card coming"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div><span class="badge soon">${this.#esc(this.#tr('ecosystem.comingSoon'))}</span></div><h3>chasket-ssr</h3><p>${this.#esc(this.#tr('ecosystem.ssr'))}</p><span class="install muted">@aspect/chasket-ssr</span></div>
-            <div class="card coming"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></div><span class="badge soon">${this.#esc(this.#tr('ecosystem.comingSoon'))}</span></div><h3>chasket-ui</h3><p>${this.#esc(this.#tr('ecosystem.ui'))}</p><span class="install muted">@aspect/chasket-ui</span></div>
-            <div class="card coming"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg></div><span class="badge soon">${this.#esc(this.#tr('ecosystem.comingSoon'))}</span></div><h3>vite-plugin-chasket</h3><p>${this.#esc(this.#tr('ecosystem.vite'))}</p><span class="install muted">vite-plugin-chasket</span></div>
-            <div class="card coming"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path></svg></div><span class="badge soon">${this.#esc(this.#tr('ecosystem.comingSoon'))}</span></div><h3>chasket-lsp</h3><p>${this.#esc(this.#tr('ecosystem.lsp'))}</p><span class="install muted">@aspect/chasket-lsp</span></div>
+            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"></path></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-cli</h3><p>${this.#esc(this.#tr('ecosystem.cli'))}</p><code class="install">npm i @chasket/chasket</code></div>
+            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"></path></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-router</h3><p>${this.#esc(this.#tr('ecosystem.router'))}</p><code class="install">npm i @chasket/chasket-router</code></div>
+            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-store</h3><p>${this.#esc(this.#tr('ecosystem.store'))}</p><code class="install">npm i @chasket/chasket-store</code></div>
+            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-ssr</h3><p>${this.#esc(this.#tr('ecosystem.ssr'))}</p><code class="install">npm i @chasket/chasket-ssr</code></div>
+            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-ui</h3><p>${this.#esc(this.#tr('ecosystem.ui'))}</p><code class="install">npm i @chasket/chasket-ui</code></div>
+            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>vite-plugin-chasket</h3><p>${this.#esc(this.#tr('ecosystem.vite'))}</p><code class="install">npm i @chasket/vite-plugin-chasket</code></div>
+            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-lsp</h3><p>${this.#esc(this.#tr('ecosystem.lsp'))}</p><code class="install">npm i @chasket/chasket-lsp</code></div>
             <div class="card coming"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"></path></svg></div><span class="badge soon">${this.#esc(this.#tr('ecosystem.comingSoon'))}</span></div><h3>chasket-vscode</h3><p>${this.#esc(this.#tr('ecosystem.vscode'))}</p><span class="install muted vs">VS Code Marketplace</span></div>
           </div>
         </div>

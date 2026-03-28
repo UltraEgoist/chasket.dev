@@ -6,11 +6,11 @@
 <script>
   fn tr(k: string) { return window.__t(k) }
 
-  state code_router: string = "import { createRouter } from '@aspect/chasket-router'\n\nconst router = createRouter([\n  { path: '/', component: Home },\n  { path: '/about', component: About },\n  { path: '/posts/:id', component: PostDetail }\n])\n\nrouter.push('/')      // navigate\nconst route = router.current()  // current route"
+  state code_router: string = "import { createRouter } from '@chasket/chasket-router'\n\nconst router = createRouter([\n  { path: '/', component: Home },\n  { path: '/about', component: About },\n  { path: '/posts/:id', component: PostDetail }\n])\n\nrouter.push('/')      // navigate\nconst route = router.current()  // current route"
 
-  state code_store: string = "import { createStore } from '@aspect/chasket-store'\n\nconst store = createStore({\n  state: { count: 0 },\n  actions: {\n    increment(state) { state.count++ }\n  },\n  getters: {\n    doubled: (state) => state.count * 2\n  }\n})\n\nstore.commit('increment')\nconsole.log(store.getters.doubled)"
+  state code_store: string = "import { createStore } from '@chasket/chasket-store'\n\nconst store = createStore({\n  state: { count: 0 },\n  actions: {\n    increment(state) { state.count++ }\n  },\n  getters: {\n    doubled: (state) => state.count * 2\n  }\n})\n\nstore.commit('increment')\nconsole.log(store.getters.doubled)"
 
-  state code_ssr: string = "import { renderToString, renderPage } from '@aspect/chasket-ssr'\n\n// render component to HTML string\nconst html = await renderToString(MyComponent, { prop1: 'value' })\n\n// render full page (with hydration)\nconst pageHtml = await renderPage(App, options)"
+  state code_ssr: string = "import { renderToString, renderPage } from '@chasket/chasket-ssr'\n\n// render component to HTML string\nconst html = await renderToString(MyComponent, { prop1: 'value' })\n\n// render full page (with hydration)\nconst pageHtml = await renderPage(App, options)"
 
   state code_ui_components: string = "&lt;fl-button variant=\"primary\" @click=\"handleClick\"&gt;\n  Click me\n&lt;/fl-button&gt;\n\n&lt;fl-input :bind=\"username\" placeholder=\"Enter username\" /&gt;\n\n&lt;fl-card&gt;\n  &lt;fl-card-header&gt;Title&lt;/fl-card-header&gt;\n  &lt;fl-card-body&gt;Content&lt;/fl-card-body&gt;\n&lt;/fl-card&gt;\n\n&lt;fl-dialog :open=\"showDialog\" @close=\"showDialog = false\"&gt;\n  Dialog content\n&lt;/fl-dialog&gt;"
 
@@ -29,7 +29,7 @@
         <h2>{{ tr('apiContent.ecosystem.officialPackages') }}</h2>
 
         <div id="router" class="subsection">
-          <h3>@aspect/chasket-router — {{ tr('apiContent.ecosystem.routerTitle') }}</h3>
+          <h3>@chasket/chasket-router — {{ tr('apiContent.ecosystem.routerTitle') }}</h3>
           <p>{{ tr('apiContent.ecosystem.routerDesc') }}</p>
 
           <div class="property">
@@ -50,12 +50,12 @@
 
           <div class="note">
             <strong>{{ tr('apiContent.ecosystem.installation') }}:</strong>
-            <pre><code>npm install @aspect/chasket-router</code></pre>
+            <pre><code>npm install @chasket/chasket-router</code></pre>
           </div>
         </div>
 
         <div id="store" class="subsection">
-          <h3>@aspect/chasket-store — {{ tr('apiContent.ecosystem.storeTitle') }}</h3>
+          <h3>@chasket/chasket-store — {{ tr('apiContent.ecosystem.storeTitle') }}</h3>
           <p>{{ tr('apiContent.ecosystem.storeDesc') }}</p>
 
           <div class="property">
@@ -77,12 +77,12 @@
 
           <div class="note">
             <strong>{{ tr('apiContent.ecosystem.installation') }}:</strong>
-            <pre><code>npm install @aspect/chasket-store</code></pre>
+            <pre><code>npm install @chasket/chasket-store</code></pre>
           </div>
         </div>
 
         <div id="ssr" class="subsection">
-          <h3>@aspect/chasket-ssr — {{ tr('apiContent.ecosystem.ssrTitle') }}</h3>
+          <h3>@chasket/chasket-ssr — {{ tr('apiContent.ecosystem.ssrTitle') }}</h3>
           <p>{{ tr('apiContent.ecosystem.ssrDesc') }}</p>
 
           <div class="property">
@@ -102,12 +102,12 @@
 
           <div class="note">
             <strong>{{ tr('apiContent.ecosystem.installation') }}:</strong>
-            <pre><code>npm install @aspect/chasket-ssr</code></pre>
+            <pre><code>npm install @chasket/chasket-ssr</code></pre>
           </div>
         </div>
 
         <div id="ui" class="subsection">
-          <h3>@aspect/chasket-ui — {{ tr('apiContent.ecosystem.uiTitle') }}</h3>
+          <h3>@chasket/chasket-ui — {{ tr('apiContent.ecosystem.uiTitle') }}</h3>
           <p>{{ tr('apiContent.ecosystem.uiDesc') }}</p>
 
           <div class="property">
@@ -132,7 +132,7 @@
 
           <div class="note">
             <strong>{{ tr('apiContent.ecosystem.installation') }}:</strong>
-            <pre><code>npm install @aspect/chasket-ui</code></pre>
+            <pre><code>npm install @chasket/chasket-ui</code></pre>
           </div>
         </div>
 
@@ -157,7 +157,7 @@
         </div>
 
         <div id="lsp" class="subsection">
-          <h3>@aspect/chasket-lsp — {{ tr('apiContent.ecosystem.lspTitle') }}</h3>
+          <h3>@chasket/chasket-lsp — {{ tr('apiContent.ecosystem.lspTitle') }}</h3>
           <p>{{ tr('apiContent.ecosystem.lspDesc') }}</p>
 
           <div class="property">
@@ -174,12 +174,12 @@
 
           <div class="note">
             <strong>{{ tr('apiContent.ecosystem.installation') }}:</strong>
-            <pre><code>npm install @aspect/chasket-lsp</code></pre>
+            <pre><code>npm install @chasket/chasket-lsp</code></pre>
           </div>
         </div>
 
         <div id="vscode" class="subsection">
-          <h3>@aspect/chasket-vscode — {{ tr('apiContent.ecosystem.vscodeTitle') }}</h3>
+          <h3>@chasket/chasket-vscode — {{ tr('apiContent.ecosystem.vscodeTitle') }}</h3>
           <p>{{ tr('apiContent.ecosystem.vscodeDesc') }}</p>
 
           <div class="property">
