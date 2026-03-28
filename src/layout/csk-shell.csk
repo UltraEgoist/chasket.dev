@@ -1,0 +1,78 @@
+<meta>
+  name: "csk-shell"
+  shadow: none
+</meta>
+
+<script>
+  // csk-shell: アプリケーションシェル（ハッシュベースルーター）
+  // shadow: none — 子ページのスタイルがライト DOM に直接適用される。
+  // ルーティング: #/guide, #/api, #/testing, #/ のホワイトリスト方式。
+  // セクションアンカー（#overview 等）はルートとして認識しない。
+
+  // 現在表示中のページ識別子。空文字列で初期化し、on mount で遅延設定する。
+  // 理由: コンポーネント定義キューの完了を待つ必要があるため。
+  state currentPage: string = ""
+
+  // ハッシュからページ識別子を返す。
+  // 既知のルート以外（セクションアンカー等）は空文字列を返し、
+  // onHashChange() でスキップされる。これにより TOC リンクの
+  // href="#section" がページ遷移を引き起こさない。
+  fn getPage() {
+    const hash = window.location.hash || "#/"
+    if (hash.startsWith("#/why")) return "why"
+    if (hash.startsWith("#/guide")) return "guide"
+    if (hash.startsWith("#/api")) return "api"
+    if (hash.startsWith("#/testing")) return "testing"
+    if (hash === "#/" || hash === "#" || hash === "") return "home"
+    return ""
+  }
+
+  // hashchange イベントのハンドラ。
+  // getPage() が空文字列を返した場合はスキップ（セクションアンカー）。
+  // ページが変わった場合のみスクロール位置をリセット。
+  fn onHashChange() {
+    const next = getPage()
+    if (next === "") return
+    const changed = (next !== currentPage)
+    currentPage = next
+    if (changed) window.scrollTo(0, 0)
+  }
+
+  on mount {
+    window.addEventListener("hashchange", () => { onHashChange() })
+    // setTimeout(0): 全カスタム要素の定義完了を待ってから初回レンダリング
+    setTimeout(() => { currentPage = getPage() || "home" }, 0)
+  }
+</script>
+
+<template>
+  <div class="shell">
+    <csk-navbar></csk-navbar>
+    <main class="shell-main">
+      <#if condition="currentPage === 'home'">
+        <csk-page-home></csk-page-home>
+      <:else-if condition="currentPage === 'why'">
+        <csk-page-why></csk-page-why>
+      <:else-if condition="currentPage === 'guide'">
+        <csk-page-guide></csk-page-guide>
+      <:else-if condition="currentPage === 'api'">
+        <csk-page-api></csk-page-api>
+      <:else-if condition="currentPage === 'testing'">
+        <csk-page-testing></csk-page-testing>
+      </#if>
+    </main>
+    <csk-footer></csk-footer>
+  </div>
+</template>
+
+<style>
+  .shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  .shell-main {
+    flex: 1;
+    padding-top: 3.75rem;
+  }
+</style>

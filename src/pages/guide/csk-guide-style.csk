@@ -1,0 +1,60 @@
+<meta>
+  name: csk-guide-style
+  shadow: none
+</meta>
+
+<script>
+  state code_styling: string = ":host {\n  display: block;\n  --my-color: var(--c-primary);\n}\n\n:host(.dark) {\n  --my-color: var(--c-accent);\n}\n\np {\n  color: var(--my-color);\n  font-family: var(--font);\n}"
+
+  state code_shadowScope: string = "/* CSS is automatically scoped */\np { color: white; }"
+
+  fn tr(k: string) { return window.__t(k) }
+</script>
+
+<template>
+  <!-- style ブロック -->
+  <section id="style-block" class="doc-section">
+    <h2>{{ tr('guideContent.style.styleBlock.title') }}</h2>
+    <p>{{ tr('guideContent.style.styleBlock.desc') }}</p>
+
+    <div class="subsection">
+      <h3>{{ tr('guideContent.style.scoping.title') }}</h3>
+      <p>{{ tr('guideContent.style.scoping.desc') }}</p>
+
+      <p class="example-title">{{ tr('guideContent.style.scoping.shadowDOM') }}:</p>
+      <pre><code>{{ code_shadowScope }}</code></pre>
+
+      <p class="example-title">{{ tr('guideContent.style.scoping.lightDOM') }}:</p>
+      <pre><code>{{ code_styling }}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.style.scoping.featuresLabel') }}:</strong>
+        <ul>
+          <li><code>:host</code> - {{ tr('guideContent.style.scoping.features.f1') }}</li>
+          <li>{{ tr('guideContent.style.scoping.features.f2') }}</li>
+          <li>{{ tr('guideContent.style.scoping.features.f3') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>{{ tr('guideContent.style.customProps.title') }}</h3>
+      <p>{{ tr('guideContent.style.customProps.desc') }}</p>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.style.customProps.availableLabel') }}:</strong>
+        <ul>
+          <li><code>--c-bg</code> - {{ tr('guideContent.style.customProps.props.p1') }}</li>
+          <li><code>--c-text</code> - {{ tr('guideContent.style.customProps.props.p2') }}</li>
+          <li><code>--c-text-dim</code> - {{ tr('guideContent.style.customProps.props.p3') }}</li>
+          <li><code>--c-border</code> - {{ tr('guideContent.style.customProps.props.p4') }}</li>
+          <li><code>--c-bg-code</code> - {{ tr('guideContent.style.customProps.props.p5') }}</li>
+          <li><code>--c-primary</code> - {{ tr('guideContent.style.customProps.props.p6') }}</li>
+          <li><code>--c-accent</code> - {{ tr('guideContent.style.customProps.props.p7') }}</li>
+          <li><code>--font</code> - {{ tr('guideContent.style.customProps.props.p8') }}</li>
+          <li><code>--mono</code> - {{ tr('guideContent.style.customProps.props.p9') }}</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</template>

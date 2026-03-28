@@ -1,0 +1,26 @@
+{
+  "name": "chasket-dev",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Official documentation site for Chasket — built with Chasket",
+  "scripts": {
+    "build": "chasket build && node scripts/postbuild.js",
+    "dev": "chasket dev"
+  },
+  "devDependencies": {
+    "@aspect/chasket": "file:../chasket/chasket-cli"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UltraEgoist/chasket.dev.git"
+  },
+  "homepage": "https://chasket.dev",
+  "bugs": {
+    "url": "https://github.com/UltraEgoist/chasket.dev/issues"
+  },
+  "author": "Aspect",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

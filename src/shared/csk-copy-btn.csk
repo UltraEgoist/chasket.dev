@@ -1,0 +1,46 @@
+<meta>
+  name: "csk-copy-btn"
+  shadow: open
+</meta>
+
+<script>
+  prop text: string = ""
+  state copied: boolean = false
+
+  fn copy() {
+    if (navigator.clipboard && text !== "") {
+      navigator.clipboard.writeText(text)
+      copied = true
+      setTimeout(() => { copied = false }, 2000)
+    }
+  }
+</script>
+
+<template>
+  <button @click="copy" :class="copied ? 'btn copied' : 'btn'" aria-label="Copy to clipboard">
+    <#if condition="copied">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    <:else>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
+    </#if>
+  </button>
+</template>
+
+<style>
+  :host { display: inline-flex; }
+
+  .btn {
+    background: none;
+    border: none;
+    color: var(--c-text-dim, #9898ab);
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn:hover { color: #fff; }
+  .btn.copied { color: var(--c-accent, #00B894); }
+</style>

@@ -1,0 +1,120 @@
+<meta>
+  name: "csk-cta"
+  shadow: open
+</meta>
+
+<script>
+  fn tr(k: string) { return window.__t(k) }
+
+  state copied: boolean = false
+
+  fn copyCmd() {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText("npx chasket init my-app")
+      copied = true
+    }
+  }
+</script>
+
+<template>
+  <section class="cta">
+    <div class="container">
+      <h2>{{ tr('cta.title') }}</h2>
+      <p>{{ tr('cta.subtitle') }}</p>
+      <div class="install">
+        <code>npx chasket init my-app</code>
+        <button @click="copyCmd" :class="copied ? 'copy copied' : 'copy'" :aria-label="tr('cta.copyLabel')">
+          <#if condition="copied">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <:else>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
+          </#if>
+        </button>
+      </div>
+      <div class="links">
+        <a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer">{{ tr('cta.github') }}</a>
+        <span class="sep">·</span>
+        <a href="https://github.com/UltraEgoist/chasket/tree/main/docs" target="_blank" rel="noopener noreferrer">{{ tr('cta.docs') }}</a>
+        <span class="sep">·</span>
+        <a href="https://github.com/UltraEgoist/chasket/tree/main/examples" target="_blank" rel="noopener noreferrer">{{ tr('cta.examples') }}</a>
+      </div>
+    </div>
+  </section>
+</template>
+
+<style>
+  :host { display: block; }
+
+  .cta {
+    padding: var(--space-section, 5rem) 0 clamp(3rem, 6vw, 5rem);
+    text-align: center;
+    background: linear-gradient(180deg, transparent 0%, rgba(108,92,231,0.06) 100%);
+  }
+
+  .container { max-width: var(--max-w, 70rem); margin: 0 auto; padding: 0 var(--space-page, 1.5rem); }
+
+  h2 {
+    font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--c-text, #e4e4ed);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  p {
+    color: var(--c-text-dim, #9898ab);
+    font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .install {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--c-bg-code, #0d0d14);
+    border: 1px solid var(--c-border, #2a2a3a);
+    border-radius: 0.625rem;
+    padding: 0.75rem 1.125rem;
+    font-size: clamp(0.8rem, 1vw, 0.9rem);
+    color: var(--c-accent-light, #55efc4);
+    margin-bottom: 1.75rem;
+    max-width: 100%;
+  }
+  .install code {
+    font-family: var(--mono, monospace);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .copy {
+    background: none; border: none;
+    color: var(--c-text-dim, #9898ab);
+    cursor: pointer; padding: 0.25rem;
+    border-radius: 0.25rem;
+    transition: color 0.2s;
+    display: flex; align-items: center;
+    min-width: 2.25rem; min-height: 2.25rem;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .copy:hover { color: #fff; }
+  .copy.copied { color: var(--c-accent, #00B894); }
+
+  .links {
+    font-size: clamp(0.8rem, 0.95vw, 0.9rem);
+  }
+  .links a {
+    color: var(--c-primary-light, #a29bfe);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .links a:hover { color: #fff; text-decoration: underline; }
+  .sep { color: var(--c-border, #2a2a3a); margin: 0 0.625rem; }
+
+  @media (max-width: 30rem) {
+    .links { display: flex; flex-direction: column; gap: 0.5rem; align-items: center; }
+    .sep { display: none; }
+    .links a { padding: 0.25rem 0; }
+  }
+</style>

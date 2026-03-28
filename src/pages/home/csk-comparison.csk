@@ -1,0 +1,157 @@
+<meta>
+  name: "csk-comparison"
+  shadow: open
+</meta>
+
+<script>
+  fn tr(k: string) { return window.__t(k) }
+</script>
+
+<template>
+  <section class="section">
+    <div class="container">
+      <div class="hd">
+        <h2>{{ tr('comparison.title') }}</h2>
+        <p>{{ tr('comparison.subtitle') }}</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th class="hl">Chasket</th>
+              <th>React</th>
+              <th>Vue</th>
+              <th>Svelte</th>
+              <th>Lit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="label">{{ tr('comparison.runtimeSize') }}</td>
+              <td class="hl"><strong>0 KB</strong></td>
+              <td>~40 KB</td>
+              <td>~33 KB</td>
+              <td>~2 KB</td>
+              <td>~5 KB</td>
+            </tr>
+            <tr>
+              <td class="label">{{ tr('comparison.webComponents') }}</td>
+              <td class="hl">{{ tr('comparison.native') }}</td>
+              <td>-</td>
+              <td>{{ tr('comparison.partial') }}</td>
+              <td>{{ tr('comparison.partial') }}</td>
+              <td>{{ tr('comparison.native') }}</td>
+            </tr>
+            <tr>
+              <td class="label">{{ tr('comparison.singleFile') }}</td>
+              <td class="hl">Yes</td>
+              <td>-</td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td class="label">{{ tr('comparison.builtInTypes') }}</td>
+              <td class="hl">Yes</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td class="label">{{ tr('comparison.xssAutoEscape') }}</td>
+              <td class="hl">Yes</td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td class="label">{{ tr('comparison.scopedCss') }}</td>
+              <td class="hl">Shadow DOM</td>
+              <td>CSS Modules</td>
+              <td>Scoped</td>
+              <td>Scoped</td>
+              <td>Shadow DOM</td>
+            </tr>
+            <tr>
+              <td class="label">{{ tr('comparison.ssr') }}</td>
+              <td class="hl">Yes</td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>Yes</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</template>
+
+<style>
+  :host { display: block; padding: var(--space-section, 5rem) 0; }
+
+  .container { max-width: var(--max-w, 70rem); margin: 0 auto; padding: 0 var(--space-page, 1.5rem); }
+
+  .hd { text-align: center; margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+  .hd h2 {
+    font-size: clamp(1.4rem, 2.8vw, 2.2rem); font-weight: 700;
+    letter-spacing: -0.02em; margin-bottom: 0.75rem; color: var(--c-text, #e4e4ed);
+  }
+  .hd p {
+    font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+    color: var(--c-text-dim, #9898ab); max-width: 35rem; margin: 0 auto;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--radius-lg, 1rem);
+    background:
+      linear-gradient(90deg, var(--c-bg-card, #12121a) 30%, transparent),
+      linear-gradient(90deg, transparent, var(--c-bg-card, #12121a) 70%) 100% 0,
+      linear-gradient(90deg, rgba(0,0,0,0.2), transparent 15px),
+      linear-gradient(90deg, transparent, rgba(0,0,0,0.2)) 100% 0;
+    background-repeat: no-repeat;
+    background-size: 2rem 100%, 2rem 100%, 1rem 100%, 1rem 100%;
+    background-attachment: local, local, scroll, scroll;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: clamp(0.75rem, 0.95vw, 0.88rem);
+    background: var(--c-bg-card, #12121a);
+    border-radius: var(--radius-lg, 1rem);
+    overflow: hidden;
+    border: 1px solid var(--c-border, #2a2a3a);
+    min-width: 36rem;
+  }
+
+  th, td {
+    padding: clamp(0.625rem, 1.2vw, 0.875rem) clamp(0.75rem, 1.5vw, 1.25rem);
+    text-align: center;
+    border-bottom: 1px solid var(--c-border, #2a2a3a);
+  }
+
+  th {
+    font-weight: 600;
+    color: var(--c-text-dim, #9898ab);
+    font-size: clamp(0.7rem, 0.85vw, 0.82rem);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .label { text-align: left; font-weight: 500; color: var(--c-text, #e4e4ed); white-space: nowrap; }
+
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: rgba(108,92,231,0.04); }
+
+  .hl {
+    background: rgba(108,92,231,0.08);
+    color: var(--c-primary-light, #a29bfe);
+  }
+  thead .hl { font-size: clamp(0.75rem, 0.95vw, 0.88rem); }
+</style>
