@@ -18,131 +18,131 @@
 <template>
   <!-- Assertions -->
   <section id="assertions" class="doc-section">
-    <h2>アサーション</h2>
+    <h2>${window.__t('testContent.assertions.title')}</h2>
 
     <div class="subsection">
-      <h3 id="assert-basic">基本的なアサーション</h3>
+      <h3 id="assert-basic">${window.__t('testContent.assertions.basicTitle')}</h3>
       <div class="property">
         <h4>assert(condition, msg)</h4>
-        <p>条件が真であることを検証します。</p>
+        <p>${window.__t('testContent.assertions.assertDesc')}</p>
       </div>
       <div class="property">
         <h4>eq(actual, expected, msg)</h4>
-        <p>厳密等価性（===）を検証します。</p>
+        <p>${window.__t('testContent.assertions.eqDesc')}</p>
       </div>
       <div class="property">
         <h4>deepEq(actual, expected, msg)</h4>
-        <p>深い等価性（JSON ベース）を検証します。</p>
+        <p>${window.__t('testContent.assertions.deepEqDesc')}</p>
       </div>
       <div class="property">
         <h4>includes(str, sub, msg)</h4>
-        <p>文字列が部分文字列を含むことを検証します。</p>
+        <p>${window.__t('testContent.assertions.includesDesc')}</p>
       </div>
       <div class="property">
         <h4>notIncludes(str, sub, msg)</h4>
-        <p>文字列が部分文字列を含まないことを検証します。</p>
+        <p>${window.__t('testContent.assertions.notIncludesDesc')}</p>
       </div>
       <div class="property">
         <h4>matches(str, regex, msg)</h4>
-        <p>文字列が正規表現に一致することを検証します。</p>
+        <p>${window.__t('testContent.assertions.matchesDesc')}</p>
       </div>
       <div class="property">
         <h4>throws(fn, msg)</h4>
-        <p>関数が例外をスローすることを検証します。</p>
+        <p>${window.__t('testContent.assertions.throwsDesc')}</p>
       </div>
-      <div class="example-title">使用例</div>
+      <div class="example-title">${window.__t('testContent.assertions.usageExample')}</div>
       <pre><code>{{ exampleAssert }}</code></pre>
     </div>
 
     <div class="subsection">
-      <h3 id="assert-compile">コンパイル関連のアサーション</h3>
+      <h3 id="assert-compile">${window.__t('testContent.assertions.compileTitle')}</h3>
       <div class="property">
         <h4>compileSuccess(result, msg)</h4>
-        <p>コンパイルが成功したことを検証します。</p>
+        <p>${window.__t('testContent.assertions.compileSuccessDesc')}</p>
       </div>
       <div class="property">
         <h4>compileFails(result, msg)</h4>
-        <p>コンパイルが失敗したことを検証します。</p>
+        <p>${window.__t('testContent.assertions.compileFailsDesc')}</p>
       </div>
       <div class="property">
         <h4>validJS(result, msg)</h4>
-        <p>出力が有効な JavaScript であることを検証します（<code>new Function()</code> で検証）。</p>
+        <p>${window.__t('testContent.assertions.validJSDesc')}</p>
       </div>
     </div>
 
     <div class="subsection">
-      <h3 id="assert-output">出力関連のアサーション</h3>
+      <h3 id="assert-output">${window.__t('testContent.assertions.outputTitle')}</h3>
       <div class="property">
         <h4>outputIncludes(result, sub, msg)</h4>
-        <p>生成されたコードが指定文字列を含むことを検証します。</p>
+        <p>${window.__t('testContent.assertions.outputIncludesDesc')}</p>
       </div>
       <div class="property">
         <h4>outputNotIncludes(result, sub, msg)</h4>
-        <p>生成されたコードが指定文字列を含まないことを検証します。</p>
+        <p>${window.__t('testContent.assertions.outputNotIncludesDesc')}</p>
       </div>
-      <div class="example-title">使用例</div>
+      <div class="example-title">${window.__t('testContent.assertions.usageExample')}</div>
       <pre><code>{{ exampleOutput }}</code></pre>
     </div>
 
     <div class="subsection">
-      <h3 id="assert-template">テンプレート関連のアサーション</h3>
+      <h3 id="assert-template">${window.__t('testContent.assertions.templateTitle')}</h3>
       <div class="property">
         <h4>getTemplate(result)</h4>
-        <p>生成されたコードからテンプレート文字列を抽出し、返します。</p>
+        <p>${window.__t('testContent.assertions.getTemplateDesc')}</p>
       </div>
       <div class="property">
         <h4>templateIncludes(result, sub, msg)</h4>
-        <p>抽出されたテンプレートが指定文字列を含むことを検証します。</p>
+        <p>${window.__t('testContent.assertions.templateIncludesDesc')}</p>
       </div>
       <div class="property">
         <h4>templateNotIncludes(result, sub, msg)</h4>
-        <p>抽出されたテンプレートが指定文字列を含まないことを検証します。</p>
+        <p>${window.__t('testContent.assertions.templateNotIncludesDesc')}</p>
       </div>
-      <div class="example-title">使用例</div>
+      <div class="example-title">${window.__t('testContent.assertions.usageExample')}</div>
       <pre><code>{{ exampleTemplate }}</code></pre>
     </div>
 
     <div class="subsection">
-      <h3 id="assert-state">state・ライフサイクル関連のアサーション</h3>
+      <h3 id="assert-state">${window.__t('testContent.assertions.stateTitle')}</h3>
       <div class="property">
         <h4>hasState(result, name, msg)</h4>
-        <p>指定名の state ゲッター / セッターペアが生成されたことを検証します。</p>
+        <p>${window.__t('testContent.assertions.hasStateDesc')}</p>
       </div>
       <div class="property">
         <h4>hasWatch(result, deps, msg)</h4>
-        <p>watch ハンドラが生成されたことを検証します。</p>
+        <p>${window.__t('testContent.assertions.hasWatchDesc')}</p>
       </div>
       <div class="property">
         <h4>hasOnMount(result, bodySubstring, msg)</h4>
-        <p><code>connectedCallback()</code> が指定部分文字列を含むことを検証します。</p>
+        <p>${window.__t('testContent.assertions.hasOnMountDesc')}</p>
       </div>
       <div class="property">
         <h4>hasOnUnmount(result, bodySubstring, msg)</h4>
-        <p><code>disconnectedCallback()</code> が指定部分文字列を含むことを検証します。</p>
+        <p>${window.__t('testContent.assertions.hasOnUnmountDesc')}</p>
       </div>
       <div class="property">
         <h4>hasInterpolation(result, varName, msg)</h4>
-        <p>変数が補間される（<code>this.#esc(this.#varName)</code> パターン）ことを検証します。</p>
+        <p>${window.__t('testContent.assertions.hasInterpolationDesc')}</p>
       </div>
-      <div class="example-title">使用例</div>
+      <div class="example-title">${window.__t('testContent.assertions.usageExample')}</div>
       <pre><code>{{ exampleState }}</code></pre>
     </div>
 
     <div class="subsection">
-      <h3 id="assert-diag">診断情報関連のアサーション</h3>
+      <h3 id="assert-diag">${window.__t('testContent.assertions.diagTitle')}</h3>
       <div class="property">
         <h4>hasDiag(result, code, level?, msg)</h4>
-        <p>指定コード（例: 'E0301'）の診断が存在することを検証します。オプションで <code>level</code>（'error', 'warning', 'info'）でフィルタリング可能です。</p>
+        <p>${window.__t('testContent.assertions.hasDiagDesc')}</p>
       </div>
       <div class="property">
         <h4>noDiag(result, code, msg)</h4>
-        <p>指定コードの診断が存在しないことを検証します。</p>
+        <p>${window.__t('testContent.assertions.noDiagDesc')}</p>
       </div>
       <div class="property">
         <h4>diagCount(result, level, expected, msg)</h4>
-        <p>指定レベル（'error', 'warning', 'info'）の診断数が期待値であることを検証します。</p>
+        <p>${window.__t('testContent.assertions.diagCountDesc')}</p>
       </div>
-      <div class="example-title">使用例</div>
+      <div class="example-title">${window.__t('testContent.assertions.usageExample')}</div>
       <pre><code>{{ exampleDiag }}</code></pre>
     </div>
   </section>

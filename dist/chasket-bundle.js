@@ -1,4 +1,4 @@
-// Chasket Bundle - 2026-03-28T10:36:24.439Z
+// Chasket Bundle - 2026-03-28T10:39:47.478Z
 // 33 component(s)
 
 // Deferred registration queue: all classes are defined first,
@@ -9087,29 +9087,31 @@ class CskTestApi extends HTMLElement {
       <!-- API Reference -->
       <section id="api-reference" class="doc-section">
         <h2>
-          API リファレンス
+          \${window.__t('testContent.api.title')}
         </h2>
         <div class="subsection">
           <h3 id="api-suite">
             suite(name, setupFn)
           </h3>
-          <p>テストスイートを定義します。<code>setupFn</code> はテストコンテキストを受け取り、テストを登録します。</p>
+          <p>
+            \${window.__t('testContent.api.suiteDesc')}
+          </p>
           <div class="property">
             <h4>
               suite.run(opts?)
             </h4>
             <p>
-              すべての登録済みスイートを実行し、結果をコンソール出力します。
+              \${window.__t('testContent.api.suiteRunDesc')}
             </p>
             <p>
-<strong>オプション:</strong>            </p>
+<strong>\${window.__t('testContent.api.options')}</strong>            </p>
             <ul>
-              <li><code>filter</code> (string): スイート名またはテスト名に一致するもののみ実行</li>
-              <li><code>verbose</code> (boolean): 詳細出力（デフォルト: true）</li>
+              <li><code>filter</code> (string): \${window.__t('testContent.api.filterOption')}</li>
+              <li><code>verbose</code> (boolean): \${window.__t('testContent.api.verboseOption')}</li>
             </ul>
           </div>
           <div class="example-title">
-            使用例
+            \${window.__t('testContent.api.usageExample')}
           </div>
           <pre><code>${this.#exampleAPI}</code></pre>
         </div>
@@ -9117,9 +9119,11 @@ class CskTestApi extends HTMLElement {
           <h3 id="api-test">
             test(name, fn) / xtest(name, fn)
           </h3>
-          <p><code>test()</code> は実行するテストを登録します。<code>xtest()</code> は同じですがテストをスキップします。</p>
           <p>
-            各テスト関数はテストコンテキストで利用可能なアサーションにアクセスできます。
+            \${window.__t('testContent.api.testDesc')}
+          </p>
+          <p>
+            \${window.__t('testContent.api.testFuncDesc')}
           </p>
         </div>
         <div class="subsection">
@@ -9127,7 +9131,7 @@ class CskTestApi extends HTMLElement {
             beforeEach(fn) / afterEach(fn)
           </h3>
           <p>
-            各テスト前後に実行するセットアップ / クリーンアップ関数を登録します。
+            \${window.__t('testContent.api.lifecycleDesc')}
           </p>
           <pre><code>t.<span class=f>beforeEach</span>(() => <span class=i>{{ /* setup */ }}</span>);
 t.<span class=f>afterEach</span>(() => <span class=i>{{ /* cleanup */ }}</span>);</code></pre>
@@ -9143,29 +9147,31 @@ t.<span class=f>afterEach</span>(() => <span class=i>{{ /* cleanup */ }}</span>)
       <!-- API Reference -->
       <section id="api-reference" class="doc-section">
         <h2>
-          API リファレンス
+          \${window.__t('testContent.api.title')}
         </h2>
         <div class="subsection">
           <h3 id="api-suite">
             suite(name, setupFn)
           </h3>
-          <p>テストスイートを定義します。<code>setupFn</code> はテストコンテキストを受け取り、テストを登録します。</p>
+          <p>
+            \${window.__t('testContent.api.suiteDesc')}
+          </p>
           <div class="property">
             <h4>
               suite.run(opts?)
             </h4>
             <p>
-              すべての登録済みスイートを実行し、結果をコンソール出力します。
+              \${window.__t('testContent.api.suiteRunDesc')}
             </p>
             <p>
-<strong>オプション:</strong>            </p>
+<strong>\${window.__t('testContent.api.options')}</strong>            </p>
             <ul>
-              <li><code>filter</code> (string): スイート名またはテスト名に一致するもののみ実行</li>
-              <li><code>verbose</code> (boolean): 詳細出力（デフォルト: true）</li>
+              <li><code>filter</code> (string): \${window.__t('testContent.api.filterOption')}</li>
+              <li><code>verbose</code> (boolean): \${window.__t('testContent.api.verboseOption')}</li>
             </ul>
           </div>
           <div class="example-title">
-            使用例
+            \${window.__t('testContent.api.usageExample')}
           </div>
           <pre><code>${this.#exampleAPI}</code></pre>
         </div>
@@ -9173,9 +9179,11 @@ t.<span class=f>afterEach</span>(() => <span class=i>{{ /* cleanup */ }}</span>)
           <h3 id="api-test">
             test(name, fn) / xtest(name, fn)
           </h3>
-          <p><code>test()</code> は実行するテストを登録します。<code>xtest()</code> は同じですがテストをスキップします。</p>
           <p>
-            各テスト関数はテストコンテキストで利用可能なアサーションにアクセスできます。
+            \${window.__t('testContent.api.testDesc')}
+          </p>
+          <p>
+            \${window.__t('testContent.api.testFuncDesc')}
           </p>
         </div>
         <div class="subsection">
@@ -9183,7 +9191,7 @@ t.<span class=f>afterEach</span>(() => <span class=i>{{ /* cleanup */ }}</span>)
             beforeEach(fn) / afterEach(fn)
           </h3>
           <p>
-            各テスト前後に実行するセットアップ / クリーンアップ関数を登録します。
+            \${window.__t('testContent.api.lifecycleDesc')}
           </p>
           <pre><code>t.<span class=f>beforeEach</span>(() => <span class=i>{{ /* setup */ }}</span>);
 t.<span class=f>afterEach</span>(() => <span class=i>{{ /* cleanup */ }}</span>);</code></pre>
@@ -9351,18 +9359,18 @@ class CskTestAssertions extends HTMLElement {
       <!-- Assertions -->
       <section id="assertions" class="doc-section">
         <h2>
-          アサーション
+          \${window.__t('testContent.assertions.title')}
         </h2>
         <div class="subsection">
           <h3 id="assert-basic">
-            基本的なアサーション
+            \${window.__t('testContent.assertions.basicTitle')}
           </h3>
           <div class="property">
             <h4>
               assert(condition, msg)
             </h4>
             <p>
-              条件が真であることを検証します。
+              \${window.__t('testContent.assertions.assertDesc')}
             </p>
           </div>
           <div class="property">
@@ -9370,7 +9378,7 @@ class CskTestAssertions extends HTMLElement {
               eq(actual, expected, msg)
             </h4>
             <p>
-              厳密等価性（===）を検証します。
+              \${window.__t('testContent.assertions.eqDesc')}
             </p>
           </div>
           <div class="property">
@@ -9378,7 +9386,7 @@ class CskTestAssertions extends HTMLElement {
               deepEq(actual, expected, msg)
             </h4>
             <p>
-              深い等価性（JSON ベース）を検証します。
+              \${window.__t('testContent.assertions.deepEqDesc')}
             </p>
           </div>
           <div class="property">
@@ -9386,7 +9394,7 @@ class CskTestAssertions extends HTMLElement {
               includes(str, sub, msg)
             </h4>
             <p>
-              文字列が部分文字列を含むことを検証します。
+              \${window.__t('testContent.assertions.includesDesc')}
             </p>
           </div>
           <div class="property">
@@ -9394,7 +9402,7 @@ class CskTestAssertions extends HTMLElement {
               notIncludes(str, sub, msg)
             </h4>
             <p>
-              文字列が部分文字列を含まないことを検証します。
+              \${window.__t('testContent.assertions.notIncludesDesc')}
             </p>
           </div>
           <div class="property">
@@ -9402,7 +9410,7 @@ class CskTestAssertions extends HTMLElement {
               matches(str, regex, msg)
             </h4>
             <p>
-              文字列が正規表現に一致することを検証します。
+              \${window.__t('testContent.assertions.matchesDesc')}
             </p>
           </div>
           <div class="property">
@@ -9410,24 +9418,24 @@ class CskTestAssertions extends HTMLElement {
               throws(fn, msg)
             </h4>
             <p>
-              関数が例外をスローすることを検証します。
+              \${window.__t('testContent.assertions.throwsDesc')}
             </p>
           </div>
           <div class="example-title">
-            使用例
+            \${window.__t('testContent.assertions.usageExample')}
           </div>
           <pre><code>${this.#exampleAssert}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-compile">
-            コンパイル関連のアサーション
+            \${window.__t('testContent.assertions.compileTitle')}
           </h3>
           <div class="property">
             <h4>
               compileSuccess(result, msg)
             </h4>
             <p>
-              コンパイルが成功したことを検証します。
+              \${window.__t('testContent.assertions.compileSuccessDesc')}
             </p>
           </div>
           <div class="property">
@@ -9435,26 +9443,28 @@ class CskTestAssertions extends HTMLElement {
               compileFails(result, msg)
             </h4>
             <p>
-              コンパイルが失敗したことを検証します。
+              \${window.__t('testContent.assertions.compileFailsDesc')}
             </p>
           </div>
           <div class="property">
             <h4>
               validJS(result, msg)
             </h4>
-            <p>出力が有効な JavaScript であることを検証します（<code>new Function()</code> で検証）。</p>
+            <p>
+              \${window.__t('testContent.assertions.validJSDesc')}
+            </p>
           </div>
         </div>
         <div class="subsection">
           <h3 id="assert-output">
-            出力関連のアサーション
+            \${window.__t('testContent.assertions.outputTitle')}
           </h3>
           <div class="property">
             <h4>
               outputIncludes(result, sub, msg)
             </h4>
             <p>
-              生成されたコードが指定文字列を含むことを検証します。
+              \${window.__t('testContent.assertions.outputIncludesDesc')}
             </p>
           </div>
           <div class="property">
@@ -9462,24 +9472,24 @@ class CskTestAssertions extends HTMLElement {
               outputNotIncludes(result, sub, msg)
             </h4>
             <p>
-              生成されたコードが指定文字列を含まないことを検証します。
+              \${window.__t('testContent.assertions.outputNotIncludesDesc')}
             </p>
           </div>
           <div class="example-title">
-            使用例
+            \${window.__t('testContent.assertions.usageExample')}
           </div>
           <pre><code>${this.#exampleOutput}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-template">
-            テンプレート関連のアサーション
+            \${window.__t('testContent.assertions.templateTitle')}
           </h3>
           <div class="property">
             <h4>
               getTemplate(result)
             </h4>
             <p>
-              生成されたコードからテンプレート文字列を抽出し、返します。
+              \${window.__t('testContent.assertions.getTemplateDesc')}
             </p>
           </div>
           <div class="property">
@@ -9487,7 +9497,7 @@ class CskTestAssertions extends HTMLElement {
               templateIncludes(result, sub, msg)
             </h4>
             <p>
-              抽出されたテンプレートが指定文字列を含むことを検証します。
+              \${window.__t('testContent.assertions.templateIncludesDesc')}
             </p>
           </div>
           <div class="property">
@@ -9495,24 +9505,24 @@ class CskTestAssertions extends HTMLElement {
               templateNotIncludes(result, sub, msg)
             </h4>
             <p>
-              抽出されたテンプレートが指定文字列を含まないことを検証します。
+              \${window.__t('testContent.assertions.templateNotIncludesDesc')}
             </p>
           </div>
           <div class="example-title">
-            使用例
+            \${window.__t('testContent.assertions.usageExample')}
           </div>
           <pre><code>${this.#exampleTemplate}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-state">
-            state・ライフサイクル関連のアサーション
+            \${window.__t('testContent.assertions.stateTitle')}
           </h3>
           <div class="property">
             <h4>
               hasState(result, name, msg)
             </h4>
             <p>
-              指定名の state ゲッター / セッターペアが生成されたことを検証します。
+              \${window.__t('testContent.assertions.hasStateDesc')}
             </p>
           </div>
           <div class="property">
@@ -9520,48 +9530,56 @@ class CskTestAssertions extends HTMLElement {
               hasWatch(result, deps, msg)
             </h4>
             <p>
-              watch ハンドラが生成されたことを検証します。
+              \${window.__t('testContent.assertions.hasWatchDesc')}
             </p>
           </div>
           <div class="property">
             <h4>
               hasOnMount(result, bodySubstring, msg)
             </h4>
-            <p><code>connectedCallback()</code> が指定部分文字列を含むことを検証します。</p>
+            <p>
+              \${window.__t('testContent.assertions.hasOnMountDesc')}
+            </p>
           </div>
           <div class="property">
             <h4>
               hasOnUnmount(result, bodySubstring, msg)
             </h4>
-            <p><code>disconnectedCallback()</code> が指定部分文字列を含むことを検証します。</p>
+            <p>
+              \${window.__t('testContent.assertions.hasOnUnmountDesc')}
+            </p>
           </div>
           <div class="property">
             <h4>
               hasInterpolation(result, varName, msg)
             </h4>
-            <p>変数が補間される（<code>this.#esc(this.#varName)</code> パターン）ことを検証します。</p>
+            <p>
+              \${window.__t('testContent.assertions.hasInterpolationDesc')}
+            </p>
           </div>
           <div class="example-title">
-            使用例
+            \${window.__t('testContent.assertions.usageExample')}
           </div>
           <pre><code>${this.#exampleState}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-diag">
-            診断情報関連のアサーション
+            \${window.__t('testContent.assertions.diagTitle')}
           </h3>
           <div class="property">
             <h4>
               hasDiag(result, code, level?, msg)
             </h4>
-            <p>指定コード（例: 'E0301'）の診断が存在することを検証します。オプションで <code>level</code>（'error', 'warning', 'info'）でフィルタリング可能です。</p>
+            <p>
+              \${window.__t('testContent.assertions.hasDiagDesc')}
+            </p>
           </div>
           <div class="property">
             <h4>
               noDiag(result, code, msg)
             </h4>
             <p>
-              指定コードの診断が存在しないことを検証します。
+              \${window.__t('testContent.assertions.noDiagDesc')}
             </p>
           </div>
           <div class="property">
@@ -9569,11 +9587,11 @@ class CskTestAssertions extends HTMLElement {
               diagCount(result, level, expected, msg)
             </h4>
             <p>
-              指定レベル（'error', 'warning', 'info'）の診断数が期待値であることを検証します。
+              \${window.__t('testContent.assertions.diagCountDesc')}
             </p>
           </div>
           <div class="example-title">
-            使用例
+            \${window.__t('testContent.assertions.usageExample')}
           </div>
           <pre><code>${this.#exampleDiag}</code></pre>
         </div>
@@ -9588,18 +9606,18 @@ class CskTestAssertions extends HTMLElement {
       <!-- Assertions -->
       <section id="assertions" class="doc-section">
         <h2>
-          アサーション
+          \${window.__t('testContent.assertions.title')}
         </h2>
         <div class="subsection">
           <h3 id="assert-basic">
-            基本的なアサーション
+            \${window.__t('testContent.assertions.basicTitle')}
           </h3>
           <div class="property">
             <h4>
               assert(condition, msg)
             </h4>
             <p>
-              条件が真であることを検証します。
+              \${window.__t('testContent.assertions.assertDesc')}
             </p>
           </div>
           <div class="property">
@@ -9607,7 +9625,7 @@ class CskTestAssertions extends HTMLElement {
               eq(actual, expected, msg)
             </h4>
             <p>
-              厳密等価性（===）を検証します。
+              \${window.__t('testContent.assertions.eqDesc')}
             </p>
           </div>
           <div class="property">
@@ -9615,7 +9633,7 @@ class CskTestAssertions extends HTMLElement {
               deepEq(actual, expected, msg)
             </h4>
             <p>
-              深い等価性（JSON ベース）を検証します。
+              \${window.__t('testContent.assertions.deepEqDesc')}
             </p>
           </div>
           <div class="property">
@@ -9623,7 +9641,7 @@ class CskTestAssertions extends HTMLElement {
               includes(str, sub, msg)
             </h4>
             <p>
-              文字列が部分文字列を含むことを検証します。
+              \${window.__t('testContent.assertions.includesDesc')}
             </p>
           </div>
           <div class="property">
@@ -9631,7 +9649,7 @@ class CskTestAssertions extends HTMLElement {
               notIncludes(str, sub, msg)
             </h4>
             <p>
-              文字列が部分文字列を含まないことを検証します。
+              \${window.__t('testContent.assertions.notIncludesDesc')}
             </p>
           </div>
           <div class="property">
@@ -9639,7 +9657,7 @@ class CskTestAssertions extends HTMLElement {
               matches(str, regex, msg)
             </h4>
             <p>
-              文字列が正規表現に一致することを検証します。
+              \${window.__t('testContent.assertions.matchesDesc')}
             </p>
           </div>
           <div class="property">
@@ -9647,24 +9665,24 @@ class CskTestAssertions extends HTMLElement {
               throws(fn, msg)
             </h4>
             <p>
-              関数が例外をスローすることを検証します。
+              \${window.__t('testContent.assertions.throwsDesc')}
             </p>
           </div>
           <div class="example-title">
-            使用例
+            \${window.__t('testContent.assertions.usageExample')}
           </div>
           <pre><code>${this.#exampleAssert}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-compile">
-            コンパイル関連のアサーション
+            \${window.__t('testContent.assertions.compileTitle')}
           </h3>
           <div class="property">
             <h4>
               compileSuccess(result, msg)
             </h4>
             <p>
-              コンパイルが成功したことを検証します。
+              \${window.__t('testContent.assertions.compileSuccessDesc')}
             </p>
           </div>
           <div class="property">
@@ -9672,26 +9690,28 @@ class CskTestAssertions extends HTMLElement {
               compileFails(result, msg)
             </h4>
             <p>
-              コンパイルが失敗したことを検証します。
+              \${window.__t('testContent.assertions.compileFailsDesc')}
             </p>
           </div>
           <div class="property">
             <h4>
               validJS(result, msg)
             </h4>
-            <p>出力が有効な JavaScript であることを検証します（<code>new Function()</code> で検証）。</p>
+            <p>
+              \${window.__t('testContent.assertions.validJSDesc')}
+            </p>
           </div>
         </div>
         <div class="subsection">
           <h3 id="assert-output">
-            出力関連のアサーション
+            \${window.__t('testContent.assertions.outputTitle')}
           </h3>
           <div class="property">
             <h4>
               outputIncludes(result, sub, msg)
             </h4>
             <p>
-              生成されたコードが指定文字列を含むことを検証します。
+              \${window.__t('testContent.assertions.outputIncludesDesc')}
             </p>
           </div>
           <div class="property">
@@ -9699,24 +9719,24 @@ class CskTestAssertions extends HTMLElement {
               outputNotIncludes(result, sub, msg)
             </h4>
             <p>
-              生成されたコードが指定文字列を含まないことを検証します。
+              \${window.__t('testContent.assertions.outputNotIncludesDesc')}
             </p>
           </div>
           <div class="example-title">
-            使用例
+            \${window.__t('testContent.assertions.usageExample')}
           </div>
           <pre><code>${this.#exampleOutput}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-template">
-            テンプレート関連のアサーション
+            \${window.__t('testContent.assertions.templateTitle')}
           </h3>
           <div class="property">
             <h4>
               getTemplate(result)
             </h4>
             <p>
-              生成されたコードからテンプレート文字列を抽出し、返します。
+              \${window.__t('testContent.assertions.getTemplateDesc')}
             </p>
           </div>
           <div class="property">
@@ -9724,7 +9744,7 @@ class CskTestAssertions extends HTMLElement {
               templateIncludes(result, sub, msg)
             </h4>
             <p>
-              抽出されたテンプレートが指定文字列を含むことを検証します。
+              \${window.__t('testContent.assertions.templateIncludesDesc')}
             </p>
           </div>
           <div class="property">
@@ -9732,24 +9752,24 @@ class CskTestAssertions extends HTMLElement {
               templateNotIncludes(result, sub, msg)
             </h4>
             <p>
-              抽出されたテンプレートが指定文字列を含まないことを検証します。
+              \${window.__t('testContent.assertions.templateNotIncludesDesc')}
             </p>
           </div>
           <div class="example-title">
-            使用例
+            \${window.__t('testContent.assertions.usageExample')}
           </div>
           <pre><code>${this.#exampleTemplate}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-state">
-            state・ライフサイクル関連のアサーション
+            \${window.__t('testContent.assertions.stateTitle')}
           </h3>
           <div class="property">
             <h4>
               hasState(result, name, msg)
             </h4>
             <p>
-              指定名の state ゲッター / セッターペアが生成されたことを検証します。
+              \${window.__t('testContent.assertions.hasStateDesc')}
             </p>
           </div>
           <div class="property">
@@ -9757,48 +9777,56 @@ class CskTestAssertions extends HTMLElement {
               hasWatch(result, deps, msg)
             </h4>
             <p>
-              watch ハンドラが生成されたことを検証します。
+              \${window.__t('testContent.assertions.hasWatchDesc')}
             </p>
           </div>
           <div class="property">
             <h4>
               hasOnMount(result, bodySubstring, msg)
             </h4>
-            <p><code>connectedCallback()</code> が指定部分文字列を含むことを検証します。</p>
+            <p>
+              \${window.__t('testContent.assertions.hasOnMountDesc')}
+            </p>
           </div>
           <div class="property">
             <h4>
               hasOnUnmount(result, bodySubstring, msg)
             </h4>
-            <p><code>disconnectedCallback()</code> が指定部分文字列を含むことを検証します。</p>
+            <p>
+              \${window.__t('testContent.assertions.hasOnUnmountDesc')}
+            </p>
           </div>
           <div class="property">
             <h4>
               hasInterpolation(result, varName, msg)
             </h4>
-            <p>変数が補間される（<code>this.#esc(this.#varName)</code> パターン）ことを検証します。</p>
+            <p>
+              \${window.__t('testContent.assertions.hasInterpolationDesc')}
+            </p>
           </div>
           <div class="example-title">
-            使用例
+            \${window.__t('testContent.assertions.usageExample')}
           </div>
           <pre><code>${this.#exampleState}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-diag">
-            診断情報関連のアサーション
+            \${window.__t('testContent.assertions.diagTitle')}
           </h3>
           <div class="property">
             <h4>
               hasDiag(result, code, level?, msg)
             </h4>
-            <p>指定コード（例: 'E0301'）の診断が存在することを検証します。オプションで <code>level</code>（'error', 'warning', 'info'）でフィルタリング可能です。</p>
+            <p>
+              \${window.__t('testContent.assertions.hasDiagDesc')}
+            </p>
           </div>
           <div class="property">
             <h4>
               noDiag(result, code, msg)
             </h4>
             <p>
-              指定コードの診断が存在しないことを検証します。
+              \${window.__t('testContent.assertions.noDiagDesc')}
             </p>
           </div>
           <div class="property">
@@ -9806,11 +9834,11 @@ class CskTestAssertions extends HTMLElement {
               diagCount(result, level, expected, msg)
             </h4>
             <p>
-              指定レベル（'error', 'warning', 'info'）の診断数が期待値であることを検証します。
+              \${window.__t('testContent.assertions.diagCountDesc')}
             </p>
           </div>
           <div class="example-title">
-            使用例
+            \${window.__t('testContent.assertions.usageExample')}
           </div>
           <pre><code>${this.#exampleDiag}</code></pre>
         </div>
@@ -9965,27 +9993,27 @@ class CskTestCompile extends HTMLElement {
       <!-- Compile Helpers -->
       <section id="compile-helpers" class="doc-section">
         <h2>
-          コンパイルヘルパー
+          \${window.__t('testContent.compile.title')}
         </h2>
         <div class="subsection">
           <h3 id="compile-ok-fail">
             compileOk(src, fileName?, opts?) / compileFail(src, fileName?, opts?)
           </h3>
           <p>
-            Chasket ソースをコンパイルし、結果オブジェクトを返します。
+            \${window.__t('testContent.compile.compileDesc')}
           </p>
           <div class="property">
             <h4>
-              戻り値
+              \${window.__t('testContent.compile.returnValue')}
             </h4>
-            <pre><code><span class=i>{{
-  success: boolean,
-  output?: string,      // 生成されたJavaScriptコード
-  diagnostics: Array    // エラー、警告、情報
-}}</span></code></pre>
+            <pre><code>{{
+  success: <span class=tp>boolean</span>,
+  output?: <span class=tp>string</span>,      <span class=cm>// \${window.__t('testContent.compile.generatedJS')}</span>
+  diagnostics: Array    <span class=cm>// \${window.__t('testContent.compile.errorWarnInfo')}</span>
+}}</code></pre>
           </div>
           <div class="example-title">
-            使用例
+            \${window.__t('testContent.compile.usageExample')}
           </div>
           <pre><code>${this.#exampleCompile}</code></pre>
         </div>
@@ -9994,18 +10022,18 @@ class CskTestCompile extends HTMLElement {
             csk(opts)
           </h3>
           <p>
-            最小限の有効な Chasket ソースを生成するヘルパー関数です。
+            \${window.__t('testContent.compile.cskHelperDesc')}
           </p>
           <div class="property">
             <h4>
-              オプション
+              \${window.__t('testContent.compile.options')}
             </h4>
             <ul>
-              <li><code>name</code> (string, 必須): コンポーネント名</li>
-              <li><code>script</code> (string, デフォルト: ''): スクリプトブロック内容</li>
-              <li><code>template</code> (string, デフォルト: '&lt;div&gt;test&lt;/div&gt;'): テンプレート</li>
-              <li><code>style</code> (string, デフォルト: ''): スタイルブロック内容</li>
-              <li><code>meta</code> (string, デフォルト: ''): 追加メタフィールド</li>
+              <li><code>name</code> (string, \${window.__t('testContent.compile.nameOption')})</li>
+              <li><code>script</code> (string, \${window.__t('testContent.compile.scriptOption')})</li>
+              <li><code>template</code> (string, \${window.__t('testContent.compile.templateOption')})</li>
+              <li><code>style</code> (string, \${window.__t('testContent.compile.styleOption')})</li>
+              <li><code>meta</code> (string, \${window.__t('testContent.compile.metaOption')})</li>
             </ul>
           </div>
         </div>
@@ -10020,27 +10048,27 @@ class CskTestCompile extends HTMLElement {
       <!-- Compile Helpers -->
       <section id="compile-helpers" class="doc-section">
         <h2>
-          コンパイルヘルパー
+          \${window.__t('testContent.compile.title')}
         </h2>
         <div class="subsection">
           <h3 id="compile-ok-fail">
             compileOk(src, fileName?, opts?) / compileFail(src, fileName?, opts?)
           </h3>
           <p>
-            Chasket ソースをコンパイルし、結果オブジェクトを返します。
+            \${window.__t('testContent.compile.compileDesc')}
           </p>
           <div class="property">
             <h4>
-              戻り値
+              \${window.__t('testContent.compile.returnValue')}
             </h4>
-            <pre><code><span class=i>{{
-  success: boolean,
-  output?: string,      // 生成されたJavaScriptコード
-  diagnostics: Array    // エラー、警告、情報
-}}</span></code></pre>
+            <pre><code>{{
+  success: <span class=tp>boolean</span>,
+  output?: <span class=tp>string</span>,      <span class=cm>// \${window.__t('testContent.compile.generatedJS')}</span>
+  diagnostics: Array    <span class=cm>// \${window.__t('testContent.compile.errorWarnInfo')}</span>
+}}</code></pre>
           </div>
           <div class="example-title">
-            使用例
+            \${window.__t('testContent.compile.usageExample')}
           </div>
           <pre><code>${this.#exampleCompile}</code></pre>
         </div>
@@ -10049,18 +10077,18 @@ class CskTestCompile extends HTMLElement {
             csk(opts)
           </h3>
           <p>
-            最小限の有効な Chasket ソースを生成するヘルパー関数です。
+            \${window.__t('testContent.compile.cskHelperDesc')}
           </p>
           <div class="property">
             <h4>
-              オプション
+              \${window.__t('testContent.compile.options')}
             </h4>
             <ul>
-              <li><code>name</code> (string, 必須): コンポーネント名</li>
-              <li><code>script</code> (string, デフォルト: ''): スクリプトブロック内容</li>
-              <li><code>template</code> (string, デフォルト: '&lt;div&gt;test&lt;/div&gt;'): テンプレート</li>
-              <li><code>style</code> (string, デフォルト: ''): スタイルブロック内容</li>
-              <li><code>meta</code> (string, デフォルト: ''): 追加メタフィールド</li>
+              <li><code>name</code> (string, \${window.__t('testContent.compile.nameOption')})</li>
+              <li><code>script</code> (string, \${window.__t('testContent.compile.scriptOption')})</li>
+              <li><code>template</code> (string, \${window.__t('testContent.compile.templateOption')})</li>
+              <li><code>style</code> (string, \${window.__t('testContent.compile.styleOption')})</li>
+              <li><code>meta</code> (string, \${window.__t('testContent.compile.metaOption')})</li>
             </ul>
           </div>
         </div>
@@ -10215,36 +10243,36 @@ class CskTestExample extends HTMLElement {
       <!-- Full Example -->
       <section id="full-example" class="doc-section">
         <h2>
-          完全なテスト例
+          \${window.__t('testContent.example.title')}
         </h2>
         <p>
-          以下は複数のアサーションを組み合わせた実践的なテスト例です。Counter コンポーネントの各側面をテストしています。
+          \${window.__t('testContent.example.desc')}
         </p>
         <div class="example-title">
-          完全なテスト例
+          \${window.__t('testContent.example.fullExampleTitle')}
         </div>
         <pre><code>${this.#exampleFull}</code></pre>
         <p>
-          このテストは:
+          \${window.__t('testContent.example.thisTestVerifies')}
         </p>
         <ul>
           <li>
-            コンポーネントがコンパイルされることを確認
+            \${window.__t('testContent.example.item1')}
           </li>
           <li>
-            生成される JavaScript が有効であることを確認
+            \${window.__t('testContent.example.item2')}
           </li>
           <li>
-            state と関数が含まれていることを確認
+            \${window.__t('testContent.example.item3')}
           </li>
           <li>
-            テンプレート構造を確認
+            \${window.__t('testContent.example.item4')}
           </li>
           <li>
-            補間が正しく処理されていることを確認
+            \${window.__t('testContent.example.item5')}
           </li>
           <li>
-            beforeEach / afterEach でセットアップ / クリーンアップを実行
+            \${window.__t('testContent.example.item6')}
           </li>
         </ul>
       </section>
@@ -10258,36 +10286,36 @@ class CskTestExample extends HTMLElement {
       <!-- Full Example -->
       <section id="full-example" class="doc-section">
         <h2>
-          完全なテスト例
+          \${window.__t('testContent.example.title')}
         </h2>
         <p>
-          以下は複数のアサーションを組み合わせた実践的なテスト例です。Counter コンポーネントの各側面をテストしています。
+          \${window.__t('testContent.example.desc')}
         </p>
         <div class="example-title">
-          完全なテスト例
+          \${window.__t('testContent.example.fullExampleTitle')}
         </div>
         <pre><code>${this.#exampleFull}</code></pre>
         <p>
-          このテストは:
+          \${window.__t('testContent.example.thisTestVerifies')}
         </p>
         <ul>
           <li>
-            コンポーネントがコンパイルされることを確認
+            \${window.__t('testContent.example.item1')}
           </li>
           <li>
-            生成される JavaScript が有効であることを確認
+            \${window.__t('testContent.example.item2')}
           </li>
           <li>
-            state と関数が含まれていることを確認
+            \${window.__t('testContent.example.item3')}
           </li>
           <li>
-            テンプレート構造を確認
+            \${window.__t('testContent.example.item4')}
           </li>
           <li>
-            補間が正しく処理されていることを確認
+            \${window.__t('testContent.example.item5')}
           </li>
           <li>
-            beforeEach / afterEach でセットアップ / クリーンアップを実行
+            \${window.__t('testContent.example.item6')}
           </li>
         </ul>
       </section>
@@ -10447,87 +10475,95 @@ class CskTestOverview extends HTMLElement {
       <!-- Overview -->
       <section id="overview" class="doc-section">
         <h2>
-          概要
+          \${window.__t('testContent.overview.exampleTitle')}
         </h2>
         <p>
-          chasket-test は Chasket コンパイラの出力検証を簡潔に記述するための、ゼロ依存のテストユーティリティライブラリです。Node.js 標準機能のみを使用しており、外部パッケージに依存していません。
+          \${window.__t('testContent.overview.desc1')}
         </p>
         <p>
-          テストランナーと充実したアサーション群により、コンポーネントの以下をテストできます:
+          \${window.__t('testContent.overview.desc2')}
         </p>
         <ul>
           <li>
-            コンパイルの成功 / 失敗
+            \${window.__t('testContent.overview.item1')}
           </li>
           <li>
-            生成される JavaScript コードの検証
+            \${window.__t('testContent.overview.item2')}
           </li>
           <li>
-            テンプレート出力の確認
+            \${window.__t('testContent.overview.item3')}
           </li>
           <li>
-            state、watch、ライフサイクルフック
+            \${window.__t('testContent.overview.item4')}
           </li>
           <li>
-            診断情報（エラー、警告）
+            \${window.__t('testContent.overview.item5')}
           </li>
           <li>
-            補間と属性バインディング
+            \${window.__t('testContent.overview.item6')}
           </li>
         </ul>
         <div class="example-title">
-          概要
+          \${window.__t('testContent.overview.exampleTitle')}
         </div>
         <pre><code>${this.#exampleOverview}</code></pre>
       </section>
       <!-- Installation / Setup -->
       <section id="install" class="doc-section">
         <h2>
-          セットアップ
+          \${window.__t('testContent.overview.setupTitle')}
         </h2>
         <p>
-          chasket-test は Chasket リポジトリに含まれています。以下の方法でアクセスできます:
+          \${window.__t('testContent.overview.setupDesc')}
         </p>
         <div class="property">
           <h4>
-            ローカル開発
+            \${window.__t('testContent.overview.localDev')}
           </h4>
           <p>
-            テストファイルから以下の形式でインポートします:
+            \${window.__t('testContent.overview.importDesc')}
           </p>
           <pre><code><span class=k>const</span> <span class=i>{{ suite, compileOk, compileFail, csk }}</span> = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);</code></pre>
         </div>
         <p class="note-text">
-          chasket-test はコンパイラの場所を自動検出し、相対パスの候補から探索します。
+          \${window.__t('testContent.overview.autoDetect')}
         </p>
         <div class="example-title">
-          セットアップ例
+          \${window.__t('testContent.overview.setupExampleTitle')}
         </div>
         <pre><code>${this.#exampleSetup}</code></pre>
       </section>
       <!-- Quick Start -->
       <section id="quickstart" class="doc-section">
         <h2>
-          クイックスタート
+          \${window.__t('testContent.overview.quickstartTitle')}
         </h2>
         <p>
-          最小限のテストを実行する例:
+          \${window.__t('testContent.overview.quickstartDesc')}
         </p>
         <div class="example-title">
-          基本的な使用方法
+          \${window.__t('testContent.overview.basicUsageTitle')}
         </div>
         <pre><code>${this.#exampleQuick}</code></pre>
         <p>
-          この例では:
+          \${window.__t('testContent.overview.exampleInThisCase')}
         </p>
         <ul>
-          <li><code>suite()</code> でテストスイートを定義</li>
-          <li><code>csk()</code> でコンポーネントソースを構築</li>
-          <li><code>compileOk()</code> でコンパイル</li>
           <li>
-            アサーション群で出力を検証
+            \${window.__t('testContent.overview.item7')}
           </li>
-          <li><code>suite.run()</code> でテストを実行</li>
+          <li>
+            \${window.__t('testContent.overview.item8')}
+          </li>
+          <li>
+            \${window.__t('testContent.overview.item9')}
+          </li>
+          <li>
+            \${window.__t('testContent.overview.item10')}
+          </li>
+          <li>
+            \${window.__t('testContent.overview.item11')}
+          </li>
         </ul>
       </section>
     `;
@@ -10540,87 +10576,95 @@ class CskTestOverview extends HTMLElement {
       <!-- Overview -->
       <section id="overview" class="doc-section">
         <h2>
-          概要
+          \${window.__t('testContent.overview.exampleTitle')}
         </h2>
         <p>
-          chasket-test は Chasket コンパイラの出力検証を簡潔に記述するための、ゼロ依存のテストユーティリティライブラリです。Node.js 標準機能のみを使用しており、外部パッケージに依存していません。
+          \${window.__t('testContent.overview.desc1')}
         </p>
         <p>
-          テストランナーと充実したアサーション群により、コンポーネントの以下をテストできます:
+          \${window.__t('testContent.overview.desc2')}
         </p>
         <ul>
           <li>
-            コンパイルの成功 / 失敗
+            \${window.__t('testContent.overview.item1')}
           </li>
           <li>
-            生成される JavaScript コードの検証
+            \${window.__t('testContent.overview.item2')}
           </li>
           <li>
-            テンプレート出力の確認
+            \${window.__t('testContent.overview.item3')}
           </li>
           <li>
-            state、watch、ライフサイクルフック
+            \${window.__t('testContent.overview.item4')}
           </li>
           <li>
-            診断情報（エラー、警告）
+            \${window.__t('testContent.overview.item5')}
           </li>
           <li>
-            補間と属性バインディング
+            \${window.__t('testContent.overview.item6')}
           </li>
         </ul>
         <div class="example-title">
-          概要
+          \${window.__t('testContent.overview.exampleTitle')}
         </div>
         <pre><code>${this.#exampleOverview}</code></pre>
       </section>
       <!-- Installation / Setup -->
       <section id="install" class="doc-section">
         <h2>
-          セットアップ
+          \${window.__t('testContent.overview.setupTitle')}
         </h2>
         <p>
-          chasket-test は Chasket リポジトリに含まれています。以下の方法でアクセスできます:
+          \${window.__t('testContent.overview.setupDesc')}
         </p>
         <div class="property">
           <h4>
-            ローカル開発
+            \${window.__t('testContent.overview.localDev')}
           </h4>
           <p>
-            テストファイルから以下の形式でインポートします:
+            \${window.__t('testContent.overview.importDesc')}
           </p>
           <pre><code><span class=k>const</span> <span class=i>{{ suite, compileOk, compileFail, csk }}</span> = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);</code></pre>
         </div>
         <p class="note-text">
-          chasket-test はコンパイラの場所を自動検出し、相対パスの候補から探索します。
+          \${window.__t('testContent.overview.autoDetect')}
         </p>
         <div class="example-title">
-          セットアップ例
+          \${window.__t('testContent.overview.setupExampleTitle')}
         </div>
         <pre><code>${this.#exampleSetup}</code></pre>
       </section>
       <!-- Quick Start -->
       <section id="quickstart" class="doc-section">
         <h2>
-          クイックスタート
+          \${window.__t('testContent.overview.quickstartTitle')}
         </h2>
         <p>
-          最小限のテストを実行する例:
+          \${window.__t('testContent.overview.quickstartDesc')}
         </p>
         <div class="example-title">
-          基本的な使用方法
+          \${window.__t('testContent.overview.basicUsageTitle')}
         </div>
         <pre><code>${this.#exampleQuick}</code></pre>
         <p>
-          この例では:
+          \${window.__t('testContent.overview.exampleInThisCase')}
         </p>
         <ul>
-          <li><code>suite()</code> でテストスイートを定義</li>
-          <li><code>csk()</code> でコンポーネントソースを構築</li>
-          <li><code>compileOk()</code> でコンパイル</li>
           <li>
-            アサーション群で出力を検証
+            \${window.__t('testContent.overview.item7')}
           </li>
-          <li><code>suite.run()</code> でテストを実行</li>
+          <li>
+            \${window.__t('testContent.overview.item8')}
+          </li>
+          <li>
+            \${window.__t('testContent.overview.item9')}
+          </li>
+          <li>
+            \${window.__t('testContent.overview.item10')}
+          </li>
+          <li>
+            \${window.__t('testContent.overview.item11')}
+          </li>
         </ul>
       </section>
     `;
