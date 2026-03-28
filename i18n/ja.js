@@ -109,7 +109,9 @@ window.__i18n_register('ja', {
     ui: 'アクセシブルなプリビルト UI コンポーネント: ボタン、インプット、ダイアログ、タブなど。',
     vite: 'HMR とソースマップ対応のファーストクラス Vite 統合。',
     lsp: 'VS Code、Neovim、Sublime 対応の Language Server — 補完、診断、フォーマット。',
-    vscode: 'シンタックスハイライト、リアルタイム診断、定義へのジャンプ対応の VS Code 拡張機能。'
+    vscode: 'シンタックスハイライト、リアルタイム診断、定義へのジャンプ対応の VS Code 拡張機能。',
+    comingSoon: '準備中',
+    available: '公開中'
   },
 
   cta: {
