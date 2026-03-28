@@ -1,4 +1,4 @@
-// Chasket Bundle - 2026-03-28T10:47:07.852Z
+// Chasket Bundle - 2026-03-28T11:02:01.280Z
 // 33 component(s)
 
 // Deferred registration queue: all classes are defined first,
@@ -7449,7 +7449,7 @@ class CskEcosystem extends HTMLElement {
   #render() {
     const tpl = document.createElement('template');
     tpl.innerHTML = `
-      <style>:host{display:block;padding:var(--space-section, 5rem) 0;}.container{max-width:var(--max-w, 70rem);margin:0 auto;padding:0 var(--space-page, 1.5rem);}.hd{text-align:center;margin-bottom:clamp(2rem, 4vw, 3.5rem);}.hd h2{font-size:clamp(1.4rem, 2.8vw, 2.2rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:0.75rem;color:var(--c-text, #e4e4ed);}.hd p{font-size:clamp(0.9rem, 1.1vw, 1.05rem);color:var(--c-text-dim, #9898ab);max-width:35rem;margin:0 auto;}.grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 14rem), 1fr));gap:clamp(0.75rem, 1.5vw, 1.25rem);}.card{background:var(--c-bg-card, #12121a);border:1px solid var(--c-border, #2a2a3a);border-radius:var(--radius, 0.75rem);padding:clamp(1.25rem, 2vw, 1.75rem);transition:border-color 0.25s, transform 0.2s;}.card:hover{border-color:var(--c-accent, #00B894);transform:translateY(-2px);}.card-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:clamp(0.75rem, 1.2vw, 1rem);}.icon{width:2.75rem;height:2.75rem;border-radius:0.625rem;display:flex;align-items:center;justify-content:center;background:rgba(0,184,148,0.12);color:var(--c-accent-light, #55efc4);margin-bottom:0;}.badge{font-size:0.65rem;font-weight:600;padding:0.2rem 0.5rem;border-radius:1rem;white-space:nowrap;line-height:1.4;letter-spacing:0.02em;}.badge.available{background:rgba(0,184,148,0.15);color:var(--c-accent-light, #55efc4);border:1px solid rgba(0,184,148,0.3);}.badge.soon{background:rgba(255,190,70,0.12);color:#f0c060;border:1px solid rgba(255,190,70,0.25);}.card.coming{opacity:0.7;}.card.coming:hover{opacity:0.9;}.card.coming .icon{background:rgba(255,255,255,0.06);color:var(--c-text-dim, #9898ab);}.install.muted{color:var(--c-text-dim, #9898ab);background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08);}h3{font-size:clamp(0.85rem, 1vw, 0.95rem);font-weight:600;margin-bottom:0.5rem;color:var(--c-text, #e4e4ed);font-family:var(--mono, monospace);}p{font-size:clamp(0.75rem, 0.9vw, 0.83rem);color:var(--c-text-dim, #9898ab);line-height:1.5;margin-bottom:0.875rem;}.install{display:block;font-family:var(--mono, monospace);font-size:clamp(0.68rem, 0.82vw, 0.78rem);color:var(--c-accent, #00B894);background:rgba(0,184,148,0.08);padding:0.375rem 0.625rem;border-radius:0.375rem;border:1px solid rgba(0,184,148,0.2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.install.vs{font-size:clamp(0.65rem, 0.75vw, 0.72rem);}@media (max-width:30rem){.grid{grid-template-columns:1fr 1fr;}}@media (max-width:20rem){.grid{grid-template-columns:1fr;}}</style>
+      <style>:host{display:block;padding:var(--space-section, 5rem) 0;}.container{max-width:var(--max-w, 70rem);margin:0 auto;padding:0 var(--space-page, 1.5rem);}.hd{text-align:center;margin-bottom:clamp(2rem, 4vw, 3.5rem);}.hd h2{font-size:clamp(1.4rem, 2.8vw, 2.2rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:0.75rem;color:var(--c-text, #e4e4ed);}.hd p{font-size:clamp(0.9rem, 1.1vw, 1.05rem);color:var(--c-text-dim, #9898ab);max-width:35rem;margin:0 auto;}.grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 14rem), 1fr));gap:clamp(0.75rem, 1.5vw, 1.25rem);}.card{background:var(--c-bg-card, #12121a);border:1px solid var(--c-border, #2a2a3a);border-radius:var(--radius, 0.75rem);padding:clamp(1.25rem, 2vw, 1.75rem);transition:border-color 0.25s, transform 0.2s;}.card:hover{border-color:var(--c-accent, #00B894);transform:translateY(-2px);}.card-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:clamp(0.75rem, 1.2vw, 1rem);}.icon{width:2.75rem;height:2.75rem;border-radius:0.625rem;display:flex;align-items:center;justify-content:center;background:rgba(0,184,148,0.12);color:var(--c-accent-light, #55efc4);margin-bottom:0;}.badge{font-size:0.65rem;font-weight:600;padding:0.2rem 0.5rem;border-radius:1rem;white-space:nowrap;line-height:1.4;letter-spacing:0.02em;}.badge.available{background:rgba(0,184,148,0.15);color:var(--c-accent-light, #55efc4);border:1px solid rgba(0,184,148,0.3);}.badge.soon{background:rgba(255,190,70,0.12);color:#f0c060;border:1px solid rgba(255,190,70,0.25);}.card.coming{opacity:0.45;cursor:not-allowed;user-select:none;}.card.coming:hover{border-color:var(--c-border, #2a2a3a);transform:none;opacity:0.55;}.card.coming .icon{background:rgba(255,255,255,0.06);color:var(--c-text-dim, #9898ab);}.install.muted{position:relative;color:var(--c-text-dim, #5a5a6a);background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.06);text-decoration:line-through;text-decoration-color:rgba(255,255,255,0.2);overflow:hidden;}.install.muted::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient( -45deg, transparent, transparent 4px, rgba(255,255,255,0.04) 4px, rgba(255,255,255,0.04) 5px );pointer-events:none;}h3{font-size:clamp(0.85rem, 1vw, 0.95rem);font-weight:600;margin-bottom:0.5rem;color:var(--c-text, #e4e4ed);font-family:var(--mono, monospace);}p{font-size:clamp(0.75rem, 0.9vw, 0.83rem);color:var(--c-text-dim, #9898ab);line-height:1.5;margin-bottom:0.875rem;}.install{display:block;font-family:var(--mono, monospace);font-size:clamp(0.68rem, 0.82vw, 0.78rem);color:var(--c-accent, #00B894);background:rgba(0,184,148,0.08);padding:0.375rem 0.625rem;border-radius:0.375rem;border:1px solid rgba(0,184,148,0.2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.install.vs{font-size:clamp(0.65rem, 0.75vw, 0.72rem);}@media (max-width:30rem){.grid{grid-template-columns:1fr 1fr;}}@media (max-width:20rem){.grid{grid-template-columns:1fr;}}</style>
       <section class="section">
         <div class="container">
           <div class="hd">
@@ -7479,7 +7479,7 @@ class CskEcosystem extends HTMLElement {
   #getNewTree() {
     const tpl = document.createElement('template');
     tpl.innerHTML = `
-      <style>:host{display:block;padding:var(--space-section, 5rem) 0;}.container{max-width:var(--max-w, 70rem);margin:0 auto;padding:0 var(--space-page, 1.5rem);}.hd{text-align:center;margin-bottom:clamp(2rem, 4vw, 3.5rem);}.hd h2{font-size:clamp(1.4rem, 2.8vw, 2.2rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:0.75rem;color:var(--c-text, #e4e4ed);}.hd p{font-size:clamp(0.9rem, 1.1vw, 1.05rem);color:var(--c-text-dim, #9898ab);max-width:35rem;margin:0 auto;}.grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 14rem), 1fr));gap:clamp(0.75rem, 1.5vw, 1.25rem);}.card{background:var(--c-bg-card, #12121a);border:1px solid var(--c-border, #2a2a3a);border-radius:var(--radius, 0.75rem);padding:clamp(1.25rem, 2vw, 1.75rem);transition:border-color 0.25s, transform 0.2s;}.card:hover{border-color:var(--c-accent, #00B894);transform:translateY(-2px);}.card-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:clamp(0.75rem, 1.2vw, 1rem);}.icon{width:2.75rem;height:2.75rem;border-radius:0.625rem;display:flex;align-items:center;justify-content:center;background:rgba(0,184,148,0.12);color:var(--c-accent-light, #55efc4);margin-bottom:0;}.badge{font-size:0.65rem;font-weight:600;padding:0.2rem 0.5rem;border-radius:1rem;white-space:nowrap;line-height:1.4;letter-spacing:0.02em;}.badge.available{background:rgba(0,184,148,0.15);color:var(--c-accent-light, #55efc4);border:1px solid rgba(0,184,148,0.3);}.badge.soon{background:rgba(255,190,70,0.12);color:#f0c060;border:1px solid rgba(255,190,70,0.25);}.card.coming{opacity:0.7;}.card.coming:hover{opacity:0.9;}.card.coming .icon{background:rgba(255,255,255,0.06);color:var(--c-text-dim, #9898ab);}.install.muted{color:var(--c-text-dim, #9898ab);background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08);}h3{font-size:clamp(0.85rem, 1vw, 0.95rem);font-weight:600;margin-bottom:0.5rem;color:var(--c-text, #e4e4ed);font-family:var(--mono, monospace);}p{font-size:clamp(0.75rem, 0.9vw, 0.83rem);color:var(--c-text-dim, #9898ab);line-height:1.5;margin-bottom:0.875rem;}.install{display:block;font-family:var(--mono, monospace);font-size:clamp(0.68rem, 0.82vw, 0.78rem);color:var(--c-accent, #00B894);background:rgba(0,184,148,0.08);padding:0.375rem 0.625rem;border-radius:0.375rem;border:1px solid rgba(0,184,148,0.2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.install.vs{font-size:clamp(0.65rem, 0.75vw, 0.72rem);}@media (max-width:30rem){.grid{grid-template-columns:1fr 1fr;}}@media (max-width:20rem){.grid{grid-template-columns:1fr;}}</style>
+      <style>:host{display:block;padding:var(--space-section, 5rem) 0;}.container{max-width:var(--max-w, 70rem);margin:0 auto;padding:0 var(--space-page, 1.5rem);}.hd{text-align:center;margin-bottom:clamp(2rem, 4vw, 3.5rem);}.hd h2{font-size:clamp(1.4rem, 2.8vw, 2.2rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:0.75rem;color:var(--c-text, #e4e4ed);}.hd p{font-size:clamp(0.9rem, 1.1vw, 1.05rem);color:var(--c-text-dim, #9898ab);max-width:35rem;margin:0 auto;}.grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 14rem), 1fr));gap:clamp(0.75rem, 1.5vw, 1.25rem);}.card{background:var(--c-bg-card, #12121a);border:1px solid var(--c-border, #2a2a3a);border-radius:var(--radius, 0.75rem);padding:clamp(1.25rem, 2vw, 1.75rem);transition:border-color 0.25s, transform 0.2s;}.card:hover{border-color:var(--c-accent, #00B894);transform:translateY(-2px);}.card-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:clamp(0.75rem, 1.2vw, 1rem);}.icon{width:2.75rem;height:2.75rem;border-radius:0.625rem;display:flex;align-items:center;justify-content:center;background:rgba(0,184,148,0.12);color:var(--c-accent-light, #55efc4);margin-bottom:0;}.badge{font-size:0.65rem;font-weight:600;padding:0.2rem 0.5rem;border-radius:1rem;white-space:nowrap;line-height:1.4;letter-spacing:0.02em;}.badge.available{background:rgba(0,184,148,0.15);color:var(--c-accent-light, #55efc4);border:1px solid rgba(0,184,148,0.3);}.badge.soon{background:rgba(255,190,70,0.12);color:#f0c060;border:1px solid rgba(255,190,70,0.25);}.card.coming{opacity:0.45;cursor:not-allowed;user-select:none;}.card.coming:hover{border-color:var(--c-border, #2a2a3a);transform:none;opacity:0.55;}.card.coming .icon{background:rgba(255,255,255,0.06);color:var(--c-text-dim, #9898ab);}.install.muted{position:relative;color:var(--c-text-dim, #5a5a6a);background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.06);text-decoration:line-through;text-decoration-color:rgba(255,255,255,0.2);overflow:hidden;}.install.muted::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient( -45deg, transparent, transparent 4px, rgba(255,255,255,0.04) 4px, rgba(255,255,255,0.04) 5px );pointer-events:none;}h3{font-size:clamp(0.85rem, 1vw, 0.95rem);font-weight:600;margin-bottom:0.5rem;color:var(--c-text, #e4e4ed);font-family:var(--mono, monospace);}p{font-size:clamp(0.75rem, 0.9vw, 0.83rem);color:var(--c-text-dim, #9898ab);line-height:1.5;margin-bottom:0.875rem;}.install{display:block;font-family:var(--mono, monospace);font-size:clamp(0.68rem, 0.82vw, 0.78rem);color:var(--c-accent, #00B894);background:rgba(0,184,148,0.08);padding:0.375rem 0.625rem;border-radius:0.375rem;border:1px solid rgba(0,184,148,0.2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.install.vs{font-size:clamp(0.65rem, 0.75vw, 0.72rem);}@media (max-width:30rem){.grid{grid-template-columns:1fr 1fr;}}@media (max-width:20rem){.grid{grid-template-columns:1fr;}}</style>
       <section class="section">
         <div class="container">
           <div class="hd">
@@ -10821,7 +10821,7 @@ class CskPageWhy extends HTMLElement {
   #render() {
     const tpl = document.createElement('template');
     tpl.innerHTML = `
-      <style>[data-chasket-scope="csk-page-why"] .why-page{max-width:var(--max-w, 70rem);margin:0 auto;padding:4rem var(--space-page, 1.5rem) 6rem;color:var(--c-text, #e4e4ed);}[data-chasket-scope="csk-page-why"] .why-hero{text-align:center;padding:3rem 0 4rem;}[data-chasket-scope="csk-page-why"] .why-hero h1{font-size:clamp(2rem, 4vw, 3rem);font-weight:800;line-height:1.2;letter-spacing:-0.03em;background:linear-gradient(135deg, #6C5CE7, #00B894);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0 0 1.25rem;}[data-chasket-scope="csk-page-why"] .why-hero-desc{font-size:clamp(1rem, 1.5vw, 1.2rem);color:var(--c-text-dim, #9898ab);max-width:40rem;margin:0 auto;line-height:1.7;}[data-chasket-scope="csk-page-why"] .why-demo{padding:2rem 0 3rem;}[data-chasket-scope="csk-page-why"] .why-demo-grid{display:flex;align-items:center;gap:1.5rem;justify-content:center;}[data-chasket-scope="csk-page-why"] .why-demo-card{background:var(--c-surface, #1a1a26);border:1px solid var(--c-border, #2a2a3a);border-radius:0.75rem;padding:1.5rem;flex:1;max-width:28rem;overflow-x:auto;}[data-chasket-scope="csk-page-why"] .why-demo-label{font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--c-text-dim, #9898ab);margin-bottom:0.75rem;}[data-chasket-scope="csk-page-why"] .why-demo-card pre{margin:0;font-size:0.8rem;line-height:1.6;}[data-chasket-scope="csk-page-why"] .why-demo-card code{font-family:var(--font-mono, 'JetBrains Mono', monospace);color:#dfe6e9;}[data-chasket-scope="csk-page-why"] /* Syntax Highlighting */ pre code .t{color:#7c8aff;}[data-chasket-scope="csk-page-why"] pre code .a{color:#f8a5c2;}[data-chasket-scope="csk-page-why"] pre code .s{color:#55efc4;}[data-chasket-scope="csk-page-why"] pre code .k{color:#fd79a8;}[data-chasket-scope="csk-page-why"] pre code .tp{color:#74b9ff;}[data-chasket-scope="csk-page-why"] pre code .v{color:#dfe6e9;}[data-chasket-scope="csk-page-why"] pre code .f{color:#ffeaa7;}[data-chasket-scope="csk-page-why"] pre code .n{color:#fab1a0;}[data-chasket-scope="csk-page-why"] pre code .i{color:#fdcb6e;}[data-chasket-scope="csk-page-why"] pre code .c{color:#e17055;}[data-chasket-scope="csk-page-why"] pre code .d{color:#a29bfe;}[data-chasket-scope="csk-page-why"] pre code .cm{color:#636e72;}[data-chasket-scope="csk-page-why"] pre code .cs{color:#81ecec;}[data-chasket-scope="csk-page-why"] .why-demo-arrow{color:var(--c-text-dim, #9898ab);flex-shrink:0;}[data-chasket-scope="csk-page-why"] .why-sections{display:flex;flex-direction:column;gap:2rem;padding:2rem 0;}[data-chasket-scope="csk-page-why"] .why-card{background:var(--c-surface, #1a1a26);border:1px solid var(--c-border, #2a2a3a);border-radius:0.75rem;padding:2rem 2.5rem;transition:border-color 0.2s;}[data-chasket-scope="csk-page-why"] .why-card:hover{border-color:var(--c-primary, #6C5CE7);}[data-chasket-scope="csk-page-why"] .why-card-future{border-style:dashed;opacity:0.85;}[data-chasket-scope="csk-page-why"] .why-card-icon{margin-bottom:1rem;}[data-chasket-scope="csk-page-why"] .why-card h2{font-size:clamp(1.15rem, 1.8vw, 1.4rem);font-weight:700;margin:0 0 0.75rem;letter-spacing:-0.02em;}[data-chasket-scope="csk-page-why"] .why-card p{color:var(--c-text-dim, #9898ab);line-height:1.7;font-size:clamp(0.9rem, 1.1vw, 1rem);margin:0;}[data-chasket-scope="csk-page-why"] .why-cta{text-align:center;padding:4rem 0 2rem;}[data-chasket-scope="csk-page-why"] .why-cta h2{font-size:clamp(1.5rem, 2.5vw, 2rem);font-weight:700;margin:0 0 0.75rem;}[data-chasket-scope="csk-page-why"] .why-cta p{color:var(--c-text-dim, #9898ab);margin:0 0 2rem;font-size:clamp(0.95rem, 1.2vw, 1.1rem);}[data-chasket-scope="csk-page-why"] .why-cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}[data-chasket-scope="csk-page-why"] .why-btn-primary{display:inline-flex;align-items:center;padding:0.75rem 2rem;background:linear-gradient(135deg, #6C5CE7, #00B894);color:#fff;border-radius:0.5rem;text-decoration:none;font-weight:600;font-size:1rem;transition:opacity 0.2s;}[data-chasket-scope="csk-page-why"] .why-btn-primary:hover{opacity:0.9;}[data-chasket-scope="csk-page-why"] .why-btn-secondary{display:inline-flex;align-items:center;padding:0.75rem 2rem;background:var(--c-surface, #1a1a26);color:var(--c-text, #e4e4ed);border:1px solid var(--c-border, #2a2a3a);border-radius:0.5rem;text-decoration:none;font-weight:600;font-size:1rem;transition:border-color 0.2s;}[data-chasket-scope="csk-page-why"] .why-btn-secondary:hover{border-color:var(--c-primary-light, #a29bfe);}[data-chasket-scope="csk-page-why"] .t{color:#7c8aff;}[data-chasket-scope="csk-page-why"] .a{color:#f8a5c2;}[data-chasket-scope="csk-page-why"] .s{color:#55efc4;}[data-chasket-scope="csk-page-why"] .k{color:#fd79a8;}[data-chasket-scope="csk-page-why"] .tp{color:#74b9ff;}[data-chasket-scope="csk-page-why"] .v{color:#dfe6e9;}[data-chasket-scope="csk-page-why"] .f{color:#ffeaa7;}[data-chasket-scope="csk-page-why"] .n{color:#fab1a0;}[data-chasket-scope="csk-page-why"] .i{color:#fdcb6e;}[data-chasket-scope="csk-page-why"] .cm{color:#636e72;}@media (max-width:48rem){[data-chasket-scope="csk-page-why"] .why-demo-grid{flex-direction:column;}[data-chasket-scope="csk-page-why"] .why-demo-card{max-width:100%;}[data-chasket-scope="csk-page-why"] .why-demo-arrow{transform:rotate(90deg);}[data-chasket-scope="csk-page-why"] .why-card{padding:1.5rem;}}</style>
+      <style>[data-chasket-scope="csk-page-why"] .why-page{max-width:var(--max-w, 70rem);margin:0 auto;padding:4rem var(--space-page, 1.5rem) 6rem;color:var(--c-text, #e4e4ed);}[data-chasket-scope="csk-page-why"] .why-hero{text-align:center;padding:3rem 0 4rem;}[data-chasket-scope="csk-page-why"] .why-hero h1{font-size:clamp(2rem, 4vw, 3rem);font-weight:800;line-height:1.2;letter-spacing:-0.03em;background:linear-gradient(135deg, #6C5CE7, #00B894);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0 0 1.25rem;}[data-chasket-scope="csk-page-why"] .why-hero-desc{font-size:clamp(1rem, 1.5vw, 1.2rem);color:var(--c-text-dim, #9898ab);max-width:40rem;margin:0 auto;line-height:1.7;}[data-chasket-scope="csk-page-why"] .why-demo{padding:2rem 0 3rem;}[data-chasket-scope="csk-page-why"] .why-demo-grid{display:flex;align-items:center;gap:1.5rem;justify-content:center;}[data-chasket-scope="csk-page-why"] .why-demo-card{background:var(--c-surface, #1a1a26);border:1px solid var(--c-border, #2a2a3a);border-radius:0.75rem;padding:1.5rem;flex:1;max-width:28rem;overflow-x:auto;}[data-chasket-scope="csk-page-why"] .why-demo-label{font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--c-text-dim, #9898ab);margin-bottom:0.75rem;}[data-chasket-scope="csk-page-why"] .why-demo-card pre{margin:0;font-size:0.8rem;line-height:1.6;}[data-chasket-scope="csk-page-why"] .why-demo-card code{font-family:var(--font-mono, 'JetBrains Mono', monospace);color:#dfe6e9;}[data-chasket-scope="csk-page-why"] /* Syntax Highlighting */ pre code .t{color:#7c8aff;}[data-chasket-scope="csk-page-why"] pre code .a{color:#f8a5c2;}[data-chasket-scope="csk-page-why"] pre code .s{color:#55efc4;}[data-chasket-scope="csk-page-why"] pre code .k{color:#fd79a8;}[data-chasket-scope="csk-page-why"] pre code .tp{color:#74b9ff;}[data-chasket-scope="csk-page-why"] pre code .v{color:#dfe6e9;}[data-chasket-scope="csk-page-why"] pre code .f{color:#ffeaa7;}[data-chasket-scope="csk-page-why"] pre code .n{color:#fab1a0;}[data-chasket-scope="csk-page-why"] pre code .i{color:#fdcb6e;}[data-chasket-scope="csk-page-why"] pre code .c{color:#e17055;}[data-chasket-scope="csk-page-why"] pre code .d{color:#a29bfe;}[data-chasket-scope="csk-page-why"] pre code .cm{color:#636e72;}[data-chasket-scope="csk-page-why"] pre code .cs{color:#81ecec;}[data-chasket-scope="csk-page-why"] .why-demo-arrow{color:var(--c-text-dim, #9898ab);flex-shrink:0;}[data-chasket-scope="csk-page-why"] .why-sections{display:flex;flex-direction:column;gap:2rem;padding:2rem 0;}[data-chasket-scope="csk-page-why"] .why-card{background:var(--c-surface, #1a1a26);border:1px solid var(--c-border, #2a2a3a);border-radius:0.75rem;padding:2rem 2.5rem;transition:border-color 0.2s;}[data-chasket-scope="csk-page-why"] .why-card:hover{border-color:var(--c-primary, #6C5CE7);}[data-chasket-scope="csk-page-why"] .why-card-future{border-style:dashed;opacity:0.85;}[data-chasket-scope="csk-page-why"] .why-card-icon{margin-bottom:1rem;}[data-chasket-scope="csk-page-why"] .why-card h2{font-size:clamp(1.15rem, 1.8vw, 1.4rem);font-weight:700;margin:0 0 0.75rem;letter-spacing:-0.02em;}[data-chasket-scope="csk-page-why"] .why-card p{color:var(--c-text-dim, #9898ab);line-height:1.7;font-size:clamp(0.9rem, 1.1vw, 1rem);margin:0;}[data-chasket-scope="csk-page-why"] /* --- Comparison Section --- */ .why-comparison, [data-chasket-scope="csk-page-why"] .why-usecases{padding:3rem 0;}[data-chasket-scope="csk-page-why"] .why-section-title{font-size:clamp(1.5rem, 2.5vw, 2rem);font-weight:700;text-align:center;margin:0 0 0.75rem;letter-spacing:-0.02em;}[data-chasket-scope="csk-page-why"] .why-section-desc{text-align:center;color:var(--c-text-dim, #9898ab);font-size:clamp(0.9rem, 1.1vw, 1.05rem);max-width:35rem;margin:0 auto 2.5rem;line-height:1.6;}[data-chasket-scope="csk-page-why"] .why-compare-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 18rem), 1fr));gap:1.5rem;}[data-chasket-scope="csk-page-why"] .why-compare-card{background:var(--c-surface, #1a1a26);border:1px solid var(--c-border, #2a2a3a);border-radius:0.75rem;padding:2rem;transition:border-color 0.2s;}[data-chasket-scope="csk-page-why"] .why-compare-card:hover{border-color:var(--c-primary, #6C5CE7);}[data-chasket-scope="csk-page-why"] .why-compare-num{font-size:2rem;font-weight:800;background:linear-gradient(135deg, #6C5CE7, #00B894);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.75rem;line-height:1;}[data-chasket-scope="csk-page-why"] .why-compare-card h3{font-size:clamp(1rem, 1.3vw, 1.15rem);font-weight:700;margin:0 0 0.75rem;}[data-chasket-scope="csk-page-why"] .why-compare-card p{color:var(--c-text-dim, #9898ab);line-height:1.7;font-size:clamp(0.85rem, 1vw, 0.95rem);margin:0;}[data-chasket-scope="csk-page-why"] /* --- Use Cases Section --- */ .why-usecase-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 18rem), 1fr));gap:1.5rem;}[data-chasket-scope="csk-page-why"] .why-usecase-card{background:var(--c-surface, #1a1a26);border:1px solid var(--c-border, #2a2a3a);border-radius:0.75rem;padding:2rem;transition:border-color 0.2s;}[data-chasket-scope="csk-page-why"] .why-usecase-card:hover{border-color:var(--c-accent, #00B894);}[data-chasket-scope="csk-page-why"] .why-usecase-icon{width:3rem;height:3rem;border-radius:0.625rem;display:flex;align-items:center;justify-content:center;background:rgba(0,184,148,0.12);color:var(--c-accent-light, #55efc4);margin-bottom:1rem;}[data-chasket-scope="csk-page-why"] .why-usecase-card h3{font-size:clamp(1rem, 1.3vw, 1.15rem);font-weight:700;margin:0 0 0.75rem;}[data-chasket-scope="csk-page-why"] .why-usecase-card p{color:var(--c-text-dim, #9898ab);line-height:1.7;font-size:clamp(0.85rem, 1vw, 0.95rem);margin:0;}[data-chasket-scope="csk-page-why"] .why-cta{text-align:center;padding:4rem 0 2rem;}[data-chasket-scope="csk-page-why"] .why-cta h2{font-size:clamp(1.5rem, 2.5vw, 2rem);font-weight:700;margin:0 0 0.75rem;}[data-chasket-scope="csk-page-why"] .why-cta p{color:var(--c-text-dim, #9898ab);margin:0 0 2rem;font-size:clamp(0.95rem, 1.2vw, 1.1rem);}[data-chasket-scope="csk-page-why"] .why-cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}[data-chasket-scope="csk-page-why"] .why-btn-primary{display:inline-flex;align-items:center;padding:0.75rem 2rem;background:linear-gradient(135deg, #6C5CE7, #00B894);color:#fff;border-radius:0.5rem;text-decoration:none;font-weight:600;font-size:1rem;transition:opacity 0.2s;}[data-chasket-scope="csk-page-why"] .why-btn-primary:hover{opacity:0.9;}[data-chasket-scope="csk-page-why"] .why-btn-secondary{display:inline-flex;align-items:center;padding:0.75rem 2rem;background:var(--c-surface, #1a1a26);color:var(--c-text, #e4e4ed);border:1px solid var(--c-border, #2a2a3a);border-radius:0.5rem;text-decoration:none;font-weight:600;font-size:1rem;transition:border-color 0.2s;}[data-chasket-scope="csk-page-why"] .why-btn-secondary:hover{border-color:var(--c-primary-light, #a29bfe);}[data-chasket-scope="csk-page-why"] .t{color:#7c8aff;}[data-chasket-scope="csk-page-why"] .a{color:#f8a5c2;}[data-chasket-scope="csk-page-why"] .s{color:#55efc4;}[data-chasket-scope="csk-page-why"] .k{color:#fd79a8;}[data-chasket-scope="csk-page-why"] .tp{color:#74b9ff;}[data-chasket-scope="csk-page-why"] .v{color:#dfe6e9;}[data-chasket-scope="csk-page-why"] .f{color:#ffeaa7;}[data-chasket-scope="csk-page-why"] .n{color:#fab1a0;}[data-chasket-scope="csk-page-why"] .i{color:#fdcb6e;}[data-chasket-scope="csk-page-why"] .cm{color:#636e72;}@media (max-width:48rem){[data-chasket-scope="csk-page-why"] .why-demo-grid{flex-direction:column;}[data-chasket-scope="csk-page-why"] .why-demo-card{max-width:100%;}[data-chasket-scope="csk-page-why"] .why-demo-arrow{transform:rotate(90deg);}[data-chasket-scope="csk-page-why"] .why-card{padding:1.5rem;}}</style>
       <div class="why-page">
         <section class="why-hero">
           <h1>
@@ -10916,6 +10916,56 @@ class CskPageWhy extends HTMLElement {
               ${this.#esc(this.#tr('why.section4Desc'))}
             </p>
           </div>
+          <div class="why-card">
+            <div class="why-card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#E17055" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6">
+                </polyline>
+                <polyline points="8 6 2 12 8 18">
+                </polyline>
+                <line x1="14" y1="4" x2="10" y2="20">
+                </line>
+              </svg>
+            </div>
+            <h2>
+              ${this.#esc(this.#tr('why.section6Title'))}
+            </h2>
+            <p>
+              ${this.#esc(this.#tr('why.section6Desc'))}
+            </p>
+          </div>
+          <div class="why-card">
+            <div class="why-card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#81ECEC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2">
+                </rect>
+                <path d="M3 9h18">
+                </path>
+                <path d="M9 21V9">
+                </path>
+              </svg>
+            </div>
+            <h2>
+              ${this.#esc(this.#tr('why.section7Title'))}
+            </h2>
+            <p>
+              ${this.#esc(this.#tr('why.section7Desc'))}
+            </p>
+          </div>
+          <div class="why-card">
+            <div class="why-card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FAB1A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2">
+                </path>
+              </svg>
+            </div>
+            <h2>
+              ${this.#esc(this.#tr('why.section8Title'))}
+            </h2>
+            <p>
+              ${this.#esc(this.#tr('why.section8Desc'))}
+            </p>
+          </div>
           <div class="why-card why-card-future">
             <div class="why-card-icon">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--c-primary-light, #A29BFE)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -10931,6 +10981,115 @@ class CskPageWhy extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('why.section5Desc'))}
             </p>
+          </div>
+        </section>
+        <section class="why-comparison">
+          <h2 class="why-section-title">
+            ${this.#esc(this.#tr('why.comparisonTitle'))}
+          </h2>
+          <p class="why-section-desc">
+            ${this.#esc(this.#tr('why.comparisonDesc'))}
+          </p>
+          <div class="why-compare-grid">
+            <div class="why-compare-card">
+              <div class="why-compare-num">
+                01
+              </div>
+              <h3>
+                ${this.#esc(this.#tr('why.compare1Title'))}
+              </h3>
+              <p>
+                ${this.#esc(this.#tr('why.compare1Desc'))}
+              </p>
+            </div>
+            <div class="why-compare-card">
+              <div class="why-compare-num">
+                02
+              </div>
+              <h3>
+                ${this.#esc(this.#tr('why.compare2Title'))}
+              </h3>
+              <p>
+                ${this.#esc(this.#tr('why.compare2Desc'))}
+              </p>
+            </div>
+            <div class="why-compare-card">
+              <div class="why-compare-num">
+                03
+              </div>
+              <h3>
+                ${this.#esc(this.#tr('why.compare3Title'))}
+              </h3>
+              <p>
+                ${this.#esc(this.#tr('why.compare3Desc'))}
+              </p>
+            </div>
+          </div>
+        </section>
+        <section class="why-usecases">
+          <h2 class="why-section-title">
+            ${this.#esc(this.#tr('why.usecaseTitle'))}
+          </h2>
+          <p class="why-section-desc">
+            ${this.#esc(this.#tr('why.usecaseDesc'))}
+          </p>
+          <div class="why-usecase-grid">
+            <div class="why-usecase-card">
+              <div class="why-usecase-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="7" height="7">
+                  </rect>
+                  <rect x="14" y="3" width="7" height="7">
+                  </rect>
+                  <rect x="14" y="14" width="7" height="7">
+                  </rect>
+                  <rect x="3" y="14" width="7" height="7">
+                  </rect>
+                </svg>
+              </div>
+              <h3>
+                ${this.#esc(this.#tr('why.usecase1Title'))}
+              </h3>
+              <p>
+                ${this.#esc(this.#tr('why.usecase1Desc'))}
+              </p>
+            </div>
+            <div class="why-usecase-card">
+              <div class="why-usecase-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10">
+                  </circle>
+                  <line x1="2" y1="12" x2="22" y2="12">
+                  </line>
+                  <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z">
+                  </path>
+                </svg>
+              </div>
+              <h3>
+                ${this.#esc(this.#tr('why.usecase2Title'))}
+              </h3>
+              <p>
+                ${this.#esc(this.#tr('why.usecase2Desc'))}
+              </p>
+            </div>
+            <div class="why-usecase-card">
+              <div class="why-usecase-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 20V10">
+                  </path>
+                  <path d="M18 20V4">
+                  </path>
+                  <path d="M6 20v-4">
+                  </path>
+                </svg>
+              </div>
+              <h3>
+                ${this.#esc(this.#tr('why.usecase3Title'))}
+              </h3>
+              <p>
+                ${this.#esc(this.#tr('why.usecase3Desc'))}
+              </p>
+            </div>
           </div>
         </section>
         <section class="why-cta">
@@ -10950,7 +11109,7 @@ class CskPageWhy extends HTMLElement {
   #getNewTree() {
     const tpl = document.createElement('template');
     tpl.innerHTML = `
-      <style>[data-chasket-scope="csk-page-why"] .why-page{max-width:var(--max-w, 70rem);margin:0 auto;padding:4rem var(--space-page, 1.5rem) 6rem;color:var(--c-text, #e4e4ed);}[data-chasket-scope="csk-page-why"] .why-hero{text-align:center;padding:3rem 0 4rem;}[data-chasket-scope="csk-page-why"] .why-hero h1{font-size:clamp(2rem, 4vw, 3rem);font-weight:800;line-height:1.2;letter-spacing:-0.03em;background:linear-gradient(135deg, #6C5CE7, #00B894);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0 0 1.25rem;}[data-chasket-scope="csk-page-why"] .why-hero-desc{font-size:clamp(1rem, 1.5vw, 1.2rem);color:var(--c-text-dim, #9898ab);max-width:40rem;margin:0 auto;line-height:1.7;}[data-chasket-scope="csk-page-why"] .why-demo{padding:2rem 0 3rem;}[data-chasket-scope="csk-page-why"] .why-demo-grid{display:flex;align-items:center;gap:1.5rem;justify-content:center;}[data-chasket-scope="csk-page-why"] .why-demo-card{background:var(--c-surface, #1a1a26);border:1px solid var(--c-border, #2a2a3a);border-radius:0.75rem;padding:1.5rem;flex:1;max-width:28rem;overflow-x:auto;}[data-chasket-scope="csk-page-why"] .why-demo-label{font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--c-text-dim, #9898ab);margin-bottom:0.75rem;}[data-chasket-scope="csk-page-why"] .why-demo-card pre{margin:0;font-size:0.8rem;line-height:1.6;}[data-chasket-scope="csk-page-why"] .why-demo-card code{font-family:var(--font-mono, 'JetBrains Mono', monospace);color:#dfe6e9;}[data-chasket-scope="csk-page-why"] /* Syntax Highlighting */ pre code .t{color:#7c8aff;}[data-chasket-scope="csk-page-why"] pre code .a{color:#f8a5c2;}[data-chasket-scope="csk-page-why"] pre code .s{color:#55efc4;}[data-chasket-scope="csk-page-why"] pre code .k{color:#fd79a8;}[data-chasket-scope="csk-page-why"] pre code .tp{color:#74b9ff;}[data-chasket-scope="csk-page-why"] pre code .v{color:#dfe6e9;}[data-chasket-scope="csk-page-why"] pre code .f{color:#ffeaa7;}[data-chasket-scope="csk-page-why"] pre code .n{color:#fab1a0;}[data-chasket-scope="csk-page-why"] pre code .i{color:#fdcb6e;}[data-chasket-scope="csk-page-why"] pre code .c{color:#e17055;}[data-chasket-scope="csk-page-why"] pre code .d{color:#a29bfe;}[data-chasket-scope="csk-page-why"] pre code .cm{color:#636e72;}[data-chasket-scope="csk-page-why"] pre code .cs{color:#81ecec;}[data-chasket-scope="csk-page-why"] .why-demo-arrow{color:var(--c-text-dim, #9898ab);flex-shrink:0;}[data-chasket-scope="csk-page-why"] .why-sections{display:flex;flex-direction:column;gap:2rem;padding:2rem 0;}[data-chasket-scope="csk-page-why"] .why-card{background:var(--c-surface, #1a1a26);border:1px solid var(--c-border, #2a2a3a);border-radius:0.75rem;padding:2rem 2.5rem;transition:border-color 0.2s;}[data-chasket-scope="csk-page-why"] .why-card:hover{border-color:var(--c-primary, #6C5CE7);}[data-chasket-scope="csk-page-why"] .why-card-future{border-style:dashed;opacity:0.85;}[data-chasket-scope="csk-page-why"] .why-card-icon{margin-bottom:1rem;}[data-chasket-scope="csk-page-why"] .why-card h2{font-size:clamp(1.15rem, 1.8vw, 1.4rem);font-weight:700;margin:0 0 0.75rem;letter-spacing:-0.02em;}[data-chasket-scope="csk-page-why"] .why-card p{color:var(--c-text-dim, #9898ab);line-height:1.7;font-size:clamp(0.9rem, 1.1vw, 1rem);margin:0;}[data-chasket-scope="csk-page-why"] .why-cta{text-align:center;padding:4rem 0 2rem;}[data-chasket-scope="csk-page-why"] .why-cta h2{font-size:clamp(1.5rem, 2.5vw, 2rem);font-weight:700;margin:0 0 0.75rem;}[data-chasket-scope="csk-page-why"] .why-cta p{color:var(--c-text-dim, #9898ab);margin:0 0 2rem;font-size:clamp(0.95rem, 1.2vw, 1.1rem);}[data-chasket-scope="csk-page-why"] .why-cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}[data-chasket-scope="csk-page-why"] .why-btn-primary{display:inline-flex;align-items:center;padding:0.75rem 2rem;background:linear-gradient(135deg, #6C5CE7, #00B894);color:#fff;border-radius:0.5rem;text-decoration:none;font-weight:600;font-size:1rem;transition:opacity 0.2s;}[data-chasket-scope="csk-page-why"] .why-btn-primary:hover{opacity:0.9;}[data-chasket-scope="csk-page-why"] .why-btn-secondary{display:inline-flex;align-items:center;padding:0.75rem 2rem;background:var(--c-surface, #1a1a26);color:var(--c-text, #e4e4ed);border:1px solid var(--c-border, #2a2a3a);border-radius:0.5rem;text-decoration:none;font-weight:600;font-size:1rem;transition:border-color 0.2s;}[data-chasket-scope="csk-page-why"] .why-btn-secondary:hover{border-color:var(--c-primary-light, #a29bfe);}[data-chasket-scope="csk-page-why"] .t{color:#7c8aff;}[data-chasket-scope="csk-page-why"] .a{color:#f8a5c2;}[data-chasket-scope="csk-page-why"] .s{color:#55efc4;}[data-chasket-scope="csk-page-why"] .k{color:#fd79a8;}[data-chasket-scope="csk-page-why"] .tp{color:#74b9ff;}[data-chasket-scope="csk-page-why"] .v{color:#dfe6e9;}[data-chasket-scope="csk-page-why"] .f{color:#ffeaa7;}[data-chasket-scope="csk-page-why"] .n{color:#fab1a0;}[data-chasket-scope="csk-page-why"] .i{color:#fdcb6e;}[data-chasket-scope="csk-page-why"] .cm{color:#636e72;}@media (max-width:48rem){[data-chasket-scope="csk-page-why"] .why-demo-grid{flex-direction:column;}[data-chasket-scope="csk-page-why"] .why-demo-card{max-width:100%;}[data-chasket-scope="csk-page-why"] .why-demo-arrow{transform:rotate(90deg);}[data-chasket-scope="csk-page-why"] .why-card{padding:1.5rem;}}</style>
+      <style>[data-chasket-scope="csk-page-why"] .why-page{max-width:var(--max-w, 70rem);margin:0 auto;padding:4rem var(--space-page, 1.5rem) 6rem;color:var(--c-text, #e4e4ed);}[data-chasket-scope="csk-page-why"] .why-hero{text-align:center;padding:3rem 0 4rem;}[data-chasket-scope="csk-page-why"] .why-hero h1{font-size:clamp(2rem, 4vw, 3rem);font-weight:800;line-height:1.2;letter-spacing:-0.03em;background:linear-gradient(135deg, #6C5CE7, #00B894);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0 0 1.25rem;}[data-chasket-scope="csk-page-why"] .why-hero-desc{font-size:clamp(1rem, 1.5vw, 1.2rem);color:var(--c-text-dim, #9898ab);max-width:40rem;margin:0 auto;line-height:1.7;}[data-chasket-scope="csk-page-why"] .why-demo{padding:2rem 0 3rem;}[data-chasket-scope="csk-page-why"] .why-demo-grid{display:flex;align-items:center;gap:1.5rem;justify-content:center;}[data-chasket-scope="csk-page-why"] .why-demo-card{background:var(--c-surface, #1a1a26);border:1px solid var(--c-border, #2a2a3a);border-radius:0.75rem;padding:1.5rem;flex:1;max-width:28rem;overflow-x:auto;}[data-chasket-scope="csk-page-why"] .why-demo-label{font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--c-text-dim, #9898ab);margin-bottom:0.75rem;}[data-chasket-scope="csk-page-why"] .why-demo-card pre{margin:0;font-size:0.8rem;line-height:1.6;}[data-chasket-scope="csk-page-why"] .why-demo-card code{font-family:var(--font-mono, 'JetBrains Mono', monospace);color:#dfe6e9;}[data-chasket-scope="csk-page-why"] /* Syntax Highlighting */ pre code .t{color:#7c8aff;}[data-chasket-scope="csk-page-why"] pre code .a{color:#f8a5c2;}[data-chasket-scope="csk-page-why"] pre code .s{color:#55efc4;}[data-chasket-scope="csk-page-why"] pre code .k{color:#fd79a8;}[data-chasket-scope="csk-page-why"] pre code .tp{color:#74b9ff;}[data-chasket-scope="csk-page-why"] pre code .v{color:#dfe6e9;}[data-chasket-scope="csk-page-why"] pre code .f{color:#ffeaa7;}[data-chasket-scope="csk-page-why"] pre code .n{color:#fab1a0;}[data-chasket-scope="csk-page-why"] pre code .i{color:#fdcb6e;}[data-chasket-scope="csk-page-why"] pre code .c{color:#e17055;}[data-chasket-scope="csk-page-why"] pre code .d{color:#a29bfe;}[data-chasket-scope="csk-page-why"] pre code .cm{color:#636e72;}[data-chasket-scope="csk-page-why"] pre code .cs{color:#81ecec;}[data-chasket-scope="csk-page-why"] .why-demo-arrow{color:var(--c-text-dim, #9898ab);flex-shrink:0;}[data-chasket-scope="csk-page-why"] .why-sections{display:flex;flex-direction:column;gap:2rem;padding:2rem 0;}[data-chasket-scope="csk-page-why"] .why-card{background:var(--c-surface, #1a1a26);border:1px solid var(--c-border, #2a2a3a);border-radius:0.75rem;padding:2rem 2.5rem;transition:border-color 0.2s;}[data-chasket-scope="csk-page-why"] .why-card:hover{border-color:var(--c-primary, #6C5CE7);}[data-chasket-scope="csk-page-why"] .why-card-future{border-style:dashed;opacity:0.85;}[data-chasket-scope="csk-page-why"] .why-card-icon{margin-bottom:1rem;}[data-chasket-scope="csk-page-why"] .why-card h2{font-size:clamp(1.15rem, 1.8vw, 1.4rem);font-weight:700;margin:0 0 0.75rem;letter-spacing:-0.02em;}[data-chasket-scope="csk-page-why"] .why-card p{color:var(--c-text-dim, #9898ab);line-height:1.7;font-size:clamp(0.9rem, 1.1vw, 1rem);margin:0;}[data-chasket-scope="csk-page-why"] /* --- Comparison Section --- */ .why-comparison, [data-chasket-scope="csk-page-why"] .why-usecases{padding:3rem 0;}[data-chasket-scope="csk-page-why"] .why-section-title{font-size:clamp(1.5rem, 2.5vw, 2rem);font-weight:700;text-align:center;margin:0 0 0.75rem;letter-spacing:-0.02em;}[data-chasket-scope="csk-page-why"] .why-section-desc{text-align:center;color:var(--c-text-dim, #9898ab);font-size:clamp(0.9rem, 1.1vw, 1.05rem);max-width:35rem;margin:0 auto 2.5rem;line-height:1.6;}[data-chasket-scope="csk-page-why"] .why-compare-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 18rem), 1fr));gap:1.5rem;}[data-chasket-scope="csk-page-why"] .why-compare-card{background:var(--c-surface, #1a1a26);border:1px solid var(--c-border, #2a2a3a);border-radius:0.75rem;padding:2rem;transition:border-color 0.2s;}[data-chasket-scope="csk-page-why"] .why-compare-card:hover{border-color:var(--c-primary, #6C5CE7);}[data-chasket-scope="csk-page-why"] .why-compare-num{font-size:2rem;font-weight:800;background:linear-gradient(135deg, #6C5CE7, #00B894);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:0.75rem;line-height:1;}[data-chasket-scope="csk-page-why"] .why-compare-card h3{font-size:clamp(1rem, 1.3vw, 1.15rem);font-weight:700;margin:0 0 0.75rem;}[data-chasket-scope="csk-page-why"] .why-compare-card p{color:var(--c-text-dim, #9898ab);line-height:1.7;font-size:clamp(0.85rem, 1vw, 0.95rem);margin:0;}[data-chasket-scope="csk-page-why"] /* --- Use Cases Section --- */ .why-usecase-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 18rem), 1fr));gap:1.5rem;}[data-chasket-scope="csk-page-why"] .why-usecase-card{background:var(--c-surface, #1a1a26);border:1px solid var(--c-border, #2a2a3a);border-radius:0.75rem;padding:2rem;transition:border-color 0.2s;}[data-chasket-scope="csk-page-why"] .why-usecase-card:hover{border-color:var(--c-accent, #00B894);}[data-chasket-scope="csk-page-why"] .why-usecase-icon{width:3rem;height:3rem;border-radius:0.625rem;display:flex;align-items:center;justify-content:center;background:rgba(0,184,148,0.12);color:var(--c-accent-light, #55efc4);margin-bottom:1rem;}[data-chasket-scope="csk-page-why"] .why-usecase-card h3{font-size:clamp(1rem, 1.3vw, 1.15rem);font-weight:700;margin:0 0 0.75rem;}[data-chasket-scope="csk-page-why"] .why-usecase-card p{color:var(--c-text-dim, #9898ab);line-height:1.7;font-size:clamp(0.85rem, 1vw, 0.95rem);margin:0;}[data-chasket-scope="csk-page-why"] .why-cta{text-align:center;padding:4rem 0 2rem;}[data-chasket-scope="csk-page-why"] .why-cta h2{font-size:clamp(1.5rem, 2.5vw, 2rem);font-weight:700;margin:0 0 0.75rem;}[data-chasket-scope="csk-page-why"] .why-cta p{color:var(--c-text-dim, #9898ab);margin:0 0 2rem;font-size:clamp(0.95rem, 1.2vw, 1.1rem);}[data-chasket-scope="csk-page-why"] .why-cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}[data-chasket-scope="csk-page-why"] .why-btn-primary{display:inline-flex;align-items:center;padding:0.75rem 2rem;background:linear-gradient(135deg, #6C5CE7, #00B894);color:#fff;border-radius:0.5rem;text-decoration:none;font-weight:600;font-size:1rem;transition:opacity 0.2s;}[data-chasket-scope="csk-page-why"] .why-btn-primary:hover{opacity:0.9;}[data-chasket-scope="csk-page-why"] .why-btn-secondary{display:inline-flex;align-items:center;padding:0.75rem 2rem;background:var(--c-surface, #1a1a26);color:var(--c-text, #e4e4ed);border:1px solid var(--c-border, #2a2a3a);border-radius:0.5rem;text-decoration:none;font-weight:600;font-size:1rem;transition:border-color 0.2s;}[data-chasket-scope="csk-page-why"] .why-btn-secondary:hover{border-color:var(--c-primary-light, #a29bfe);}[data-chasket-scope="csk-page-why"] .t{color:#7c8aff;}[data-chasket-scope="csk-page-why"] .a{color:#f8a5c2;}[data-chasket-scope="csk-page-why"] .s{color:#55efc4;}[data-chasket-scope="csk-page-why"] .k{color:#fd79a8;}[data-chasket-scope="csk-page-why"] .tp{color:#74b9ff;}[data-chasket-scope="csk-page-why"] .v{color:#dfe6e9;}[data-chasket-scope="csk-page-why"] .f{color:#ffeaa7;}[data-chasket-scope="csk-page-why"] .n{color:#fab1a0;}[data-chasket-scope="csk-page-why"] .i{color:#fdcb6e;}[data-chasket-scope="csk-page-why"] .cm{color:#636e72;}@media (max-width:48rem){[data-chasket-scope="csk-page-why"] .why-demo-grid{flex-direction:column;}[data-chasket-scope="csk-page-why"] .why-demo-card{max-width:100%;}[data-chasket-scope="csk-page-why"] .why-demo-arrow{transform:rotate(90deg);}[data-chasket-scope="csk-page-why"] .why-card{padding:1.5rem;}}</style>
       <div class="why-page">
         <section class="why-hero">
           <h1>
@@ -11045,6 +11204,56 @@ class CskPageWhy extends HTMLElement {
               ${this.#esc(this.#tr('why.section4Desc'))}
             </p>
           </div>
+          <div class="why-card">
+            <div class="why-card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#E17055" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6">
+                </polyline>
+                <polyline points="8 6 2 12 8 18">
+                </polyline>
+                <line x1="14" y1="4" x2="10" y2="20">
+                </line>
+              </svg>
+            </div>
+            <h2>
+              ${this.#esc(this.#tr('why.section6Title'))}
+            </h2>
+            <p>
+              ${this.#esc(this.#tr('why.section6Desc'))}
+            </p>
+          </div>
+          <div class="why-card">
+            <div class="why-card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#81ECEC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2">
+                </rect>
+                <path d="M3 9h18">
+                </path>
+                <path d="M9 21V9">
+                </path>
+              </svg>
+            </div>
+            <h2>
+              ${this.#esc(this.#tr('why.section7Title'))}
+            </h2>
+            <p>
+              ${this.#esc(this.#tr('why.section7Desc'))}
+            </p>
+          </div>
+          <div class="why-card">
+            <div class="why-card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FAB1A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2">
+                </path>
+              </svg>
+            </div>
+            <h2>
+              ${this.#esc(this.#tr('why.section8Title'))}
+            </h2>
+            <p>
+              ${this.#esc(this.#tr('why.section8Desc'))}
+            </p>
+          </div>
           <div class="why-card why-card-future">
             <div class="why-card-icon">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--c-primary-light, #A29BFE)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -11060,6 +11269,115 @@ class CskPageWhy extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('why.section5Desc'))}
             </p>
+          </div>
+        </section>
+        <section class="why-comparison">
+          <h2 class="why-section-title">
+            ${this.#esc(this.#tr('why.comparisonTitle'))}
+          </h2>
+          <p class="why-section-desc">
+            ${this.#esc(this.#tr('why.comparisonDesc'))}
+          </p>
+          <div class="why-compare-grid">
+            <div class="why-compare-card">
+              <div class="why-compare-num">
+                01
+              </div>
+              <h3>
+                ${this.#esc(this.#tr('why.compare1Title'))}
+              </h3>
+              <p>
+                ${this.#esc(this.#tr('why.compare1Desc'))}
+              </p>
+            </div>
+            <div class="why-compare-card">
+              <div class="why-compare-num">
+                02
+              </div>
+              <h3>
+                ${this.#esc(this.#tr('why.compare2Title'))}
+              </h3>
+              <p>
+                ${this.#esc(this.#tr('why.compare2Desc'))}
+              </p>
+            </div>
+            <div class="why-compare-card">
+              <div class="why-compare-num">
+                03
+              </div>
+              <h3>
+                ${this.#esc(this.#tr('why.compare3Title'))}
+              </h3>
+              <p>
+                ${this.#esc(this.#tr('why.compare3Desc'))}
+              </p>
+            </div>
+          </div>
+        </section>
+        <section class="why-usecases">
+          <h2 class="why-section-title">
+            ${this.#esc(this.#tr('why.usecaseTitle'))}
+          </h2>
+          <p class="why-section-desc">
+            ${this.#esc(this.#tr('why.usecaseDesc'))}
+          </p>
+          <div class="why-usecase-grid">
+            <div class="why-usecase-card">
+              <div class="why-usecase-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="7" height="7">
+                  </rect>
+                  <rect x="14" y="3" width="7" height="7">
+                  </rect>
+                  <rect x="14" y="14" width="7" height="7">
+                  </rect>
+                  <rect x="3" y="14" width="7" height="7">
+                  </rect>
+                </svg>
+              </div>
+              <h3>
+                ${this.#esc(this.#tr('why.usecase1Title'))}
+              </h3>
+              <p>
+                ${this.#esc(this.#tr('why.usecase1Desc'))}
+              </p>
+            </div>
+            <div class="why-usecase-card">
+              <div class="why-usecase-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10">
+                  </circle>
+                  <line x1="2" y1="12" x2="22" y2="12">
+                  </line>
+                  <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z">
+                  </path>
+                </svg>
+              </div>
+              <h3>
+                ${this.#esc(this.#tr('why.usecase2Title'))}
+              </h3>
+              <p>
+                ${this.#esc(this.#tr('why.usecase2Desc'))}
+              </p>
+            </div>
+            <div class="why-usecase-card">
+              <div class="why-usecase-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 20V10">
+                  </path>
+                  <path d="M18 20V4">
+                  </path>
+                  <path d="M6 20v-4">
+                  </path>
+                </svg>
+              </div>
+              <h3>
+                ${this.#esc(this.#tr('why.usecase3Title'))}
+              </h3>
+              <p>
+                ${this.#esc(this.#tr('why.usecase3Desc'))}
+              </p>
+            </div>
           </div>
         </section>
         <section class="why-cta">

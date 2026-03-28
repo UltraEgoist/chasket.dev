@@ -964,17 +964,45 @@ window.__i18n_register('en', {
 
   why: {
     heroHeadline: 'Why Choose Chasket',
-    heroDesc: 'Chasket is a template-first compiler that generates zero-runtime Web Components. Low learning curve, no lock-in, and secure by default.',
+    heroDesc: 'Chasket is a template-first compiler that generates zero-runtime Web Components. Low learning curve, no lock-in, and secure by default. A development experience only possible because everything is resolved at build time.',
+
     section1Title: 'Zero Runtime',
-    section1Desc: 'Chasket does all the heavy lifting at build time. The output is framework-free vanilla Web Components (custom elements extending HTMLElement). No runtime library is added to your bundle size.',
+    section1Desc: 'Chasket does all the heavy lifting at build time. The output is framework-free vanilla Web Components (custom elements extending HTMLElement). No runtime library is added to your bundle — ever. Compared to React\'s ~40 KB and Vue\'s ~33 KB, Chasket adds exactly 0 KB.',
     section2Title: 'Minimal Learning Curve',
-    section2Desc: 'If you know HTML, CSS, and JavaScript, you can start immediately. Unique concepts are minimal — files are structured in four blocks: meta, script, template, and style. The intuitive syntax boosts your productivity.',
+    section2Desc: 'If you know HTML, CSS, and JavaScript, you can start immediately. Files are structured in just four blocks: meta, script, template, and style. No JSX or proprietary template language to learn — your web standards knowledge translates directly. New team members can read and write components from day one.',
     section3Title: 'XSS Safe by Default',
-    section3Desc: 'Template interpolation ({{ }}) is automatically HTML-escaped. Raw HTML is never output unless you explicitly use @html, letting you build secure applications by default.',
+    section3Desc: 'Template interpolation {{ }} is automatically HTML-escaped. Raw HTML is never output unless you explicitly use @html, and URL validation is built in. Reduce security review overhead and build secure applications by default.',
     section4Title: 'No Lock-in',
-    section4Desc: 'The output is standard Web Components (classes extending HTMLElement). Even if you switch frameworks in the future, components built with Chasket will continue to work as-is.',
+    section4Desc: 'The output is standard Web Components (classes extending HTMLElement). Embed them in React or Vue projects, or switch frameworks entirely in the future. Components built with Chasket will continue to work as-is in any environment.',
+
+    section6Title: 'Compile-Time Type Checking',
+    section6Desc: 'State variables and props are type-checked at compile time. Undefined variable references, type mismatches, and bindings to nonexistent attributes are caught before deployment. Refactor large-scale projects with confidence.',
+    section7Title: 'Scoped Styles',
+    section7Desc: 'Shadow DOM automatically scopes component styles. No BEM conventions or CSS Modules needed. Design freely per component without worrying about global style collisions — eliminate style conflicts in team development entirely.',
+    section8Title: 'Typed Event System',
+    section8Desc: 'Define event names and payload types with emit declarations. Parent components know exactly which events carry which types at compile time. Control bubbling with emit(local) and design safe, explicit component communication.',
+
     section5Title: 'Component Catalog Vision',
     section5Desc: 'We are planning a catalog feature where the community can share components. As the Chasket ecosystem grows, we aim to create a world where reusable parts are easy to discover.',
+
+    comparisonTitle: 'Developer Experience Compared',
+    comparisonDesc: 'How Chasket differs from other frameworks — from the developer\'s perspective.',
+    compare1Title: 'What You Write Is What Runs',
+    compare1Desc: 'React goes through JSX → virtual DOM → real DOM. Vue goes through template → reactive proxy → real DOM. Chasket generates native DOM manipulation code directly from your template — what you write is what runs. When debugging, you only trace standard browser APIs.',
+    compare2Title: 'Fast Builds, Light Deploys',
+    compare2Desc: 'Chasket\'s compiler transforms .csk to JavaScript in a single pass. Without virtual DOM diffing or reactive system wiring, the output code is small and fast. Performance that directly improves your Lighthouse score — with zero configuration.',
+    compare3Title: 'Build On What You Know',
+    compare3Desc: 'React\'s useEffect rules, Vue\'s Composition API, Svelte\'s $: labels — does each framework\'s unique concepts feel like starting over? With Chasket, your web standards knowledge is directly valuable. Instead of learning new APIs, you build on what you already know.',
+
+    usecaseTitle: 'Where Chasket Shines',
+    usecaseDesc: 'Scenarios where Chasket is especially effective.',
+    usecase1Title: 'Design Systems / UI Libraries',
+    usecase1Desc: 'Output as standard Web Components means they embed in React, Vue, or Angular projects alike. Share design team components across all products regardless of framework. No more maintaining separate React and Vue versions of the same button.',
+    usecase2Title: 'Micro-Frontends',
+    usecase2Desc: 'Zero runtime means lightweight bundles, and no constraints on coexisting with other frameworks. Ideal for micro-frontend architectures where different teams use different tech stacks. Chasket components run independently without affecting overall page performance.',
+    usecase3Title: 'Gradual Adoption in Legacy Systems',
+    usecase3Desc: 'Introduce Chasket one component at a time into existing jQuery or plain HTML systems. No need to rewrite existing code — just create new interactive parts as .csk files. Adopt a modern development experience incrementally without the risk of a large-scale rewrite.',
+
     ctaTitle: 'Get Started',
     ctaDesc: 'Create a Chasket project with a single command and experience template-first Web Component development.'
   }
