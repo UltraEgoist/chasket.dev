@@ -12,6 +12,12 @@
 
   state code_diagnostic_e0003: string = "state count: number = 0\nstate result: string = count + 10  // error: assigning number+number to string\n\n// fix:\nstate result: number = count + 10\n// or\nstate result: string = (count + 10).toString()"
 
+  state code_diagnostic_e0004: string = "&lt;meta&gt;\n  name: my-component\n&lt;/meta&gt;\n&lt;script&gt;\n  state count: number = 0\n  // error: duplicate state declaration\n  state count: string = 'hello'\n&lt;/script&gt;\n\n&lt;!-- fix: use unique names --&gt;\n&lt;script&gt;\n  state count: number = 0\n  state label: string = 'hello'\n&lt;/script&gt;"
+
+  state code_diagnostic_e0301: string = "&lt;template&gt;\n  &lt;p&gt;{{ unknownVar }}&lt;/p&gt;\n&lt;/template&gt;\n\n&lt;!-- fix: declare the variable in script --&gt;\n&lt;script&gt;\n  state unknownVar: string = 'hello'\n&lt;/script&gt;\n&lt;template&gt;\n  &lt;p&gt;{{ unknownVar }}&lt;/p&gt;\n&lt;/template&gt;"
+
+  state code_diagnostic_e0302: string = "&lt;template&gt;\n  &lt;button @click=&quot;handleClick&quot;&gt;Click&lt;/button&gt;\n&lt;/template&gt;\n\n&lt;!-- fix: define the function in script --&gt;\n&lt;script&gt;\n  fn handleClick() {\n    console.log('clicked')\n  }\n&lt;/script&gt;\n&lt;template&gt;\n  &lt;button @click=&quot;handleClick&quot;&gt;Click&lt;/button&gt;\n&lt;/template&gt;"
+
   state code_diagnostic_w0101: string = "state count: number = 0   // warning: unused\nstate name: string = 'John'\n\n&lt;template&gt;\n  &lt;p&gt;{{ name }}&lt;/p&gt;\n&lt;/template&gt;\n\n// fix: use or remove count"
 
   state code_diagnostic_w0201: string = "&lt;!-- dangerous: inserting user input as HTML --&gt;\n&lt;div @html=\"userContent\"&gt;&lt;/div&gt;\n\n&lt;!-- safe: auto-escaped --&gt;\n&lt;div&gt;{{ userContent }}&lt;/div&gt;\n\n&lt;!-- fix: use only trusted HTML --&gt;\n&lt;div @html=\"sanitize(userContent)\"&gt;&lt;/div&gt;"
@@ -38,7 +44,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
-            <pre><code>{{ code_diagnostic_e0001 }}</code></pre>
+            <pre><code>{{{ code_diagnostic_e0001 }}}</code></pre>
           </div>
         </div>
 
@@ -48,7 +54,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
-            <pre><code>{{ code_diagnostic_e0002 }}</code></pre>
+            <pre><code>{{{ code_diagnostic_e0002 }}}</code></pre>
           </div>
 
           <div class="note">
@@ -67,7 +73,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
-            <pre><code>{{ code_diagnostic_e0003 }}</code></pre>
+            <pre><code>{{{ code_diagnostic_e0003 }}}</code></pre>
           </div>
         </div>
 
@@ -77,7 +83,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
-            <p>{{ tr('apiContent.diagnostics.e0004.fixDescription') }}</p>
+            <pre><code>{{{ code_diagnostic_e0004 }}}</code></pre>
           </div>
         </div>
 
@@ -87,7 +93,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
-            <p>{{ tr('apiContent.diagnostics.e0301.fixDescription') }}</p>
+            <pre><code>{{{ code_diagnostic_e0301 }}}</code></pre>
           </div>
         </div>
 
@@ -97,7 +103,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
-            <p>{{ tr('apiContent.diagnostics.e0302.fixDescription') }}</p>
+            <pre><code>{{{ code_diagnostic_e0302 }}}</code></pre>
           </div>
         </div>
       </section>
@@ -112,7 +118,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
-            <pre><code>{{ code_diagnostic_w0101 }}</code></pre>
+            <pre><code>{{{ code_diagnostic_w0101 }}}</code></pre>
           </div>
 
           <div class="note">
@@ -131,7 +137,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
-            <pre><code>{{ code_diagnostic_w0201 }}</code></pre>
+            <pre><code>{{{ code_diagnostic_w0201 }}}</code></pre>
           </div>
 
           <div class="note">
@@ -150,7 +156,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
-            <pre><code>{{ code_diagnostic_w0202 }}</code></pre>
+            <pre><code>{{{ code_diagnostic_w0202 }}}</code></pre>
           </div>
 
           <div class="note">
@@ -169,7 +175,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
-            <pre><code>{{ code_diagnostic_w0203 }}</code></pre>
+            <pre><code>{{{ code_diagnostic_w0203 }}}</code></pre>
           </div>
 
           <div class="note">

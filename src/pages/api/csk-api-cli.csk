@@ -32,7 +32,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.cli.example') }}</h4>
-            <pre><code>{{ code_chasketInit }}</code></pre>
+            <pre><code>{{{ code_chasketInit }}}</code></pre>
           </div>
 
           <div class="note">
@@ -57,7 +57,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.cli.example') }}</h4>
-            <pre><code>{{ code_chasketDev }}</code></pre>
+            <pre><code>{{{ code_chasketDev }}}</code></pre>
           </div>
 
           <div class="property">
@@ -91,7 +91,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.cli.example') }}</h4>
-            <pre><code>{{ code_chasketBuild }}</code></pre>
+            <pre><code>{{{ code_chasketBuild }}}</code></pre>
           </div>
 
           <div class="property">
@@ -125,7 +125,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.cli.example') }}</h4>
-            <pre><code>{{ code_chasketCheck }}</code></pre>
+            <pre><code>{{{ code_chasketCheck }}}</code></pre>
           </div>
 
           <div class="note">

@@ -71,7 +71,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.config.exampleTitle') }}</h4>
-            <pre><code>{{ code_configBasic }}</code></pre>
+            <pre><code>{{{ code_configBasic }}}</code></pre>
           </div>
         </div>
       </section>

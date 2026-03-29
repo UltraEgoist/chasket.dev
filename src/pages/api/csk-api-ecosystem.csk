@@ -45,7 +45,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.ecosystem.usageExample') }}</h4>
-            <pre><code>{{ code_router }}</code></pre>
+            <pre><code>{{{ code_router }}}</code></pre>
           </div>
 
           <div class="note">
@@ -72,7 +72,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.ecosystem.usageExample') }}</h4>
-            <pre><code>{{ code_store }}</code></pre>
+            <pre><code>{{{ code_store }}}</code></pre>
           </div>
 
           <div class="note">
@@ -97,7 +97,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.ecosystem.usageExample') }}</h4>
-            <pre><code>{{ code_ssr }}</code></pre>
+            <pre><code>{{{ code_ssr }}}</code></pre>
           </div>
 
           <div class="note">
@@ -127,7 +127,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.ecosystem.usageExample') }}</h4>
-            <pre><code>{{ code_ui_components }}</code></pre>
+            <pre><code>{{{ code_ui_components }}}</code></pre>
           </div>
 
           <div class="note">
@@ -210,7 +210,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.ecosystem.basicClassStructure') }}</h4>
-            <pre><code>{{ code_compilation_output }}</code></pre>
+            <pre><code>{{{ code_compilation_output }}}</code></pre>
           </div>
 
           <div class="property">

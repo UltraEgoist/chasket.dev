@@ -4,24 +4,25 @@
 </meta>
 
 <script>
+  fn tr(k: string) { return window.__t(k) }
   state exampleFull: string = "const { suite, compileOk, csk } = require('./lib/chasket-test');\n\nsuite('Counter Component', t => {\n  let src;\n\n  t.beforeEach(() => {\n    src = csk({\n      name: 'my-counter',\n      script: '\n        state count: number = 0\n        fn increment() { count++; }\n        fn decrement() { count--; }\n      ',\n      template: '\n        &lt;div&gt;\n          &lt;p&gt;Count: {{ count }}&lt;/p&gt;\n          &lt;button @click=&quot;increment&quot;&gt;+&lt;/button&gt;\n          &lt;button @click=&quot;decrement&quot;&gt;-&lt;/button&gt;\n        &lt;/div&gt;\n      '\n    });\n  });\n\n  t.test('compiles successfully', () => {\n    const r = compileOk(src);\n    t.compileSuccess(r);\n    t.validJS(r);\n  });\n\n  t.test('has state and methods', () => {\n    const r = compileOk(src);\n    t.hasState(r, 'count');\n    t.outputIncludes(r, 'increment');\n    t.outputIncludes(r, 'decrement');\n  });\n\n  t.test('template includes buttons', () => {\n    const r = compileOk(src);\n    t.templateIncludes(r, '&lt;button');\n    t.templateIncludes(r, 'Count:');\n  });\n\n  t.test('interpolates count', () => {\n    const r = compileOk(src);\n    t.hasInterpolation(r, 'count');\n  });\n\n  t.afterEach(() => {\n    console.log('test complete');\n  });\n});\n\nsuite.run();"
 </script>
 
 <template>
   <!-- Full Example -->
   <section id="full-example" class="doc-section">
-    <h2>${window.__t('testContent.example.title')}</h2>
-    <p>${window.__t('testContent.example.desc')}</p>
-    <div class="example-title">${window.__t('testContent.example.fullExampleTitle')}</div>
-    <pre><code>{{ exampleFull }}</code></pre>
-    <p>${window.__t('testContent.example.thisTestVerifies')}</p>
+    <h2>{{ tr('testContent.example.title') }}</h2>
+    <p>{{ tr('testContent.example.desc') }}</p>
+    <div class="example-title">{{ tr('testContent.example.fullExampleTitle') }}</div>
+    <pre><code>{{{ exampleFull }}}</code></pre>
+    <p>{{ tr('testContent.example.thisTestVerifies') }}</p>
     <ul>
-      <li>${window.__t('testContent.example.item1')}</li>
-      <li>${window.__t('testContent.example.item2')}</li>
-      <li>${window.__t('testContent.example.item3')}</li>
-      <li>${window.__t('testContent.example.item4')}</li>
-      <li>${window.__t('testContent.example.item5')}</li>
-      <li>${window.__t('testContent.example.item6')}</li>
+      <li>{{ tr('testContent.example.item1') }}</li>
+      <li>{{ tr('testContent.example.item2') }}</li>
+      <li>{{ tr('testContent.example.item3') }}</li>
+      <li>{{ tr('testContent.example.item4') }}</li>
+      <li>{{ tr('testContent.example.item5') }}</li>
+      <li>{{ tr('testContent.example.item6') }}</li>
     </ul>
   </section>
 </template>

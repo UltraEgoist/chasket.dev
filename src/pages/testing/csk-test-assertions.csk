@@ -4,6 +4,7 @@
 </meta>
 
 <script>
+  fn tr(k: string) { return window.__t(k) }
   state exampleAssert: string = "const { suite, compileOk } = require('./lib/chasket-test');\n\nsuite('Assertions', t => {\n  t.test('basic assertions', () => {\n    t.assert(true, 'is truthy');\n    t.eq(5, 5, 'values equal');\n    t.deepEq({ a: 1 }, { a: 1 }, 'deep equal');\n    t.includes('hello world', 'world', 'includes substring');\n    t.notIncludes('hello', 'xyz', 'excludes substring');\n    t.matches('test123', /\\\\d+/, 'matches regex');\n    t.throws(() => { throw new Error('oops'); }, 'function throws');\n  });\n});\n\nsuite.run();"
 
   state exampleOutput: string = "const { suite, compileOk, csk } = require('./lib/chasket-test');\n\nsuite('Output Assertions', t => {\n  t.test('verify output', () => {\n    const src = csk({\n      name: 'my-comp',\n      script: 'state msg: string = &quot;hello&quot;',\n      template: '&lt;p&gt;{{ msg }}&lt;/p&gt;'\n    });\n    const r = compileOk(src);\n\n    t.compileSuccess(r);\n    t.validJS(r);\n    t.outputIncludes(r, 'hello');\n    t.outputNotIncludes(r, 'world');\n    t.hasInterpolation(r, 'msg');\n  });\n});\n\nsuite.run();"
@@ -18,132 +19,132 @@
 <template>
   <!-- Assertions -->
   <section id="assertions" class="doc-section">
-    <h2>${window.__t('testContent.assertions.title')}</h2>
+    <h2>{{ tr('testContent.assertions.title') }}</h2>
 
     <div class="subsection">
-      <h3 id="assert-basic">${window.__t('testContent.assertions.basicTitle')}</h3>
+      <h3 id="assert-basic">{{ tr('testContent.assertions.basicTitle') }}</h3>
       <div class="property">
         <h4>assert(condition, msg)</h4>
-        <p>${window.__t('testContent.assertions.assertDesc')}</p>
+        <p>{{ tr('testContent.assertions.assertDesc') }}</p>
       </div>
       <div class="property">
         <h4>eq(actual, expected, msg)</h4>
-        <p>${window.__t('testContent.assertions.eqDesc')}</p>
+        <p>{{ tr('testContent.assertions.eqDesc') }}</p>
       </div>
       <div class="property">
         <h4>deepEq(actual, expected, msg)</h4>
-        <p>${window.__t('testContent.assertions.deepEqDesc')}</p>
+        <p>{{ tr('testContent.assertions.deepEqDesc') }}</p>
       </div>
       <div class="property">
         <h4>includes(str, sub, msg)</h4>
-        <p>${window.__t('testContent.assertions.includesDesc')}</p>
+        <p>{{ tr('testContent.assertions.includesDesc') }}</p>
       </div>
       <div class="property">
         <h4>notIncludes(str, sub, msg)</h4>
-        <p>${window.__t('testContent.assertions.notIncludesDesc')}</p>
+        <p>{{ tr('testContent.assertions.notIncludesDesc') }}</p>
       </div>
       <div class="property">
         <h4>matches(str, regex, msg)</h4>
-        <p>${window.__t('testContent.assertions.matchesDesc')}</p>
+        <p>{{ tr('testContent.assertions.matchesDesc') }}</p>
       </div>
       <div class="property">
         <h4>throws(fn, msg)</h4>
-        <p>${window.__t('testContent.assertions.throwsDesc')}</p>
+        <p>{{ tr('testContent.assertions.throwsDesc') }}</p>
       </div>
-      <div class="example-title">${window.__t('testContent.assertions.usageExample')}</div>
-      <pre><code>{{ exampleAssert }}</code></pre>
+      <div class="example-title">{{ tr('testContent.assertions.usageExample') }}</div>
+      <pre><code>{{{ exampleAssert }}}</code></pre>
     </div>
 
     <div class="subsection">
-      <h3 id="assert-compile">${window.__t('testContent.assertions.compileTitle')}</h3>
+      <h3 id="assert-compile">{{ tr('testContent.assertions.compileTitle') }}</h3>
       <div class="property">
         <h4>compileSuccess(result, msg)</h4>
-        <p>${window.__t('testContent.assertions.compileSuccessDesc')}</p>
+        <p>{{ tr('testContent.assertions.compileSuccessDesc') }}</p>
       </div>
       <div class="property">
         <h4>compileFails(result, msg)</h4>
-        <p>${window.__t('testContent.assertions.compileFailsDesc')}</p>
+        <p>{{ tr('testContent.assertions.compileFailsDesc') }}</p>
       </div>
       <div class="property">
         <h4>validJS(result, msg)</h4>
-        <p>${window.__t('testContent.assertions.validJSDesc')}</p>
+        <p>{{ tr('testContent.assertions.validJSDesc') }}</p>
       </div>
     </div>
 
     <div class="subsection">
-      <h3 id="assert-output">${window.__t('testContent.assertions.outputTitle')}</h3>
+      <h3 id="assert-output">{{ tr('testContent.assertions.outputTitle') }}</h3>
       <div class="property">
         <h4>outputIncludes(result, sub, msg)</h4>
-        <p>${window.__t('testContent.assertions.outputIncludesDesc')}</p>
+        <p>{{ tr('testContent.assertions.outputIncludesDesc') }}</p>
       </div>
       <div class="property">
         <h4>outputNotIncludes(result, sub, msg)</h4>
-        <p>${window.__t('testContent.assertions.outputNotIncludesDesc')}</p>
+        <p>{{ tr('testContent.assertions.outputNotIncludesDesc') }}</p>
       </div>
-      <div class="example-title">${window.__t('testContent.assertions.usageExample')}</div>
-      <pre><code>{{ exampleOutput }}</code></pre>
+      <div class="example-title">{{ tr('testContent.assertions.usageExample') }}</div>
+      <pre><code>{{{ exampleOutput }}}</code></pre>
     </div>
 
     <div class="subsection">
-      <h3 id="assert-template">${window.__t('testContent.assertions.templateTitle')}</h3>
+      <h3 id="assert-template">{{ tr('testContent.assertions.templateTitle') }}</h3>
       <div class="property">
         <h4>getTemplate(result)</h4>
-        <p>${window.__t('testContent.assertions.getTemplateDesc')}</p>
+        <p>{{ tr('testContent.assertions.getTemplateDesc') }}</p>
       </div>
       <div class="property">
         <h4>templateIncludes(result, sub, msg)</h4>
-        <p>${window.__t('testContent.assertions.templateIncludesDesc')}</p>
+        <p>{{ tr('testContent.assertions.templateIncludesDesc') }}</p>
       </div>
       <div class="property">
         <h4>templateNotIncludes(result, sub, msg)</h4>
-        <p>${window.__t('testContent.assertions.templateNotIncludesDesc')}</p>
+        <p>{{ tr('testContent.assertions.templateNotIncludesDesc') }}</p>
       </div>
-      <div class="example-title">${window.__t('testContent.assertions.usageExample')}</div>
-      <pre><code>{{ exampleTemplate }}</code></pre>
+      <div class="example-title">{{ tr('testContent.assertions.usageExample') }}</div>
+      <pre><code>{{{ exampleTemplate }}}</code></pre>
     </div>
 
     <div class="subsection">
-      <h3 id="assert-state">${window.__t('testContent.assertions.stateTitle')}</h3>
+      <h3 id="assert-state">{{ tr('testContent.assertions.stateTitle') }}</h3>
       <div class="property">
         <h4>hasState(result, name, msg)</h4>
-        <p>${window.__t('testContent.assertions.hasStateDesc')}</p>
+        <p>{{ tr('testContent.assertions.hasStateDesc') }}</p>
       </div>
       <div class="property">
         <h4>hasWatch(result, deps, msg)</h4>
-        <p>${window.__t('testContent.assertions.hasWatchDesc')}</p>
+        <p>{{ tr('testContent.assertions.hasWatchDesc') }}</p>
       </div>
       <div class="property">
         <h4>hasOnMount(result, bodySubstring, msg)</h4>
-        <p>${window.__t('testContent.assertions.hasOnMountDesc')}</p>
+        <p>{{ tr('testContent.assertions.hasOnMountDesc') }}</p>
       </div>
       <div class="property">
         <h4>hasOnUnmount(result, bodySubstring, msg)</h4>
-        <p>${window.__t('testContent.assertions.hasOnUnmountDesc')}</p>
+        <p>{{ tr('testContent.assertions.hasOnUnmountDesc') }}</p>
       </div>
       <div class="property">
         <h4>hasInterpolation(result, varName, msg)</h4>
-        <p>${window.__t('testContent.assertions.hasInterpolationDesc')}</p>
+        <p>{{ tr('testContent.assertions.hasInterpolationDesc') }}</p>
       </div>
-      <div class="example-title">${window.__t('testContent.assertions.usageExample')}</div>
-      <pre><code>{{ exampleState }}</code></pre>
+      <div class="example-title">{{ tr('testContent.assertions.usageExample') }}</div>
+      <pre><code>{{{ exampleState }}}</code></pre>
     </div>
 
     <div class="subsection">
-      <h3 id="assert-diag">${window.__t('testContent.assertions.diagTitle')}</h3>
+      <h3 id="assert-diag">{{ tr('testContent.assertions.diagTitle') }}</h3>
       <div class="property">
         <h4>hasDiag(result, code, level?, msg)</h4>
-        <p>${window.__t('testContent.assertions.hasDiagDesc')}</p>
+        <p>{{ tr('testContent.assertions.hasDiagDesc') }}</p>
       </div>
       <div class="property">
         <h4>noDiag(result, code, msg)</h4>
-        <p>${window.__t('testContent.assertions.noDiagDesc')}</p>
+        <p>{{ tr('testContent.assertions.noDiagDesc') }}</p>
       </div>
       <div class="property">
         <h4>diagCount(result, level, expected, msg)</h4>
-        <p>${window.__t('testContent.assertions.diagCountDesc')}</p>
+        <p>{{ tr('testContent.assertions.diagCountDesc') }}</p>
       </div>
-      <div class="example-title">${window.__t('testContent.assertions.usageExample')}</div>
-      <pre><code>{{ exampleDiag }}</code></pre>
+      <div class="example-title">{{ tr('testContent.assertions.usageExample') }}</div>
+      <pre><code>{{{ exampleDiag }}}</code></pre>
     </div>
   </section>
 </template>

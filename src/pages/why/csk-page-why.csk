@@ -27,14 +27,14 @@
       <div class="why-demo-grid">
         <div class="why-demo-card">
           <div class="why-demo-label">Chasket (.csk)</div>
-          <pre><code>{{ codeExample }}</code></pre>
+          <pre><code>{{{ codeExample }}}</code></pre>
         </div>
         <div class="why-demo-arrow">
           <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </div>
         <div class="why-demo-card">
           <div class="why-demo-label">Output (vanilla JS)</div>
-          <pre><code>{{ codeOutput }}</code></pre>
+          <pre><code>{{{ codeOutput }}}</code></pre>
         </div>
       </div>
     </section>

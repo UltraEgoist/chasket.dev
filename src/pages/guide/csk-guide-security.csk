@@ -19,7 +19,7 @@
       <h3>{{ tr('guideContent.security.autoEscape.title') }}</h3>
       <p>{{ tr('guideContent.security.autoEscape.desc') }}</p>
 
-      <pre><code>{{ code_xssExample }}</code></pre>
+      <pre><code>{{{ code_xssExample }}}</code></pre>
 
       <div class="warning">
         <strong>⚠️ {{ tr('guideContent.security.autoEscape.warningLabel') }}:</strong> {{ tr('guideContent.security.autoEscape.warningText') }}

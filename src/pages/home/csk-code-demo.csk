@@ -83,7 +83,7 @@
           <div class="layout">
             <div class="code">
               <div class="file">counter.csk</div>
-              <pre><code>{{ codeCounter }}</code></pre>
+              <pre><code>{{{ codeCounter }}}</code></pre>
             </div>
             <div class="preview">
               <div class="preview-label">{{ tr('codeDemo.preview') }}</div>
@@ -102,7 +102,7 @@
           <div class="layout">
             <div class="code">
               <div class="file">todo.csk</div>
-              <pre><code>{{ codeTodo }}</code></pre>
+              <pre><code>{{{ codeTodo }}}</code></pre>
             </div>
             <div class="preview">
               <div class="preview-label">{{ tr('codeDemo.preview') }}</div>
@@ -138,7 +138,7 @@
           <div class="layout">
             <div class="code">
               <div class="file">user-card.csk</div>
-              <pre><code>{{ codeFetch }}</code></pre>
+              <pre><code>{{{ codeFetch }}}</code></pre>
             </div>
             <div class="preview">
               <div class="preview-label">{{ tr('codeDemo.preview') }}</div>
