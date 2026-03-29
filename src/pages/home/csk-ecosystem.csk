@@ -26,6 +26,7 @@
           <h3>chasket-cli</h3>
           <p>{{ tr('ecosystem.cli') }}</p>
           <code class="install">npm i @chasket/chasket</code>
+          <span class="caution">{{ tr('ecosystem.experimental') }}</span>
         </div>
 
         <div class="card clr-blue">
