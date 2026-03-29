@@ -582,7 +582,7 @@ window.__i18n_register('ja', {
         },
         properties: 'プロパティ',
         shadow: {
-          desc: 'Shadow DOMを使用するかどうかを設定します。trueでShadow DOMを有効化、falseまたはnoneでライトDOM（スコープ付き）を使用します。',
+          desc: 'Shadow DOMのモードを設定します。"open"でShadow DOM（外部アクセス可）、"closed"でShadow DOM（外部アクセス不可）、"none"でライトDOM（スコープ付き）を使用します。',
           hint: 'ヒント',
           hintText: 'ページ型コンポーネントではshadow: noneを推奨します。',
         },
@@ -780,7 +780,7 @@ window.__i18n_register('ja', {
     },
     template: {
       conditionals: {
-        desc: '<#if>タグで条件に応じてコンテンツを表示/非表示にします。<#else if>と<#else>で複数条件に対応できます。',
+        desc: '<#if>タグで条件に応じてコンテンツを表示/非表示にします。<:else-if>と<:else>で複数条件に対応できます。',
         syntax: {
           s1: '条件が真の時に表示',
           s2: '別の条件',
@@ -815,7 +815,6 @@ window.__i18n_register('ja', {
           enter: 'Enterキーのみ反応',
           escape: 'Escapeキーのみ反応',
           prevent: 'preventDefault()を実行',
-          space: 'Spaceキーのみ反応',
           stop: 'stopPropagation()を実行',
         },
         modifiersLabel: '修飾子',

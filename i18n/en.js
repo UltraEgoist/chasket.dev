@@ -582,7 +582,7 @@ window.__i18n_register('en', {
         },
         properties: 'Properties',
         shadow: {
-          desc: 'Configures whether to use Shadow DOM. Set to true to enable Shadow DOM, or false/none to use Light DOM (with scoping).',
+          desc: 'Configures the Shadow DOM mode. "open" for Shadow DOM (externally accessible), "closed" for Shadow DOM (not externally accessible), or "none" for Light DOM (with scoping).',
           hint: 'Hint',
           hintText: 'For page-type components, shadow: none is recommended.',
         },
@@ -780,7 +780,7 @@ window.__i18n_register('en', {
     },
     template: {
       conditionals: {
-        desc: '<#if> tags show/hide content based on conditions. <#else if> and <#else> handle multiple conditions.',
+        desc: '<#if> tags show/hide content based on conditions. <:else-if> and <:else> handle multiple conditions.',
         syntax: {
           s1: 'Show when condition is true',
           s2: 'Alternative condition',
@@ -815,7 +815,6 @@ window.__i18n_register('en', {
           enter: 'Only responds to Enter key',
           escape: 'Only responds to Escape key',
           prevent: 'Executes preventDefault()',
-          space: 'Only responds to Space key',
           stop: 'Executes stopPropagation()',
         },
         modifiersLabel: 'Modifiers',

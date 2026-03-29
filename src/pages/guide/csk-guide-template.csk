@@ -12,7 +12,7 @@
 
   state code_eventHandling: string = "&lt;button @click=\"increment\"&gt;Count: {{ count }}&lt;/button&gt;\n&lt;form @submit|prevent=\"handleSubmit\"&gt;\n  &lt;input @keydown|enter=\"handleEnter\" /&gt;\n  &lt;button @click|stop=\"handleClick\"&gt;Click&lt;/button&gt;\n&lt;/form&gt;"
 
-  state code_conditional: string = "&lt;#if condition=\"isLoggedIn\"&gt;\n  &lt;p&gt;Welcome, {{ username }}!&lt;/p&gt;\n&lt;#else if condition=\"loading\"&gt;\n  &lt;p&gt;Loading...&lt;/p&gt;\n&lt;#else&gt;\n  &lt;p&gt;Please log in&lt;/p&gt;\n&lt;/#if&gt;"
+  state code_conditional: string = "&lt;#if condition=\"isLoggedIn\"&gt;\n  &lt;p&gt;Welcome, {{ username }}!&lt;/p&gt;\n&lt;:else-if condition=\"loading\"&gt;\n  &lt;p&gt;Loading...&lt;/p&gt;\n&lt;:else&gt;\n  &lt;p&gt;Please log in&lt;/p&gt;\n&lt;/#if&gt;"
 
   state code_loop: string = "&lt;#for each=\"item\" of=\"items\" key=\"item.id\"&gt;\n  &lt;div&gt;\n    &lt;h3&gt;{{ item.name }}&lt;/h3&gt;\n    &lt;p&gt;{{ item.description }}&lt;/p&gt;\n  &lt;/div&gt;\n&lt;#empty&gt;\n  &lt;p&gt;No items found&lt;/p&gt;\n&lt;/#for&gt;"
 
@@ -103,8 +103,7 @@
           <li><code>|prevent</code> - {{ tr('guideContent.template.events.modifiers.prevent') }}</li>
           <li><code>|stop</code> - {{ tr('guideContent.template.events.modifiers.stop') }}</li>
           <li><code>|enter</code> - {{ tr('guideContent.template.events.modifiers.enter') }}</li>
-          <li><code>|escape</code> - {{ tr('guideContent.template.events.modifiers.escape') }}</li>
-          <li><code>|space</code> - {{ tr('guideContent.template.events.modifiers.space') }}</li>
+          <li><code>|esc</code> - {{ tr('guideContent.template.events.modifiers.escape') }}</li>
         </ul>
       </div>
 
@@ -131,8 +130,8 @@
         <strong>{{ tr('guideContent.template.conditionals.syntaxLabel') }}:</strong>
         <ul>
           <li><code>&lt;#if condition="..."&gt;</code> - {{ tr('guideContent.template.conditionals.syntax.s1') }}</li>
-          <li><code>&lt;#else if condition="..."&gt;</code> - {{ tr('guideContent.template.conditionals.syntax.s2') }}</li>
-          <li><code>&lt;#else&gt;</code> - {{ tr('guideContent.template.conditionals.syntax.s3') }}</li>
+          <li><code>&lt;:else-if condition="..."&gt;</code> - {{ tr('guideContent.template.conditionals.syntax.s2') }}</li>
+          <li><code>&lt;:else&gt;</code> - {{ tr('guideContent.template.conditionals.syntax.s3') }}</li>
           <li><code>&lt;/#if&gt;</code> - {{ tr('guideContent.template.conditionals.syntax.s4') }}</li>
         </ul>
       </div>
