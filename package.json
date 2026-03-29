@@ -9,7 +9,7 @@
     "preview": "chasket build && node scripts/postbuild.js"
   },
   "dependencies": {
-    "@chasket/chasket": "file:../chasket/chasket-cli"
+    "@chasket/chasket": "^0.2.1"
   },
   "repository": {
     "type": "git",

@@ -152,7 +152,7 @@
 
           <div class="note">
             <strong>{{ tr('apiContent.ecosystem.installation') }}:</strong>
-            <pre><code>npm install vite-plugin-chasket</code></pre>
+            <pre><code>npm install @chasket/vite-plugin-chasket</code></pre>
           </div>
         </div>
 
