@@ -10,7 +10,7 @@
 
   fn copyCmd() {
     if (navigator.clipboard) {
-      navigator.clipboard.writeText("npx chasket init my-app")
+      navigator.clipboard.writeText("npx @chasket/chasket init my-app")
       copied = true
     }
   }
@@ -22,7 +22,7 @@
       <h2>{{ tr('cta.title') }}</h2>
       <p>{{ tr('cta.subtitle') }}</p>
       <div class="install">
-        <code>npx chasket init my-app</code>
+        <code>npx @chasket/chasket init my-app</code>
         <button @click="copyCmd" :class="copied ? 'copy copied' : 'copy'" :aria-label="tr('cta.copyLabel')">
           <#if condition="copied">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>

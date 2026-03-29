@@ -8,8 +8,8 @@
     "dev": "chasket build && node scripts/postbuild.js && chasket dev",
     "preview": "chasket build && node scripts/postbuild.js"
   },
-  "devDependencies": {
-    "@aspect/chasket": "github:UltraEgoist/chasket#main"
+  "dependencies": {
+    "@chasket/chasket": "^0.2.1"
   },
   "repository": {
     "type": "git",

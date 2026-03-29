@@ -10,7 +10,7 @@
 
   fn copyCmd() {
     if (navigator.clipboard) {
-      navigator.clipboard.writeText("npx chasket init my-app")
+      navigator.clipboard.writeText("npx @chasket/chasket init my-app")
       copied = true
     }
   }
@@ -36,7 +36,7 @@
         </a>
       </div>
       <div class="install">
-        <code>npx chasket init my-app</code>
+        <code>npx @chasket/chasket init my-app</code>
         <button
           @click="copyCmd"
           :class="copied ? 'copy copied' : 'copy'"
