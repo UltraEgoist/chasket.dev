@@ -21,7 +21,7 @@
       <h3>{{ tr('guideContent.communication.propsEmit.title') }}</h3>
       <p>{{ tr('guideContent.communication.propsEmit.desc') }}</p>
 
-      <pre><code>{{ code_propsEmit }}</code></pre>
+      <pre><code>{{{ code_propsEmit }}}</code></pre>
 
       <div class="note">
         <strong>{{ tr('guideContent.communication.propsEmit.patternLabel') }}:</strong>
@@ -38,7 +38,7 @@
       <h3>{{ tr('guideContent.communication.provideConsume.title') }}</h3>
       <p>{{ tr('guideContent.communication.provideConsume.desc') }}</p>
 
-      <pre><code>{{ code_provideConsumeEx }}</code></pre>
+      <pre><code>{{{ code_provideConsumeEx }}}</code></pre>
 
       <div class="note">
         <strong>{{ tr('guideContent.communication.provideConsume.usesLabel') }}:</strong>

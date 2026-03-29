@@ -111,7 +111,8 @@ window.__i18n_register('en', {
     lsp: 'Language Server for VS Code, Neovim, Sublime — completions, diagnostics, formatting.',
     vscode: 'VS Code extension with syntax highlighting, real-time diagnostics, and Go to Definition.',
     comingSoon: 'Coming Soon',
-    available: 'Available'
+    available: 'Available',
+    experimental: 'Early release — not yet battle-tested'
   },
 
   cta: {

@@ -22,10 +22,10 @@
       <p>{{ tr('guideContent.style.scoping.desc') }}</p>
 
       <p class="example-title">{{ tr('guideContent.style.scoping.shadowDOM') }}:</p>
-      <pre><code>{{ code_shadowScope }}</code></pre>
+      <pre><code>{{{ code_shadowScope }}}</code></pre>
 
       <p class="example-title">{{ tr('guideContent.style.scoping.lightDOM') }}:</p>
-      <pre><code>{{ code_styling }}</code></pre>
+      <pre><code>{{{ code_styling }}}</code></pre>
 
       <div class="note">
         <strong>{{ tr('guideContent.style.scoping.featuresLabel') }}:</strong>

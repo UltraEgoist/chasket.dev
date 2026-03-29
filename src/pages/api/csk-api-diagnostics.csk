@@ -38,7 +38,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
-            <pre><code>{{ code_diagnostic_e0001 }}</code></pre>
+            <pre><code>{{{ code_diagnostic_e0001 }}</code></pre>
           </div>
         </div>
 
@@ -48,7 +48,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
-            <pre><code>{{ code_diagnostic_e0002 }}</code></pre>
+            <pre><code>{{{ code_diagnostic_e0002 }}</code></pre>
           </div>
 
           <div class="note">
@@ -67,7 +67,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
-            <pre><code>{{ code_diagnostic_e0003 }}</code></pre>
+            <pre><code>{{{ code_diagnostic_e0003 }}</code></pre>
           </div>
         </div>
 
@@ -112,7 +112,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
-            <pre><code>{{ code_diagnostic_w0101 }}</code></pre>
+            <pre><code>{{{ code_diagnostic_w0101 }}</code></pre>
           </div>
 
           <div class="note">
@@ -131,7 +131,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
-            <pre><code>{{ code_diagnostic_w0201 }}</code></pre>
+            <pre><code>{{{ code_diagnostic_w0201 }}</code></pre>
           </div>
 
           <div class="note">
@@ -150,7 +150,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
-            <pre><code>{{ code_diagnostic_w0202 }}</code></pre>
+            <pre><code>{{{ code_diagnostic_w0202 }}</code></pre>
           </div>
 
           <div class="note">
@@ -169,7 +169,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.diagnostics.fixMethod') }}</h4>
-            <pre><code>{{ code_diagnostic_w0203 }}</code></pre>
+            <pre><code>{{{ code_diagnostic_w0203 }}</code></pre>
           </div>
 
           <div class="note">

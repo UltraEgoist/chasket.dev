@@ -19,7 +19,7 @@
       <h3>{{ tr('guideContent.fileStructure.fourBlocks.heading') }}</h3>
       <p>{{ tr('guideContent.fileStructure.fourBlocks.desc') }}</p>
 
-      <pre><code>{{ code_fileStructure }}</code></pre>
+      <pre><code>{{{ code_fileStructure }}}</code></pre>
 
       <div class="note">
         <strong>{{ tr('guideContent.fileStructure.fourBlocks.noteLabel') }}:</strong> {{ tr('guideContent.fileStructure.fourBlocks.noteText') }}

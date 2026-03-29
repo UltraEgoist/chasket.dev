@@ -53,7 +53,7 @@
           </div>
           <h3>{{ tr('features.reactivity.title') }}</h3>
           <p>{{ tr('features.reactivity.desc') }}</p>
-          <div class="snippet"><pre><code>{{ codeReactivity }}</code></pre></div>
+          <div class="snippet"><pre><code>{{{ codeReactivity }}}</code></pre></div>
         </div>
 
         <div class="card">
@@ -62,7 +62,7 @@
           </div>
           <h3>{{ tr('features.templates.title') }}</h3>
           <p>{{ tr('features.templates.desc') }}</p>
-          <div class="snippet"><pre><code>{{ codeTemplate }}</code></pre></div>
+          <div class="snippet"><pre><code>{{{ codeTemplate }}}</code></pre></div>
         </div>
 
         <div class="card">
@@ -71,7 +71,7 @@
           </div>
           <h3>{{ tr('features.compileCheck.title') }}</h3>
           <p>{{ tr('features.compileCheck.desc') }}</p>
-          <div class="snippet"><pre><code>{{ codeCompile }}</code></pre></div>
+          <div class="snippet"><pre><code>{{{ codeCompile }}}</code></pre></div>
         </div>
 
         <div class="card">
@@ -80,7 +80,7 @@
           </div>
           <h3>{{ tr('features.xss.title') }}</h3>
           <p>{{ tr('features.xss.desc') }}</p>
-          <div class="snippet"><pre><code>{{ codeXss }}</code></pre></div>
+          <div class="snippet"><pre><code>{{{ codeXss }}}</code></pre></div>
         </div>
 
         <div class="card">
@@ -89,7 +89,7 @@
           </div>
           <h3>{{ tr('features.scopedStyles.title') }}</h3>
           <p>{{ tr('features.scopedStyles.desc') }}</p>
-          <div class="snippet"><pre><code>{{ codeScoped }}</code></pre></div>
+          <div class="snippet"><pre><code>{{{ codeScoped }}}</code></pre></div>
         </div>
 
         <div class="card">
@@ -98,7 +98,7 @@
           </div>
           <h3>{{ tr('features.customEvents.title') }}</h3>
           <p>{{ tr('features.customEvents.desc') }}</p>
-          <div class="snippet"><pre><code>{{ codeEvents }}</code></pre></div>
+          <div class="snippet"><pre><code>{{{ codeEvents }}}</code></pre></div>
         </div>
       </div>
     </div>

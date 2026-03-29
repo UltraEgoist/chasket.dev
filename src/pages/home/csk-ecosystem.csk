@@ -16,7 +16,7 @@
       </div>
 
       <div class="grid">
-        <div class="card">
+        <div class="card clr-teal">
           <div class="card-head">
             <div class="icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"></path></svg>
@@ -28,7 +28,7 @@
           <code class="install">npm i @chasket/chasket</code>
         </div>
 
-        <div class="card">
+        <div class="card clr-blue">
           <div class="card-head">
             <div class="icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"></path></svg>
@@ -38,9 +38,10 @@
           <h3>chasket-router</h3>
           <p>{{ tr('ecosystem.router') }}</p>
           <code class="install">npm i @chasket/chasket-router</code>
+          <span class="caution">{{ tr('ecosystem.experimental') }}</span>
         </div>
 
-        <div class="card">
+        <div class="card clr-purple">
           <div class="card-head">
             <div class="icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
@@ -50,9 +51,10 @@
           <h3>chasket-store</h3>
           <p>{{ tr('ecosystem.store') }}</p>
           <code class="install">npm i @chasket/chasket-store</code>
+          <span class="caution">{{ tr('ecosystem.experimental') }}</span>
         </div>
 
-        <div class="card">
+        <div class="card clr-coral">
           <div class="card-head">
             <div class="icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
@@ -62,9 +64,10 @@
           <h3>chasket-ssr</h3>
           <p>{{ tr('ecosystem.ssr') }}</p>
           <code class="install">npm i @chasket/chasket-ssr</code>
+          <span class="caution">{{ tr('ecosystem.experimental') }}</span>
         </div>
 
-        <div class="card">
+        <div class="card clr-pink">
           <div class="card-head">
             <div class="icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
@@ -74,9 +77,10 @@
           <h3>chasket-ui</h3>
           <p>{{ tr('ecosystem.ui') }}</p>
           <code class="install">npm i @chasket/chasket-ui</code>
+          <span class="caution">{{ tr('ecosystem.experimental') }}</span>
         </div>
 
-        <div class="card">
+        <div class="card clr-amber">
           <div class="card-head">
             <div class="icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
@@ -86,9 +90,10 @@
           <h3>vite-plugin-chasket</h3>
           <p>{{ tr('ecosystem.vite') }}</p>
           <code class="install">npm i @chasket/vite-plugin-chasket</code>
+          <span class="caution">{{ tr('ecosystem.experimental') }}</span>
         </div>
 
-        <div class="card">
+        <div class="card clr-cyan">
           <div class="card-head">
             <div class="icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path></svg>
@@ -98,6 +103,7 @@
           <h3>chasket-lsp</h3>
           <p>{{ tr('ecosystem.lsp') }}</p>
           <code class="install">npm i @chasket/chasket-lsp</code>
+          <span class="caution">{{ tr('ecosystem.experimental') }}</span>
         </div>
 
         <div class="card coming">
@@ -155,7 +161,7 @@
     width: 2.75rem; height: 2.75rem;
     border-radius: 0.625rem;
     display: flex; align-items: center; justify-content: center;
-    background: rgba(0,184,148,0.12); color: var(--c-accent-light, #55efc4);
+    background: rgba(0,184,148,0.12); color: #55efc4;
     margin-bottom: 0;
   }
 
@@ -166,13 +172,49 @@
     letter-spacing: 0.02em;
   }
   .badge.available {
-    background: rgba(0,184,148,0.15); color: var(--c-accent-light, #55efc4);
+    background: rgba(0,184,148,0.15); color: #55efc4;
     border: 1px solid rgba(0,184,148,0.3);
   }
   .badge.soon {
     background: rgba(255,190,70,0.12); color: #f0c060;
     border: 1px solid rgba(255,190,70,0.25);
   }
+
+  /* — per-card color variants — */
+  .clr-teal .icon  { background: rgba(46,188,176,0.12); color: #5de8d8; }
+  .clr-teal:hover  { border-color: #2EBCB0; }
+  .clr-teal .badge.available { background: rgba(46,188,176,0.15); color: #5de8d8; border-color: rgba(46,188,176,0.3); }
+  .clr-teal .install { color: #2EBCB0; background: rgba(46,188,176,0.08); border-color: rgba(46,188,176,0.2); }
+
+  .clr-blue .icon  { background: rgba(59,130,246,0.12); color: #7daafd; }
+  .clr-blue:hover  { border-color: #3B82F6; }
+  .clr-blue .badge.available { background: rgba(59,130,246,0.15); color: #7daafd; border-color: rgba(59,130,246,0.3); }
+  .clr-blue .install { color: #3B82F6; background: rgba(59,130,246,0.08); border-color: rgba(59,130,246,0.2); }
+
+  .clr-purple .icon  { background: rgba(139,92,246,0.12); color: #b49afc; }
+  .clr-purple:hover  { border-color: #8B5CF6; }
+  .clr-purple .badge.available { background: rgba(139,92,246,0.15); color: #b49afc; border-color: rgba(139,92,246,0.3); }
+  .clr-purple .install { color: #8B5CF6; background: rgba(139,92,246,0.08); border-color: rgba(139,92,246,0.2); }
+
+  .clr-coral .icon  { background: rgba(255,113,112,0.12); color: #ff9b9a; }
+  .clr-coral:hover  { border-color: #FF7170; }
+  .clr-coral .badge.available { background: rgba(255,113,112,0.15); color: #ff9b9a; border-color: rgba(255,113,112,0.3); }
+  .clr-coral .install { color: #FF7170; background: rgba(255,113,112,0.08); border-color: rgba(255,113,112,0.2); }
+
+  .clr-pink .icon  { background: rgba(236,72,153,0.12); color: #f298c8; }
+  .clr-pink:hover  { border-color: #EC4899; }
+  .clr-pink .badge.available { background: rgba(236,72,153,0.15); color: #f298c8; border-color: rgba(236,72,153,0.3); }
+  .clr-pink .install { color: #EC4899; background: rgba(236,72,153,0.08); border-color: rgba(236,72,153,0.2); }
+
+  .clr-amber .icon  { background: rgba(234,179,8,0.12); color: #f0cc50; }
+  .clr-amber:hover  { border-color: #EAB308; }
+  .clr-amber .badge.available { background: rgba(234,179,8,0.15); color: #f0cc50; border-color: rgba(234,179,8,0.3); }
+  .clr-amber .install { color: #EAB308; background: rgba(234,179,8,0.08); border-color: rgba(234,179,8,0.2); }
+
+  .clr-cyan .icon  { background: rgba(6,182,212,0.12); color: #5cd6ec; }
+  .clr-cyan:hover  { border-color: #06B6D4; }
+  .clr-cyan .badge.available { background: rgba(6,182,212,0.15); color: #5cd6ec; border-color: rgba(6,182,212,0.3); }
+  .clr-cyan .install { color: #06B6D4; background: rgba(6,182,212,0.08); border-color: rgba(6,182,212,0.2); }
 
   .card.coming {
     opacity: 0.45;
@@ -235,6 +277,15 @@
     white-space: nowrap;
   }
   .install.vs { font-size: clamp(0.65rem, 0.75vw, 0.72rem); }
+
+  .caution {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: clamp(0.6rem, 0.72vw, 0.68rem);
+    color: var(--c-text-dim, #6a6a7a);
+    line-height: 1.3;
+    font-style: italic;
+  }
 
   @media (max-width: 30rem) {
     .grid { grid-template-columns: 1fr 1fr; }

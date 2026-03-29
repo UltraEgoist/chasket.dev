@@ -6,6 +6,7 @@
 <script>
   state menuOpen: boolean = false
   state scrolled: boolean = false
+  state currentHash: string = ""
 
   fn tr(k: string) { return window.__t(k) }
 
@@ -28,26 +29,35 @@
     scrolled = window.scrollY > 40
   }
 
-  fn goFeatures() {
-    const el = document.getElementById("features")
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
-    menuOpen = false
+  fn updateHash() {
+    currentHash = window.location.hash
   }
 
-  fn goCode() {
-    const el = document.getElementById("code")
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
-    menuOpen = false
+  fn isActive(path: string) {
+    if (path === '/') return currentHash === '' || currentHash === '#' || currentHash === '#/'
+    return currentHash === '#' + path || currentHash.startsWith('#' + path + '/')
   }
 
   fn goEcosystem() {
-    const el = document.getElementById("ecosystem")
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
+    if (window.location.hash.startsWith('#/')) {
+      window.location.hash = '/'
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const el = document.getElementById("ecosystem")
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
+        })
+      })
+    } else {
+      const el = document.getElementById("ecosystem")
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
     menuOpen = false
   }
 
   on mount {
     window.addEventListener("scroll", () => { handleScroll() }, { passive: true })
+    window.addEventListener("hashchange", () => { updateHash() })
+    updateHash()
   }
 </script>
 
@@ -65,11 +75,11 @@
       </a>
 
       <div :class="menuOpen ? 'links open' : 'links'">
-        <a href="#/why" @click="closeMenu">{{ tr('nav.why') }}</a>
-        <a href="#/guide" @click="closeMenu">{{ tr('nav.guide') }}</a>
-        <a href="#/api" @click="closeMenu">{{ tr('nav.api') }}</a>
-        <a href="#/testing" @click="closeMenu">{{ tr('nav.testing') }}</a>
-        <a href="#ecosystem" @click|prevent="goEcosystem">{{ tr('nav.ecosystem') }}</a>
+        <a href="#/why" :class="isActive('/why') ? 'active' : ''" @click="closeMenu">{{ tr('nav.why') }}</a>
+        <a href="#/guide" :class="isActive('/guide') ? 'active' : ''" @click="closeMenu">{{ tr('nav.guide') }}</a>
+        <a href="#/api" :class="isActive('/api') ? 'active' : ''" @click="closeMenu">{{ tr('nav.api') }}</a>
+        <a href="#/testing" :class="isActive('/testing') ? 'active' : ''" @click="closeMenu">{{ tr('nav.testing') }}</a>
+        <a href="#ecosystem" :class="isActive('/') ? '' : ''" @click|prevent="goEcosystem">{{ tr('nav.ecosystem') }}</a>
         <a
           href="https://github.com/UltraEgoist/chasket"
           target="_blank"
@@ -152,6 +162,16 @@
     white-space: nowrap;
   }
   .links a:hover { color: #fff; }
+  .links a.active { color: #fff; position: relative; }
+  .links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -0.25rem;
+    left: 0; right: 0;
+    height: 2px;
+    background: var(--c-accent, #2EBCB0);
+    border-radius: 1px;
+  }
 
   .gh-link {
     display: inline-flex !important;

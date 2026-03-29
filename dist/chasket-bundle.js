@@ -1,4 +1,4 @@
-// Chasket Bundle - 2026-03-28T15:55:18.008Z
+// Chasket Bundle - 2026-03-29T02:56:57.613Z
 // 33 component(s)
 
 // Deferred registration queue: all classes are defined first,
@@ -86,7 +86,9 @@ class CskFooter extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -191,6 +193,9 @@ class CskNavbar extends HTMLElement {
   #_scrolled = false;
   get #scrolled() { return this.#_scrolled; }
   set #scrolled(v) { this.#_scrolled = v; this.#scheduleUpdate(); }
+  #_currentHash = "";
+  get #currentHash() { return this.#_currentHash; }
+  set #currentHash(v) { this.#_currentHash = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
   #shadow;
   #listeners = [];
@@ -205,6 +210,8 @@ class CskNavbar extends HTMLElement {
     this.#bindEvents();
     this.#bindRefs();
     window.addEventListener("scroll", () => { this.#handleScroll() }, { passive: true })
+        window.addEventListener("hashchange", () => { this.#updateHash() })
+        this.#updateHash()
   }
 
   disconnectedCallback() {
@@ -237,30 +244,37 @@ class CskNavbar extends HTMLElement {
     this.#scrolled = window.scrollY > 40
   }
 
-  #goFeatures() {
-    const el = document.getElementById("features")
-        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
-        this.#menuOpen = false
+  #updateHash() {
+    this.#currentHash = window.location.hash
   }
 
-  #goCode() {
-    const el = document.getElementById("code")
-        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
-        this.#menuOpen = false
+  #isActive(path) {
+    if (path === '/') return this.#currentHash === '' || this.#currentHash === '#' || this.#currentHash === '#/'
+        return this.#currentHash === '#' + path || this.#currentHash.startsWith('#' + path + '/')
   }
 
   #goEcosystem() {
-    const el = document.getElementById("ecosystem")
-        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
+    if (window.location.hash.startsWith('#/')) {
+          window.location.hash = '/'
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              const el = document.getElementById("ecosystem")
+              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
+            })
+          })
+        } else {
+          const el = document.getElementById("ecosystem")
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
+        }
         this.#menuOpen = false
   }
 
   #render() {
     const tpl = document.createElement('template');
     tpl.innerHTML = `
-      <style>:host{display:block;position:fixed;top:0;left:0;right:0;z-index:100;}.nav{background:rgba(10, 10, 15, 0.82);backdrop-filter:blur(1rem) saturate(1.6);-webkit-backdrop-filter:blur(1rem) saturate(1.6);border-bottom:1px solid var(--c-border, #2a2a3a);transition:border-color 0.3s;}.nav.scrolled{border-bottom-color:rgba(42, 42, 58, 1);}.inner{max-width:var(--max-w, 70rem);margin:0 auto;padding:0 var(--space-page, 1.5rem);display:flex;align-items:center;justify-content:space-between;height:3.75rem;}.logo{display:flex;align-items:center;gap:0.625rem;font-weight:700;font-size:clamp(1.2rem, 1.6vw, 1.5rem);letter-spacing:-0.02em;color:var(--c-text, #e4e4ed);text-decoration:none;transition:color 0.2s;}.logo:hover{color:#fff;}.logo svg{flex-shrink:0;}.links{display:flex;align-items:center;gap:clamp(1rem, 2.5vw, 1.75rem);font-size:clamp(0.8rem, 1vw, 0.9rem);}.links a{color:var(--c-text-dim, #9898ab);text-decoration:none;transition:color 0.2s;white-space:nowrap;}.links a:hover{color:#fff;}.gh-link{display:inline-flex !important;align-items:center;gap:0.375rem;background:var(--c-surface, #1a1a26);padding:0.375rem 0.875rem;border-radius:0.5rem;border:1px solid var(--c-border, #2a2a3a);font-size:clamp(0.75rem, 0.9vw, 0.85rem) !important;}.gh-link:hover{border-color:var(--c-primary-light, #a29bfe);color:#fff !important;}.lang-btn{display:inline-flex;align-items:center;gap:0.375rem;background:var(--c-surface, #1a1a26);padding:0.375rem 0.75rem;border-radius:0.5rem;border:1px solid var(--c-border, #2a2a3a);font-size:clamp(0.75rem, 0.9vw, 0.85rem);color:var(--c-text-dim, #9898ab);cursor:pointer;transition:border-color 0.2s, color 0.2s;font-family:var(--font, sans-serif);font-weight:600;letter-spacing:0.04em;min-height:2.25rem;white-space:nowrap;}.lang-btn:hover{border-color:var(--c-primary-light, #a29bfe);color:#fff;}.lang-btn svg{flex-shrink:0;}.toggle{display:none;background:none;border:none;cursor:pointer;padding:0.5rem;min-width:2.75rem;min-height:2.75rem;justify-content:center;align-items:center;}.toggle span{display:block;width:1.375rem;height:2px;background:var(--c-text, #e4e4ed);margin:0.3125rem 0;border-radius:2px;transition:0.25s;}@media (max-width:48rem){.links{display:none;flex-direction:column;position:absolute;top:3.75rem;left:0;right:0;background:rgba(10, 10, 15, 0.96);padding:1.25rem var(--space-page, 1.5rem);gap:1rem;border-bottom:1px solid var(--c-border, #2a2a3a);backdrop-filter:blur(1rem);}.links.open{display:flex;}.links a{padding:0.5rem 0;font-size:1rem;}.toggle{display:flex;}}</style>
+      <style>:host{display:block;position:fixed;top:0;left:0;right:0;z-index:100;}.nav{background:rgba(10, 10, 15, 0.82);backdrop-filter:blur(1rem) saturate(1.6);-webkit-backdrop-filter:blur(1rem) saturate(1.6);border-bottom:1px solid var(--c-border, #2a2a3a);transition:border-color 0.3s;}.nav.scrolled{border-bottom-color:rgba(42, 42, 58, 1);}.inner{max-width:var(--max-w, 70rem);margin:0 auto;padding:0 var(--space-page, 1.5rem);display:flex;align-items:center;justify-content:space-between;height:3.75rem;}.logo{display:flex;align-items:center;gap:0.625rem;font-weight:700;font-size:clamp(1.2rem, 1.6vw, 1.5rem);letter-spacing:-0.02em;color:var(--c-text, #e4e4ed);text-decoration:none;transition:color 0.2s;}.logo:hover{color:#fff;}.logo svg{flex-shrink:0;}.links{display:flex;align-items:center;gap:clamp(1rem, 2.5vw, 1.75rem);font-size:clamp(0.8rem, 1vw, 0.9rem);}.links a{color:var(--c-text-dim, #9898ab);text-decoration:none;transition:color 0.2s;white-space:nowrap;}.links a:hover{color:#fff;}.links a.active{color:#fff;position:relative;}.links a.active::after{content:'';position:absolute;bottom:-0.25rem;left:0;right:0;height:2px;background:var(--c-accent, #2EBCB0);border-radius:1px;}.gh-link{display:inline-flex !important;align-items:center;gap:0.375rem;background:var(--c-surface, #1a1a26);padding:0.375rem 0.875rem;border-radius:0.5rem;border:1px solid var(--c-border, #2a2a3a);font-size:clamp(0.75rem, 0.9vw, 0.85rem) !important;}.gh-link:hover{border-color:var(--c-primary-light, #a29bfe);color:#fff !important;}.lang-btn{display:inline-flex;align-items:center;gap:0.375rem;background:var(--c-surface, #1a1a26);padding:0.375rem 0.75rem;border-radius:0.5rem;border:1px solid var(--c-border, #2a2a3a);font-size:clamp(0.75rem, 0.9vw, 0.85rem);color:var(--c-text-dim, #9898ab);cursor:pointer;transition:border-color 0.2s, color 0.2s;font-family:var(--font, sans-serif);font-weight:600;letter-spacing:0.04em;min-height:2.25rem;white-space:nowrap;}.lang-btn:hover{border-color:var(--c-primary-light, #a29bfe);color:#fff;}.lang-btn svg{flex-shrink:0;}.toggle{display:none;background:none;border:none;cursor:pointer;padding:0.5rem;min-width:2.75rem;min-height:2.75rem;justify-content:center;align-items:center;}.toggle span{display:block;width:1.375rem;height:2px;background:var(--c-text, #e4e4ed);margin:0.3125rem 0;border-radius:2px;transition:0.25s;}@media (max-width:48rem){.links{display:none;flex-direction:column;position:absolute;top:3.75rem;left:0;right:0;background:rgba(10, 10, 15, 0.96);padding:1.25rem var(--space-page, 1.5rem);gap:1rem;border-bottom:1px solid var(--c-border, #2a2a3a);backdrop-filter:blur(1rem);}.links.open{display:flex;}.links a{padding:0.5rem 0;font-size:1rem;}.toggle{display:flex;}}</style>
       <nav class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#scrolled ? 'nav scrolled' : 'nav'))}">
-        <div class="inner"><a href="/" class="logo"><svg width="28" height="28" viewBox="0 0 64 64" fill="none"><defs><linearGradient id="ng" x1="4" y1="6" x2="48" y2="58" gradientUnits="userSpaceOnUse"><stop stop-color="#2EBCB0"></stop><stop offset="1" stop-color="#FF7170"></stop></linearGradient></defs><rect x="4" y="6" width="42" height="50" rx="8" fill="url(#ng)" fill-opacity="0.9" stroke="url(#ng)" stroke-width="3.5"></rect><rect x="12" y="24" width="20" height="14" rx="4" stroke="#fff" stroke-width="2" stroke-opacity="0.5" stroke-dasharray="3 3"></rect><line x1="34" y1="40" x2="54" y2="12" stroke="#E8A243" stroke-width="5.5" stroke-linecap="round"></line></svg><span>Chasket</span></a><div class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#menuOpen ? 'links open' : 'links'))}"><a data-chasket-id="fl-0" href="#/why">${this.#esc(this.#tr('nav.why'))}</a><a data-chasket-id="fl-1" href="#/guide">${this.#esc(this.#tr('nav.guide'))}</a><a data-chasket-id="fl-2" href="#/api">${this.#esc(this.#tr('nav.api'))}</a><a data-chasket-id="fl-3" href="#/testing">${this.#esc(this.#tr('nav.testing'))}</a><a data-chasket-id="fl-4" href="#ecosystem">${this.#esc(this.#tr('nav.ecosystem'))}</a><a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer" class="gh-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path></svg>
+        <div class="inner"><a href="/" class="logo"><svg width="28" height="28" viewBox="0 0 64 64" fill="none"><defs><linearGradient id="ng" x1="4" y1="6" x2="48" y2="58" gradientUnits="userSpaceOnUse"><stop stop-color="#2EBCB0"></stop><stop offset="1" stop-color="#FF7170"></stop></linearGradient></defs><rect x="4" y="6" width="42" height="50" rx="8" fill="url(#ng)" fill-opacity="0.9" stroke="url(#ng)" stroke-width="3.5"></rect><rect x="12" y="24" width="20" height="14" rx="4" stroke="#fff" stroke-width="2" stroke-opacity="0.5" stroke-dasharray="3 3"></rect><line x1="34" y1="40" x2="54" y2="12" stroke="#E8A243" stroke-width="5.5" stroke-linecap="round"></line></svg><span>Chasket</span></a><div class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#menuOpen ? 'links open' : 'links'))}"><a data-chasket-id="fl-0" href="#/why" class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#isActive('/why') ? 'active' : ''))}">${this.#esc(this.#tr('nav.why'))}</a><a data-chasket-id="fl-1" href="#/guide" class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#isActive('/guide') ? 'active' : ''))}">${this.#esc(this.#tr('nav.guide'))}</a><a data-chasket-id="fl-2" href="#/api" class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#isActive('/api') ? 'active' : ''))}">${this.#esc(this.#tr('nav.api'))}</a><a data-chasket-id="fl-3" href="#/testing" class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#isActive('/testing') ? 'active' : ''))}">${this.#esc(this.#tr('nav.testing'))}</a><a data-chasket-id="fl-4" href="#ecosystem" class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#isActive('/') ? '' : ''))}">${this.#esc(this.#tr('nav.ecosystem'))}</a><a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer" class="gh-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path></svg>
           GitHub
         </a><button data-chasket-id="fl-5" class="lang-btn" aria-label="${this.#escAttr(this.#tr('nav.switchLang'))}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>${this.#esc(this.#currentLang() === 'ja' ? 'EN' : 'JA')}</button></div><button data-chasket-id="fl-6" class="toggle" aria-label="${this.#escAttr(this.#tr('nav.toggleMenu'))}"><span></span><span></span><span></span></button></div>
       </nav>
@@ -271,9 +285,9 @@ class CskNavbar extends HTMLElement {
   #getNewTree() {
     const tpl = document.createElement('template');
     tpl.innerHTML = `
-      <style>:host{display:block;position:fixed;top:0;left:0;right:0;z-index:100;}.nav{background:rgba(10, 10, 15, 0.82);backdrop-filter:blur(1rem) saturate(1.6);-webkit-backdrop-filter:blur(1rem) saturate(1.6);border-bottom:1px solid var(--c-border, #2a2a3a);transition:border-color 0.3s;}.nav.scrolled{border-bottom-color:rgba(42, 42, 58, 1);}.inner{max-width:var(--max-w, 70rem);margin:0 auto;padding:0 var(--space-page, 1.5rem);display:flex;align-items:center;justify-content:space-between;height:3.75rem;}.logo{display:flex;align-items:center;gap:0.625rem;font-weight:700;font-size:clamp(1.2rem, 1.6vw, 1.5rem);letter-spacing:-0.02em;color:var(--c-text, #e4e4ed);text-decoration:none;transition:color 0.2s;}.logo:hover{color:#fff;}.logo svg{flex-shrink:0;}.links{display:flex;align-items:center;gap:clamp(1rem, 2.5vw, 1.75rem);font-size:clamp(0.8rem, 1vw, 0.9rem);}.links a{color:var(--c-text-dim, #9898ab);text-decoration:none;transition:color 0.2s;white-space:nowrap;}.links a:hover{color:#fff;}.gh-link{display:inline-flex !important;align-items:center;gap:0.375rem;background:var(--c-surface, #1a1a26);padding:0.375rem 0.875rem;border-radius:0.5rem;border:1px solid var(--c-border, #2a2a3a);font-size:clamp(0.75rem, 0.9vw, 0.85rem) !important;}.gh-link:hover{border-color:var(--c-primary-light, #a29bfe);color:#fff !important;}.lang-btn{display:inline-flex;align-items:center;gap:0.375rem;background:var(--c-surface, #1a1a26);padding:0.375rem 0.75rem;border-radius:0.5rem;border:1px solid var(--c-border, #2a2a3a);font-size:clamp(0.75rem, 0.9vw, 0.85rem);color:var(--c-text-dim, #9898ab);cursor:pointer;transition:border-color 0.2s, color 0.2s;font-family:var(--font, sans-serif);font-weight:600;letter-spacing:0.04em;min-height:2.25rem;white-space:nowrap;}.lang-btn:hover{border-color:var(--c-primary-light, #a29bfe);color:#fff;}.lang-btn svg{flex-shrink:0;}.toggle{display:none;background:none;border:none;cursor:pointer;padding:0.5rem;min-width:2.75rem;min-height:2.75rem;justify-content:center;align-items:center;}.toggle span{display:block;width:1.375rem;height:2px;background:var(--c-text, #e4e4ed);margin:0.3125rem 0;border-radius:2px;transition:0.25s;}@media (max-width:48rem){.links{display:none;flex-direction:column;position:absolute;top:3.75rem;left:0;right:0;background:rgba(10, 10, 15, 0.96);padding:1.25rem var(--space-page, 1.5rem);gap:1rem;border-bottom:1px solid var(--c-border, #2a2a3a);backdrop-filter:blur(1rem);}.links.open{display:flex;}.links a{padding:0.5rem 0;font-size:1rem;}.toggle{display:flex;}}</style>
+      <style>:host{display:block;position:fixed;top:0;left:0;right:0;z-index:100;}.nav{background:rgba(10, 10, 15, 0.82);backdrop-filter:blur(1rem) saturate(1.6);-webkit-backdrop-filter:blur(1rem) saturate(1.6);border-bottom:1px solid var(--c-border, #2a2a3a);transition:border-color 0.3s;}.nav.scrolled{border-bottom-color:rgba(42, 42, 58, 1);}.inner{max-width:var(--max-w, 70rem);margin:0 auto;padding:0 var(--space-page, 1.5rem);display:flex;align-items:center;justify-content:space-between;height:3.75rem;}.logo{display:flex;align-items:center;gap:0.625rem;font-weight:700;font-size:clamp(1.2rem, 1.6vw, 1.5rem);letter-spacing:-0.02em;color:var(--c-text, #e4e4ed);text-decoration:none;transition:color 0.2s;}.logo:hover{color:#fff;}.logo svg{flex-shrink:0;}.links{display:flex;align-items:center;gap:clamp(1rem, 2.5vw, 1.75rem);font-size:clamp(0.8rem, 1vw, 0.9rem);}.links a{color:var(--c-text-dim, #9898ab);text-decoration:none;transition:color 0.2s;white-space:nowrap;}.links a:hover{color:#fff;}.links a.active{color:#fff;position:relative;}.links a.active::after{content:'';position:absolute;bottom:-0.25rem;left:0;right:0;height:2px;background:var(--c-accent, #2EBCB0);border-radius:1px;}.gh-link{display:inline-flex !important;align-items:center;gap:0.375rem;background:var(--c-surface, #1a1a26);padding:0.375rem 0.875rem;border-radius:0.5rem;border:1px solid var(--c-border, #2a2a3a);font-size:clamp(0.75rem, 0.9vw, 0.85rem) !important;}.gh-link:hover{border-color:var(--c-primary-light, #a29bfe);color:#fff !important;}.lang-btn{display:inline-flex;align-items:center;gap:0.375rem;background:var(--c-surface, #1a1a26);padding:0.375rem 0.75rem;border-radius:0.5rem;border:1px solid var(--c-border, #2a2a3a);font-size:clamp(0.75rem, 0.9vw, 0.85rem);color:var(--c-text-dim, #9898ab);cursor:pointer;transition:border-color 0.2s, color 0.2s;font-family:var(--font, sans-serif);font-weight:600;letter-spacing:0.04em;min-height:2.25rem;white-space:nowrap;}.lang-btn:hover{border-color:var(--c-primary-light, #a29bfe);color:#fff;}.lang-btn svg{flex-shrink:0;}.toggle{display:none;background:none;border:none;cursor:pointer;padding:0.5rem;min-width:2.75rem;min-height:2.75rem;justify-content:center;align-items:center;}.toggle span{display:block;width:1.375rem;height:2px;background:var(--c-text, #e4e4ed);margin:0.3125rem 0;border-radius:2px;transition:0.25s;}@media (max-width:48rem){.links{display:none;flex-direction:column;position:absolute;top:3.75rem;left:0;right:0;background:rgba(10, 10, 15, 0.96);padding:1.25rem var(--space-page, 1.5rem);gap:1rem;border-bottom:1px solid var(--c-border, #2a2a3a);backdrop-filter:blur(1rem);}.links.open{display:flex;}.links a{padding:0.5rem 0;font-size:1rem;}.toggle{display:flex;}}</style>
       <nav class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#scrolled ? 'nav scrolled' : 'nav'))}">
-        <div class="inner"><a href="/" class="logo"><svg width="28" height="28" viewBox="0 0 64 64" fill="none"><defs><linearGradient id="ng" x1="4" y1="6" x2="48" y2="58" gradientUnits="userSpaceOnUse"><stop stop-color="#2EBCB0"></stop><stop offset="1" stop-color="#FF7170"></stop></linearGradient></defs><rect x="4" y="6" width="42" height="50" rx="8" fill="url(#ng)" fill-opacity="0.9" stroke="url(#ng)" stroke-width="3.5"></rect><rect x="12" y="24" width="20" height="14" rx="4" stroke="#fff" stroke-width="2" stroke-opacity="0.5" stroke-dasharray="3 3"></rect><line x1="34" y1="40" x2="54" y2="12" stroke="#E8A243" stroke-width="5.5" stroke-linecap="round"></line></svg><span>Chasket</span></a><div class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#menuOpen ? 'links open' : 'links'))}"><a data-chasket-id="fl-0" href="#/why">${this.#esc(this.#tr('nav.why'))}</a><a data-chasket-id="fl-1" href="#/guide">${this.#esc(this.#tr('nav.guide'))}</a><a data-chasket-id="fl-2" href="#/api">${this.#esc(this.#tr('nav.api'))}</a><a data-chasket-id="fl-3" href="#/testing">${this.#esc(this.#tr('nav.testing'))}</a><a data-chasket-id="fl-4" href="#ecosystem">${this.#esc(this.#tr('nav.ecosystem'))}</a><a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer" class="gh-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path></svg>
+        <div class="inner"><a href="/" class="logo"><svg width="28" height="28" viewBox="0 0 64 64" fill="none"><defs><linearGradient id="ng" x1="4" y1="6" x2="48" y2="58" gradientUnits="userSpaceOnUse"><stop stop-color="#2EBCB0"></stop><stop offset="1" stop-color="#FF7170"></stop></linearGradient></defs><rect x="4" y="6" width="42" height="50" rx="8" fill="url(#ng)" fill-opacity="0.9" stroke="url(#ng)" stroke-width="3.5"></rect><rect x="12" y="24" width="20" height="14" rx="4" stroke="#fff" stroke-width="2" stroke-opacity="0.5" stroke-dasharray="3 3"></rect><line x1="34" y1="40" x2="54" y2="12" stroke="#E8A243" stroke-width="5.5" stroke-linecap="round"></line></svg><span>Chasket</span></a><div class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#menuOpen ? 'links open' : 'links'))}"><a data-chasket-id="fl-0" href="#/why" class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#isActive('/why') ? 'active' : ''))}">${this.#esc(this.#tr('nav.why'))}</a><a data-chasket-id="fl-1" href="#/guide" class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#isActive('/guide') ? 'active' : ''))}">${this.#esc(this.#tr('nav.guide'))}</a><a data-chasket-id="fl-2" href="#/api" class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#isActive('/api') ? 'active' : ''))}">${this.#esc(this.#tr('nav.api'))}</a><a data-chasket-id="fl-3" href="#/testing" class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#isActive('/testing') ? 'active' : ''))}">${this.#esc(this.#tr('nav.testing'))}</a><a data-chasket-id="fl-4" href="#ecosystem" class="${this.#escAttr(((v) => Array.isArray(v) ? v.filter(Boolean).join(' ') : typeof v === 'object' && v !== null ? Object.entries(v).filter(([,b])=>b).map(([k])=>k).join(' ') : String(v || ''))(this.#isActive('/') ? '' : ''))}">${this.#esc(this.#tr('nav.ecosystem'))}</a><a href="https://github.com/UltraEgoist/chasket" target="_blank" rel="noopener noreferrer" class="gh-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path></svg>
           GitHub
         </a><button data-chasket-id="fl-5" class="lang-btn" aria-label="${this.#escAttr(this.#tr('nav.switchLang'))}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>${this.#esc(this.#currentLang() === 'ja' ? 'EN' : 'JA')}</button></div><button data-chasket-id="fl-6" class="toggle" aria-label="${this.#escAttr(this.#tr('nav.toggleMenu'))}"><span></span><span></span><span></span></button></div>
       </nav>
@@ -300,7 +314,9 @@ class CskNavbar extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -568,7 +584,9 @@ class CskShell extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -1189,7 +1207,9 @@ class CskApiCli extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -1574,7 +1594,9 @@ class CskApiCompiler extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -1908,7 +1930,9 @@ class CskApiConfig extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -2007,25 +2031,25 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskApiDiagnostics extends HTMLElement {
-  #_code_diagnostic_e0001 = "<span class=cm>&lt;!-- csk-page-api.csk --&gt;</span>\n<span class=t>&lt;meta</span><span class=t>&gt;</span>\n  name: my-component\n<span class=t>&lt;/meta</span><span class=t>&gt;</span>\n<span class=t>&lt;script</span><span class=t>&gt;</span>\n  <span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>\n<span class=t>&lt;/script</span><span class=t>&gt;</span>\n<span class=cm>&lt;!-- no template block --&gt;</span>\n\n<span class=cm>&lt;!-- fix: add template block --&gt;</span>\n<span class=t>&lt;template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ count }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=t>&lt;/template</span><span class=t>&gt;</span>";
+  #_code_diagnostic_e0001 = "&lt;!-- csk-page-api.csk --&gt;\n&lt;meta&gt;\n  name: my-component\n&lt;/meta&gt;\n&lt;script&gt;\n  state count: number = 0\n&lt;/script&gt;\n&lt;!-- no template block --&gt;\n\n&lt;!-- fix: add template block --&gt;\n&lt;template&gt;\n  &lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;/template&gt;";
   get #code_diagnostic_e0001() { return this.#_code_diagnostic_e0001; }
   set #code_diagnostic_e0001(v) { this.#_code_diagnostic_e0001 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_e0002 = "<span class=cm>&lt;!-- invalid: no hyphens --&gt;</span>\n<span class=t>&lt;meta</span><span class=t>&gt;</span>\n  name: MyComponent\n<span class=t>&lt;/meta</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- fix: use kebab-case --&gt;</span>\n<span class=t>&lt;meta</span><span class=t>&gt;</span>\n  name: my-component\n<span class=t>&lt;/meta</span><span class=t>&gt;</span>";
+  #_code_diagnostic_e0002 = "&lt;!-- invalid: no hyphens --&gt;\n&lt;meta&gt;\n  name: MyComponent\n&lt;/meta&gt;\n\n&lt;!-- fix: use kebab-case --&gt;\n&lt;meta&gt;\n  name: my-component\n&lt;/meta&gt;";
   get #code_diagnostic_e0002() { return this.#_code_diagnostic_e0002; }
   set #code_diagnostic_e0002(v) { this.#_code_diagnostic_e0002 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_e0003 = "<span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>\n<span class=k>state</span> result: <span class=tp>string</span> = count + <span class=n>10</span>  <span class=cm>// error: assigning number+number to string</span>\n\n<span class=cm>// fix:</span>\n<span class=k>state</span> result: <span class=tp>number</span> = count + <span class=n>10</span>\n<span class=cm>// or</span>\n<span class=k>state</span> result: <span class=tp>string</span> = (count + <span class=n>10</span>).<span class=f>toString</span>()";
+  #_code_diagnostic_e0003 = "state count: number = 0\nstate result: string = count + 10  // error: assigning number+number to string\n\n// fix:\nstate result: number = count + 10\n// or\nstate result: string = (count + 10).toString()";
   get #code_diagnostic_e0003() { return this.#_code_diagnostic_e0003; }
   set #code_diagnostic_e0003(v) { this.#_code_diagnostic_e0003 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_w0101 = "<span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>   <span class=cm>// warning: unused</span>\n<span class=k>state</span> name: <span class=tp>string</span> = <span class=s>'John'</span>\n\n<span class=t>&lt;template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ name }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=t>&lt;/template</span><span class=t>&gt;</span>\n\n<span class=cm>// fix: use or remove count</span>";
+  #_code_diagnostic_w0101 = "state count: number = 0   // warning: unused\nstate name: string = 'John'\n\n&lt;template&gt;\n  &lt;p&gt;{{ name }}&lt;/p&gt;\n&lt;/template&gt;\n\n// fix: use or remove count";
   get #code_diagnostic_w0101() { return this.#_code_diagnostic_w0101; }
   set #code_diagnostic_w0101(v) { this.#_code_diagnostic_w0101 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_w0201 = "<span class=cm>&lt;!-- dangerous: inserting user input as HTML --&gt;</span>\n<span class=t>&lt;div</span> @html=\"userContent\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- safe: auto-escaped --&gt;</span>\n<span class=t>&lt;div</span><span class=t>&gt;</span><span class=i>{{ userContent }}</span><span class=t>&lt;/div</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- fix: use only trusted HTML --&gt;</span>\n<span class=t>&lt;div</span> @html=\"sanitize(userContent)\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>";
+  #_code_diagnostic_w0201 = "&lt;!-- dangerous: inserting user input as HTML --&gt;\n&lt;div @html=\"userContent\"&gt;&lt;/div&gt;\n\n&lt;!-- safe: auto-escaped --&gt;\n&lt;div&gt;{{ userContent }}&lt;/div&gt;\n\n&lt;!-- fix: use only trusted HTML --&gt;\n&lt;div @html=\"sanitize(userContent)\"&gt;&lt;/div&gt;";
   get #code_diagnostic_w0201() { return this.#_code_diagnostic_w0201; }
   set #code_diagnostic_w0201(v) { this.#_code_diagnostic_w0201 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_w0202 = "<span class=cm>&lt;!-- dangerous: dynamic URL injection --&gt;</span>\n<span class=t>&lt;a</span> :href=\"'https://' + userInput\"<span class=t>&gt;</span>Link<span class=t>&lt;/a</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- fix: URL validation --&gt;</span>\n<span class=t>&lt;a</span> :href=\"isValidUrl(userInput) ? userInput : '#'\"<span class=t>&gt;</span>Link<span class=t>&lt;/a</span><span class=t>&gt;</span>";
+  #_code_diagnostic_w0202 = "&lt;!-- dangerous: dynamic URL injection --&gt;\n&lt;a :href=\"'https://' + userInput\"&gt;Link&lt;/a&gt;\n\n&lt;!-- fix: URL validation --&gt;\n&lt;a :href=\"isValidUrl(userInput) ? userInput : '#'\"&gt;Link&lt;/a&gt;";
   get #code_diagnostic_w0202() { return this.#_code_diagnostic_w0202; }
   set #code_diagnostic_w0202(v) { this.#_code_diagnostic_w0202 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_w0203 = "<span class=cm>&lt;!-- duplicate ID warning --&gt;</span>\n<span class=t>&lt;div</span> id=\"header\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>\n<span class=t>&lt;div</span> id=\"header\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>  <span class=cm>&lt;!-- warning --&gt;</span>\n\n<span class=cm>&lt;!-- fix: use unique IDs --&gt;</span>\n<span class=t>&lt;div</span> id=\"header\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>\n<span class=t>&lt;div</span> id=\"main\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>";
+  #_code_diagnostic_w0203 = "&lt;!-- duplicate ID warning --&gt;\n&lt;div id=\"header\"&gt;&lt;/div&gt;\n&lt;div id=\"header\"&gt;&lt;/div&gt;  &lt;!-- warning --&gt;\n\n&lt;!-- fix: use unique IDs --&gt;\n&lt;div id=\"header\"&gt;&lt;/div&gt;\n&lt;div id=\"main\"&gt;&lt;/div&gt;";
   get #code_diagnostic_w0203() { return this.#_code_diagnostic_w0203; }
   set #code_diagnostic_w0203(v) { this.#_code_diagnostic_w0203 = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -2081,7 +2105,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#code_diagnostic_e0001}</code></pre>
+            <pre><code><span class=i>{{{ code_diagnostic_e0001 }}</span></code></pre>
           </div>
         </div>
         <div id="e0002" class="subsection">
@@ -2096,7 +2120,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#code_diagnostic_e0002}</code></pre>
+            <pre><code><span class=i>{{{ code_diagnostic_e0002 }}</span></code></pre>
           </div>
           <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.kebabCaseConvention'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.kebabRule1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.kebabRule2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.kebabRule3'))}</li></ul></div>
         </div>
@@ -2112,7 +2136,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#code_diagnostic_e0003}</code></pre>
+            <pre><code><span class=i>{{{ code_diagnostic_e0003 }}</span></code></pre>
           </div>
         </div>
         <div id="e0004" class="subsection">
@@ -2185,7 +2209,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#code_diagnostic_w0101}</code></pre>
+            <pre><code><span class=i>{{{ code_diagnostic_w0101 }}</span></code></pre>
           </div>
           <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.approaches'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach3'))}</li></ul></div>
         </div>
@@ -2201,7 +2225,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#code_diagnostic_w0201}</code></pre>
+            <pre><code><span class=i>{{{ code_diagnostic_w0201 }}</span></code></pre>
           </div>
           <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.securityMeasures'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure3'))}</li></ul></div>
         </div>
@@ -2217,7 +2241,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#code_diagnostic_w0202}</code></pre>
+            <pre><code><span class=i>{{{ code_diagnostic_w0202 }}</span></code></pre>
           </div>
           <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.countermeasures'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure3'))}</li></ul></div>
         </div>
@@ -2233,7 +2257,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#code_diagnostic_w0203}</code></pre>
+            <pre><code><span class=i>{{{ code_diagnostic_w0203 }}</span></code></pre>
           </div>
           <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.bestPractices'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice3'))}</li></ul></div>
         </div>
@@ -2272,7 +2296,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#code_diagnostic_e0001}</code></pre>
+            <pre><code><span class=i>{{{ code_diagnostic_e0001 }}</span></code></pre>
           </div>
         </div>
         <div id="e0002" class="subsection">
@@ -2287,7 +2311,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#code_diagnostic_e0002}</code></pre>
+            <pre><code><span class=i>{{{ code_diagnostic_e0002 }}</span></code></pre>
           </div>
           <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.kebabCaseConvention'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.kebabRule1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.kebabRule2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.kebabRule3'))}</li></ul></div>
         </div>
@@ -2303,7 +2327,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#code_diagnostic_e0003}</code></pre>
+            <pre><code><span class=i>{{{ code_diagnostic_e0003 }}</span></code></pre>
           </div>
         </div>
         <div id="e0004" class="subsection">
@@ -2376,7 +2400,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#code_diagnostic_w0101}</code></pre>
+            <pre><code><span class=i>{{{ code_diagnostic_w0101 }}</span></code></pre>
           </div>
           <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.approaches'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach3'))}</li></ul></div>
         </div>
@@ -2392,7 +2416,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#code_diagnostic_w0201}</code></pre>
+            <pre><code><span class=i>{{{ code_diagnostic_w0201 }}</span></code></pre>
           </div>
           <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.securityMeasures'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure3'))}</li></ul></div>
         </div>
@@ -2408,7 +2432,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#code_diagnostic_w0202}</code></pre>
+            <pre><code><span class=i>{{{ code_diagnostic_w0202 }}</span></code></pre>
           </div>
           <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.countermeasures'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure3'))}</li></ul></div>
         </div>
@@ -2424,7 +2448,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code>${this.#code_diagnostic_w0203}</code></pre>
+            <pre><code><span class=i>{{{ code_diagnostic_w0203 }}</span></code></pre>
           </div>
           <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.bestPractices'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice3'))}</li></ul></div>
         </div>
@@ -2452,7 +2476,9 @@ class CskApiDiagnostics extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -3298,7 +3324,9 @@ class CskApiEcosystem extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -3550,7 +3578,9 @@ class CskApiTypes extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -3875,7 +3905,9 @@ class CskPageApi extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -4110,7 +4142,9 @@ class CskGuideCommunication extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -4386,7 +4420,9 @@ shadow: none    <span class=cm>&lt;!-- Light DOM with scoping --&gt;</span></cod
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -4868,7 +4904,9 @@ class CskGuideScript extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -5128,7 +5166,9 @@ class CskGuideSecurity extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -5363,7 +5403,9 @@ class CskGuideStyle extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -5771,7 +5813,9 @@ class CskGuideTemplate extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -6070,7 +6114,9 @@ class CskPageGuide extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -6253,7 +6299,7 @@ class CskCodeDemo extends HTMLElement {
 
   #addTodo() {
     if (this.#todoText.trim() === "") return
-        this.#todoItems = [...todoItems, this.#todoText.trim()]
+        this.#todoItems = [...this.#todoItems, this.#todoText.trim()]
         this.#todoText = ""
   }
 
@@ -6517,7 +6563,9 @@ class CskCodeDemo extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -7097,7 +7145,9 @@ class CskComparison extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -7315,7 +7365,9 @@ class CskCta extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -7449,7 +7501,7 @@ class CskEcosystem extends HTMLElement {
   #render() {
     const tpl = document.createElement('template');
     tpl.innerHTML = `
-      <style>:host{display:block;padding:var(--space-section, 5rem) 0;}.container{max-width:var(--max-w, 70rem);margin:0 auto;padding:0 var(--space-page, 1.5rem);}.hd{text-align:center;margin-bottom:clamp(2rem, 4vw, 3.5rem);}.hd h2{font-size:clamp(1.4rem, 2.8vw, 2.2rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:0.75rem;color:var(--c-text, #e4e4ed);}.hd p{font-size:clamp(0.9rem, 1.1vw, 1.05rem);color:var(--c-text-dim, #9898ab);max-width:35rem;margin:0 auto;}.grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 14rem), 1fr));gap:clamp(0.75rem, 1.5vw, 1.25rem);}.card{background:var(--c-bg-card, #12121a);border:1px solid var(--c-border, #2a2a3a);border-radius:var(--radius, 0.75rem);padding:clamp(1.25rem, 2vw, 1.75rem);transition:border-color 0.25s, transform 0.2s;}.card:hover{border-color:var(--c-accent, #00B894);transform:translateY(-2px);}.card-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:clamp(0.75rem, 1.2vw, 1rem);}.icon{width:2.75rem;height:2.75rem;border-radius:0.625rem;display:flex;align-items:center;justify-content:center;background:rgba(0,184,148,0.12);color:var(--c-accent-light, #55efc4);margin-bottom:0;}.badge{font-size:0.65rem;font-weight:600;padding:0.2rem 0.5rem;border-radius:1rem;white-space:nowrap;line-height:1.4;letter-spacing:0.02em;}.badge.available{background:rgba(0,184,148,0.15);color:var(--c-accent-light, #55efc4);border:1px solid rgba(0,184,148,0.3);}.badge.soon{background:rgba(255,190,70,0.12);color:#f0c060;border:1px solid rgba(255,190,70,0.25);}.card.coming{opacity:0.45;cursor:not-allowed;user-select:none;}.card.coming:hover{border-color:var(--c-border, #2a2a3a);transform:none;opacity:0.55;}.card.coming .icon{background:rgba(255,255,255,0.06);color:var(--c-text-dim, #9898ab);}.install.muted{position:relative;color:var(--c-text-dim, #5a5a6a);background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.06);text-decoration:line-through;text-decoration-color:rgba(255,255,255,0.2);overflow:hidden;}.install.muted::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient( -45deg, transparent, transparent 4px, rgba(255,255,255,0.04) 4px, rgba(255,255,255,0.04) 5px );pointer-events:none;}h3{font-size:clamp(0.85rem, 1vw, 0.95rem);font-weight:600;margin-bottom:0.5rem;color:var(--c-text, #e4e4ed);font-family:var(--mono, monospace);}p{font-size:clamp(0.75rem, 0.9vw, 0.83rem);color:var(--c-text-dim, #9898ab);line-height:1.5;margin-bottom:0.875rem;}.install{display:block;font-family:var(--mono, monospace);font-size:clamp(0.68rem, 0.82vw, 0.78rem);color:var(--c-accent, #00B894);background:rgba(0,184,148,0.08);padding:0.375rem 0.625rem;border-radius:0.375rem;border:1px solid rgba(0,184,148,0.2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.install.vs{font-size:clamp(0.65rem, 0.75vw, 0.72rem);}@media (max-width:30rem){.grid{grid-template-columns:1fr 1fr;}}@media (max-width:20rem){.grid{grid-template-columns:1fr;}}</style>
+      <style>:host{display:block;padding:var(--space-section, 5rem) 0;}.container{max-width:var(--max-w, 70rem);margin:0 auto;padding:0 var(--space-page, 1.5rem);}.hd{text-align:center;margin-bottom:clamp(2rem, 4vw, 3.5rem);}.hd h2{font-size:clamp(1.4rem, 2.8vw, 2.2rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:0.75rem;color:var(--c-text, #e4e4ed);}.hd p{font-size:clamp(0.9rem, 1.1vw, 1.05rem);color:var(--c-text-dim, #9898ab);max-width:35rem;margin:0 auto;}.grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 14rem), 1fr));gap:clamp(0.75rem, 1.5vw, 1.25rem);}.card{background:var(--c-bg-card, #12121a);border:1px solid var(--c-border, #2a2a3a);border-radius:var(--radius, 0.75rem);padding:clamp(1.25rem, 2vw, 1.75rem);transition:border-color 0.25s, transform 0.2s;}.card:hover{border-color:var(--c-accent, #00B894);transform:translateY(-2px);}.card-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:clamp(0.75rem, 1.2vw, 1rem);}.icon{width:2.75rem;height:2.75rem;border-radius:0.625rem;display:flex;align-items:center;justify-content:center;background:rgba(0,184,148,0.12);color:#55efc4;margin-bottom:0;}.badge{font-size:0.65rem;font-weight:600;padding:0.2rem 0.5rem;border-radius:1rem;white-space:nowrap;line-height:1.4;letter-spacing:0.02em;}.badge.available{background:rgba(0,184,148,0.15);color:#55efc4;border:1px solid rgba(0,184,148,0.3);}.badge.soon{background:rgba(255,190,70,0.12);color:#f0c060;border:1px solid rgba(255,190,70,0.25);}/* — per-card color variants — */ .clr-teal .icon{background:rgba(46,188,176,0.12);color:#5de8d8;}.clr-teal:hover{border-color:#2EBCB0;}.clr-teal .badge.available{background:rgba(46,188,176,0.15);color:#5de8d8;border-color:rgba(46,188,176,0.3);}.clr-teal .install{color:#2EBCB0;background:rgba(46,188,176,0.08);border-color:rgba(46,188,176,0.2);}.clr-blue .icon{background:rgba(59,130,246,0.12);color:#7daafd;}.clr-blue:hover{border-color:#3B82F6;}.clr-blue .badge.available{background:rgba(59,130,246,0.15);color:#7daafd;border-color:rgba(59,130,246,0.3);}.clr-blue .install{color:#3B82F6;background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.2);}.clr-purple .icon{background:rgba(139,92,246,0.12);color:#b49afc;}.clr-purple:hover{border-color:#8B5CF6;}.clr-purple .badge.available{background:rgba(139,92,246,0.15);color:#b49afc;border-color:rgba(139,92,246,0.3);}.clr-purple .install{color:#8B5CF6;background:rgba(139,92,246,0.08);border-color:rgba(139,92,246,0.2);}.clr-coral .icon{background:rgba(255,113,112,0.12);color:#ff9b9a;}.clr-coral:hover{border-color:#FF7170;}.clr-coral .badge.available{background:rgba(255,113,112,0.15);color:#ff9b9a;border-color:rgba(255,113,112,0.3);}.clr-coral .install{color:#FF7170;background:rgba(255,113,112,0.08);border-color:rgba(255,113,112,0.2);}.clr-pink .icon{background:rgba(236,72,153,0.12);color:#f298c8;}.clr-pink:hover{border-color:#EC4899;}.clr-pink .badge.available{background:rgba(236,72,153,0.15);color:#f298c8;border-color:rgba(236,72,153,0.3);}.clr-pink .install{color:#EC4899;background:rgba(236,72,153,0.08);border-color:rgba(236,72,153,0.2);}.clr-amber .icon{background:rgba(234,179,8,0.12);color:#f0cc50;}.clr-amber:hover{border-color:#EAB308;}.clr-amber .badge.available{background:rgba(234,179,8,0.15);color:#f0cc50;border-color:rgba(234,179,8,0.3);}.clr-amber .install{color:#EAB308;background:rgba(234,179,8,0.08);border-color:rgba(234,179,8,0.2);}.clr-cyan .icon{background:rgba(6,182,212,0.12);color:#5cd6ec;}.clr-cyan:hover{border-color:#06B6D4;}.clr-cyan .badge.available{background:rgba(6,182,212,0.15);color:#5cd6ec;border-color:rgba(6,182,212,0.3);}.clr-cyan .install{color:#06B6D4;background:rgba(6,182,212,0.08);border-color:rgba(6,182,212,0.2);}.card.coming{opacity:0.45;cursor:not-allowed;user-select:none;}.card.coming:hover{border-color:var(--c-border, #2a2a3a);transform:none;opacity:0.55;}.card.coming .icon{background:rgba(255,255,255,0.06);color:var(--c-text-dim, #9898ab);}.install.muted{position:relative;color:var(--c-text-dim, #5a5a6a);background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.06);text-decoration:line-through;text-decoration-color:rgba(255,255,255,0.2);overflow:hidden;}.install.muted::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient( -45deg, transparent, transparent 4px, rgba(255,255,255,0.04) 4px, rgba(255,255,255,0.04) 5px );pointer-events:none;}h3{font-size:clamp(0.85rem, 1vw, 0.95rem);font-weight:600;margin-bottom:0.5rem;color:var(--c-text, #e4e4ed);font-family:var(--mono, monospace);}p{font-size:clamp(0.75rem, 0.9vw, 0.83rem);color:var(--c-text-dim, #9898ab);line-height:1.5;margin-bottom:0.875rem;}.install{display:block;font-family:var(--mono, monospace);font-size:clamp(0.68rem, 0.82vw, 0.78rem);color:var(--c-accent, #00B894);background:rgba(0,184,148,0.08);padding:0.375rem 0.625rem;border-radius:0.375rem;border:1px solid rgba(0,184,148,0.2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.install.vs{font-size:clamp(0.65rem, 0.75vw, 0.72rem);}.caution{display:block;margin-top:0.4rem;font-size:clamp(0.6rem, 0.72vw, 0.68rem);color:var(--c-text-dim, #6a6a7a);line-height:1.3;font-style:italic;}@media (max-width:30rem){.grid{grid-template-columns:1fr 1fr;}}@media (max-width:20rem){.grid{grid-template-columns:1fr;}}</style>
       <section class="section">
         <div class="container">
           <div class="hd">
@@ -7461,13 +7513,13 @@ class CskEcosystem extends HTMLElement {
             </p>
           </div>
           <div class="grid">
-            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"></path></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-cli</h3><p>${this.#esc(this.#tr('ecosystem.cli'))}</p><code class="install">npm i @chasket/chasket</code></div>
-            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"></path></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-router</h3><p>${this.#esc(this.#tr('ecosystem.router'))}</p><code class="install">npm i @chasket/chasket-router</code></div>
-            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-store</h3><p>${this.#esc(this.#tr('ecosystem.store'))}</p><code class="install">npm i @chasket/chasket-store</code></div>
-            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-ssr</h3><p>${this.#esc(this.#tr('ecosystem.ssr'))}</p><code class="install">npm i @chasket/chasket-ssr</code></div>
-            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-ui</h3><p>${this.#esc(this.#tr('ecosystem.ui'))}</p><code class="install">npm i @chasket/chasket-ui</code></div>
-            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>vite-plugin-chasket</h3><p>${this.#esc(this.#tr('ecosystem.vite'))}</p><code class="install">npm i @chasket/vite-plugin-chasket</code></div>
-            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-lsp</h3><p>${this.#esc(this.#tr('ecosystem.lsp'))}</p><code class="install">npm i @chasket/chasket-lsp</code></div>
+            <div class="card clr-teal"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"></path></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-cli</h3><p>${this.#esc(this.#tr('ecosystem.cli'))}</p><code class="install">npm i @chasket/chasket</code></div>
+            <div class="card clr-blue"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"></path></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-router</h3><p>${this.#esc(this.#tr('ecosystem.router'))}</p><code class="install">npm i @chasket/chasket-router</code><span class="caution">${this.#esc(this.#tr('ecosystem.experimental'))}</span></div>
+            <div class="card clr-purple"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-store</h3><p>${this.#esc(this.#tr('ecosystem.store'))}</p><code class="install">npm i @chasket/chasket-store</code><span class="caution">${this.#esc(this.#tr('ecosystem.experimental'))}</span></div>
+            <div class="card clr-coral"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-ssr</h3><p>${this.#esc(this.#tr('ecosystem.ssr'))}</p><code class="install">npm i @chasket/chasket-ssr</code><span class="caution">${this.#esc(this.#tr('ecosystem.experimental'))}</span></div>
+            <div class="card clr-pink"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-ui</h3><p>${this.#esc(this.#tr('ecosystem.ui'))}</p><code class="install">npm i @chasket/chasket-ui</code><span class="caution">${this.#esc(this.#tr('ecosystem.experimental'))}</span></div>
+            <div class="card clr-amber"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>vite-plugin-chasket</h3><p>${this.#esc(this.#tr('ecosystem.vite'))}</p><code class="install">npm i @chasket/vite-plugin-chasket</code><span class="caution">${this.#esc(this.#tr('ecosystem.experimental'))}</span></div>
+            <div class="card clr-cyan"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-lsp</h3><p>${this.#esc(this.#tr('ecosystem.lsp'))}</p><code class="install">npm i @chasket/chasket-lsp</code><span class="caution">${this.#esc(this.#tr('ecosystem.experimental'))}</span></div>
             <div class="card coming"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"></path></svg></div><span class="badge soon">${this.#esc(this.#tr('ecosystem.comingSoon'))}</span></div><h3>chasket-vscode</h3><p>${this.#esc(this.#tr('ecosystem.vscode'))}</p><span class="install muted vs">VS Code Marketplace</span></div>
           </div>
         </div>
@@ -7479,7 +7531,7 @@ class CskEcosystem extends HTMLElement {
   #getNewTree() {
     const tpl = document.createElement('template');
     tpl.innerHTML = `
-      <style>:host{display:block;padding:var(--space-section, 5rem) 0;}.container{max-width:var(--max-w, 70rem);margin:0 auto;padding:0 var(--space-page, 1.5rem);}.hd{text-align:center;margin-bottom:clamp(2rem, 4vw, 3.5rem);}.hd h2{font-size:clamp(1.4rem, 2.8vw, 2.2rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:0.75rem;color:var(--c-text, #e4e4ed);}.hd p{font-size:clamp(0.9rem, 1.1vw, 1.05rem);color:var(--c-text-dim, #9898ab);max-width:35rem;margin:0 auto;}.grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 14rem), 1fr));gap:clamp(0.75rem, 1.5vw, 1.25rem);}.card{background:var(--c-bg-card, #12121a);border:1px solid var(--c-border, #2a2a3a);border-radius:var(--radius, 0.75rem);padding:clamp(1.25rem, 2vw, 1.75rem);transition:border-color 0.25s, transform 0.2s;}.card:hover{border-color:var(--c-accent, #00B894);transform:translateY(-2px);}.card-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:clamp(0.75rem, 1.2vw, 1rem);}.icon{width:2.75rem;height:2.75rem;border-radius:0.625rem;display:flex;align-items:center;justify-content:center;background:rgba(0,184,148,0.12);color:var(--c-accent-light, #55efc4);margin-bottom:0;}.badge{font-size:0.65rem;font-weight:600;padding:0.2rem 0.5rem;border-radius:1rem;white-space:nowrap;line-height:1.4;letter-spacing:0.02em;}.badge.available{background:rgba(0,184,148,0.15);color:var(--c-accent-light, #55efc4);border:1px solid rgba(0,184,148,0.3);}.badge.soon{background:rgba(255,190,70,0.12);color:#f0c060;border:1px solid rgba(255,190,70,0.25);}.card.coming{opacity:0.45;cursor:not-allowed;user-select:none;}.card.coming:hover{border-color:var(--c-border, #2a2a3a);transform:none;opacity:0.55;}.card.coming .icon{background:rgba(255,255,255,0.06);color:var(--c-text-dim, #9898ab);}.install.muted{position:relative;color:var(--c-text-dim, #5a5a6a);background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.06);text-decoration:line-through;text-decoration-color:rgba(255,255,255,0.2);overflow:hidden;}.install.muted::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient( -45deg, transparent, transparent 4px, rgba(255,255,255,0.04) 4px, rgba(255,255,255,0.04) 5px );pointer-events:none;}h3{font-size:clamp(0.85rem, 1vw, 0.95rem);font-weight:600;margin-bottom:0.5rem;color:var(--c-text, #e4e4ed);font-family:var(--mono, monospace);}p{font-size:clamp(0.75rem, 0.9vw, 0.83rem);color:var(--c-text-dim, #9898ab);line-height:1.5;margin-bottom:0.875rem;}.install{display:block;font-family:var(--mono, monospace);font-size:clamp(0.68rem, 0.82vw, 0.78rem);color:var(--c-accent, #00B894);background:rgba(0,184,148,0.08);padding:0.375rem 0.625rem;border-radius:0.375rem;border:1px solid rgba(0,184,148,0.2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.install.vs{font-size:clamp(0.65rem, 0.75vw, 0.72rem);}@media (max-width:30rem){.grid{grid-template-columns:1fr 1fr;}}@media (max-width:20rem){.grid{grid-template-columns:1fr;}}</style>
+      <style>:host{display:block;padding:var(--space-section, 5rem) 0;}.container{max-width:var(--max-w, 70rem);margin:0 auto;padding:0 var(--space-page, 1.5rem);}.hd{text-align:center;margin-bottom:clamp(2rem, 4vw, 3.5rem);}.hd h2{font-size:clamp(1.4rem, 2.8vw, 2.2rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:0.75rem;color:var(--c-text, #e4e4ed);}.hd p{font-size:clamp(0.9rem, 1.1vw, 1.05rem);color:var(--c-text-dim, #9898ab);max-width:35rem;margin:0 auto;}.grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 14rem), 1fr));gap:clamp(0.75rem, 1.5vw, 1.25rem);}.card{background:var(--c-bg-card, #12121a);border:1px solid var(--c-border, #2a2a3a);border-radius:var(--radius, 0.75rem);padding:clamp(1.25rem, 2vw, 1.75rem);transition:border-color 0.25s, transform 0.2s;}.card:hover{border-color:var(--c-accent, #00B894);transform:translateY(-2px);}.card-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:clamp(0.75rem, 1.2vw, 1rem);}.icon{width:2.75rem;height:2.75rem;border-radius:0.625rem;display:flex;align-items:center;justify-content:center;background:rgba(0,184,148,0.12);color:#55efc4;margin-bottom:0;}.badge{font-size:0.65rem;font-weight:600;padding:0.2rem 0.5rem;border-radius:1rem;white-space:nowrap;line-height:1.4;letter-spacing:0.02em;}.badge.available{background:rgba(0,184,148,0.15);color:#55efc4;border:1px solid rgba(0,184,148,0.3);}.badge.soon{background:rgba(255,190,70,0.12);color:#f0c060;border:1px solid rgba(255,190,70,0.25);}/* — per-card color variants — */ .clr-teal .icon{background:rgba(46,188,176,0.12);color:#5de8d8;}.clr-teal:hover{border-color:#2EBCB0;}.clr-teal .badge.available{background:rgba(46,188,176,0.15);color:#5de8d8;border-color:rgba(46,188,176,0.3);}.clr-teal .install{color:#2EBCB0;background:rgba(46,188,176,0.08);border-color:rgba(46,188,176,0.2);}.clr-blue .icon{background:rgba(59,130,246,0.12);color:#7daafd;}.clr-blue:hover{border-color:#3B82F6;}.clr-blue .badge.available{background:rgba(59,130,246,0.15);color:#7daafd;border-color:rgba(59,130,246,0.3);}.clr-blue .install{color:#3B82F6;background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.2);}.clr-purple .icon{background:rgba(139,92,246,0.12);color:#b49afc;}.clr-purple:hover{border-color:#8B5CF6;}.clr-purple .badge.available{background:rgba(139,92,246,0.15);color:#b49afc;border-color:rgba(139,92,246,0.3);}.clr-purple .install{color:#8B5CF6;background:rgba(139,92,246,0.08);border-color:rgba(139,92,246,0.2);}.clr-coral .icon{background:rgba(255,113,112,0.12);color:#ff9b9a;}.clr-coral:hover{border-color:#FF7170;}.clr-coral .badge.available{background:rgba(255,113,112,0.15);color:#ff9b9a;border-color:rgba(255,113,112,0.3);}.clr-coral .install{color:#FF7170;background:rgba(255,113,112,0.08);border-color:rgba(255,113,112,0.2);}.clr-pink .icon{background:rgba(236,72,153,0.12);color:#f298c8;}.clr-pink:hover{border-color:#EC4899;}.clr-pink .badge.available{background:rgba(236,72,153,0.15);color:#f298c8;border-color:rgba(236,72,153,0.3);}.clr-pink .install{color:#EC4899;background:rgba(236,72,153,0.08);border-color:rgba(236,72,153,0.2);}.clr-amber .icon{background:rgba(234,179,8,0.12);color:#f0cc50;}.clr-amber:hover{border-color:#EAB308;}.clr-amber .badge.available{background:rgba(234,179,8,0.15);color:#f0cc50;border-color:rgba(234,179,8,0.3);}.clr-amber .install{color:#EAB308;background:rgba(234,179,8,0.08);border-color:rgba(234,179,8,0.2);}.clr-cyan .icon{background:rgba(6,182,212,0.12);color:#5cd6ec;}.clr-cyan:hover{border-color:#06B6D4;}.clr-cyan .badge.available{background:rgba(6,182,212,0.15);color:#5cd6ec;border-color:rgba(6,182,212,0.3);}.clr-cyan .install{color:#06B6D4;background:rgba(6,182,212,0.08);border-color:rgba(6,182,212,0.2);}.card.coming{opacity:0.45;cursor:not-allowed;user-select:none;}.card.coming:hover{border-color:var(--c-border, #2a2a3a);transform:none;opacity:0.55;}.card.coming .icon{background:rgba(255,255,255,0.06);color:var(--c-text-dim, #9898ab);}.install.muted{position:relative;color:var(--c-text-dim, #5a5a6a);background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.06);text-decoration:line-through;text-decoration-color:rgba(255,255,255,0.2);overflow:hidden;}.install.muted::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient( -45deg, transparent, transparent 4px, rgba(255,255,255,0.04) 4px, rgba(255,255,255,0.04) 5px );pointer-events:none;}h3{font-size:clamp(0.85rem, 1vw, 0.95rem);font-weight:600;margin-bottom:0.5rem;color:var(--c-text, #e4e4ed);font-family:var(--mono, monospace);}p{font-size:clamp(0.75rem, 0.9vw, 0.83rem);color:var(--c-text-dim, #9898ab);line-height:1.5;margin-bottom:0.875rem;}.install{display:block;font-family:var(--mono, monospace);font-size:clamp(0.68rem, 0.82vw, 0.78rem);color:var(--c-accent, #00B894);background:rgba(0,184,148,0.08);padding:0.375rem 0.625rem;border-radius:0.375rem;border:1px solid rgba(0,184,148,0.2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.install.vs{font-size:clamp(0.65rem, 0.75vw, 0.72rem);}.caution{display:block;margin-top:0.4rem;font-size:clamp(0.6rem, 0.72vw, 0.68rem);color:var(--c-text-dim, #6a6a7a);line-height:1.3;font-style:italic;}@media (max-width:30rem){.grid{grid-template-columns:1fr 1fr;}}@media (max-width:20rem){.grid{grid-template-columns:1fr;}}</style>
       <section class="section">
         <div class="container">
           <div class="hd">
@@ -7491,13 +7543,13 @@ class CskEcosystem extends HTMLElement {
             </p>
           </div>
           <div class="grid">
-            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"></path></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-cli</h3><p>${this.#esc(this.#tr('ecosystem.cli'))}</p><code class="install">npm i @chasket/chasket</code></div>
-            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"></path></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-router</h3><p>${this.#esc(this.#tr('ecosystem.router'))}</p><code class="install">npm i @chasket/chasket-router</code></div>
-            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-store</h3><p>${this.#esc(this.#tr('ecosystem.store'))}</p><code class="install">npm i @chasket/chasket-store</code></div>
-            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-ssr</h3><p>${this.#esc(this.#tr('ecosystem.ssr'))}</p><code class="install">npm i @chasket/chasket-ssr</code></div>
-            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-ui</h3><p>${this.#esc(this.#tr('ecosystem.ui'))}</p><code class="install">npm i @chasket/chasket-ui</code></div>
-            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>vite-plugin-chasket</h3><p>${this.#esc(this.#tr('ecosystem.vite'))}</p><code class="install">npm i @chasket/vite-plugin-chasket</code></div>
-            <div class="card"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-lsp</h3><p>${this.#esc(this.#tr('ecosystem.lsp'))}</p><code class="install">npm i @chasket/chasket-lsp</code></div>
+            <div class="card clr-teal"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"></path></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-cli</h3><p>${this.#esc(this.#tr('ecosystem.cli'))}</p><code class="install">npm i @chasket/chasket</code></div>
+            <div class="card clr-blue"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"></path></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-router</h3><p>${this.#esc(this.#tr('ecosystem.router'))}</p><code class="install">npm i @chasket/chasket-router</code><span class="caution">${this.#esc(this.#tr('ecosystem.experimental'))}</span></div>
+            <div class="card clr-purple"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-store</h3><p>${this.#esc(this.#tr('ecosystem.store'))}</p><code class="install">npm i @chasket/chasket-store</code><span class="caution">${this.#esc(this.#tr('ecosystem.experimental'))}</span></div>
+            <div class="card clr-coral"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-ssr</h3><p>${this.#esc(this.#tr('ecosystem.ssr'))}</p><code class="install">npm i @chasket/chasket-ssr</code><span class="caution">${this.#esc(this.#tr('ecosystem.experimental'))}</span></div>
+            <div class="card clr-pink"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-ui</h3><p>${this.#esc(this.#tr('ecosystem.ui'))}</p><code class="install">npm i @chasket/chasket-ui</code><span class="caution">${this.#esc(this.#tr('ecosystem.experimental'))}</span></div>
+            <div class="card clr-amber"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>vite-plugin-chasket</h3><p>${this.#esc(this.#tr('ecosystem.vite'))}</p><code class="install">npm i @chasket/vite-plugin-chasket</code><span class="caution">${this.#esc(this.#tr('ecosystem.experimental'))}</span></div>
+            <div class="card clr-cyan"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path></svg></div><span class="badge available">${this.#esc(this.#tr('ecosystem.available'))}</span></div><h3>chasket-lsp</h3><p>${this.#esc(this.#tr('ecosystem.lsp'))}</p><code class="install">npm i @chasket/chasket-lsp</code><span class="caution">${this.#esc(this.#tr('ecosystem.experimental'))}</span></div>
             <div class="card coming"><div class="card-head"><div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"></path></svg></div><span class="badge soon">${this.#esc(this.#tr('ecosystem.comingSoon'))}</span></div><h3>chasket-vscode</h3><p>${this.#esc(this.#tr('ecosystem.vscode'))}</p><span class="install muted vs">VS Code Marketplace</span></div>
           </div>
         </div>
@@ -7525,7 +7577,9 @@ class CskEcosystem extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -7957,7 +8011,9 @@ class CskFeatures extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -8187,7 +8243,9 @@ class CskHero extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -8485,7 +8543,9 @@ class CskHighlights extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -8657,7 +8717,9 @@ class CskPageHome extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -8944,7 +9006,9 @@ class CskPageTesting extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -9220,7 +9284,9 @@ t.<span class=f>afterEach</span>(() => <span class=i>{{ /* cleanup */ }}</span>)
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -9866,7 +9932,9 @@ class CskTestAssertions extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -10116,7 +10184,9 @@ class CskTestCompile extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -10342,7 +10412,9 @@ class CskTestExample extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -10690,7 +10762,9 @@ class CskTestOverview extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -11413,7 +11487,9 @@ class CskPageWhy extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
@@ -11621,7 +11697,9 @@ class CskCopyBtn extends HTMLElement {
         const oA = o.attributes, nA = n.attributes;
         for (let j = nA.length - 1; j >= 0; j--) {
           const a = nA[j];
-          if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
         }
         for (let j = oA.length - 1; j >= 0; j--) {
           if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);

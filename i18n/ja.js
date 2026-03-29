@@ -111,7 +111,8 @@ window.__i18n_register('ja', {
     lsp: 'VS Code、Neovim、Sublime 対応の Language Server — 補完、診断、フォーマット。',
     vscode: 'シンタックスハイライト、リアルタイム診断、定義へのジャンプ対応の VS Code 拡張機能。',
     comingSoon: '準備中',
-    available: '公開中'
+    available: '公開中',
+    experimental: '初期リリース — 実戦での検証はこれからです'
   },
 
   cta: {

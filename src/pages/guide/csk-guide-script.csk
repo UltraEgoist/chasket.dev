@@ -45,7 +45,7 @@
       <h3>{{ tr('guideContent.script.state.title') }}</h3>
       <p>{{ tr('guideContent.script.state.desc') }}</p>
 
-      <pre><code>{{ code_stateExample }}</code></pre>
+      <pre><code>{{{ code_stateExample }}}</code></pre>
 
       <div class="note">
         <strong>{{ tr('guideContent.script.state.featuresLabel') }}:</strong>
@@ -63,7 +63,7 @@
       <h3>{{ tr('guideContent.script.prop.title') }}</h3>
       <p>{{ tr('guideContent.script.prop.desc') }}</p>
 
-      <pre><code>{{ code_propExample }}</code></pre>
+      <pre><code>{{{ code_propExample }}}</code></pre>
 
       <div class="note">
         <strong>{{ tr('guideContent.script.prop.featuresLabel') }}:</strong>
@@ -83,7 +83,7 @@
       <h3>{{ tr('guideContent.script.computed.title') }}</h3>
       <p>{{ tr('guideContent.script.computed.desc') }}</p>
 
-      <pre><code>{{ code_computedExample }}</code></pre>
+      <pre><code>{{{ code_computedExample }}}</code></pre>
 
       <div class="note">
         <strong>{{ tr('guideContent.script.computed.featuresLabel') }}:</strong>
@@ -100,7 +100,7 @@
       <h3>{{ tr('guideContent.script.fn.title') }}</h3>
       <p>{{ tr('guideContent.script.fn.desc') }}</p>
 
-      <pre><code>{{ code_fnExample }}</code></pre>
+      <pre><code>{{{ code_fnExample }}}</code></pre>
 
       <div class="note">
         <strong>{{ tr('guideContent.script.fn.featuresLabel') }}:</strong>
@@ -118,7 +118,7 @@
       <h3>{{ tr('guideContent.script.emit.title') }}</h3>
       <p>{{ tr('guideContent.script.emit.desc') }}</p>
 
-      <pre><code>{{ code_emitExample }}</code></pre>
+      <pre><code>{{{ code_emitExample }}}</code></pre>
 
       <div class="note">
         <strong>{{ tr('guideContent.script.emit.modifiersLabel') }}:</strong>
@@ -139,7 +139,7 @@
       <h3>{{ tr('guideContent.script.watch.title') }}</h3>
       <p>{{ tr('guideContent.script.watch.desc') }}</p>
 
-      <pre><code>{{ code_watchExample }}</code></pre>
+      <pre><code>{{{ code_watchExample }}}</code></pre>
 
       <div class="note">
         <strong>{{ tr('guideContent.script.watch.usesLabel') }}:</strong>
@@ -157,7 +157,7 @@
       <h3>{{ tr('guideContent.script.ref.title') }}</h3>
       <p>{{ tr('guideContent.script.ref.desc') }}</p>
 
-      <pre><code>{{ code_refExample }}</code></pre>
+      <pre><code>{{{ code_refExample }}}</code></pre>
 
       <div class="note">
         <strong>{{ tr('guideContent.script.ref.usesLabel') }}:</strong>
@@ -178,10 +178,10 @@
       <h3>{{ tr('guideContent.script.provideConsume.title') }}</h3>
       <p>{{ tr('guideContent.script.provideConsume.desc') }}</p>
 
-      <pre><code>{{ code_provideExample }}</code></pre>
+      <pre><code>{{{ code_provideExample }}}</code></pre>
 
       <p class="example-title">{{ tr('guideContent.script.provideConsume.example') }}:</p>
-      <pre><code>{{ code_consumeExample }}</code></pre>
+      <pre><code>{{{ code_consumeExample }}}</code></pre>
 
       <div class="note">
         <strong>{{ tr('guideContent.script.provideConsume.featuresLabel') }}:</strong>
@@ -198,7 +198,7 @@
       <h3>{{ tr('guideContent.script.type.title') }}</h3>
       <p>{{ tr('guideContent.script.type.desc') }}</p>
 
-      <pre><code>{{ code_typeExample }}</code></pre>
+      <pre><code>{{{ code_typeExample }}}</code></pre>
 
       <div class="note">
         <strong>{{ tr('guideContent.script.type.usesLabel') }}:</strong>
@@ -216,7 +216,7 @@
       <h3>{{ tr('guideContent.script.import.title') }}</h3>
       <p>{{ tr('guideContent.script.import.desc') }}</p>
 
-      <pre><code>{{ code_importExample }}</code></pre>
+      <pre><code>{{{ code_importExample }}}</code></pre>
 
       <div class="note">
         <strong>{{ tr('guideContent.script.import.featuresLabel') }}:</strong>

@@ -44,7 +44,7 @@
 
           <div class="property">
             <h4>{{ tr('apiContent.types.exampleTitle') }}</h4>
-            <pre><code>{{ code_typeExamples }}</code></pre>
+            <pre><code>{{{ code_typeExamples }}}</code></pre>
           </div>
 
           <div class="note">
