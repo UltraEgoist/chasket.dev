@@ -9,7 +9,7 @@
   // TOC パターンは csk-page-guide と同一（ARCHITECTURE.md §7 参照）。
   // ⚠️ activeSection を state にしないこと（#patch() がサブコンポーネントを破壊する）。
 
-  state sidebarOpen: boolean = true
+  state sidebarOpen: boolean = false
 
   fn tr(k: string) { return window.__t(k) }
 
@@ -25,7 +25,16 @@
       e.preventDefault()
       const el = document.getElementById(href.substring(1))
       if (el) el.scrollIntoView({ behavior: 'smooth' })
+      if (window.innerWidth <= 768) sidebarOpen = false
     }
+  }
+
+  fn handleOverlayClick() {
+    sidebarOpen = false
+  }
+
+  fn handleEdgeClick() {
+    sidebarOpen = true
   }
 
   fn updateActiveLink(sectionId: string) {
@@ -41,6 +50,8 @@
   }
 
   on mount {
+    if (window.innerWidth > 768) sidebarOpen = true
+
     const sections = document.querySelectorAll('.doc-section[id]')
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
@@ -50,6 +61,10 @@
       }
     }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 })
     sections.forEach((s) => { observer.observe(s) })
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) sidebarOpen = true
+    })
   }
 </script>
 
@@ -99,6 +114,13 @@
         </ul>
       </nav>
     </aside>
+
+    <!-- Sidebar overlay (mobile) -->
+    <div :class="'sidebar-overlay ' + (sidebarOpen ? 'visible' : '')" @click="handleOverlayClick"></div>
+    <!-- Sidebar edge tab (mobile) -->
+    <div :class="'sidebar-edge ' + (sidebarOpen ? '' : 'visible')" @click="handleEdgeClick">
+      <span>≡</span>
+    </div>
 
     <!-- Main Content -->
     <main class="content">
@@ -404,28 +426,149 @@ pre code .cs { color: #81ecec; }
   letter-spacing: 0.05em;
 }
 
-/* Responsive */
+/* Mobile sidebar helpers */
+.sidebar-overlay {
+  display: none;
+}
+
+.sidebar-edge {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .page-container {
+    grid-template-columns: 240px 1fr;
+  }
+
+  .sidebar {
+    padding: 1rem;
+  }
+
+  .content {
+    padding: 1.5rem;
+  }
+}
+
 @media (max-width: 768px) {
   .page-container {
     grid-template-columns: 1fr;
   }
+
   .sidebar {
-    display: none;
     position: fixed;
-    top: 3.75rem;
     left: 0;
+    top: 0;
     width: 280px;
-    height: calc(100vh - 3.75rem);
-    z-index: 100;
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
   }
+
   .sidebar.open {
-    display: block;
+    transform: translateX(0);
   }
+
   .sidebar-toggle {
     display: flex;
   }
+
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+    display: none;
+  }
+
+  .sidebar-overlay.visible {
+    display: block;
+  }
+
+  .sidebar-edge {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 64px;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+    z-index: 50;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: var(--c-text-dim);
+    font-size: 1rem;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .sidebar-edge:hover {
+    background: var(--c-primary);
+    color: #fff;
+  }
+
+  .sidebar-edge.visible {
+    display: flex;
+  }
+
   .content {
     padding: var(--space-page) 1rem;
+  }
+
+  .page-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .doc-section h2 {
+    font-size: 1.4rem;
+  }
+
+  .doc-section h3 {
+    font-size: 1.1rem;
+  }
+
+  pre {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  code {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .doc-section h2 {
+    font-size: 1.25rem;
+  }
+
+  .doc-section h3 {
+    font-size: 1rem;
+  }
+
+  .content {
+    padding: 0.75rem;
+  }
+
+  pre {
+    padding: 0.5rem;
+    font-size: 0.75rem;
   }
 }
 </style>

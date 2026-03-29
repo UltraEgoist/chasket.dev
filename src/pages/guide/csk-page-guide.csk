@@ -15,7 +15,7 @@
   // - handleTocClick() は e.preventDefault() でハッシュ変更を阻止する
   // API / Testing ページも同じパターンを使用（ARCHITECTURE.md §7 参照）。
 
-  state sidebarOpen: boolean = true
+  state sidebarOpen: boolean = false
 
   fn tr(k: string) { return window.__t(k) }
 
@@ -34,7 +34,16 @@
       e.preventDefault()
       const el = document.getElementById(href.substring(1))
       if (el) el.scrollIntoView({ behavior: 'smooth' })
+      if (window.innerWidth <= 768) sidebarOpen = false
     }
+  }
+
+  fn handleOverlayClick() {
+    sidebarOpen = false
+  }
+
+  fn handleEdgeClick() {
+    sidebarOpen = true
   }
 
   // アクティブな TOC リンクを更新する。
@@ -58,6 +67,8 @@
   // サブコンポーネントが shadow: none のため、全セクション要素は
   // ライト DOM に存在し document.querySelectorAll で取得可能。
   on mount {
+    if (window.innerWidth > 768) sidebarOpen = true
+
     const sections = document.querySelectorAll('.doc-section[id]')
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
@@ -67,6 +78,12 @@
       }
     }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 })
     sections.forEach((s) => { observer.observe(s) })
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        sidebarOpen = true
+      }
+    })
   }
 </script>
 
@@ -121,6 +138,13 @@
         </ul>
       </nav>
     </aside>
+
+    <!-- Sidebar overlay (mobile) -->
+    <div :class="'sidebar-overlay ' + (sidebarOpen ? 'visible' : '')" @click="handleOverlayClick"></div>
+    <!-- Sidebar edge tab (mobile) -->
+    <div :class="'sidebar-edge ' + (sidebarOpen ? '' : 'visible')" @click="handleEdgeClick">
+      <span>≡</span>
+    </div>
 
     <!-- Main Content -->
     <main class="content">
@@ -418,6 +442,15 @@ pre code .cs { color: #81ecec; }
   font-size: 0.9rem;
 }
 
+/* Mobile sidebar helpers */
+.sidebar-overlay {
+  display: none;
+}
+
+.sidebar-edge {
+  display: none;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .page-container {
@@ -455,6 +488,51 @@ pre code .cs { color: #81ecec; }
   }
 
   .sidebar-toggle {
+    display: flex;
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+    display: none;
+  }
+
+  .sidebar-overlay.visible {
+    display: block;
+  }
+
+  .sidebar-edge {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 64px;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+    z-index: 50;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: var(--c-text-dim);
+    font-size: 1rem;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .sidebar-edge:hover {
+    background: var(--c-primary);
+    color: #fff;
+  }
+
+  .sidebar-edge.visible {
     display: flex;
   }
 

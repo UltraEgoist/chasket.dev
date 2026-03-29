@@ -38,8 +38,27 @@
     if (changed) window.scrollTo(0, 0)
   }
 
+  fn scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  fn updateBackToTop() {
+    const btn = document.querySelector('.back-to-top')
+    if (!btn) return
+    if (window.scrollY > 500) {
+      btn.classList.add('visible')
+    } else {
+      btn.classList.remove('visible')
+    }
+  }
+
   on mount {
     window.addEventListener("hashchange", () => { onHashChange() })
+    window.addEventListener("scroll", () => { updateBackToTop() })
+    // back-to-top ボタンのクリックハンドラを直接バインド
+    // （shadow: none の fl-0 ID 衝突を回避するため @click を使わない）
+    const backBtn = document.querySelector('.back-to-top')
+    if (backBtn) backBtn.addEventListener('click', () => { scrollToTop() })
     // setTimeout(0): 全カスタム要素の定義完了を待ってから初回レンダリング
     setTimeout(() => { currentPage = getPage() || "home" }, 0)
   }
@@ -62,6 +81,7 @@
       </#if>
     </main>
     <csk-footer></csk-footer>
+    <button class="back-to-top" aria-label="Back to top">↑</button>
   </div>
 </template>
 
@@ -74,5 +94,46 @@
   .shell-main {
     flex: 1;
     padding-top: 3.75rem;
+  }
+
+  .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--c-primary, #6C5CE7);
+    color: #fff;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    z-index: 900;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, background 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .back-to-top:hover {
+    background: var(--c-primary-light, #a29bfe);
+  }
+
+  @media (max-width: 480px) {
+    .back-to-top {
+      bottom: 1rem;
+      right: 1rem;
+      width: 40px;
+      height: 40px;
+      font-size: 1.1rem;
+    }
   }
 </style>
