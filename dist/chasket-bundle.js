@@ -1,4 +1,4 @@
-// Chasket Bundle - 2026-03-29T02:56:57.613Z
+// Chasket Bundle - 2026-03-29T03:06:12.736Z
 // 33 component(s)
 
 // Deferred registration queue: all classes are defined first,
@@ -9145,37 +9145,41 @@ class CskTestApi extends HTMLElement {
     this.#listeners = [];
   }
 
+  #tr(k) {
+    return window.__t(k)
+  }
+
   #render() {
     const tpl = document.createElement('template');
     tpl.innerHTML = `
       <!-- API Reference -->
       <section id="api-reference" class="doc-section">
         <h2>
-          \${window.__t('testContent.api.title')}
+          ${this.#esc(this.#tr('testContent.api.title'))}
         </h2>
         <div class="subsection">
           <h3 id="api-suite">
             suite(name, setupFn)
           </h3>
           <p>
-            \${window.__t('testContent.api.suiteDesc')}
+            ${this.#esc(this.#tr('testContent.api.suiteDesc'))}
           </p>
           <div class="property">
             <h4>
               suite.run(opts?)
             </h4>
             <p>
-              \${window.__t('testContent.api.suiteRunDesc')}
+              ${this.#esc(this.#tr('testContent.api.suiteRunDesc'))}
             </p>
             <p>
-<strong>\${window.__t('testContent.api.options')}</strong>            </p>
+<strong>${this.#esc(this.#tr('testContent.api.options'))}</strong>            </p>
             <ul>
-              <li><code>filter</code> (string): \${window.__t('testContent.api.filterOption')}</li>
-              <li><code>verbose</code> (boolean): \${window.__t('testContent.api.verboseOption')}</li>
+              <li><code>filter</code> (string): ${this.#esc(this.#tr('testContent.api.filterOption'))}</li>
+              <li><code>verbose</code> (boolean): ${this.#esc(this.#tr('testContent.api.verboseOption'))}</li>
             </ul>
           </div>
           <div class="example-title">
-            \${window.__t('testContent.api.usageExample')}
+            ${this.#esc(this.#tr('testContent.api.usageExample'))}
           </div>
           <pre><code>${this.#exampleAPI}</code></pre>
         </div>
@@ -9184,10 +9188,10 @@ class CskTestApi extends HTMLElement {
             test(name, fn) / xtest(name, fn)
           </h3>
           <p>
-            \${window.__t('testContent.api.testDesc')}
+            ${this.#esc(this.#tr('testContent.api.testDesc'))}
           </p>
           <p>
-            \${window.__t('testContent.api.testFuncDesc')}
+            ${this.#esc(this.#tr('testContent.api.testFuncDesc'))}
           </p>
         </div>
         <div class="subsection">
@@ -9195,7 +9199,7 @@ class CskTestApi extends HTMLElement {
             beforeEach(fn) / afterEach(fn)
           </h3>
           <p>
-            \${window.__t('testContent.api.lifecycleDesc')}
+            ${this.#esc(this.#tr('testContent.api.lifecycleDesc'))}
           </p>
           <pre><code>t.<span class=f>beforeEach</span>(() => <span class=i>{{ /* setup */ }}</span>);
 t.<span class=f>afterEach</span>(() => <span class=i>{{ /* cleanup */ }}</span>);</code></pre>
@@ -9211,31 +9215,31 @@ t.<span class=f>afterEach</span>(() => <span class=i>{{ /* cleanup */ }}</span>)
       <!-- API Reference -->
       <section id="api-reference" class="doc-section">
         <h2>
-          \${window.__t('testContent.api.title')}
+          ${this.#esc(this.#tr('testContent.api.title'))}
         </h2>
         <div class="subsection">
           <h3 id="api-suite">
             suite(name, setupFn)
           </h3>
           <p>
-            \${window.__t('testContent.api.suiteDesc')}
+            ${this.#esc(this.#tr('testContent.api.suiteDesc'))}
           </p>
           <div class="property">
             <h4>
               suite.run(opts?)
             </h4>
             <p>
-              \${window.__t('testContent.api.suiteRunDesc')}
+              ${this.#esc(this.#tr('testContent.api.suiteRunDesc'))}
             </p>
             <p>
-<strong>\${window.__t('testContent.api.options')}</strong>            </p>
+<strong>${this.#esc(this.#tr('testContent.api.options'))}</strong>            </p>
             <ul>
-              <li><code>filter</code> (string): \${window.__t('testContent.api.filterOption')}</li>
-              <li><code>verbose</code> (boolean): \${window.__t('testContent.api.verboseOption')}</li>
+              <li><code>filter</code> (string): ${this.#esc(this.#tr('testContent.api.filterOption'))}</li>
+              <li><code>verbose</code> (boolean): ${this.#esc(this.#tr('testContent.api.verboseOption'))}</li>
             </ul>
           </div>
           <div class="example-title">
-            \${window.__t('testContent.api.usageExample')}
+            ${this.#esc(this.#tr('testContent.api.usageExample'))}
           </div>
           <pre><code>${this.#exampleAPI}</code></pre>
         </div>
@@ -9244,10 +9248,10 @@ t.<span class=f>afterEach</span>(() => <span class=i>{{ /* cleanup */ }}</span>)
             test(name, fn) / xtest(name, fn)
           </h3>
           <p>
-            \${window.__t('testContent.api.testDesc')}
+            ${this.#esc(this.#tr('testContent.api.testDesc'))}
           </p>
           <p>
-            \${window.__t('testContent.api.testFuncDesc')}
+            ${this.#esc(this.#tr('testContent.api.testFuncDesc'))}
           </p>
         </div>
         <div class="subsection">
@@ -9255,7 +9259,7 @@ t.<span class=f>afterEach</span>(() => <span class=i>{{ /* cleanup */ }}</span>)
             beforeEach(fn) / afterEach(fn)
           </h3>
           <p>
-            \${window.__t('testContent.api.lifecycleDesc')}
+            ${this.#esc(this.#tr('testContent.api.lifecycleDesc'))}
           </p>
           <pre><code>t.<span class=f>beforeEach</span>(() => <span class=i>{{ /* setup */ }}</span>);
 t.<span class=f>afterEach</span>(() => <span class=i>{{ /* cleanup */ }}</span>);</code></pre>
@@ -9419,24 +9423,28 @@ class CskTestAssertions extends HTMLElement {
     this.#listeners = [];
   }
 
+  #tr(k) {
+    return window.__t(k)
+  }
+
   #render() {
     const tpl = document.createElement('template');
     tpl.innerHTML = `
       <!-- Assertions -->
       <section id="assertions" class="doc-section">
         <h2>
-          \${window.__t('testContent.assertions.title')}
+          ${this.#esc(this.#tr('testContent.assertions.title'))}
         </h2>
         <div class="subsection">
           <h3 id="assert-basic">
-            \${window.__t('testContent.assertions.basicTitle')}
+            ${this.#esc(this.#tr('testContent.assertions.basicTitle'))}
           </h3>
           <div class="property">
             <h4>
               assert(condition, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.assertDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.assertDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9444,7 +9452,7 @@ class CskTestAssertions extends HTMLElement {
               eq(actual, expected, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.eqDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.eqDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9452,7 +9460,7 @@ class CskTestAssertions extends HTMLElement {
               deepEq(actual, expected, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.deepEqDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.deepEqDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9460,7 +9468,7 @@ class CskTestAssertions extends HTMLElement {
               includes(str, sub, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.includesDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.includesDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9468,7 +9476,7 @@ class CskTestAssertions extends HTMLElement {
               notIncludes(str, sub, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.notIncludesDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.notIncludesDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9476,7 +9484,7 @@ class CskTestAssertions extends HTMLElement {
               matches(str, regex, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.matchesDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.matchesDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9484,24 +9492,24 @@ class CskTestAssertions extends HTMLElement {
               throws(fn, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.throwsDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.throwsDesc'))}
             </p>
           </div>
           <div class="example-title">
-            \${window.__t('testContent.assertions.usageExample')}
+            ${this.#esc(this.#tr('testContent.assertions.usageExample'))}
           </div>
           <pre><code>${this.#exampleAssert}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-compile">
-            \${window.__t('testContent.assertions.compileTitle')}
+            ${this.#esc(this.#tr('testContent.assertions.compileTitle'))}
           </h3>
           <div class="property">
             <h4>
               compileSuccess(result, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.compileSuccessDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.compileSuccessDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9509,7 +9517,7 @@ class CskTestAssertions extends HTMLElement {
               compileFails(result, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.compileFailsDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.compileFailsDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9517,20 +9525,20 @@ class CskTestAssertions extends HTMLElement {
               validJS(result, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.validJSDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.validJSDesc'))}
             </p>
           </div>
         </div>
         <div class="subsection">
           <h3 id="assert-output">
-            \${window.__t('testContent.assertions.outputTitle')}
+            ${this.#esc(this.#tr('testContent.assertions.outputTitle'))}
           </h3>
           <div class="property">
             <h4>
               outputIncludes(result, sub, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.outputIncludesDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.outputIncludesDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9538,24 +9546,24 @@ class CskTestAssertions extends HTMLElement {
               outputNotIncludes(result, sub, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.outputNotIncludesDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.outputNotIncludesDesc'))}
             </p>
           </div>
           <div class="example-title">
-            \${window.__t('testContent.assertions.usageExample')}
+            ${this.#esc(this.#tr('testContent.assertions.usageExample'))}
           </div>
           <pre><code>${this.#exampleOutput}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-template">
-            \${window.__t('testContent.assertions.templateTitle')}
+            ${this.#esc(this.#tr('testContent.assertions.templateTitle'))}
           </h3>
           <div class="property">
             <h4>
               getTemplate(result)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.getTemplateDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.getTemplateDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9563,7 +9571,7 @@ class CskTestAssertions extends HTMLElement {
               templateIncludes(result, sub, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.templateIncludesDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.templateIncludesDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9571,24 +9579,24 @@ class CskTestAssertions extends HTMLElement {
               templateNotIncludes(result, sub, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.templateNotIncludesDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.templateNotIncludesDesc'))}
             </p>
           </div>
           <div class="example-title">
-            \${window.__t('testContent.assertions.usageExample')}
+            ${this.#esc(this.#tr('testContent.assertions.usageExample'))}
           </div>
           <pre><code>${this.#exampleTemplate}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-state">
-            \${window.__t('testContent.assertions.stateTitle')}
+            ${this.#esc(this.#tr('testContent.assertions.stateTitle'))}
           </h3>
           <div class="property">
             <h4>
               hasState(result, name, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.hasStateDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.hasStateDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9596,7 +9604,7 @@ class CskTestAssertions extends HTMLElement {
               hasWatch(result, deps, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.hasWatchDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.hasWatchDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9604,7 +9612,7 @@ class CskTestAssertions extends HTMLElement {
               hasOnMount(result, bodySubstring, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.hasOnMountDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.hasOnMountDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9612,7 +9620,7 @@ class CskTestAssertions extends HTMLElement {
               hasOnUnmount(result, bodySubstring, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.hasOnUnmountDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.hasOnUnmountDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9620,24 +9628,24 @@ class CskTestAssertions extends HTMLElement {
               hasInterpolation(result, varName, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.hasInterpolationDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.hasInterpolationDesc'))}
             </p>
           </div>
           <div class="example-title">
-            \${window.__t('testContent.assertions.usageExample')}
+            ${this.#esc(this.#tr('testContent.assertions.usageExample'))}
           </div>
           <pre><code>${this.#exampleState}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-diag">
-            \${window.__t('testContent.assertions.diagTitle')}
+            ${this.#esc(this.#tr('testContent.assertions.diagTitle'))}
           </h3>
           <div class="property">
             <h4>
               hasDiag(result, code, level?, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.hasDiagDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.hasDiagDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9645,7 +9653,7 @@ class CskTestAssertions extends HTMLElement {
               noDiag(result, code, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.noDiagDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.noDiagDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9653,11 +9661,11 @@ class CskTestAssertions extends HTMLElement {
               diagCount(result, level, expected, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.diagCountDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.diagCountDesc'))}
             </p>
           </div>
           <div class="example-title">
-            \${window.__t('testContent.assertions.usageExample')}
+            ${this.#esc(this.#tr('testContent.assertions.usageExample'))}
           </div>
           <pre><code>${this.#exampleDiag}</code></pre>
         </div>
@@ -9672,18 +9680,18 @@ class CskTestAssertions extends HTMLElement {
       <!-- Assertions -->
       <section id="assertions" class="doc-section">
         <h2>
-          \${window.__t('testContent.assertions.title')}
+          ${this.#esc(this.#tr('testContent.assertions.title'))}
         </h2>
         <div class="subsection">
           <h3 id="assert-basic">
-            \${window.__t('testContent.assertions.basicTitle')}
+            ${this.#esc(this.#tr('testContent.assertions.basicTitle'))}
           </h3>
           <div class="property">
             <h4>
               assert(condition, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.assertDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.assertDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9691,7 +9699,7 @@ class CskTestAssertions extends HTMLElement {
               eq(actual, expected, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.eqDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.eqDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9699,7 +9707,7 @@ class CskTestAssertions extends HTMLElement {
               deepEq(actual, expected, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.deepEqDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.deepEqDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9707,7 +9715,7 @@ class CskTestAssertions extends HTMLElement {
               includes(str, sub, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.includesDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.includesDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9715,7 +9723,7 @@ class CskTestAssertions extends HTMLElement {
               notIncludes(str, sub, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.notIncludesDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.notIncludesDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9723,7 +9731,7 @@ class CskTestAssertions extends HTMLElement {
               matches(str, regex, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.matchesDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.matchesDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9731,24 +9739,24 @@ class CskTestAssertions extends HTMLElement {
               throws(fn, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.throwsDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.throwsDesc'))}
             </p>
           </div>
           <div class="example-title">
-            \${window.__t('testContent.assertions.usageExample')}
+            ${this.#esc(this.#tr('testContent.assertions.usageExample'))}
           </div>
           <pre><code>${this.#exampleAssert}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-compile">
-            \${window.__t('testContent.assertions.compileTitle')}
+            ${this.#esc(this.#tr('testContent.assertions.compileTitle'))}
           </h3>
           <div class="property">
             <h4>
               compileSuccess(result, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.compileSuccessDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.compileSuccessDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9756,7 +9764,7 @@ class CskTestAssertions extends HTMLElement {
               compileFails(result, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.compileFailsDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.compileFailsDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9764,20 +9772,20 @@ class CskTestAssertions extends HTMLElement {
               validJS(result, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.validJSDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.validJSDesc'))}
             </p>
           </div>
         </div>
         <div class="subsection">
           <h3 id="assert-output">
-            \${window.__t('testContent.assertions.outputTitle')}
+            ${this.#esc(this.#tr('testContent.assertions.outputTitle'))}
           </h3>
           <div class="property">
             <h4>
               outputIncludes(result, sub, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.outputIncludesDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.outputIncludesDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9785,24 +9793,24 @@ class CskTestAssertions extends HTMLElement {
               outputNotIncludes(result, sub, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.outputNotIncludesDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.outputNotIncludesDesc'))}
             </p>
           </div>
           <div class="example-title">
-            \${window.__t('testContent.assertions.usageExample')}
+            ${this.#esc(this.#tr('testContent.assertions.usageExample'))}
           </div>
           <pre><code>${this.#exampleOutput}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-template">
-            \${window.__t('testContent.assertions.templateTitle')}
+            ${this.#esc(this.#tr('testContent.assertions.templateTitle'))}
           </h3>
           <div class="property">
             <h4>
               getTemplate(result)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.getTemplateDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.getTemplateDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9810,7 +9818,7 @@ class CskTestAssertions extends HTMLElement {
               templateIncludes(result, sub, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.templateIncludesDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.templateIncludesDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9818,24 +9826,24 @@ class CskTestAssertions extends HTMLElement {
               templateNotIncludes(result, sub, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.templateNotIncludesDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.templateNotIncludesDesc'))}
             </p>
           </div>
           <div class="example-title">
-            \${window.__t('testContent.assertions.usageExample')}
+            ${this.#esc(this.#tr('testContent.assertions.usageExample'))}
           </div>
           <pre><code>${this.#exampleTemplate}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-state">
-            \${window.__t('testContent.assertions.stateTitle')}
+            ${this.#esc(this.#tr('testContent.assertions.stateTitle'))}
           </h3>
           <div class="property">
             <h4>
               hasState(result, name, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.hasStateDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.hasStateDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9843,7 +9851,7 @@ class CskTestAssertions extends HTMLElement {
               hasWatch(result, deps, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.hasWatchDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.hasWatchDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9851,7 +9859,7 @@ class CskTestAssertions extends HTMLElement {
               hasOnMount(result, bodySubstring, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.hasOnMountDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.hasOnMountDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9859,7 +9867,7 @@ class CskTestAssertions extends HTMLElement {
               hasOnUnmount(result, bodySubstring, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.hasOnUnmountDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.hasOnUnmountDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9867,24 +9875,24 @@ class CskTestAssertions extends HTMLElement {
               hasInterpolation(result, varName, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.hasInterpolationDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.hasInterpolationDesc'))}
             </p>
           </div>
           <div class="example-title">
-            \${window.__t('testContent.assertions.usageExample')}
+            ${this.#esc(this.#tr('testContent.assertions.usageExample'))}
           </div>
           <pre><code>${this.#exampleState}</code></pre>
         </div>
         <div class="subsection">
           <h3 id="assert-diag">
-            \${window.__t('testContent.assertions.diagTitle')}
+            ${this.#esc(this.#tr('testContent.assertions.diagTitle'))}
           </h3>
           <div class="property">
             <h4>
               hasDiag(result, code, level?, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.hasDiagDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.hasDiagDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9892,7 +9900,7 @@ class CskTestAssertions extends HTMLElement {
               noDiag(result, code, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.noDiagDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.noDiagDesc'))}
             </p>
           </div>
           <div class="property">
@@ -9900,11 +9908,11 @@ class CskTestAssertions extends HTMLElement {
               diagCount(result, level, expected, msg)
             </h4>
             <p>
-              \${window.__t('testContent.assertions.diagCountDesc')}
+              ${this.#esc(this.#tr('testContent.assertions.diagCountDesc'))}
             </p>
           </div>
           <div class="example-title">
-            \${window.__t('testContent.assertions.usageExample')}
+            ${this.#esc(this.#tr('testContent.assertions.usageExample'))}
           </div>
           <pre><code>${this.#exampleDiag}</code></pre>
         </div>
@@ -10055,33 +10063,37 @@ class CskTestCompile extends HTMLElement {
     this.#listeners = [];
   }
 
+  #tr(k) {
+    return window.__t(k)
+  }
+
   #render() {
     const tpl = document.createElement('template');
     tpl.innerHTML = `
       <!-- Compile Helpers -->
       <section id="compile-helpers" class="doc-section">
         <h2>
-          \${window.__t('testContent.compile.title')}
+          ${this.#esc(this.#tr('testContent.compile.title'))}
         </h2>
         <div class="subsection">
           <h3 id="compile-ok-fail">
             compileOk(src, fileName?, opts?) / compileFail(src, fileName?, opts?)
           </h3>
           <p>
-            \${window.__t('testContent.compile.compileDesc')}
+            ${this.#esc(this.#tr('testContent.compile.compileDesc'))}
           </p>
           <div class="property">
             <h4>
-              \${window.__t('testContent.compile.returnValue')}
+              ${this.#esc(this.#tr('testContent.compile.returnValue'))}
             </h4>
             <pre><code>{{
-  success: <span class=tp>boolean</span>,
-  output?: <span class=tp>string</span>,      <span class=cm>// \${window.__t('testContent.compile.generatedJS')}</span>
-  diagnostics: Array    <span class=cm>// \${window.__t('testContent.compile.errorWarnInfo')}</span>
+  success: boolean,
+  output?: string,      // {{ tr('testContent.compile.generatedJS') }}
+  diagnostics: Array    // ${this.#esc(this.#tr('testContent.compile.errorWarnInfo'))}
 }}</code></pre>
           </div>
           <div class="example-title">
-            \${window.__t('testContent.compile.usageExample')}
+            ${this.#esc(this.#tr('testContent.compile.usageExample'))}
           </div>
           <pre><code>${this.#exampleCompile}</code></pre>
         </div>
@@ -10090,18 +10102,18 @@ class CskTestCompile extends HTMLElement {
             csk(opts)
           </h3>
           <p>
-            \${window.__t('testContent.compile.cskHelperDesc')}
+            ${this.#esc(this.#tr('testContent.compile.cskHelperDesc'))}
           </p>
           <div class="property">
             <h4>
-              \${window.__t('testContent.compile.options')}
+              ${this.#esc(this.#tr('testContent.compile.options'))}
             </h4>
             <ul>
-              <li><code>name</code> (string, \${window.__t('testContent.compile.nameOption')})</li>
-              <li><code>script</code> (string, \${window.__t('testContent.compile.scriptOption')})</li>
-              <li><code>template</code> (string, \${window.__t('testContent.compile.templateOption')})</li>
-              <li><code>style</code> (string, \${window.__t('testContent.compile.styleOption')})</li>
-              <li><code>meta</code> (string, \${window.__t('testContent.compile.metaOption')})</li>
+              <li><code>name</code> (string, ${this.#esc(this.#tr('testContent.compile.nameOption'))})</li>
+              <li><code>script</code> (string, ${this.#esc(this.#tr('testContent.compile.scriptOption'))})</li>
+              <li><code>template</code> (string, ${this.#esc(this.#tr('testContent.compile.templateOption'))})</li>
+              <li><code>style</code> (string, ${this.#esc(this.#tr('testContent.compile.styleOption'))})</li>
+              <li><code>meta</code> (string, ${this.#esc(this.#tr('testContent.compile.metaOption'))})</li>
             </ul>
           </div>
         </div>
@@ -10116,27 +10128,27 @@ class CskTestCompile extends HTMLElement {
       <!-- Compile Helpers -->
       <section id="compile-helpers" class="doc-section">
         <h2>
-          \${window.__t('testContent.compile.title')}
+          ${this.#esc(this.#tr('testContent.compile.title'))}
         </h2>
         <div class="subsection">
           <h3 id="compile-ok-fail">
             compileOk(src, fileName?, opts?) / compileFail(src, fileName?, opts?)
           </h3>
           <p>
-            \${window.__t('testContent.compile.compileDesc')}
+            ${this.#esc(this.#tr('testContent.compile.compileDesc'))}
           </p>
           <div class="property">
             <h4>
-              \${window.__t('testContent.compile.returnValue')}
+              ${this.#esc(this.#tr('testContent.compile.returnValue'))}
             </h4>
             <pre><code>{{
-  success: <span class=tp>boolean</span>,
-  output?: <span class=tp>string</span>,      <span class=cm>// \${window.__t('testContent.compile.generatedJS')}</span>
-  diagnostics: Array    <span class=cm>// \${window.__t('testContent.compile.errorWarnInfo')}</span>
+  success: boolean,
+  output?: string,      // {{ tr('testContent.compile.generatedJS') }}
+  diagnostics: Array    // ${this.#esc(this.#tr('testContent.compile.errorWarnInfo'))}
 }}</code></pre>
           </div>
           <div class="example-title">
-            \${window.__t('testContent.compile.usageExample')}
+            ${this.#esc(this.#tr('testContent.compile.usageExample'))}
           </div>
           <pre><code>${this.#exampleCompile}</code></pre>
         </div>
@@ -10145,18 +10157,18 @@ class CskTestCompile extends HTMLElement {
             csk(opts)
           </h3>
           <p>
-            \${window.__t('testContent.compile.cskHelperDesc')}
+            ${this.#esc(this.#tr('testContent.compile.cskHelperDesc'))}
           </p>
           <div class="property">
             <h4>
-              \${window.__t('testContent.compile.options')}
+              ${this.#esc(this.#tr('testContent.compile.options'))}
             </h4>
             <ul>
-              <li><code>name</code> (string, \${window.__t('testContent.compile.nameOption')})</li>
-              <li><code>script</code> (string, \${window.__t('testContent.compile.scriptOption')})</li>
-              <li><code>template</code> (string, \${window.__t('testContent.compile.templateOption')})</li>
-              <li><code>style</code> (string, \${window.__t('testContent.compile.styleOption')})</li>
-              <li><code>meta</code> (string, \${window.__t('testContent.compile.metaOption')})</li>
+              <li><code>name</code> (string, ${this.#esc(this.#tr('testContent.compile.nameOption'))})</li>
+              <li><code>script</code> (string, ${this.#esc(this.#tr('testContent.compile.scriptOption'))})</li>
+              <li><code>template</code> (string, ${this.#esc(this.#tr('testContent.compile.templateOption'))})</li>
+              <li><code>style</code> (string, ${this.#esc(this.#tr('testContent.compile.styleOption'))})</li>
+              <li><code>meta</code> (string, ${this.#esc(this.#tr('testContent.compile.metaOption'))})</li>
             </ul>
           </div>
         </div>
@@ -10307,42 +10319,46 @@ class CskTestExample extends HTMLElement {
     this.#listeners = [];
   }
 
+  #tr(k) {
+    return window.__t(k)
+  }
+
   #render() {
     const tpl = document.createElement('template');
     tpl.innerHTML = `
       <!-- Full Example -->
       <section id="full-example" class="doc-section">
         <h2>
-          \${window.__t('testContent.example.title')}
+          ${this.#esc(this.#tr('testContent.example.title'))}
         </h2>
         <p>
-          \${window.__t('testContent.example.desc')}
+          ${this.#esc(this.#tr('testContent.example.desc'))}
         </p>
         <div class="example-title">
-          \${window.__t('testContent.example.fullExampleTitle')}
+          ${this.#esc(this.#tr('testContent.example.fullExampleTitle'))}
         </div>
         <pre><code>${this.#exampleFull}</code></pre>
         <p>
-          \${window.__t('testContent.example.thisTestVerifies')}
+          ${this.#esc(this.#tr('testContent.example.thisTestVerifies'))}
         </p>
         <ul>
           <li>
-            \${window.__t('testContent.example.item1')}
+            ${this.#esc(this.#tr('testContent.example.item1'))}
           </li>
           <li>
-            \${window.__t('testContent.example.item2')}
+            ${this.#esc(this.#tr('testContent.example.item2'))}
           </li>
           <li>
-            \${window.__t('testContent.example.item3')}
+            ${this.#esc(this.#tr('testContent.example.item3'))}
           </li>
           <li>
-            \${window.__t('testContent.example.item4')}
+            ${this.#esc(this.#tr('testContent.example.item4'))}
           </li>
           <li>
-            \${window.__t('testContent.example.item5')}
+            ${this.#esc(this.#tr('testContent.example.item5'))}
           </li>
           <li>
-            \${window.__t('testContent.example.item6')}
+            ${this.#esc(this.#tr('testContent.example.item6'))}
           </li>
         </ul>
       </section>
@@ -10356,36 +10372,36 @@ class CskTestExample extends HTMLElement {
       <!-- Full Example -->
       <section id="full-example" class="doc-section">
         <h2>
-          \${window.__t('testContent.example.title')}
+          ${this.#esc(this.#tr('testContent.example.title'))}
         </h2>
         <p>
-          \${window.__t('testContent.example.desc')}
+          ${this.#esc(this.#tr('testContent.example.desc'))}
         </p>
         <div class="example-title">
-          \${window.__t('testContent.example.fullExampleTitle')}
+          ${this.#esc(this.#tr('testContent.example.fullExampleTitle'))}
         </div>
         <pre><code>${this.#exampleFull}</code></pre>
         <p>
-          \${window.__t('testContent.example.thisTestVerifies')}
+          ${this.#esc(this.#tr('testContent.example.thisTestVerifies'))}
         </p>
         <ul>
           <li>
-            \${window.__t('testContent.example.item1')}
+            ${this.#esc(this.#tr('testContent.example.item1'))}
           </li>
           <li>
-            \${window.__t('testContent.example.item2')}
+            ${this.#esc(this.#tr('testContent.example.item2'))}
           </li>
           <li>
-            \${window.__t('testContent.example.item3')}
+            ${this.#esc(this.#tr('testContent.example.item3'))}
           </li>
           <li>
-            \${window.__t('testContent.example.item4')}
+            ${this.#esc(this.#tr('testContent.example.item4'))}
           </li>
           <li>
-            \${window.__t('testContent.example.item5')}
+            ${this.#esc(this.#tr('testContent.example.item5'))}
           </li>
           <li>
-            \${window.__t('testContent.example.item6')}
+            ${this.#esc(this.#tr('testContent.example.item6'))}
           </li>
         </ul>
       </section>
@@ -10541,100 +10557,104 @@ class CskTestOverview extends HTMLElement {
     this.#listeners = [];
   }
 
+  #tr(k) {
+    return window.__t(k)
+  }
+
   #render() {
     const tpl = document.createElement('template');
     tpl.innerHTML = `
       <!-- Overview -->
       <section id="overview" class="doc-section">
         <h2>
-          \${window.__t('testContent.overview.exampleTitle')}
+          ${this.#esc(this.#tr('testContent.overview.exampleTitle'))}
         </h2>
         <p>
-          \${window.__t('testContent.overview.desc1')}
+          ${this.#esc(this.#tr('testContent.overview.desc1'))}
         </p>
         <p>
-          \${window.__t('testContent.overview.desc2')}
+          ${this.#esc(this.#tr('testContent.overview.desc2'))}
         </p>
         <ul>
           <li>
-            \${window.__t('testContent.overview.item1')}
+            ${this.#esc(this.#tr('testContent.overview.item1'))}
           </li>
           <li>
-            \${window.__t('testContent.overview.item2')}
+            ${this.#esc(this.#tr('testContent.overview.item2'))}
           </li>
           <li>
-            \${window.__t('testContent.overview.item3')}
+            ${this.#esc(this.#tr('testContent.overview.item3'))}
           </li>
           <li>
-            \${window.__t('testContent.overview.item4')}
+            ${this.#esc(this.#tr('testContent.overview.item4'))}
           </li>
           <li>
-            \${window.__t('testContent.overview.item5')}
+            ${this.#esc(this.#tr('testContent.overview.item5'))}
           </li>
           <li>
-            \${window.__t('testContent.overview.item6')}
+            ${this.#esc(this.#tr('testContent.overview.item6'))}
           </li>
         </ul>
         <div class="example-title">
-          \${window.__t('testContent.overview.exampleTitle')}
+          ${this.#esc(this.#tr('testContent.overview.exampleTitle'))}
         </div>
         <pre><code>${this.#exampleOverview}</code></pre>
       </section>
       <!-- Installation / Setup -->
       <section id="install" class="doc-section">
         <h2>
-          \${window.__t('testContent.overview.setupTitle')}
+          ${this.#esc(this.#tr('testContent.overview.setupTitle'))}
         </h2>
         <p>
-          \${window.__t('testContent.overview.setupDesc')}
+          ${this.#esc(this.#tr('testContent.overview.setupDesc'))}
         </p>
         <div class="property">
           <h4>
-            \${window.__t('testContent.overview.localDev')}
+            ${this.#esc(this.#tr('testContent.overview.localDev'))}
           </h4>
           <p>
-            \${window.__t('testContent.overview.importDesc')}
+            ${this.#esc(this.#tr('testContent.overview.importDesc'))}
           </p>
           <pre><code><span class=k>const</span> <span class=i>{{ suite, compileOk, compileFail, csk }}</span> = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);</code></pre>
         </div>
         <p class="note-text">
-          \${window.__t('testContent.overview.autoDetect')}
+          ${this.#esc(this.#tr('testContent.overview.autoDetect'))}
         </p>
         <div class="example-title">
-          \${window.__t('testContent.overview.setupExampleTitle')}
+          ${this.#esc(this.#tr('testContent.overview.setupExampleTitle'))}
         </div>
         <pre><code>${this.#exampleSetup}</code></pre>
       </section>
       <!-- Quick Start -->
       <section id="quickstart" class="doc-section">
         <h2>
-          \${window.__t('testContent.overview.quickstartTitle')}
+          ${this.#esc(this.#tr('testContent.overview.quickstartTitle'))}
         </h2>
         <p>
-          \${window.__t('testContent.overview.quickstartDesc')}
+          ${this.#esc(this.#tr('testContent.overview.quickstartDesc'))}
         </p>
         <div class="example-title">
-          \${window.__t('testContent.overview.basicUsageTitle')}
+          ${this.#esc(this.#tr('testContent.overview.basicUsageTitle'))}
         </div>
         <pre><code>${this.#exampleQuick}</code></pre>
         <p>
-          \${window.__t('testContent.overview.exampleInThisCase')}
+          ${this.#esc(this.#tr('testContent.overview.exampleInThisCase'))}
         </p>
         <ul>
           <li>
-            \${window.__t('testContent.overview.item7')}
+            ${this.#esc(this.#tr('testContent.overview.item7'))}
           </li>
           <li>
-            \${window.__t('testContent.overview.item8')}
+            ${this.#esc(this.#tr('testContent.overview.item8'))}
           </li>
           <li>
-            \${window.__t('testContent.overview.item9')}
+            ${this.#esc(this.#tr('testContent.overview.item9'))}
           </li>
           <li>
-            \${window.__t('testContent.overview.item10')}
+            ${this.#esc(this.#tr('testContent.overview.item10'))}
           </li>
           <li>
-            \${window.__t('testContent.overview.item11')}
+            ${this.#esc(this.#tr('testContent.overview.item11'))}
           </li>
         </ul>
       </section>
@@ -10648,94 +10668,94 @@ class CskTestOverview extends HTMLElement {
       <!-- Overview -->
       <section id="overview" class="doc-section">
         <h2>
-          \${window.__t('testContent.overview.exampleTitle')}
+          ${this.#esc(this.#tr('testContent.overview.exampleTitle'))}
         </h2>
         <p>
-          \${window.__t('testContent.overview.desc1')}
+          ${this.#esc(this.#tr('testContent.overview.desc1'))}
         </p>
         <p>
-          \${window.__t('testContent.overview.desc2')}
+          ${this.#esc(this.#tr('testContent.overview.desc2'))}
         </p>
         <ul>
           <li>
-            \${window.__t('testContent.overview.item1')}
+            ${this.#esc(this.#tr('testContent.overview.item1'))}
           </li>
           <li>
-            \${window.__t('testContent.overview.item2')}
+            ${this.#esc(this.#tr('testContent.overview.item2'))}
           </li>
           <li>
-            \${window.__t('testContent.overview.item3')}
+            ${this.#esc(this.#tr('testContent.overview.item3'))}
           </li>
           <li>
-            \${window.__t('testContent.overview.item4')}
+            ${this.#esc(this.#tr('testContent.overview.item4'))}
           </li>
           <li>
-            \${window.__t('testContent.overview.item5')}
+            ${this.#esc(this.#tr('testContent.overview.item5'))}
           </li>
           <li>
-            \${window.__t('testContent.overview.item6')}
+            ${this.#esc(this.#tr('testContent.overview.item6'))}
           </li>
         </ul>
         <div class="example-title">
-          \${window.__t('testContent.overview.exampleTitle')}
+          ${this.#esc(this.#tr('testContent.overview.exampleTitle'))}
         </div>
         <pre><code>${this.#exampleOverview}</code></pre>
       </section>
       <!-- Installation / Setup -->
       <section id="install" class="doc-section">
         <h2>
-          \${window.__t('testContent.overview.setupTitle')}
+          ${this.#esc(this.#tr('testContent.overview.setupTitle'))}
         </h2>
         <p>
-          \${window.__t('testContent.overview.setupDesc')}
+          ${this.#esc(this.#tr('testContent.overview.setupDesc'))}
         </p>
         <div class="property">
           <h4>
-            \${window.__t('testContent.overview.localDev')}
+            ${this.#esc(this.#tr('testContent.overview.localDev'))}
           </h4>
           <p>
-            \${window.__t('testContent.overview.importDesc')}
+            ${this.#esc(this.#tr('testContent.overview.importDesc'))}
           </p>
           <pre><code><span class=k>const</span> <span class=i>{{ suite, compileOk, compileFail, csk }}</span> = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);</code></pre>
         </div>
         <p class="note-text">
-          \${window.__t('testContent.overview.autoDetect')}
+          ${this.#esc(this.#tr('testContent.overview.autoDetect'))}
         </p>
         <div class="example-title">
-          \${window.__t('testContent.overview.setupExampleTitle')}
+          ${this.#esc(this.#tr('testContent.overview.setupExampleTitle'))}
         </div>
         <pre><code>${this.#exampleSetup}</code></pre>
       </section>
       <!-- Quick Start -->
       <section id="quickstart" class="doc-section">
         <h2>
-          \${window.__t('testContent.overview.quickstartTitle')}
+          ${this.#esc(this.#tr('testContent.overview.quickstartTitle'))}
         </h2>
         <p>
-          \${window.__t('testContent.overview.quickstartDesc')}
+          ${this.#esc(this.#tr('testContent.overview.quickstartDesc'))}
         </p>
         <div class="example-title">
-          \${window.__t('testContent.overview.basicUsageTitle')}
+          ${this.#esc(this.#tr('testContent.overview.basicUsageTitle'))}
         </div>
         <pre><code>${this.#exampleQuick}</code></pre>
         <p>
-          \${window.__t('testContent.overview.exampleInThisCase')}
+          ${this.#esc(this.#tr('testContent.overview.exampleInThisCase'))}
         </p>
         <ul>
           <li>
-            \${window.__t('testContent.overview.item7')}
+            ${this.#esc(this.#tr('testContent.overview.item7'))}
           </li>
           <li>
-            \${window.__t('testContent.overview.item8')}
+            ${this.#esc(this.#tr('testContent.overview.item8'))}
           </li>
           <li>
-            \${window.__t('testContent.overview.item9')}
+            ${this.#esc(this.#tr('testContent.overview.item9'))}
           </li>
           <li>
-            \${window.__t('testContent.overview.item10')}
+            ${this.#esc(this.#tr('testContent.overview.item10'))}
           </li>
           <li>
-            \${window.__t('testContent.overview.item11')}
+            ${this.#esc(this.#tr('testContent.overview.item11'))}
           </li>
         </ul>
       </section>

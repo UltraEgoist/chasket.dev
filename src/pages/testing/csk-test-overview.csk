@@ -9,53 +9,55 @@
   state exampleSetup: string = "const { suite, compileOk, compileFail, csk } = require('./lib/chasket-test');\n\n// Simple compile check\nconst src = '&lt;meta&gt;name: &quot;test&quot;&lt;/meta&gt;&lt;template&gt;&lt;div&gt;content&lt;/div&gt;&lt;/template&gt;';\nconst result = compileOk(src);\nconsole.log(result.success);  // true\nconsole.log(result.output);   // generated JS code\nconsole.log(result.diagnostics);  // [ ]"
 
   state exampleQuick: string = "const { suite, compileOk, csk } = require('./lib/chasket-test');\n\nsuite('Counter Component', t => {\n  t.test('compiles with state', () => {\n    const src = csk({\n      name: 'my-counter',\n      script: 'state count: number = 0',\n      template: '&lt;button @click=&quot;count++&quot;&gt;{{ count }}&lt;/button&gt;'\n    });\n    const r = compileOk(src);\n    t.compileSuccess(r);\n    t.hasState(r, 'count');\n    t.outputIncludes(r, 'count++');\n  });\n});\n\nsuite.run();"
+
+  fn tr(k: string) { return window.__t(k) }
 </script>
 
 <template>
   <!-- Overview -->
   <section id="overview" class="doc-section">
-    <h2>${window.__t('testContent.overview.exampleTitle')}</h2>
-    <p>${window.__t('testContent.overview.desc1')}</p>
-    <p>${window.__t('testContent.overview.desc2')}</p>
+    <h2>{{ tr('testContent.overview.exampleTitle') }}</h2>
+    <p>{{ tr('testContent.overview.desc1') }}</p>
+    <p>{{ tr('testContent.overview.desc2') }}</p>
     <ul>
-      <li>${window.__t('testContent.overview.item1')}</li>
-      <li>${window.__t('testContent.overview.item2')}</li>
-      <li>${window.__t('testContent.overview.item3')}</li>
-      <li>${window.__t('testContent.overview.item4')}</li>
-      <li>${window.__t('testContent.overview.item5')}</li>
-      <li>${window.__t('testContent.overview.item6')}</li>
+      <li>{{ tr('testContent.overview.item1') }}</li>
+      <li>{{ tr('testContent.overview.item2') }}</li>
+      <li>{{ tr('testContent.overview.item3') }}</li>
+      <li>{{ tr('testContent.overview.item4') }}</li>
+      <li>{{ tr('testContent.overview.item5') }}</li>
+      <li>{{ tr('testContent.overview.item6') }}</li>
     </ul>
-    <div class="example-title">${window.__t('testContent.overview.exampleTitle')}</div>
-    <pre><code>{{ exampleOverview }}</code></pre>
+    <div class="example-title">{{ tr('testContent.overview.exampleTitle') }}</div>
+    <pre><code>{{{ exampleOverview }}}</code></pre>
   </section>
 
   <!-- Installation / Setup -->
   <section id="install" class="doc-section">
-    <h2>${window.__t('testContent.overview.setupTitle')}</h2>
-    <p>${window.__t('testContent.overview.setupDesc')}</p>
+    <h2>{{ tr('testContent.overview.setupTitle') }}</h2>
+    <p>{{ tr('testContent.overview.setupDesc') }}</p>
     <div class="property">
-      <h4>${window.__t('testContent.overview.localDev')}</h4>
-      <p>${window.__t('testContent.overview.importDesc')}</p>
+      <h4>{{ tr('testContent.overview.localDev') }}</h4>
+      <p>{{ tr('testContent.overview.importDesc') }}</p>
       <pre><code>const \{{ suite, compileOk, compileFail, csk }} = require('./lib/chasket-test');</code></pre>
     </div>
-    <p class="note-text">${window.__t('testContent.overview.autoDetect')}</p>
-    <div class="example-title">${window.__t('testContent.overview.setupExampleTitle')}</div>
-    <pre><code>{{ exampleSetup }}</code></pre>
+    <p class="note-text">{{ tr('testContent.overview.autoDetect') }}</p>
+    <div class="example-title">{{ tr('testContent.overview.setupExampleTitle') }}</div>
+    <pre><code>{{{ exampleSetup }}}</code></pre>
   </section>
 
   <!-- Quick Start -->
   <section id="quickstart" class="doc-section">
-    <h2>${window.__t('testContent.overview.quickstartTitle')}</h2>
-    <p>${window.__t('testContent.overview.quickstartDesc')}</p>
-    <div class="example-title">${window.__t('testContent.overview.basicUsageTitle')}</div>
-    <pre><code>{{ exampleQuick }}</code></pre>
-    <p>${window.__t('testContent.overview.exampleInThisCase')}</p>
+    <h2>{{ tr('testContent.overview.quickstartTitle') }}</h2>
+    <p>{{ tr('testContent.overview.quickstartDesc') }}</p>
+    <div class="example-title">{{ tr('testContent.overview.basicUsageTitle') }}</div>
+    <pre><code>{{{ exampleQuick }}}</code></pre>
+    <p>{{ tr('testContent.overview.exampleInThisCase') }}</p>
     <ul>
-      <li>${window.__t('testContent.overview.item7')}</li>
-      <li>${window.__t('testContent.overview.item8')}</li>
-      <li>${window.__t('testContent.overview.item9')}</li>
-      <li>${window.__t('testContent.overview.item10')}</li>
-      <li>${window.__t('testContent.overview.item11')}</li>
+      <li>{{ tr('testContent.overview.item7') }}</li>
+      <li>{{ tr('testContent.overview.item8') }}</li>
+      <li>{{ tr('testContent.overview.item9') }}</li>
+      <li>{{ tr('testContent.overview.item10') }}</li>
+      <li>{{ tr('testContent.overview.item11') }}</li>
     </ul>
   </section>
 </template>

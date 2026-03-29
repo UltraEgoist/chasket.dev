@@ -5,39 +5,41 @@
 
 <script>
   state exampleCompile: string = "const { compileOk, compileFail, csk } = require('./lib/chasket-test');\n\n// Success\nconst ok = compileOk('&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;hi&lt;/p&gt;&lt;/template&gt;');\nconsole.log(ok.success);  // true\nconsole.log(ok.output);   // JavaScript code\n\n// With file name\nconst r1 = compileOk(src, 'my-component.csk');\n\n// With options\nconst r2 = compileOk(src, 'test.csk', { strict: true });\n\n// Failure\nconst fail = compileFail('&lt;meta name=&quot;x&quot;&lt;/meta&gt;');  // bad syntax\nconsole.log(fail.success);  // false\nconsole.log(fail.diagnostics);  // [{ code, level, message, ... }]\n\n// Helper\nconst src = csk({\n  name: 'my-btn',\n  script: 'state disabled: boolean = false',\n  template: '&lt;button :disabled=&quot;disabled&quot;&gt;Click&lt;/button&gt;',\n  style: 'button { cursor: pointer; }',\n  meta: 'shadow: open'\n});\nconst r3 = compileOk(src);"
+
+  fn tr(k: string) { return window.__t(k) }
 </script>
 
 <template>
   <!-- Compile Helpers -->
   <section id="compile-helpers" class="doc-section">
-    <h2>${window.__t('testContent.compile.title')}</h2>
+    <h2>{{ tr('testContent.compile.title') }}</h2>
 
     <div class="subsection">
       <h3 id="compile-ok-fail">compileOk(src, fileName?, opts?) / compileFail(src, fileName?, opts?)</h3>
-      <p>${window.__t('testContent.compile.compileDesc')}</p>
+      <p>{{ tr('testContent.compile.compileDesc') }}</p>
       <div class="property">
-        <h4>${window.__t('testContent.compile.returnValue')}</h4>
+        <h4>{{ tr('testContent.compile.returnValue') }}</h4>
         <pre><code>\{{
   success: boolean,
-  output?: string,      // ${window.__t('testContent.compile.generatedJS')}
-  diagnostics: Array    // ${window.__t('testContent.compile.errorWarnInfo')}
+  output?: string,      // {{ tr('testContent.compile.generatedJS') }}
+  diagnostics: Array    // {{ tr('testContent.compile.errorWarnInfo') }}
 }}</code></pre>
       </div>
-      <div class="example-title">${window.__t('testContent.compile.usageExample')}</div>
-      <pre><code>{{ exampleCompile }}</code></pre>
+      <div class="example-title">{{ tr('testContent.compile.usageExample') }}</div>
+      <pre><code>{{{ exampleCompile }}}</code></pre>
     </div>
 
     <div class="subsection">
       <h3 id="csk-helper">csk(opts)</h3>
-      <p>${window.__t('testContent.compile.cskHelperDesc')}</p>
+      <p>{{ tr('testContent.compile.cskHelperDesc') }}</p>
       <div class="property">
-        <h4>${window.__t('testContent.compile.options')}</h4>
+        <h4>{{ tr('testContent.compile.options') }}</h4>
         <ul>
-          <li><code>name</code> (string, ${window.__t('testContent.compile.nameOption')})</li>
-          <li><code>script</code> (string, ${window.__t('testContent.compile.scriptOption')})</li>
-          <li><code>template</code> (string, ${window.__t('testContent.compile.templateOption')})</li>
-          <li><code>style</code> (string, ${window.__t('testContent.compile.styleOption')})</li>
-          <li><code>meta</code> (string, ${window.__t('testContent.compile.metaOption')})</li>
+          <li><code>name</code> (string, {{ tr('testContent.compile.nameOption') }})</li>
+          <li><code>script</code> (string, {{ tr('testContent.compile.scriptOption') }})</li>
+          <li><code>template</code> (string, {{ tr('testContent.compile.templateOption') }})</li>
+          <li><code>style</code> (string, {{ tr('testContent.compile.styleOption') }})</li>
+          <li><code>meta</code> (string, {{ tr('testContent.compile.metaOption') }})</li>
         </ul>
       </div>
     </div>

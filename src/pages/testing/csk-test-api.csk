@@ -5,38 +5,40 @@
 
 <script>
   state exampleAPI: string = "const { suite, compileOk, csk } = require('./lib/chasket-test');\n\nsuite('API Usage', t => {\n  t.beforeEach(() => {\n    console.log('setup');\n  });\n\n  t.test('test 1', () => {\n    const r = compileOk('&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;&lt;/p&gt;&lt;/template&gt;');\n    t.compileSuccess(r);\n  });\n\n  t.xtest('skipped test', () => {\n    // This test is skipped\n  });\n\n  t.afterEach(() => {\n    console.log('teardown');\n  });\n});\n\nsuite.run();"
+
+  fn tr(k: string) { return window.__t(k) }
 </script>
 
 <template>
   <!-- API Reference -->
   <section id="api-reference" class="doc-section">
-    <h2>${window.__t('testContent.api.title')}</h2>
+    <h2>{{ tr('testContent.api.title') }}</h2>
 
     <div class="subsection">
       <h3 id="api-suite">suite(name, setupFn)</h3>
-      <p>${window.__t('testContent.api.suiteDesc')}</p>
+      <p>{{ tr('testContent.api.suiteDesc') }}</p>
       <div class="property">
         <h4>suite.run(opts?)</h4>
-        <p>${window.__t('testContent.api.suiteRunDesc')}</p>
-        <p><strong>${window.__t('testContent.api.options')}</strong></p>
+        <p>{{ tr('testContent.api.suiteRunDesc') }}</p>
+        <p><strong>{{ tr('testContent.api.options') }}</strong></p>
         <ul>
-          <li><code>filter</code> (string): ${window.__t('testContent.api.filterOption')}</li>
-          <li><code>verbose</code> (boolean): ${window.__t('testContent.api.verboseOption')}</li>
+          <li><code>filter</code> (string): {{ tr('testContent.api.filterOption') }}</li>
+          <li><code>verbose</code> (boolean): {{ tr('testContent.api.verboseOption') }}</li>
         </ul>
       </div>
-      <div class="example-title">${window.__t('testContent.api.usageExample')}</div>
-      <pre><code>{{ exampleAPI }}</code></pre>
+      <div class="example-title">{{ tr('testContent.api.usageExample') }}</div>
+      <pre><code>{{{ exampleAPI }}}</code></pre>
     </div>
 
     <div class="subsection">
       <h3 id="api-test">test(name, fn) / xtest(name, fn)</h3>
-      <p>${window.__t('testContent.api.testDesc')}</p>
-      <p>${window.__t('testContent.api.testFuncDesc')}</p>
+      <p>{{ tr('testContent.api.testDesc') }}</p>
+      <p>{{ tr('testContent.api.testFuncDesc') }}</p>
     </div>
 
     <div class="subsection">
       <h3 id="api-lifecycle">beforeEach(fn) / afterEach(fn)</h3>
-      <p>${window.__t('testContent.api.lifecycleDesc')}</p>
+      <p>{{ tr('testContent.api.lifecycleDesc') }}</p>
       <pre><code>t.beforeEach(() => \{{ /* setup */ }});
 t.afterEach(() => \{{ /* cleanup */ }});</code></pre>
     </div>
