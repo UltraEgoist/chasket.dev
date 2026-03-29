@@ -1,4 +1,4 @@
-// Chasket Bundle - 2026-03-29T08:31:17.380Z
+// Chasket Bundle - 2026-03-29T15:08:42.494Z
 // 33 component(s)
 
 // Deferred registration queue: all classes are defined first,
@@ -7,7 +7,7 @@
 const __chasketDefineQueue = [];
 
 // ── csk-footer.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -188,7 +188,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-navbar.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -477,7 +477,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-shell.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 
 (() => {
 "use strict";
@@ -734,7 +734,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-api-cli.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -1358,7 +1358,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-api-compiler.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -1366,7 +1366,7 @@ class CskApiCompiler extends HTMLElement {
   #_code_compileBasic = "<span class=k>import</span> { compile } <span class=k>from</span> <span class=s>'@chasket/chasket'</span>\n\n<span class=k>const</span> source = <span class=s>`\n&lt;meta&gt;\n  name: my-component\n&lt;/meta&gt;\n&lt;script&gt;\n  state count: number = 0\n&lt;/script&gt;\n&lt;template&gt;\n  &lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;/template&gt;\n`</span>\n\n<span class=k>const</span> result = <span class=f>compile</span>(source, <span class=s>'my-component.csk'</span>, {\n  target: <span class=s>'es2020'</span>\n})\n\n<span class=k>if</span> (result.success) {\n  console.<span class=f>log</span>(result.output)\n}";
   get #code_compileBasic() { return this.#_code_compileBasic; }
   set #code_compileBasic(v) { this.#_code_compileBasic = v; this.#scheduleUpdate(); }
-  #_code_compileOptions = "<span class=k>const</span> options = {\n  target: <span class=s>'es2020'</span>,           <span class=cm>// &quot;es2020&quot; | &quot;es2021&quot; | &quot;esnext&quot;</span>\n  bundle: <span class=n>true</span>,               <span class=cm>// embed CSS in JS</span>\n  shadow: <span class=n>false</span>,              <span class=cm>// Shadow DOM or </span>Light DOM\n  sourcemap: <span class=n>true</span>,            <span class=cm>// generate source maps</span>\n  minify: <span class=n>false</span>,              <span class=cm>// enable in production</span>\n  imports: {                  <span class=cm>// external import mapping</span>\n    <span class=s>'lodash'</span>: <span class=s>'./libs/lodash.js'</span>\n  }\n}";
+  #_code_compileOptions = "<span class=k>const</span> options = {\n  target: <span class=s>'es2020'</span>,           <span class=cm>// &quot;es2020&quot; | &quot;es2021&quot; | &quot;esnext&quot;</span>\n  bundle: <span class=n>true</span>,               <span class=cm>// embed CSS in JS</span>\n  shadow: <span class=s>'open'</span>,             <span class=cm>// &quot;open&quot; | &quot;closed&quot; | &quot;none&quot;</span>\n  sourcemap: <span class=n>true</span>,            <span class=cm>// generate source maps</span>\n  minify: <span class=n>false</span>,              <span class=cm>// enable in production</span>\n  imports: {                  <span class=cm>// external import mapping</span>\n    <span class=s>'lodash'</span>: <span class=s>'./libs/lodash.js'</span>\n  }\n}";
   get #code_compileOptions() { return this.#_code_compileOptions; }
   set #code_compileOptions(v) { this.#_code_compileOptions = v; this.#scheduleUpdate(); }
   #_code_splitBlocks = "<span class=k>import</span> { splitBlocks } <span class=k>from</span> <span class=s>'@chasket/chasket'</span>\n\n<span class=k>const</span> source = <span class=s>`...csk file content...`</span>\n<span class=k>const</span> blocks = <span class=f>splitBlocks</span>(source)\n\nconsole.<span class=f>log</span>(blocks.meta)      <span class=cm>// meta block</span>\nconsole.<span class=f>log</span>(blocks.script)    <span class=cm>// script block</span>\nconsole.<span class=f>log</span>(blocks.template)  <span class=cm>// template block</span>\nconsole.<span class=f>log</span>(blocks.style)     <span class=cm>// style block</span>";
@@ -1746,12 +1746,12 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-api-config.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
 class CskApiConfig extends HTMLElement {
-  #_code_configBasic = "{\n  <span class=s>&quot;src&quot;</span>: <span class=s>&quot;src&quot;</span>,\n  <span class=s>&quot;outdir&quot;</span>: <span class=s>&quot;dist&quot;</span>,\n  <span class=s>&quot;target&quot;</span>: <span class=s>&quot;es2020&quot;</span>,\n  <span class=s>&quot;bundle&quot;</span>: <span class=n>true</span>,\n  <span class=s>&quot;shadow&quot;</span>: <span class=n>true</span>,\n  <span class=s>&quot;sourcemap&quot;</span>: <span class=n>true</span>,\n  <span class=s>&quot;minify&quot;</span>: <span class=n>true</span>\n}";
+  #_code_configBasic = "{\n  <span class=s>&quot;src&quot;</span>: <span class=s>&quot;src&quot;</span>,\n  <span class=s>&quot;outdir&quot;</span>: <span class=s>&quot;dist&quot;</span>,\n  <span class=s>&quot;target&quot;</span>: <span class=s>&quot;es2020&quot;</span>,\n  <span class=s>&quot;bundle&quot;</span>: <span class=n>true</span>,\n  <span class=s>&quot;shadow&quot;</span>: <span class=s>&quot;open&quot;</span>,\n  <span class=s>&quot;sourcemap&quot;</span>: <span class=n>true</span>,\n  <span class=s>&quot;minify&quot;</span>: <span class=n>true</span>\n}";
   get #code_configBasic() { return this.#_code_configBasic; }
   set #code_configBasic(v) { this.#_code_configBasic = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -1831,7 +1831,7 @@ class CskApiConfig extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('apiContent.config.shadowDesc'))}
             </p>
-            <pre><code><span class=s>"shadow"</span>: <span class=n>true</span></code></pre>
+            <pre><code><span class=s>"shadow"</span>: <span class=s>"open"</span></code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1926,7 +1926,7 @@ class CskApiConfig extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('apiContent.config.shadowDesc'))}
             </p>
-            <pre><code><span class=s>"shadow"</span>: <span class=n>true</span></code></pre>
+            <pre><code><span class=s>"shadow"</span>: <span class=s>"open"</span></code></pre>
           </div>
           <div class="property">
             <h4>
@@ -2083,7 +2083,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-api-diagnostics.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -2627,7 +2627,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-api-ecosystem.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -3476,7 +3476,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-api-types.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -3731,7 +3731,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-page-api.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 
 (() => {
 "use strict";
@@ -4135,7 +4135,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-guide-communication.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -4357,12 +4357,12 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-guide-file-structure.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
 class CskGuideFileStructure extends HTMLElement {
-  #_code_fileStructure = "<span class=t>&lt;meta</span><span class=t>&gt;</span>\n  name: component-name\n  shadow: <span class=n>true</span>\n<span class=t>&lt;/meta</span><span class=t>&gt;</span>\n\n<span class=t>&lt;script</span><span class=t>&gt;</span>\n  <span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>\n<span class=t>&lt;/script</span><span class=t>&gt;</span>\n\n<span class=t>&lt;template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ count }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=t>&lt;/template</span><span class=t>&gt;</span>\n\n<span class=t>&lt;style</span><span class=t>&gt;</span>\n  p { color: white; }\n<span class=t>&lt;/style</span><span class=t>&gt;</span>";
+  #_code_fileStructure = "<span class=t>&lt;meta</span><span class=t>&gt;</span>\n  name: component-name\n  shadow: open\n<span class=t>&lt;/meta</span><span class=t>&gt;</span>\n\n<span class=t>&lt;script</span><span class=t>&gt;</span>\n  <span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>\n<span class=t>&lt;/script</span><span class=t>&gt;</span>\n\n<span class=t>&lt;template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ count }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=t>&lt;/template</span><span class=t>&gt;</span>\n\n<span class=t>&lt;style</span><span class=t>&gt;</span>\n  p { color: white; }\n<span class=t>&lt;/style</span><span class=t>&gt;</span>";
   get #code_fileStructure() { return this.#_code_fileStructure; }
   set #code_fileStructure(v) { this.#_code_fileStructure = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -4436,7 +4436,8 @@ class CskGuideFileStructure extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.desc'))}
             </p>
-            <pre><code>shadow: <span class=n>true</span>    <span class=cm>&lt;!-- Shadow DOM --&gt;</span>
+            <pre><code>shadow: open    <span class=cm>&lt;!-- Shadow DOM (open) --&gt;</span>
+shadow: closed  <span class=cm>&lt;!-- Shadow DOM (closed) --&gt;</span>
 shadow: none    <span class=cm>&lt;!-- Light DOM with scoping --&gt;</span></code></pre>
             <p class="note-text"><strong>${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.hint'))}:</strong>${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.hintText'))}</p>
           </div>
@@ -4502,7 +4503,8 @@ shadow: none    <span class=cm>&lt;!-- Light DOM with scoping --&gt;</span></cod
             <p>
               ${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.desc'))}
             </p>
-            <pre><code>shadow: <span class=n>true</span>    <span class=cm>&lt;!-- Shadow DOM --&gt;</span>
+            <pre><code>shadow: open    <span class=cm>&lt;!-- Shadow DOM (open) --&gt;</span>
+shadow: closed  <span class=cm>&lt;!-- Shadow DOM (closed) --&gt;</span>
 shadow: none    <span class=cm>&lt;!-- Light DOM with scoping --&gt;</span></code></pre>
             <p class="note-text"><strong>${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.hint'))}:</strong>${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.hintText'))}</p>
           </div>
@@ -4636,7 +4638,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-guide-script.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -5121,7 +5123,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-guide-security.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -5384,7 +5386,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-guide-style.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -5622,7 +5624,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-guide-template.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -6033,7 +6035,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-page-guide.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 
 (() => {
 "use strict";
@@ -6413,7 +6415,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-code-demo.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -6917,7 +6919,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-comparison.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -7438,7 +7440,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-cta.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -7671,7 +7673,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-ecosystem.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -7880,7 +7882,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-features.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -8319,7 +8321,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-hero.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -8564,7 +8566,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-highlights.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -8861,7 +8863,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-page-home.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 
 (() => {
 "use strict";
@@ -9053,7 +9055,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-page-testing.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 
 (() => {
 "use strict";
@@ -9419,7 +9421,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-test-api.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -9686,7 +9688,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-test-assertions.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -10339,7 +10341,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-test-compile.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -10596,7 +10598,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-test-example.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -10829,7 +10831,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-test-overview.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -11184,7 +11186,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-page-why.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -11927,7 +11929,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-copy-btn.csk ──
-/* Built with Chasket v0.2.1 — https://chasket.dev */
+/* Built with Chasket v0.2.2 — https://chasket.dev */
 (() => {
 "use strict";
 

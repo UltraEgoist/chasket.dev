@@ -6,7 +6,7 @@
 <script>
   fn tr(k: string) { return window.__t(k) }
 
-  state code_configBasic: string = "{\n  &quot;src&quot;: &quot;src&quot;,\n  &quot;outdir&quot;: &quot;dist&quot;,\n  &quot;target&quot;: &quot;es2020&quot;,\n  &quot;bundle&quot;: true,\n  &quot;shadow&quot;: true,\n  &quot;sourcemap&quot;: true,\n  &quot;minify&quot;: true\n}"
+  state code_configBasic: string = "{\n  &quot;src&quot;: &quot;src&quot;,\n  &quot;outdir&quot;: &quot;dist&quot;,\n  &quot;target&quot;: &quot;es2020&quot;,\n  &quot;bundle&quot;: true,\n  &quot;shadow&quot;: &quot;open&quot;,\n  &quot;sourcemap&quot;: true,\n  &quot;minify&quot;: true\n}"
 </script>
 
 <template>
@@ -45,7 +45,7 @@
           <div class="property">
             <h4><code>shadow</code></h4>
             <p>{{ tr('apiContent.config.shadowDesc') }}</p>
-            <pre><code>"shadow": true</code></pre>
+            <pre><code>"shadow": "open"</code></pre>
           </div>
 
           <div class="property">

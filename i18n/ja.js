@@ -341,7 +341,7 @@ window.__i18n_register('ja', {
       minifyDesc: '本番ビルド時にコードを圧縮するか。',
       outdirDesc: 'ビルド出力の保存先ディレクトリ。デフォルトは ',
       properties: '設定プロパティ',
-      shadowDesc: 'デフォルトで Shadow DOM を使用するか。 true または false。個別コンポーネントで上書き可能。',
+      shadowDesc: 'デフォルトの Shadow DOM モード。"open"、"closed"、"none" のいずれか。個別コンポーネントで上書き可能。',
       sourcemapDesc: 'デバッグ用のソースマップを生成するか。',
       srcDesc: 'ソースファイルが格納されるディレクトリパス。デフォルトは ',
       targetDesc: 'コンパイル対象の JavaScript バージョン。 ',
@@ -759,7 +759,7 @@ window.__i18n_register('ja', {
         },
         featuresLabel: '特徴',
         lightDOM: 'Light DOM（shadow: none）',
-        shadowDOM: 'Shadow DOM（shadow: true）',
+        shadowDOM: 'Shadow DOM（shadow: open）',
         title: 'スコーピング',
       },
       styleBlock: {

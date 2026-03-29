@@ -341,7 +341,7 @@ window.__i18n_register('en', {
       minifyDesc: 'Whether to compress code during production build.',
       outdirDesc: 'Directory where build output is saved. Default is ',
       properties: 'Configuration Properties',
-      shadowDesc: 'Whether to use Shadow DOM by default. true or false. Can be overridden per component.',
+      shadowDesc: 'Default Shadow DOM mode. "open", "closed", or "none". Can be overridden per component.',
       sourcemapDesc: 'Whether to generate source maps for debugging.',
       srcDesc: 'Directory path where source files are stored. Default is ',
       targetDesc: 'Target JavaScript version for compilation. Choose from ',
@@ -759,7 +759,7 @@ window.__i18n_register('en', {
         },
         featuresLabel: 'Features',
         lightDOM: 'Light DOM (shadow: none)',
-        shadowDOM: 'Shadow DOM (shadow: true)',
+        shadowDOM: 'Shadow DOM (shadow: open)',
         title: 'Scoping',
       },
       styleBlock: {

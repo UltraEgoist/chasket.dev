@@ -4,7 +4,7 @@
 </meta>
 
 <script>
-  state code_fileStructure: string = "&lt;meta&gt;\n  name: component-name\n  shadow: true\n&lt;/meta&gt;\n\n&lt;script&gt;\n  state count: number = 0\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;/template&gt;\n\n&lt;style&gt;\n  p { color: white; }\n&lt;/style&gt;"
+  state code_fileStructure: string = "&lt;meta&gt;\n  name: component-name\n  shadow: open\n&lt;/meta&gt;\n\n&lt;script&gt;\n  state count: number = 0\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;/template&gt;\n\n&lt;style&gt;\n  p { color: white; }\n&lt;/style&gt;"
 
   fn tr(k: string) { return window.__t(k) }
 </script>
@@ -44,7 +44,8 @@
       <div class="property">
         <h4><code>shadow</code></h4>
         <p>{{ tr('guideContent.fileStructure.metaBlock.shadow.desc') }}</p>
-        <pre><code>shadow: true    &lt;!-- Shadow DOM --&gt;
+        <pre><code>shadow: open    &lt;!-- Shadow DOM (open) --&gt;
+shadow: closed  &lt;!-- Shadow DOM (closed) --&gt;
 shadow: none    &lt;!-- Light DOM with scoping --&gt;</code></pre>
         <p class="note-text"><strong>{{ tr('guideContent.fileStructure.metaBlock.shadow.hint') }}:</strong> {{ tr('guideContent.fileStructure.metaBlock.shadow.hintText') }}</p>
       </div>

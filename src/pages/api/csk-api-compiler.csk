@@ -8,7 +8,7 @@
 
   state code_compileBasic: string = "import { compile } from '@chasket/chasket'\n\nconst source = `\n&lt;meta&gt;\n  name: my-component\n&lt;/meta&gt;\n&lt;script&gt;\n  state count: number = 0\n&lt;/script&gt;\n&lt;template&gt;\n  &lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;/template&gt;\n`\n\nconst result = compile(source, 'my-component.csk', {\n  target: 'es2020'\n})\n\nif (result.success) {\n  console.log(result.output)\n}"
 
-  state code_compileOptions: string = "const options = {\n  target: 'es2020',           // &quot;es2020&quot; | &quot;es2021&quot; | &quot;esnext&quot;\n  bundle: true,               // embed CSS in JS\n  shadow: false,              // Shadow DOM or Light DOM\n  sourcemap: true,            // generate source maps\n  minify: false,              // enable in production\n  imports: {                  // external import mapping\n    'lodash': './libs/lodash.js'\n  }\n}"
+  state code_compileOptions: string = "const options = {\n  target: 'es2020',           // &quot;es2020&quot; | &quot;es2021&quot; | &quot;esnext&quot;\n  bundle: true,               // embed CSS in JS\n  shadow: 'open',             // &quot;open&quot; | &quot;closed&quot; | &quot;none&quot;\n  sourcemap: true,            // generate source maps\n  minify: false,              // enable in production\n  imports: {                  // external import mapping\n    'lodash': './libs/lodash.js'\n  }\n}"
 
   state code_splitBlocks: string = "import { splitBlocks } from '@chasket/chasket'\n\nconst source = `...csk file content...`\nconst blocks = splitBlocks(source)\n\nconsole.log(blocks.meta)      // meta block\nconsole.log(blocks.script)    // script block\nconsole.log(blocks.template)  // template block\nconsole.log(blocks.style)     // style block"
 
