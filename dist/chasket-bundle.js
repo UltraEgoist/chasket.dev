@@ -1,8 +1,9 @@
-// Chasket Bundle - 2026-03-29T05:04:46.908Z
+// Chasket Bundle - 2026-03-29T05:17:28.705Z
 // 33 component(s)
 
-if (typeof window !== 'undefined') window.__chasketClasses = window.__chasketClasses || {};
-
+// Deferred registration queue: all classes are defined first,
+// then all customElements.define() calls happen at the end.
+// This ensures nested components work regardless of file order.
 const __chasketDefineQueue = [];
 
 // ── csk-footer.csk ──
@@ -466,6 +467,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-shell.csk ──
+
 (() => {
 "use strict";
 
@@ -686,13 +688,13 @@ class CskApiCli extends HTMLElement {
   #_code_chasketInit = "chasket init my-project\ncd my-project\nnpm install\nchasket dev";
   get #code_chasketInit() { return this.#_code_chasketInit; }
   set #code_chasketInit(v) { this.#_code_chasketInit = v; this.#scheduleUpdate(); }
-  #_code_chasketDev = "chasket dev                    # port 5173 (default)\nchasket dev --port 3000      # custom port\nchasket dev --no-hmr         # disable HMR";
+  #_code_chasketDev = "chasket dev                    <span class=cm># port 5173 (default)</span>\nchasket dev --port <span class=n>3000</span>      <span class=cm># custom port</span>\nchasket dev --no-hmr         <span class=cm># disable HMR</span>";
   get #code_chasketDev() { return this.#_code_chasketDev; }
   set #code_chasketDev(v) { this.#_code_chasketDev = v; this.#scheduleUpdate(); }
-  #_code_chasketBuild = "chasket build                  # src/ → dist/\nchasket build src/pages       # specify directory";
+  #_code_chasketBuild = "chasket build                  <span class=cm># src/ → dist/</span>\nchasket build src/pages       <span class=cm># specify directory</span>";
   get #code_chasketBuild() { return this.#_code_chasketBuild; }
   set #code_chasketBuild(v) { this.#_code_chasketBuild = v; this.#scheduleUpdate(); }
-  #_code_chasketCheck = "chasket check                  # report type errors (no build)\nchasket check src/pages";
+  #_code_chasketCheck = "chasket check                  <span class=cm># report type errors (no build)</span>\nchasket check src/pages";
   get #code_chasketCheck() { return this.#_code_chasketCheck; }
   set #code_chasketCheck(v) { this.#_code_chasketCheck = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -1306,16 +1308,16 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskApiCompiler extends HTMLElement {
-  #_code_compileBasic = "import { compile } from '@chasket/chasket'\n\nconst source = `\n&lt;meta&gt;\n  name: my-component\n&lt;/meta&gt;\n&lt;script&gt;\n  state count: number = 0\n&lt;/script&gt;\n&lt;template&gt;\n  &lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;/template&gt;\n`\n\nconst result = compile(source, 'my-component.csk', {\n  target: 'es2020'\n})\n\nif (result.success) {\n  console.log(result.output)\n}";
+  #_code_compileBasic = "<span class=k>import</span> { compile } <span class=k>from</span> <span class=s>'@chasket/chasket'</span>\n\n<span class=k>const</span> source = <span class=s>`\n&lt;meta&gt;\n  name: my-component\n&lt;/meta&gt;\n&lt;script&gt;\n  state count: number = 0\n&lt;/script&gt;\n&lt;template&gt;\n  &lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;/template&gt;\n`</span>\n\n<span class=k>const</span> result = <span class=f>compile</span>(source, <span class=s>'my-component.csk'</span>, {\n  target: <span class=s>'es2020'</span>\n})\n\n<span class=k>if</span> (result.success) {\n  console.<span class=f>log</span>(result.output)\n}";
   get #code_compileBasic() { return this.#_code_compileBasic; }
   set #code_compileBasic(v) { this.#_code_compileBasic = v; this.#scheduleUpdate(); }
-  #_code_compileOptions = "const options = {\n  target: 'es2020',           // &quot;es2020&quot; | &quot;es2021&quot; | &quot;esnext&quot;\n  bundle: true,               // embed CSS in JS\n  shadow: false,              // Shadow DOM or Light DOM\n  sourcemap: true,            // generate source maps\n  minify: false,              // enable in production\n  imports: {                  // external import mapping\n    'lodash': './libs/lodash.js'\n  }\n}";
+  #_code_compileOptions = "<span class=k>const</span> options = {\n  target: <span class=s>'es2020'</span>,           <span class=cm>// &quot;es2020&quot; | &quot;es2021&quot; | &quot;esnext&quot;</span>\n  bundle: <span class=n>true</span>,               <span class=cm>// embed CSS in JS</span>\n  shadow: <span class=n>false</span>,              <span class=cm>// Shadow DOM or </span>Light DOM\n  sourcemap: <span class=n>true</span>,            <span class=cm>// generate source maps</span>\n  minify: <span class=n>false</span>,              <span class=cm>// enable in production</span>\n  imports: {                  <span class=cm>// external import mapping</span>\n    <span class=s>'lodash'</span>: <span class=s>'./libs/lodash.js'</span>\n  }\n}";
   get #code_compileOptions() { return this.#_code_compileOptions; }
   set #code_compileOptions(v) { this.#_code_compileOptions = v; this.#scheduleUpdate(); }
-  #_code_splitBlocks = "import { splitBlocks } from '@chasket/chasket'\n\nconst source = `...csk file content...`\nconst blocks = splitBlocks(source)\n\nconsole.log(blocks.meta)      // meta block\nconsole.log(blocks.script)    // script block\nconsole.log(blocks.template)  // template block\nconsole.log(blocks.style)     // style block";
+  #_code_splitBlocks = "<span class=k>import</span> { splitBlocks } <span class=k>from</span> <span class=s>'@chasket/chasket'</span>\n\n<span class=k>const</span> source = <span class=s>`...csk file content...`</span>\n<span class=k>const</span> blocks = <span class=f>splitBlocks</span>(source)\n\nconsole.<span class=f>log</span>(blocks.meta)      <span class=cm>// meta block</span>\nconsole.<span class=f>log</span>(blocks.script)    <span class=cm>// script block</span>\nconsole.<span class=f>log</span>(blocks.template)  <span class=cm>// template block</span>\nconsole.<span class=f>log</span>(blocks.style)     <span class=cm>// style block</span>";
   get #code_splitBlocks() { return this.#_code_splitBlocks; }
   set #code_splitBlocks(v) { this.#_code_splitBlocks = v; this.#scheduleUpdate(); }
-  #_code_parseTemplate = "import { parseTemplateNodes } from '@chasket/chasket'\n\nconst html = `\n  &lt;div&gt;\n    &lt;p&gt;{{ name }}&lt;/p&gt;\n    &lt;button @click=&quot;handleClick&quot;&gt;Click&lt;/button&gt;\n  &lt;/div&gt;\n`\n\nconst ast = parseTemplateNodes(html)\nconsole.log(ast)  // node syntax tree";
+  #_code_parseTemplate = "<span class=k>import</span> { parseTemplateNodes } <span class=k>from</span> <span class=s>'@chasket/chasket'</span>\n\n<span class=k>const</span> html = <span class=s>`\n  &lt;div&gt;\n    &lt;p&gt;{{ name }}&lt;/p&gt;\n    &lt;button @click=&quot;handleClick&quot;&gt;Click&lt;/button&gt;\n  &lt;/div&gt;\n`</span>\n\n<span class=k>const</span> ast = <span class=f>parseTemplateNodes</span>(html)\nconsole.<span class=f>log</span>(ast)  <span class=cm>// node syntax tree</span>";
   get #code_parseTemplate() { return this.#_code_parseTemplate; }
   set #code_parseTemplate(v) { this.#_code_parseTemplate = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -1364,7 +1366,7 @@ class CskApiCompiler extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.compiler.signature'))}
             </h4>
-            <pre><code>compile(source: string, filename: string, options: CompileOptions): CompileResult</code></pre>
+            <pre><code><span class=f>compile</span>(source: <span class=tp>string</span>, filename: <span class=tp>string</span>, options: CompileOptions): CompileResult</code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1408,7 +1410,7 @@ class CskApiCompiler extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.compiler.signature'))}
             </h4>
-            <pre><code>splitBlocks(source: string): { meta: string, script: string, template: string, style: string }</code></pre>
+            <pre><code><span class=f>splitBlocks</span>(source: <span class=tp>string</span>): { meta: <span class=tp>string</span>, script: <span class=tp>string</span>, template: <span class=tp>string</span>, style: <span class=tp>string</span> }</code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1430,7 +1432,7 @@ class CskApiCompiler extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.compiler.signature'))}
             </h4>
-            <pre><code>parseTemplateNodes(html: string): ASTNode[]</code></pre>
+            <pre><code><span class=f>parseTemplateNodes</span>(html: <span class=tp>string</span>): ASTNode[]</code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1480,7 +1482,7 @@ class CskApiCompiler extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.compiler.signature'))}
             </h4>
-            <pre><code>compile(source: string, filename: string, options: CompileOptions): CompileResult</code></pre>
+            <pre><code><span class=f>compile</span>(source: <span class=tp>string</span>, filename: <span class=tp>string</span>, options: CompileOptions): CompileResult</code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1524,7 +1526,7 @@ class CskApiCompiler extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.compiler.signature'))}
             </h4>
-            <pre><code>splitBlocks(source: string): { meta: string, script: string, template: string, style: string }</code></pre>
+            <pre><code><span class=f>splitBlocks</span>(source: <span class=tp>string</span>): { meta: <span class=tp>string</span>, script: <span class=tp>string</span>, template: <span class=tp>string</span>, style: <span class=tp>string</span> }</code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1546,7 +1548,7 @@ class CskApiCompiler extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.compiler.signature'))}
             </h4>
-            <pre><code>parseTemplateNodes(html: string): ASTNode[]</code></pre>
+            <pre><code><span class=f>parseTemplateNodes</span>(html: <span class=tp>string</span>): ASTNode[]</code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1693,7 +1695,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskApiConfig extends HTMLElement {
-  #_code_configBasic = "{\n  &quot;src&quot;: &quot;src&quot;,\n  &quot;outdir&quot;: &quot;dist&quot;,\n  &quot;target&quot;: &quot;es2020&quot;,\n  &quot;bundle&quot;: true,\n  &quot;shadow&quot;: true,\n  &quot;sourcemap&quot;: true,\n  &quot;minify&quot;: true\n}";
+  #_code_configBasic = "{\n  <span class=s>&quot;src&quot;</span>: <span class=s>&quot;src&quot;</span>,\n  <span class=s>&quot;outdir&quot;</span>: <span class=s>&quot;dist&quot;</span>,\n  <span class=s>&quot;target&quot;</span>: <span class=s>&quot;es2020&quot;</span>,\n  <span class=s>&quot;bundle&quot;</span>: <span class=n>true</span>,\n  <span class=s>&quot;shadow&quot;</span>: <span class=n>true</span>,\n  <span class=s>&quot;sourcemap&quot;</span>: <span class=n>true</span>,\n  <span class=s>&quot;minify&quot;</span>: <span class=n>true</span>\n}";
   get #code_configBasic() { return this.#_code_configBasic; }
   set #code_configBasic(v) { this.#_code_configBasic = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -1741,7 +1743,7 @@ class CskApiConfig extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('apiContent.config.srcDesc'))}
             </p>
-            <pre><code>"src": "src"</code></pre>
+            <pre><code><span class=s>"src"</span>: <span class=s>"src"</span></code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1749,7 +1751,7 @@ class CskApiConfig extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('apiContent.config.outdirDesc'))}
             </p>
-            <pre><code>"outdir": "dist"</code></pre>
+            <pre><code><span class=s>"outdir"</span>: <span class=s>"dist"</span></code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1757,7 +1759,7 @@ class CskApiConfig extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('apiContent.config.targetDesc'))}
             </p>
-            <pre><code>"target": "es2020"</code></pre>
+            <pre><code><span class=s>"target"</span>: <span class=s>"es2020"</span></code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1765,7 +1767,7 @@ class CskApiConfig extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('apiContent.config.bundleDesc'))}
             </p>
-            <pre><code>"bundle": true</code></pre>
+            <pre><code><span class=s>"bundle"</span>: <span class=n>true</span></code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1773,7 +1775,7 @@ class CskApiConfig extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('apiContent.config.shadowDesc'))}
             </p>
-            <pre><code>"shadow": true</code></pre>
+            <pre><code><span class=s>"shadow"</span>: <span class=n>true</span></code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1781,7 +1783,7 @@ class CskApiConfig extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('apiContent.config.sourcemapDesc'))}
             </p>
-            <pre><code>"sourcemap": true</code></pre>
+            <pre><code><span class=s>"sourcemap"</span>: <span class=n>true</span></code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1789,7 +1791,7 @@ class CskApiConfig extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('apiContent.config.minifyDesc'))}
             </p>
-            <pre><code>"minify": true</code></pre>
+            <pre><code><span class=s>"minify"</span>: <span class=n>true</span></code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1797,9 +1799,9 @@ class CskApiConfig extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('apiContent.config.importsDesc'))}
             </p>
-            <pre><code>"imports": {
-  "@": "./src",
-  "utils": "./src/utils"
+            <pre><code><span class=s>"imports"</span>: {
+  <span class=s>"@"</span>: <span class=s>"./src"</span>,
+  <span class=s>"utils"</span>: <span class=s>"./src/utils"</span>
 }</code></pre>
           </div>
           <div class="property">
@@ -1836,7 +1838,7 @@ class CskApiConfig extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('apiContent.config.srcDesc'))}
             </p>
-            <pre><code>"src": "src"</code></pre>
+            <pre><code><span class=s>"src"</span>: <span class=s>"src"</span></code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1844,7 +1846,7 @@ class CskApiConfig extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('apiContent.config.outdirDesc'))}
             </p>
-            <pre><code>"outdir": "dist"</code></pre>
+            <pre><code><span class=s>"outdir"</span>: <span class=s>"dist"</span></code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1852,7 +1854,7 @@ class CskApiConfig extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('apiContent.config.targetDesc'))}
             </p>
-            <pre><code>"target": "es2020"</code></pre>
+            <pre><code><span class=s>"target"</span>: <span class=s>"es2020"</span></code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1860,7 +1862,7 @@ class CskApiConfig extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('apiContent.config.bundleDesc'))}
             </p>
-            <pre><code>"bundle": true</code></pre>
+            <pre><code><span class=s>"bundle"</span>: <span class=n>true</span></code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1868,7 +1870,7 @@ class CskApiConfig extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('apiContent.config.shadowDesc'))}
             </p>
-            <pre><code>"shadow": true</code></pre>
+            <pre><code><span class=s>"shadow"</span>: <span class=n>true</span></code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1876,7 +1878,7 @@ class CskApiConfig extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('apiContent.config.sourcemapDesc'))}
             </p>
-            <pre><code>"sourcemap": true</code></pre>
+            <pre><code><span class=s>"sourcemap"</span>: <span class=n>true</span></code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1884,7 +1886,7 @@ class CskApiConfig extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('apiContent.config.minifyDesc'))}
             </p>
-            <pre><code>"minify": true</code></pre>
+            <pre><code><span class=s>"minify"</span>: <span class=n>true</span></code></pre>
           </div>
           <div class="property">
             <h4>
@@ -1892,9 +1894,9 @@ class CskApiConfig extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('apiContent.config.importsDesc'))}
             </p>
-            <pre><code>"imports": {
-  "@": "./src",
-  "utils": "./src/utils"
+            <pre><code><span class=s>"imports"</span>: {
+  <span class=s>"@"</span>: <span class=s>"./src"</span>,
+  <span class=s>"utils"</span>: <span class=s>"./src/utils"</span>
 }</code></pre>
           </div>
           <div class="property">
@@ -2029,34 +2031,34 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskApiDiagnostics extends HTMLElement {
-  #_code_diagnostic_e0001 = "&lt;!-- csk-page-api.csk --&gt;\n&lt;meta&gt;\n  name: my-component\n&lt;/meta&gt;\n&lt;script&gt;\n  state count: number = 0\n&lt;/script&gt;\n&lt;!-- no template block --&gt;\n\n&lt;!-- fix: add template block --&gt;\n&lt;template&gt;\n  &lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;/template&gt;";
+  #_code_diagnostic_e0001 = "<span class=cm>&lt;!-- csk-page-api.csk --&gt;</span>\n<span class=t>&lt;meta</span><span class=t>&gt;</span>\n  name: my-component\n<span class=t>&lt;/meta</span><span class=t>&gt;</span>\n<span class=t>&lt;script</span><span class=t>&gt;</span>\n  <span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>\n<span class=t>&lt;/script</span><span class=t>&gt;</span>\n<span class=cm>&lt;!-- no template block --&gt;</span>\n\n<span class=cm>&lt;!-- fix: add template block --&gt;</span>\n<span class=t>&lt;template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ count }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=t>&lt;/template</span><span class=t>&gt;</span>";
   get #code_diagnostic_e0001() { return this.#_code_diagnostic_e0001; }
   set #code_diagnostic_e0001(v) { this.#_code_diagnostic_e0001 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_e0002 = "&lt;!-- invalid: no hyphens --&gt;\n&lt;meta&gt;\n  name: MyComponent\n&lt;/meta&gt;\n\n&lt;!-- fix: use kebab-case --&gt;\n&lt;meta&gt;\n  name: my-component\n&lt;/meta&gt;";
+  #_code_diagnostic_e0002 = "<span class=cm>&lt;!-- invalid: no hyphens --&gt;</span>\n<span class=t>&lt;meta</span><span class=t>&gt;</span>\n  name: MyComponent\n<span class=t>&lt;/meta</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- fix: use kebab-case --&gt;</span>\n<span class=t>&lt;meta</span><span class=t>&gt;</span>\n  name: my-component\n<span class=t>&lt;/meta</span><span class=t>&gt;</span>";
   get #code_diagnostic_e0002() { return this.#_code_diagnostic_e0002; }
   set #code_diagnostic_e0002(v) { this.#_code_diagnostic_e0002 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_e0003 = "state count: number = 0\nstate result: string = count + 10  // error: assigning number+number to string\n\n// fix:\nstate result: number = count + 10\n// or\nstate result: string = (count + 10).toString()";
+  #_code_diagnostic_e0003 = "<span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>\n<span class=k>state</span> result: <span class=tp>string</span> = count + <span class=n>10</span>  <span class=cm>// error: assigning number+number to string</span>\n\n<span class=cm>// fix:</span>\n<span class=k>state</span> result: <span class=tp>number</span> = count + <span class=n>10</span>\n<span class=cm>// or</span>\n<span class=k>state</span> result: <span class=tp>string</span> = (count + <span class=n>10</span>).<span class=f>toString</span>()";
   get #code_diagnostic_e0003() { return this.#_code_diagnostic_e0003; }
   set #code_diagnostic_e0003(v) { this.#_code_diagnostic_e0003 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_w0101 = "state count: number = 0   // warning: unused\nstate name: string = 'John'\n\n&lt;template&gt;\n  &lt;p&gt;{{ name }}&lt;/p&gt;\n&lt;/template&gt;\n\n// fix: use or remove count";
+  #_code_diagnostic_w0101 = "<span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>   <span class=cm>// warning: unused</span>\n<span class=k>state</span> name: <span class=tp>string</span> = <span class=s>'John'</span>\n\n<span class=t>&lt;template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ name }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=t>&lt;/template</span><span class=t>&gt;</span>\n\n<span class=cm>// fix: use or remove count</span>";
   get #code_diagnostic_w0101() { return this.#_code_diagnostic_w0101; }
   set #code_diagnostic_w0101(v) { this.#_code_diagnostic_w0101 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_w0201 = "&lt;!-- dangerous: inserting user input as HTML --&gt;\n&lt;div @html=\"userContent\"&gt;&lt;/div&gt;\n\n&lt;!-- safe: auto-escaped --&gt;\n&lt;div&gt;{{ userContent }}&lt;/div&gt;\n\n&lt;!-- fix: use only trusted HTML --&gt;\n&lt;div @html=\"sanitize(userContent)\"&gt;&lt;/div&gt;";
+  #_code_diagnostic_w0201 = "<span class=cm>&lt;!-- dangerous: inserting user input as HTML --&gt;</span>\n<span class=t>&lt;div</span> @html=\"userContent\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- safe: auto-escaped --&gt;</span>\n<span class=t>&lt;div</span><span class=t>&gt;</span><span class=i>{{ userContent }}</span><span class=t>&lt;/div</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- fix: use only trusted HTML --&gt;</span>\n<span class=t>&lt;div</span> @html=\"sanitize(userContent)\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>";
   get #code_diagnostic_w0201() { return this.#_code_diagnostic_w0201; }
   set #code_diagnostic_w0201(v) { this.#_code_diagnostic_w0201 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_w0202 = "&lt;!-- dangerous: dynamic URL injection --&gt;\n&lt;a :href=\"'https://' + userInput\"&gt;Link&lt;/a&gt;\n\n&lt;!-- fix: URL validation --&gt;\n&lt;a :href=\"isValidUrl(userInput) ? userInput : '#'\"&gt;Link&lt;/a&gt;";
+  #_code_diagnostic_w0202 = "<span class=cm>&lt;!-- dangerous: dynamic URL injection --&gt;</span>\n<span class=t>&lt;a</span> :href=\"'https://' + userInput\"<span class=t>&gt;</span>Link<span class=t>&lt;/a</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- fix: URL validation --&gt;</span>\n<span class=t>&lt;a</span> :href=\"isValidUrl(userInput) ? userInput : '#'\"<span class=t>&gt;</span>Link<span class=t>&lt;/a</span><span class=t>&gt;</span>";
   get #code_diagnostic_w0202() { return this.#_code_diagnostic_w0202; }
   set #code_diagnostic_w0202(v) { this.#_code_diagnostic_w0202 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_w0203 = "&lt;!-- duplicate ID warning --&gt;\n&lt;div id=\"header\"&gt;&lt;/div&gt;\n&lt;div id=\"header\"&gt;&lt;/div&gt;  &lt;!-- warning --&gt;\n\n&lt;!-- fix: use unique IDs --&gt;\n&lt;div id=\"header\"&gt;&lt;/div&gt;\n&lt;div id=\"main\"&gt;&lt;/div&gt;";
+  #_code_diagnostic_w0203 = "<span class=cm>&lt;!-- duplicate ID warning --&gt;</span>\n<span class=t>&lt;div</span> id=\"header\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>\n<span class=t>&lt;div</span> id=\"header\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>  <span class=cm>&lt;!-- warning --&gt;</span>\n\n<span class=cm>&lt;!-- fix: use unique IDs --&gt;</span>\n<span class=t>&lt;div</span> id=\"header\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>\n<span class=t>&lt;div</span> id=\"main\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>";
   get #code_diagnostic_w0203() { return this.#_code_diagnostic_w0203; }
   set #code_diagnostic_w0203(v) { this.#_code_diagnostic_w0203 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_e0004 = "// error: unknown identifier 'countr'\nfn increment() {\n  countr++   // typo\n}\n\n// fix: use declared variable\nstate count: number = 0\nfn increment() {\n  count++\n}";
+  #_code_diagnostic_e0004 = "<span class=cm>// error: unknown identifier 'countr'</span>\n<span class=k>fn</span> <span class=f>increment</span>() {\n  countr++   <span class=cm>// typo</span>\n}\n\n<span class=cm>// fix: use declared variable</span>\n<span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>\n<span class=k>fn</span> <span class=f>increment</span>() {\n  count++\n}";
   get #code_diagnostic_e0004() { return this.#_code_diagnostic_e0004; }
   set #code_diagnostic_e0004(v) { this.#_code_diagnostic_e0004 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_e0301 = "&lt;template&gt;\n  &lt;p&gt;{{ userName }}&lt;/p&gt;  &lt;!-- error: userName not defined --&gt;\n&lt;/template&gt;\n\n&lt;!-- fix: declare in script --&gt;\n&lt;script&gt;\n  state userName: string = 'Alice'\n&lt;/script&gt;\n&lt;template&gt;\n  &lt;p&gt;{{ userName }}&lt;/p&gt;\n&lt;/template&gt;";
+  #_code_diagnostic_e0301 = "<span class=t>&lt;template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ userName }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>  <span class=cm>&lt;!-- error: userName not defined --&gt;</span>\n<span class=t>&lt;/template</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- fix: declare in script --&gt;</span>\n<span class=t>&lt;script</span><span class=t>&gt;</span>\n  <span class=k>state</span> userName: <span class=tp>string</span> = <span class=s>'Alice'</span>\n<span class=t>&lt;/script</span><span class=t>&gt;</span>\n<span class=t>&lt;template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ userName }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=t>&lt;/template</span><span class=t>&gt;</span>";
   get #code_diagnostic_e0301() { return this.#_code_diagnostic_e0301; }
   set #code_diagnostic_e0301(v) { this.#_code_diagnostic_e0301 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_e0302 = "&lt;template&gt;\n  &lt;p&gt;{{ count + 'px' }}&lt;/p&gt;  &lt;!-- error: number + string --&gt;\n&lt;/template&gt;\n\n&lt;!-- fix: explicit conversion --&gt;\n&lt;template&gt;\n  &lt;p&gt;{{ count.toString() + 'px' }}&lt;/p&gt;\n&lt;/template&gt;";
+  #_code_diagnostic_e0302 = "<span class=t>&lt;template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ count + 'px' }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>  <span class=cm>&lt;!-- error: number + string --&gt;</span>\n<span class=t>&lt;/template</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- fix: explicit conversion --&gt;</span>\n<span class=t>&lt;template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ count.toString() + 'px' }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=t>&lt;/template</span><span class=t>&gt;</span>";
   get #code_diagnostic_e0302() { return this.#_code_diagnostic_e0302; }
   set #code_diagnostic_e0302(v) { this.#_code_diagnostic_e0302 = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -2572,19 +2574,19 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskApiEcosystem extends HTMLElement {
-  #_code_router = "import { createRouter } from '@chasket/chasket-router'\n\nconst router = createRouter([\n  { path: '/', component: Home },\n  { path: '/about', component: About },\n  { path: '/posts/:id', component: PostDetail }\n])\n\nrouter.push('/')      // navigate\nconst route = router.current()  // current route";
+  #_code_router = "<span class=k>import</span> { createRouter } <span class=k>from</span> <span class=s>'@chasket/chasket-router'</span>\n\n<span class=k>const</span> router = <span class=f>createRouter</span>([\n  { path: <span class=s>'/'</span>, component: Home },\n  { path: <span class=s>'/about'</span>, component: About },\n  { path: <span class=s>'/posts/:id'</span>, component: PostDetail }\n])\n\nrouter.<span class=f>push</span>(<span class=s>'/'</span>)      <span class=cm>// navigate</span>\n<span class=k>const</span> route = router.<span class=f>current</span>()  <span class=cm>// current route</span>";
   get #code_router() { return this.#_code_router; }
   set #code_router(v) { this.#_code_router = v; this.#scheduleUpdate(); }
-  #_code_store = "import { createStore } from '@chasket/chasket-store'\n\nconst store = createStore({\n  state: { count: 0 },\n  actions: {\n    increment(state) { state.count++ }\n  },\n  getters: {\n    doubled: (state) => state.count * 2\n  }\n})\n\nstore.commit('increment')\nconsole.log(store.getters.doubled)";
+  #_code_store = "<span class=k>import</span> { createStore } <span class=k>from</span> <span class=s>'@chasket/chasket-store'</span>\n\n<span class=k>const</span> store = <span class=f>createStore</span>({\n  <span class=k>state</span>: { count: <span class=n>0</span> },\n  actions: {\n    <span class=f>increment</span>(<span class=k>state</span>) { <span class=k>state</span>.count++ }\n  },\n  getters: {\n    doubled: (<span class=k>state</span>) => <span class=k>state</span>.count * <span class=n>2</span>\n  }\n})\n\nstore.<span class=f>commit</span>(<span class=s>'increment'</span>)\nconsole.<span class=f>log</span>(store.getters.doubled)";
   get #code_store() { return this.#_code_store; }
   set #code_store(v) { this.#_code_store = v; this.#scheduleUpdate(); }
-  #_code_ssr = "import { renderToString, renderPage } from '@chasket/chasket-ssr'\n\n// render component to HTML string\nconst html = await renderToString(MyComponent, { prop1: 'value' })\n\n// render full page (with hydration)\nconst pageHtml = await renderPage(App, options)";
+  #_code_ssr = "<span class=k>import</span> { renderToString, renderPage } <span class=k>from</span> <span class=s>'@chasket/chasket-ssr'</span>\n\n<span class=cm>// render component to HTM</span>L string\n<span class=k>const</span> html = <span class=k>await</span> <span class=f>renderToString</span>(MyComponent, { prop1: <span class=s>'value'</span> })\n\n<span class=cm>// render full page (with hydration)</span>\n<span class=k>const</span> pageHtml = <span class=k>await</span> <span class=f>renderPage</span>(App, options)";
   get #code_ssr() { return this.#_code_ssr; }
   set #code_ssr(v) { this.#_code_ssr = v; this.#scheduleUpdate(); }
-  #_code_ui_components = "&lt;fl-button variant=\"primary\" @click=\"handleClick\"&gt;\n  Click me\n&lt;/fl-button&gt;\n\n&lt;fl-input :bind=\"username\" placeholder=\"Enter username\" /&gt;\n\n&lt;fl-card&gt;\n  &lt;fl-card-header&gt;Title&lt;/fl-card-header&gt;\n  &lt;fl-card-body&gt;Content&lt;/fl-card-body&gt;\n&lt;/fl-card&gt;\n\n&lt;fl-dialog :open=\"showDialog\" @close=\"showDialog = false\"&gt;\n  Dialog content\n&lt;/fl-dialog&gt;";
+  #_code_ui_components = "<span class=t>&lt;fl-button</span> variant=\"primary\" @click=\"handleClick\"<span class=t>&gt;</span>\n  Click me\n<span class=t>&lt;/fl-button</span><span class=t>&gt;</span>\n\n<span class=t>&lt;fl-input</span> :bind=\"username\" placeholder=\"Enter username\" <span class=t>/&gt;</span>\n\n<span class=t>&lt;fl-card</span><span class=t>&gt;</span>\n  <span class=t>&lt;fl-card-header</span><span class=t>&gt;</span>Title<span class=t>&lt;/fl-card-header</span><span class=t>&gt;</span>\n  <span class=t>&lt;fl-card-body</span><span class=t>&gt;</span>Content<span class=t>&lt;/fl-card-body</span><span class=t>&gt;</span>\n<span class=t>&lt;/fl-card</span><span class=t>&gt;</span>\n\n<span class=t>&lt;fl-dialog</span> :open=\"showDialog\" @close=\"showDialog = false\"<span class=t>&gt;</span>\n  Dialog content\n<span class=t>&lt;/fl-dialog</span><span class=t>&gt;</span>";
   get #code_ui_components() { return this.#_code_ui_components; }
   set #code_ui_components(v) { this.#_code_ui_components = v; this.#scheduleUpdate(); }
-  #_code_compilation_output = "// class generated by Chasket\nexport default class MyComponent extends HTMLElement {\n  #state = {}\n  #render() { /* render template */ }\n  #update() { /* detect changes */ }\n  #patch() { /* update DOM */ }\n  \n  get count() { return this.#state.count }\n  set count(value) {\n    this.#state.count = value\n    this.#scheduleUpdate()\n  }\n}";
+  #_code_compilation_output = "<span class=cm>// class generated by Chasket</span>\n<span class=k>export</span> <span class=k>default</span> <span class=k>class</span> MyComponent <span class=k>extends</span> HTMLElement {\n  <span class=cm>#state = {}</span>\n  <span class=cm>#render() { /* render template */ }</span>\n  <span class=cm>#update() { /* detect changes */ }</span>\n  <span class=cm>#patch() { /* update DOM */ }</span>\n  \n  get <span class=f>count</span>() { <span class=k>return</span> this.<span class=cm>#state.count }</span>\n  set <span class=f>count</span>(value) {\n    this.<span class=cm>#state.count = value</span>\n    this.<span class=cm>#scheduleUpdate()</span>\n  }\n}";
   get #code_compilation_output() { return this.#_code_compilation_output; }
   set #code_compilation_output(v) { this.#_code_compilation_output = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -3420,7 +3422,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskApiTypes extends HTMLElement {
-  #_code_typeExamples = "// primitive types\nstate name: string = 'John'\nstate age: number = 30\nstate active: boolean = true\nstate nothing: void\n\n// array types\nstate names: string[] = ['Alice', 'Bob']\nstate matrix: number[][] = [[1, 2], [3, 4]]\n\n// object type\nstate user: { name: string, age?: number } = { name: 'John' }\n\n// union type\nstate status: 'idle' | 'loading' | 'done' = 'idle'\n\n// literal type\nstate priority: 'low' | 'medium' | 'high' = 'medium'\n\n// generics (limited support)\nstate items: Array&lt;string&gt; = []\nstate map: Map&lt;string, number&gt; = new Map()";
+  #_code_typeExamples = "<span class=cm>// primitive types</span>\n<span class=k>state</span> name: <span class=tp>string</span> = <span class=s>'John'</span>\n<span class=k>state</span> age: <span class=tp>number</span> = <span class=n>30</span>\n<span class=k>state</span> active: <span class=tp>boolean</span> = <span class=n>true</span>\n<span class=k>state</span> nothing: <span class=tp>void</span>\n\n<span class=cm>// array types</span>\n<span class=k>state</span> names: <span class=tp>string</span>[] = [<span class=s>'Alice'</span>, <span class=s>'Bob'</span>]\n<span class=k>state</span> matrix: <span class=tp>number</span>[][] = [[<span class=n>1</span>, <span class=n>2</span>], [<span class=n>3</span>, <span class=n>4</span>]]\n\n<span class=cm>// object type</span>\n<span class=k>state</span> user: { name: <span class=tp>string</span>, age?: <span class=tp>number</span> } = { name: <span class=s>'John'</span> }\n\n<span class=cm>// union type</span>\n<span class=k>state</span> status: <span class=s>'idle'</span> | <span class=s>'loading'</span> | <span class=s>'done'</span> = <span class=s>'idle'</span>\n\n<span class=cm>// literal type</span>\n<span class=k>state</span> priority: <span class=s>'low'</span> | <span class=s>'medium'</span> | <span class=s>'high'</span> = <span class=s>'medium'</span>\n\n<span class=cm>// generics (limited support)</span>\n<span class=k>state</span> items: Array<span class=t>&lt;string</span><span class=t>&gt;</span> = []\n<span class=k>state</span> map: Map&lt;string, number&gt; = <span class=k>new</span> <span class=f>Map</span>()";
   get #code_typeExamples() { return this.#_code_typeExamples; }
   set #code_typeExamples(v) { this.#_code_typeExamples = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -3670,6 +3672,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-page-api.csk ──
+
 (() => {
 "use strict";
 
@@ -4016,10 +4019,10 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskGuideCommunication extends HTMLElement {
-  #_code_propsEmit = "// Parent.csk\n&lt;Counter :initial=\"5\" @change=\"handleCountChange\" /&gt;\n\n// Counter.csk\nprop initial: number = 0\nstate count: number = initial\nemit change: { value: number }\nfn increment() {\n  count = count + 1\n  change({ value: count })\n}";
+  #_code_propsEmit = "<span class=cm>// Parent.csk</span>\n<span class=t>&lt;Counter</span> :initial=\"5\" @change=\"handleCountChange\" <span class=t>/&gt;</span>\n\n<span class=cm>// Counter.csk</span>\n<span class=k>prop</span> initial: <span class=tp>number</span> = <span class=n>0</span>\n<span class=k>state</span> count: <span class=tp>number</span> = initial\n<span class=k>emit</span> change: { value: <span class=tp>number</span> }\n<span class=k>fn</span> <span class=f>increment</span>() {\n  count = count + <span class=n>1</span>\n  <span class=f>change</span>({ value: count })\n}";
   get #code_propsEmit() { return this.#_code_propsEmit; }
   set #code_propsEmit(v) { this.#_code_propsEmit = v; this.#scheduleUpdate(); }
-  #_code_provideConsumeEx = "// App.csk\nprovide theme: string = 'dark'\n&lt;Layout /&gt;\n\n// Layout.csk\nconsume theme: string\nfn toggleTheme() {\n  theme = theme === 'dark' ? 'light' : 'dark'\n}";
+  #_code_provideConsumeEx = "<span class=cm>// App.csk</span>\n<span class=k>provide</span> theme: <span class=tp>string</span> = <span class=s>'dark'</span>\n<span class=t>&lt;Layout</span> <span class=t>/&gt;</span>\n\n<span class=cm>// </span>Layout.csk\n<span class=k>consume</span> theme: <span class=tp>string</span>\n<span class=k>fn</span> <span class=f>toggleTheme</span>() {\n  theme = theme === <span class=s>'dark'</span> ? <span class=s>'light'</span> : <span class=s>'dark'</span>\n}";
   get #code_provideConsumeEx() { return this.#_code_provideConsumeEx; }
   set #code_provideConsumeEx(v) { this.#_code_provideConsumeEx = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -4237,7 +4240,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskGuideFileStructure extends HTMLElement {
-  #_code_fileStructure = "&lt;meta&gt;\n  name: component-name\n  shadow: true\n&lt;/meta&gt;\n\n&lt;script&gt;\n  state count: number = 0\n&lt;/script&gt;\n\n&lt;template&gt;\n  &lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;/template&gt;\n\n&lt;style&gt;\n  p { color: white; }\n&lt;/style&gt;";
+  #_code_fileStructure = "<span class=t>&lt;meta</span><span class=t>&gt;</span>\n  name: component-name\n  shadow: <span class=n>true</span>\n<span class=t>&lt;/meta</span><span class=t>&gt;</span>\n\n<span class=t>&lt;script</span><span class=t>&gt;</span>\n  <span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>\n<span class=t>&lt;/script</span><span class=t>&gt;</span>\n\n<span class=t>&lt;template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ count }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=t>&lt;/template</span><span class=t>&gt;</span>\n\n<span class=t>&lt;style</span><span class=t>&gt;</span>\n  p { color: white; }\n<span class=t>&lt;/style</span><span class=t>&gt;</span>";
   get #code_fileStructure() { return this.#_code_fileStructure; }
   set #code_fileStructure(v) { this.#_code_fileStructure = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -4311,8 +4314,8 @@ class CskGuideFileStructure extends HTMLElement {
             <p>
               ${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.desc'))}
             </p>
-            <pre><code>shadow: true    &lt;!-- Shadow DOM --&gt;
-shadow: none    &lt;!-- Light DOM with scoping --&gt;</code></pre>
+            <pre><code>shadow: <span class=n>true</span>    <span class=cm>&lt;!-- Shadow DOM --&gt;</span>
+shadow: none    <span class=cm>&lt;!-- Light DOM with scoping --&gt;</span></code></pre>
             <p class="note-text"><strong>${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.hint'))}:</strong>${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.hintText'))}</p>
           </div>
           <div class="property">
@@ -4321,7 +4324,7 @@ shadow: none    &lt;!-- Light DOM with scoping --&gt;</code></pre>
             <p>
               ${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.form.desc'))}
             </p>
-            <pre><code>form: true</code></pre>
+            <pre><code>form: <span class=n>true</span></code></pre>
           </div>
         </div>
       </section>
@@ -4377,8 +4380,8 @@ shadow: none    &lt;!-- Light DOM with scoping --&gt;</code></pre>
             <p>
               ${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.desc'))}
             </p>
-            <pre><code>shadow: true    &lt;!-- Shadow DOM --&gt;
-shadow: none    &lt;!-- Light DOM with scoping --&gt;</code></pre>
+            <pre><code>shadow: <span class=n>true</span>    <span class=cm>&lt;!-- Shadow DOM --&gt;</span>
+shadow: none    <span class=cm>&lt;!-- Light DOM with scoping --&gt;</span></code></pre>
             <p class="note-text"><strong>${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.hint'))}:</strong>${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.shadow.hintText'))}</p>
           </div>
           <div class="property">
@@ -4387,7 +4390,7 @@ shadow: none    &lt;!-- Light DOM with scoping --&gt;</code></pre>
             <p>
               ${this.#esc(this.#tr('guideContent.fileStructure.metaBlock.form.desc'))}
             </p>
-            <pre><code>form: true</code></pre>
+            <pre><code>form: <span class=n>true</span></code></pre>
           </div>
         </div>
       </section>
@@ -4515,37 +4518,37 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskGuideScript extends HTMLElement {
-  #_code_stateExample = "state count: number = 0\nstate name: string = 'John'\nstate items: array&lt;string&gt; = ['a', 'b']\nstate visible: boolean = true";
+  #_code_stateExample = "<span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>\n<span class=k>state</span> name: <span class=tp>string</span> = <span class=s>'John'</span>\n<span class=k>state</span> items: array<span class=t>&lt;string</span><span class=t>&gt;</span> = [<span class=s>'a'</span>, <span class=s>'b'</span>]\n<span class=k>state</span> visible: <span class=tp>boolean</span> = <span class=n>true</span>";
   get #code_stateExample() { return this.#_code_stateExample; }
   set #code_stateExample(v) { this.#_code_stateExample = v; this.#scheduleUpdate(); }
-  #_code_propExample = "prop title: string = 'Default Title'\nprop count: number\nprop items: array&lt;unknown&gt;";
+  #_code_propExample = "<span class=k>prop</span> title: <span class=tp>string</span> = <span class=s>'Default Title'</span>\n<span class=k>prop</span> count: <span class=tp>number</span>\n<span class=k>prop</span> items: array<span class=t>&lt;unknown</span><span class=t>&gt;</span>";
   get #code_propExample() { return this.#_code_propExample; }
   set #code_propExample(v) { this.#_code_propExample = v; this.#scheduleUpdate(); }
-  #_code_computedExample = "computed doubleCount: number = count * 2\ncomputed fullName: string = firstName + ' ' + lastName";
+  #_code_computedExample = "<span class=k>computed</span> doubleCount: <span class=tp>number</span> = count * <span class=n>2</span>\n<span class=k>computed</span> fullName: <span class=tp>string</span> = firstName + <span class=s>' '</span> + lastName";
   get #code_computedExample() { return this.#_code_computedExample; }
   set #code_computedExample(v) { this.#_code_computedExample = v; this.#scheduleUpdate(); }
-  #_code_fnExample = "fn increment() {\n  count = count + 1\n}\n\nfn async fetchData() {\n  const response = await fetch('/api/data')\n  return response.json()\n}";
+  #_code_fnExample = "<span class=k>fn</span> <span class=f>increment</span>() {\n  count = count + <span class=n>1</span>\n}\n\n<span class=k>fn</span> <span class=k>async</span> <span class=f>fetchData</span>() {\n  <span class=k>const</span> response = <span class=k>await</span> <span class=f>fetch</span>(<span class=s>'/api/data'</span>)\n  <span class=k>return</span> response.<span class=f>json</span>()\n}";
   get #code_fnExample() { return this.#_code_fnExample; }
   set #code_fnExample(v) { this.#_code_fnExample = v; this.#scheduleUpdate(); }
-  #_code_emitExample = "emit click: { x: number, y: number }\nemit change|prevent: { value: string }\nemit submit|stop: { data: unknown }";
+  #_code_emitExample = "<span class=k>emit</span> click: { x: <span class=tp>number</span>, y: <span class=tp>number</span> }\n<span class=k>emit</span> change|prevent: { value: <span class=tp>string</span> }\n<span class=k>emit</span> submit|stop: { data: unknown }";
   get #code_emitExample() { return this.#_code_emitExample; }
   set #code_emitExample(v) { this.#_code_emitExample = v; this.#scheduleUpdate(); }
-  #_code_watchExample = "watch count {\n  console.log('Count changed to:', count)\n}\n\nwatch [firstName, lastName] {\n  fullName = firstName + ' ' + lastName\n}";
+  #_code_watchExample = "<span class=k>watch</span> count {\n  console.<span class=f>log</span>(<span class=s>'Count changed to:'</span>, count)\n}\n\n<span class=k>watch</span> [firstName, lastName] {\n  fullName = firstName + <span class=s>' '</span> + lastName\n}";
   get #code_watchExample() { return this.#_code_watchExample; }
   set #code_watchExample(v) { this.#_code_watchExample = v; this.#scheduleUpdate(); }
-  #_code_refExample = "ref inputElement: HTMLInputElement\nref containerDiv: HTMLElement\n\nfn focus() {\n  inputElement?.focus()\n}";
+  #_code_refExample = "ref inputElement: HTMLInputElement\nref containerDiv: HTMLElement\n\n<span class=k>fn</span> <span class=f>focus</span>() {\n  inputElement?.<span class=f>focus</span>()\n}";
   get #code_refExample() { return this.#_code_refExample; }
   set #code_refExample(v) { this.#_code_refExample = v; this.#scheduleUpdate(); }
-  #_code_provideExample = "provide theme: string = 'dark'\nprovide apiUrl: string = 'https://api.example.com'";
+  #_code_provideExample = "<span class=k>provide</span> theme: <span class=tp>string</span> = <span class=s>'dark'</span>\n<span class=k>provide</span> apiUrl: <span class=tp>string</span> = <span class=s>'https://api.example.com'</span>";
   get #code_provideExample() { return this.#_code_provideExample; }
   set #code_provideExample(v) { this.#_code_provideExample = v; this.#scheduleUpdate(); }
-  #_code_consumeExample = "consume theme: string\nconsume apiUrl: string\n\nfn useApi() {\n  fetch(apiUrl + '/data')\n}";
+  #_code_consumeExample = "<span class=k>consume</span> theme: <span class=tp>string</span>\n<span class=k>consume</span> apiUrl: <span class=tp>string</span>\n\n<span class=k>fn</span> <span class=f>useApi</span>() {\n  <span class=f>fetch</span>(apiUrl + <span class=s>'/data'</span>)\n}";
   get #code_consumeExample() { return this.#_code_consumeExample; }
   set #code_consumeExample(v) { this.#_code_consumeExample = v; this.#scheduleUpdate(); }
-  #_code_typeExample = "type User = {\n  id: number\n  name: string\n  email: string\n}\n\ntype Status = 'pending' | 'success' | 'error'";
+  #_code_typeExample = "type User = {\n  id: <span class=tp>number</span>\n  name: <span class=tp>string</span>\n  email: <span class=tp>string</span>\n}\n\ntype Status = <span class=s>'pending'</span> | <span class=s>'success'</span> | <span class=s>'error'</span>";
   get #code_typeExample() { return this.#_code_typeExample; }
   set #code_typeExample(v) { this.#_code_typeExample = v; this.#scheduleUpdate(); }
-  #_code_importExample = "import { someFunction } from './utils.js'\nimport { Button } from './components/Button.csk'";
+  #_code_importExample = "<span class=k>import</span> { someFunction } <span class=k>from</span> <span class=s>'./utils.js'</span>\n<span class=k>import</span> { Button } <span class=k>from</span> <span class=s>'./components/Button.csk'</span>";
   get #code_importExample() { return this.#_code_importExample; }
   set #code_importExample(v) { this.#_code_importExample = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -4613,7 +4616,7 @@ class CskGuideScript extends HTMLElement {
             ${this.#esc(this.#tr('guideContent.script.prop.example'))}
             :
           </p>
-          <pre><code>&lt;MyComponent :title="'Hello'" :count="5" /&gt;</code></pre>
+          <pre><code><span class=t>&lt;MyComponent</span> <span class=d>:title</span>=<span class=s>"'Hello'"</span> <span class=d>:count</span>=<span class=s>"5"</span> <span class=t>/&gt;</span></code></pre>
         </div>
         <!-- computed -->
         <div id="computed" class="subsection">
@@ -4651,8 +4654,8 @@ class CskGuideScript extends HTMLElement {
             ${this.#esc(this.#tr('guideContent.script.emit.example'))}
             :
           </p>
-          <pre><code>fn handleClick(x: number, y: number) {
-  click({ x, y })
+          <pre><code><span class=k>fn</span> <span class=f>handleClick</span>(x: <span class=tp>number</span>, y: <span class=tp>number</span>) {
+  <span class=f>click</span>({ x, y })
 }</code></pre>
         </div>
         <!-- watch -->
@@ -4680,7 +4683,7 @@ class CskGuideScript extends HTMLElement {
             ${this.#esc(this.#tr('guideContent.script.ref.inTemplate'))}
             :
           </p>
-          <pre><code>&lt;input ref="inputElement" type="text" /&gt;</code></pre>
+          <pre><code><span class=t>&lt;input</span> <span class=a>ref</span>=<span class=s>"inputElement"</span> <span class=a>type</span>=<span class=s>"text"</span> <span class=t>/&gt;</span></code></pre>
         </div>
         <!-- provide/consume -->
         <div id="provide-consume" class="subsection">
@@ -4767,7 +4770,7 @@ class CskGuideScript extends HTMLElement {
             ${this.#esc(this.#tr('guideContent.script.prop.example'))}
             :
           </p>
-          <pre><code>&lt;MyComponent :title="'Hello'" :count="5" /&gt;</code></pre>
+          <pre><code><span class=t>&lt;MyComponent</span> <span class=d>:title</span>=<span class=s>"'Hello'"</span> <span class=d>:count</span>=<span class=s>"5"</span> <span class=t>/&gt;</span></code></pre>
         </div>
         <!-- computed -->
         <div id="computed" class="subsection">
@@ -4805,8 +4808,8 @@ class CskGuideScript extends HTMLElement {
             ${this.#esc(this.#tr('guideContent.script.emit.example'))}
             :
           </p>
-          <pre><code>fn handleClick(x: number, y: number) {
-  click({ x, y })
+          <pre><code><span class=k>fn</span> <span class=f>handleClick</span>(x: <span class=tp>number</span>, y: <span class=tp>number</span>) {
+  <span class=f>click</span>({ x, y })
 }</code></pre>
         </div>
         <!-- watch -->
@@ -4834,7 +4837,7 @@ class CskGuideScript extends HTMLElement {
             ${this.#esc(this.#tr('guideContent.script.ref.inTemplate'))}
             :
           </p>
-          <pre><code>&lt;input ref="inputElement" type="text" /&gt;</code></pre>
+          <pre><code><span class=t>&lt;input</span> <span class=a>ref</span>=<span class=s>"inputElement"</span> <span class=a>type</span>=<span class=s>"text"</span> <span class=t>/&gt;</span></code></pre>
         </div>
         <!-- provide/consume -->
         <div id="provide-consume" class="subsection">
@@ -4999,7 +5002,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskGuideSecurity extends HTMLElement {
-  #_code_xssExample = "&lt;!-- Safe: auto-escaped --&gt;\n&lt;p&gt;{{ userInput }}&lt;/p&gt;\n\n&lt;!-- Dangerous: allows script injection --&gt;\n&lt;div @html=\"userInput\"&gt;&lt;/div&gt;\n\n&lt;!-- Safe: URL validation --&gt;\n&lt;a :href=\"isValidUrl(link) ? link : '#'\"&gt;Link&lt;/a&gt;";
+  #_code_xssExample = "<span class=cm>&lt;!-- Safe: auto-escaped --&gt;</span>\n<span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ userInput }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- Dangerous: allows script injection --&gt;</span>\n<span class=t>&lt;div</span> @html=\"userInput\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- Safe: URL validation --&gt;</span>\n<span class=t>&lt;a</span> :href=\"isValidUrl(link) ? link : '#'\"<span class=t>&gt;</span>Link<span class=t>&lt;/a</span><span class=t>&gt;</span>";
   get #code_xssExample() { return this.#_code_xssExample; }
   set #code_xssExample(v) { this.#_code_xssExample = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -5053,12 +5056,12 @@ class CskGuideSecurity extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.security.urlValidation.desc'))}
           </p>
-          <pre><code>fn isValidUrl(url: string): boolean {
+          <pre><code><span class=k>fn</span> <span class=f>isValidUrl</span>(url: <span class=tp>string</span>): <span class=tp>boolean</span> {
   try {
-    const parsed = new URL(url)
-    return ['http:', 'https:'].includes(parsed.protocol)
+    <span class=k>const</span> parsed = <span class=k>new</span> <span class=f>URL</span>(url)
+    <span class=k>return</span> [<span class=s>'http:'</span>, <span class=s>'https:'</span>].<span class=f>includes</span>(parsed.protocol)
   } catch {
-    return false
+    <span class=k>return</span> <span class=n>false</span>
   }
 }</code></pre>
         </div>
@@ -5111,12 +5114,12 @@ class CskGuideSecurity extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('guideContent.security.urlValidation.desc'))}
           </p>
-          <pre><code>fn isValidUrl(url: string): boolean {
+          <pre><code><span class=k>fn</span> <span class=f>isValidUrl</span>(url: <span class=tp>string</span>): <span class=tp>boolean</span> {
   try {
-    const parsed = new URL(url)
-    return ['http:', 'https:'].includes(parsed.protocol)
+    <span class=k>const</span> parsed = <span class=k>new</span> <span class=f>URL</span>(url)
+    <span class=k>return</span> [<span class=s>'http:'</span>, <span class=s>'https:'</span>].<span class=f>includes</span>(parsed.protocol)
   } catch {
-    return false
+    <span class=k>return</span> <span class=n>false</span>
   }
 }</code></pre>
         </div>
@@ -5261,10 +5264,10 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskGuideStyle extends HTMLElement {
-  #_code_styling = ":host {\n  display: block;\n  --my-color: var(--c-primary);\n}\n\n:host(.dark) {\n  --my-color: var(--c-accent);\n}\n\np {\n  color: var(--my-color);\n  font-family: var(--font);\n}";
+  #_code_styling = ":host {\n  display: block;\n  --my-color: <span class=k>var</span>(--c-primary);\n}\n\n:<span class=f>host</span>(.dark) {\n  --my-color: <span class=k>var</span>(--c-accent);\n}\n\np {\n  color: <span class=k>var</span>(--my-color);\n  font-family: <span class=k>var</span>(--font);\n}";
   get #code_styling() { return this.#_code_styling; }
   set #code_styling(v) { this.#_code_styling = v; this.#scheduleUpdate(); }
-  #_code_shadowScope = "/* CSS is automatically scoped */\np { color: white; }";
+  #_code_shadowScope = "<span class=cm>/* CSS is automatically scoped */</span>\np { color: white; }";
   get #code_shadowScope() { return this.#_code_shadowScope; }
   set #code_shadowScope(v) { this.#_code_shadowScope = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -5498,31 +5501,31 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskGuideTemplate extends HTMLElement {
-  #_code_interpolation = "&lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;p&gt;{{ firstName + ' ' + lastName }}&lt;/p&gt;\n&lt;p&gt;{{ formatDate(date) }}&lt;/p&gt;";
+  #_code_interpolation = "<span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ count }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ firstName + ' ' + lastName }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ formatDate(date) }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>";
   get #code_interpolation() { return this.#_code_interpolation; }
   set #code_interpolation(v) { this.#_code_interpolation = v; this.#scheduleUpdate(); }
-  #_code_dynamicAttr = "&lt;div :class=\"isActive ? 'active' : ''\"&gt;\n  &lt;a :href=\"'/posts/' + postId\"&gt;View&lt;/a&gt;\n  &lt;img :src=\"imageUrl\" :alt=\"imageName\" /&gt;\n&lt;/div&gt;";
+  #_code_dynamicAttr = "<span class=t>&lt;div</span> :class=\"isActive ? 'active' : ''\"<span class=t>&gt;</span>\n  <span class=t>&lt;a</span> :href=\"'/posts/' + postId\"<span class=t>&gt;</span>View<span class=t>&lt;/a</span><span class=t>&gt;</span>\n  <span class=t>&lt;img</span> :src=\"imageUrl\" :alt=\"imageName\" <span class=t>/&gt;</span>\n<span class=t>&lt;/div</span><span class=t>&gt;</span>";
   get #code_dynamicAttr() { return this.#_code_dynamicAttr; }
   set #code_dynamicAttr(v) { this.#_code_dynamicAttr = v; this.#scheduleUpdate(); }
-  #_code_twoWayBinding = "&lt;input :bind=\"name\" type=\"text\" /&gt;\n&lt;textarea :bind=\"description\"&gt;&lt;/textarea&gt;\n&lt;!-- name and description update automatically --&gt;";
+  #_code_twoWayBinding = "<span class=t>&lt;input</span> :bind=\"name\" type=\"text\" <span class=t>/&gt;</span>\n<span class=t>&lt;textarea</span> :bind=\"description\"<span class=t>&gt;</span><span class=t>&lt;/textarea</span><span class=t>&gt;</span>\n<span class=cm>&lt;!-- name and description update automatically --&gt;</span>";
   get #code_twoWayBinding() { return this.#_code_twoWayBinding; }
   set #code_twoWayBinding(v) { this.#_code_twoWayBinding = v; this.#scheduleUpdate(); }
-  #_code_eventHandling = "&lt;button @click=\"increment\"&gt;Count: {{ count }}&lt;/button&gt;\n&lt;form @submit|prevent=\"handleSubmit\"&gt;\n  &lt;input @keydown|enter=\"handleEnter\" /&gt;\n  &lt;button @click|stop=\"handleClick\"&gt;Click&lt;/button&gt;\n&lt;/form&gt;";
+  #_code_eventHandling = "<span class=t>&lt;button</span> @click=\"increment\"<span class=t>&gt;</span>Count: <span class=i>{{ count }}</span><span class=t>&lt;/button</span><span class=t>&gt;</span>\n<span class=t>&lt;form</span> @submit|prevent=\"handleSubmit\"<span class=t>&gt;</span>\n  <span class=t>&lt;input</span> @keydown|enter=\"handleEnter\" <span class=t>/&gt;</span>\n  <span class=t>&lt;button</span> @click|stop=\"handleClick\"<span class=t>&gt;</span>Click<span class=t>&lt;/button</span><span class=t>&gt;</span>\n<span class=t>&lt;/form</span><span class=t>&gt;</span>";
   get #code_eventHandling() { return this.#_code_eventHandling; }
   set #code_eventHandling(v) { this.#_code_eventHandling = v; this.#scheduleUpdate(); }
-  #_code_conditional = "&lt;#if condition=\"isLoggedIn\"&gt;\n  &lt;p&gt;Welcome, {{ username }}!&lt;/p&gt;\n&lt;#else if condition=\"loading\"&gt;\n  &lt;p&gt;Loading...&lt;/p&gt;\n&lt;#else&gt;\n  &lt;p&gt;Please log in&lt;/p&gt;\n&lt;/#if&gt;";
+  #_code_conditional = "<span class=c>&lt;#if condition=\"isLoggedIn\"&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span>Welcome, <span class=i>{{ username }}</span>!<span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=c>&lt;#else if condition=\"loading\"&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span>Loading...<span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=c>&lt;#else&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span>Please log <span class=k>in</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n&lt;/<span class=cm>#if&gt;</span>";
   get #code_conditional() { return this.#_code_conditional; }
   set #code_conditional(v) { this.#_code_conditional = v; this.#scheduleUpdate(); }
-  #_code_loop = "&lt;#for each=\"item\" of=\"items\" key=\"item.id\"&gt;\n  &lt;div&gt;\n    &lt;h3&gt;{{ item.name }}&lt;/h3&gt;\n    &lt;p&gt;{{ item.description }}&lt;/p&gt;\n  &lt;/div&gt;\n&lt;#empty&gt;\n  &lt;p&gt;No items found&lt;/p&gt;\n&lt;/#for&gt;";
+  #_code_loop = "<span class=c>&lt;#for each=\"item\" of=\"items\" key=\"item.id\"&gt;</span>\n  <span class=t>&lt;div</span><span class=t>&gt;</span>\n    <span class=t>&lt;h3</span><span class=t>&gt;</span><span class=i>{{ item.name }}</span><span class=t>&lt;/h3</span><span class=t>&gt;</span>\n    <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ item.description }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n  <span class=t>&lt;/div</span><span class=t>&gt;</span>\n<span class=c>&lt;#empty&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span>No items found<span class=t>&lt;/p</span><span class=t>&gt;</span>\n&lt;/<span class=cm>#for&gt;</span>";
   get #code_loop() { return this.#_code_loop; }
   set #code_loop(v) { this.#_code_loop = v; this.#scheduleUpdate(); }
-  #_code_html = "&lt;div @html=\"richContent\"&gt;&lt;/div&gt;\n&lt;!-- Renders: rawHtmlString (use only with trusted content!) --&gt;";
+  #_code_html = "<span class=t>&lt;div</span> @html=\"richContent\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>\n<span class=cm>&lt;!-- Renders: rawHtmlString (use only with trusted content!) --&gt;</span>";
   get #code_html() { return this.#_code_html; }
   set #code_html(v) { this.#_code_html = v; this.#scheduleUpdate(); }
-  #_code_slot = "&lt;div class=\"card\"&gt;\n  &lt;slot name=\"header\"&gt;&lt;/slot&gt;\n  &lt;slot&gt;&lt;/slot&gt;\n  &lt;slot name=\"footer\"&gt;&lt;/slot&gt;\n&lt;/div&gt;";
+  #_code_slot = "<span class=t>&lt;div</span> class=\"card\"<span class=t>&gt;</span>\n  <span class=t>&lt;slot</span> name=\"header\"<span class=t>&gt;</span><span class=t>&lt;/slot</span><span class=t>&gt;</span>\n  <span class=t>&lt;slot</span><span class=t>&gt;</span><span class=t>&lt;/slot</span><span class=t>&gt;</span>\n  <span class=t>&lt;slot</span> name=\"footer\"<span class=t>&gt;</span><span class=t>&lt;/slot</span><span class=t>&gt;</span>\n<span class=t>&lt;/div</span><span class=t>&gt;</span>";
   get #code_slot() { return this.#_code_slot; }
   set #code_slot(v) { this.#_code_slot = v; this.#scheduleUpdate(); }
-  #_code_slotUsage = "&lt;Card&gt;\n  &lt;template #header&gt;\n    &lt;h2&gt;Title&lt;/h2&gt;\n  &lt;/template&gt;\n  &lt;p&gt;Main content&lt;/p&gt;\n  &lt;template #footer&gt;\n    &lt;button&gt;Close&lt;/button&gt;\n  &lt;/template&gt;\n&lt;/Card&gt;";
+  #_code_slotUsage = "<span class=t>&lt;Card</span><span class=t>&gt;</span>\n  <span class=t>&lt;template</span> #header<span class=t>&gt;</span>\n    <span class=t>&lt;h2</span><span class=t>&gt;</span>Title<span class=t>&lt;/h2</span><span class=t>&gt;</span>\n  <span class=t>&lt;/template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span>Main content<span class=t>&lt;/p</span><span class=t>&gt;</span>\n  <span class=t>&lt;template</span> #footer<span class=t>&gt;</span>\n    <span class=t>&lt;button</span><span class=t>&gt;</span>Close<span class=t>&lt;/button</span><span class=t>&gt;</span>\n  <span class=t>&lt;/template</span><span class=t>&gt;</span>\n<span class=t>&lt;/Card</span><span class=t>&gt;</span>";
   get #code_slotUsage() { return this.#_code_slotUsage; }
   set #code_slotUsage(v) { this.#_code_slotUsage = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -5904,6 +5907,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-page-guide.csk ──
+
 (() => {
 "use strict";
 
@@ -7494,7 +7498,7 @@ class CskEcosystem extends HTMLElement {
   #render() {
     const tpl = document.createElement('template');
     tpl.innerHTML = `
-      <style>:host{display:block;padding:var(--space-section, 5rem) 0;}.container{max-width:var(--max-w, 70rem);margin:0 auto;padding:0 var(--space-page, 1.5rem);}.hd{text-align:center;margin-bottom:clamp(2rem, 4vw, 3.5rem);}.hd h2{font-size:clamp(1.4rem, 2.8vw, 2.2rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:0.75rem;color:var(--c-text, #e4e4ed);}.hd p{font-size:clamp(0.9rem, 1.1vw, 1.05rem);color:var(--c-text-dim, #9898ab);max-width:35rem;margin:0 auto;}.grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 14rem), 1fr));gap:clamp(0.75rem, 1.5vw, 1.25rem);}.card{background:var(--c-bg-card, #12121a);border:1px solid var(--c-border, #2a2a3a);border-radius:var(--radius, 0.75rem);padding:clamp(1.25rem, 2vw, 1.75rem);transition:border-color 0.25s, transform 0.2s;}.card:hover{border-color:var(--c-accent, #00B894);transform:translateY(-2px);}.card-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:clamp(0.75rem, 1.2vw, 1rem);}.icon{width:2.75rem;height:2.75rem;border-radius:0.625rem;display:flex;align-items:center;justify-content:center;background:rgba(0,184,148,0.12);color:#55efc4;margin-bottom:0;}.badge{font-size:0.65rem;font-weight:600;padding:0.2rem 0.5rem;border-radius:1rem;white-space:nowrap;line-height:1.4;letter-spacing:0.02em;}.badge.available{background:rgba(0,184,148,0.15);color:#55efc4;border:1px solid rgba(0,184,148,0.3);}.badge.soon{background:rgba(255,190,70,0.12);color:#f0c060;border:1px solid rgba(255,190,70,0.25);}/* — per-card color variants — */ .clr-teal .icon{background:rgba(46,188,176,0.12);color:#5de8d8;}.clr-teal:hover{border-color:#2EBCB0;}.clr-teal .badge.available{background:rgba(46,188,176,0.15);color:#5de8d8;border-color:rgba(46,188,176,0.3);}.clr-teal .install{color:#2EBCB0;background:rgba(46,188,176,0.08);border-color:rgba(46,188,176,0.2);}.clr-blue .icon{background:rgba(59,130,246,0.12);color:#7daafd;}.clr-blue:hover{border-color:#3B82F6;}.clr-blue .badge.available{background:rgba(59,130,246,0.15);color:#7daafd;border-color:rgba(59,130,246,0.3);}.clr-blue .install{color:#3B82F6;background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.2);}.clr-purple .icon{background:rgba(139,92,246,0.12);color:#b49afc;}.clr-purple:hover{border-color:#8B5CF6;}.clr-purple .badge.available{background:rgba(139,92,246,0.15);color:#b49afc;border-color:rgba(139,92,246,0.3);}.clr-purple .install{color:#8B5CF6;background:rgba(139,92,246,0.08);border-color:rgba(139,92,246,0.2);}.clr-coral .icon{background:rgba(255,113,112,0.12);color:#ff9b9a;}.clr-coral:hover{border-color:#FF7170;}.clr-coral .badge.available{background:rgba(255,113,112,0.15);color:#ff9b9a;border-color:rgba(255,113,112,0.3);}.clr-coral .install{color:#FF7170;background:rgba(255,113,112,0.08);border-color:rgba(255,113,112,0.2);}.clr-pink .icon{background:rgba(236,72,153,0.12);color:#f298c8;}.clr-pink:hover{border-color:#EC4899;}.clr-pink .badge.available{background:rgba(236,72,153,0.15);color:#f298c8;border-color:rgba(236,72,153,0.3);}.clr-pink .install{color:#EC4899;background:rgba(236,72,153,0.08);border-color:rgba(236,72,153,0.2);}.clr-amber .icon{background:rgba(234,179,8,0.12);color:#f0cc50;}.clr-amber:hover{border-color:#EAB308;}.clr-amber .badge.available{background:rgba(234,179,8,0.15);color:#f0cc50;border-color:rgba(234,179,8,0.3);}.clr-amber .install{color:#EAB308;background:rgba(234,179,8,0.08);border-color:rgba(234,179,8,0.2);}.clr-cyan .icon{background:rgba(6,182,212,0.12);color:#5cd6ec;}.clr-cyan:hover{border-color:#06B6D4;}.clr-cyan .badge.available{background:rgba(6,182,212,0.15);color:#5cd6ec;border-color:rgba(6,182,212,0.3);}.clr-cyan .install{color:#06B6D4;background:rgba(6,182,212,0.08);border-color:rgba(6,182,212,0.2);}.card.coming{opacity:0.45;cursor:not-allowed;user-select:none;}.card.coming:hover{border-color:var(--c-border, #2a2a3a);transform:none;opacity:0.55;}.card.coming .icon{background:rgba(255,255,255,0.06);color:var(--c-text-dim, #9898ab);}.install.muted{position:relative;color:var(--c-text-dim, #5a5a6a);background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.06);text-decoration:line-through;text-decoration-color:rgba(255,255,255,0.2);overflow:hidden;}.install.muted::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient( -45deg, transparent, transparent 4px, rgba(255,255,255,0.04) 4px, rgba(255,255,255,0.04) 5px );pointer-events:none;}h3{font-size:clamp(0.85rem, 1vw, 0.95rem);font-weight:600;margin-bottom:0.5rem;color:var(--c-text, #e4e4ed);font-family:var(--mono, monospace);}p{font-size:clamp(0.75rem, 0.9vw, 0.83rem);color:var(--c-text-dim, #9898ab);line-height:1.5;margin-bottom:0.875rem;}.install{display:block;font-family:var(--mono, monospace);font-size:clamp(0.68rem, 0.82vw, 0.78rem);color:var(--c-accent, #00B894);background:rgba(0,184,148,0.08);padding:0.375rem 0.625rem;border-radius:0.375rem;border:1px solid rgba(0,184,148,0.2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.install.vs{font-size:clamp(0.65rem, 0.75vw, 0.72rem);}.caution{display:block;margin-top:0.4rem;font-size:clamp(0.6rem, 0.72vw, 0.68rem);color:var(--c-text-dim, #6a6a7a);line-height:1.3;font-style:italic;}@media (max-width:40rem){.grid{grid-template-columns:1fr;}}</style>
+      <style>:host{display:block;padding:var(--space-section, 5rem) 0;}.container{max-width:var(--max-w, 70rem);margin:0 auto;padding:0 var(--space-page, 1.5rem);}.hd{text-align:center;margin-bottom:clamp(2rem, 4vw, 3.5rem);}.hd h2{font-size:clamp(1.4rem, 2.8vw, 2.2rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:0.75rem;color:var(--c-text, #e4e4ed);}.hd p{font-size:clamp(0.9rem, 1.1vw, 1.05rem);color:var(--c-text-dim, #9898ab);max-width:35rem;margin:0 auto;}.grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 14rem), 1fr));gap:clamp(0.75rem, 1.5vw, 1.25rem);}.card{background:var(--c-bg-card, #12121a);border:1px solid var(--c-border, #2a2a3a);border-radius:var(--radius, 0.75rem);padding:clamp(1.25rem, 2vw, 1.75rem);transition:border-color 0.25s, transform 0.2s;}.card:hover{border-color:var(--c-accent, #00B894);transform:translateY(-2px);}.card-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:clamp(0.75rem, 1.2vw, 1rem);}.icon{width:2.75rem;height:2.75rem;border-radius:0.625rem;display:flex;align-items:center;justify-content:center;background:rgba(0,184,148,0.12);color:#55efc4;margin-bottom:0;}.badge{font-size:0.65rem;font-weight:600;padding:0.2rem 0.5rem;border-radius:1rem;white-space:nowrap;line-height:1.4;letter-spacing:0.02em;}.badge.available{background:rgba(0,184,148,0.15);color:#55efc4;border:1px solid rgba(0,184,148,0.3);}.badge.soon{background:rgba(255,190,70,0.12);color:#f0c060;border:1px solid rgba(255,190,70,0.25);}/* — per-card color variants — */ .clr-teal .icon{background:rgba(46,188,176,0.12);color:#5de8d8;}.clr-teal:hover{border-color:#2EBCB0;}.clr-teal .badge.available{background:rgba(46,188,176,0.15);color:#5de8d8;border-color:rgba(46,188,176,0.3);}.clr-teal .install{color:#2EBCB0;background:rgba(46,188,176,0.08);border-color:rgba(46,188,176,0.2);}.clr-blue .icon{background:rgba(59,130,246,0.12);color:#7daafd;}.clr-blue:hover{border-color:#3B82F6;}.clr-blue .badge.available{background:rgba(59,130,246,0.15);color:#7daafd;border-color:rgba(59,130,246,0.3);}.clr-blue .install{color:#3B82F6;background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.2);}.clr-purple .icon{background:rgba(139,92,246,0.12);color:#b49afc;}.clr-purple:hover{border-color:#8B5CF6;}.clr-purple .badge.available{background:rgba(139,92,246,0.15);color:#b49afc;border-color:rgba(139,92,246,0.3);}.clr-purple .install{color:#8B5CF6;background:rgba(139,92,246,0.08);border-color:rgba(139,92,246,0.2);}.clr-coral .icon{background:rgba(255,113,112,0.12);color:#ff9b9a;}.clr-coral:hover{border-color:#FF7170;}.clr-coral .badge.available{background:rgba(255,113,112,0.15);color:#ff9b9a;border-color:rgba(255,113,112,0.3);}.clr-coral .install{color:#FF7170;background:rgba(255,113,112,0.08);border-color:rgba(255,113,112,0.2);}.clr-pink .icon{background:rgba(236,72,153,0.12);color:#f298c8;}.clr-pink:hover{border-color:#EC4899;}.clr-pink .badge.available{background:rgba(236,72,153,0.15);color:#f298c8;border-color:rgba(236,72,153,0.3);}.clr-pink .install{color:#EC4899;background:rgba(236,72,153,0.08);border-color:rgba(236,72,153,0.2);}.clr-amber .icon{background:rgba(234,179,8,0.12);color:#f0cc50;}.clr-amber:hover{border-color:#EAB308;}.clr-amber .badge.available{background:rgba(234,179,8,0.15);color:#f0cc50;border-color:rgba(234,179,8,0.3);}.clr-amber .install{color:#EAB308;background:rgba(234,179,8,0.08);border-color:rgba(234,179,8,0.2);}.clr-cyan .icon{background:rgba(6,182,212,0.12);color:#5cd6ec;}.clr-cyan:hover{border-color:#06B6D4;}.clr-cyan .badge.available{background:rgba(6,182,212,0.15);color:#5cd6ec;border-color:rgba(6,182,212,0.3);}.clr-cyan .install{color:#06B6D4;background:rgba(6,182,212,0.08);border-color:rgba(6,182,212,0.2);}.card.coming{opacity:0.45;cursor:not-allowed;user-select:none;}.card.coming:hover{border-color:var(--c-border, #2a2a3a);transform:none;opacity:0.55;}.card.coming .icon{background:rgba(255,255,255,0.06);color:var(--c-text-dim, #9898ab);}.install.muted{position:relative;color:var(--c-text-dim, #5a5a6a);background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.06);text-decoration:line-through;text-decoration-color:rgba(255,255,255,0.2);overflow:hidden;}.install.muted::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient( -45deg, transparent, transparent 4px, rgba(255,255,255,0.04) 4px, rgba(255,255,255,0.04) 5px );pointer-events:none;}h3{font-size:clamp(0.85rem, 1vw, 0.95rem);font-weight:600;margin-bottom:0.5rem;color:var(--c-text, #e4e4ed);font-family:var(--mono, monospace);}p{font-size:clamp(0.75rem, 0.9vw, 0.83rem);color:var(--c-text-dim, #9898ab);line-height:1.5;margin-bottom:0.875rem;}.install{display:block;font-family:var(--mono, monospace);font-size:clamp(0.68rem, 0.82vw, 0.78rem);color:var(--c-accent, #00B894);background:rgba(0,184,148,0.08);padding:0.375rem 0.625rem;border-radius:0.375rem;border:1px solid rgba(0,184,148,0.2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.install.vs{font-size:clamp(0.65rem, 0.75vw, 0.72rem);}.caution{display:block;margin-top:0.4rem;font-size:clamp(0.6rem, 0.72vw, 0.68rem);color:var(--c-text-dim, #6a6a7a);line-height:1.3;font-style:italic;}@media (max-width:30rem){.grid{grid-template-columns:1fr;}}</style>
       <section class="section">
         <div class="container">
           <div class="hd">
@@ -7524,7 +7528,7 @@ class CskEcosystem extends HTMLElement {
   #getNewTree() {
     const tpl = document.createElement('template');
     tpl.innerHTML = `
-      <style>:host{display:block;padding:var(--space-section, 5rem) 0;}.container{max-width:var(--max-w, 70rem);margin:0 auto;padding:0 var(--space-page, 1.5rem);}.hd{text-align:center;margin-bottom:clamp(2rem, 4vw, 3.5rem);}.hd h2{font-size:clamp(1.4rem, 2.8vw, 2.2rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:0.75rem;color:var(--c-text, #e4e4ed);}.hd p{font-size:clamp(0.9rem, 1.1vw, 1.05rem);color:var(--c-text-dim, #9898ab);max-width:35rem;margin:0 auto;}.grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 14rem), 1fr));gap:clamp(0.75rem, 1.5vw, 1.25rem);}.card{background:var(--c-bg-card, #12121a);border:1px solid var(--c-border, #2a2a3a);border-radius:var(--radius, 0.75rem);padding:clamp(1.25rem, 2vw, 1.75rem);transition:border-color 0.25s, transform 0.2s;}.card:hover{border-color:var(--c-accent, #00B894);transform:translateY(-2px);}.card-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:clamp(0.75rem, 1.2vw, 1rem);}.icon{width:2.75rem;height:2.75rem;border-radius:0.625rem;display:flex;align-items:center;justify-content:center;background:rgba(0,184,148,0.12);color:#55efc4;margin-bottom:0;}.badge{font-size:0.65rem;font-weight:600;padding:0.2rem 0.5rem;border-radius:1rem;white-space:nowrap;line-height:1.4;letter-spacing:0.02em;}.badge.available{background:rgba(0,184,148,0.15);color:#55efc4;border:1px solid rgba(0,184,148,0.3);}.badge.soon{background:rgba(255,190,70,0.12);color:#f0c060;border:1px solid rgba(255,190,70,0.25);}/* — per-card color variants — */ .clr-teal .icon{background:rgba(46,188,176,0.12);color:#5de8d8;}.clr-teal:hover{border-color:#2EBCB0;}.clr-teal .badge.available{background:rgba(46,188,176,0.15);color:#5de8d8;border-color:rgba(46,188,176,0.3);}.clr-teal .install{color:#2EBCB0;background:rgba(46,188,176,0.08);border-color:rgba(46,188,176,0.2);}.clr-blue .icon{background:rgba(59,130,246,0.12);color:#7daafd;}.clr-blue:hover{border-color:#3B82F6;}.clr-blue .badge.available{background:rgba(59,130,246,0.15);color:#7daafd;border-color:rgba(59,130,246,0.3);}.clr-blue .install{color:#3B82F6;background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.2);}.clr-purple .icon{background:rgba(139,92,246,0.12);color:#b49afc;}.clr-purple:hover{border-color:#8B5CF6;}.clr-purple .badge.available{background:rgba(139,92,246,0.15);color:#b49afc;border-color:rgba(139,92,246,0.3);}.clr-purple .install{color:#8B5CF6;background:rgba(139,92,246,0.08);border-color:rgba(139,92,246,0.2);}.clr-coral .icon{background:rgba(255,113,112,0.12);color:#ff9b9a;}.clr-coral:hover{border-color:#FF7170;}.clr-coral .badge.available{background:rgba(255,113,112,0.15);color:#ff9b9a;border-color:rgba(255,113,112,0.3);}.clr-coral .install{color:#FF7170;background:rgba(255,113,112,0.08);border-color:rgba(255,113,112,0.2);}.clr-pink .icon{background:rgba(236,72,153,0.12);color:#f298c8;}.clr-pink:hover{border-color:#EC4899;}.clr-pink .badge.available{background:rgba(236,72,153,0.15);color:#f298c8;border-color:rgba(236,72,153,0.3);}.clr-pink .install{color:#EC4899;background:rgba(236,72,153,0.08);border-color:rgba(236,72,153,0.2);}.clr-amber .icon{background:rgba(234,179,8,0.12);color:#f0cc50;}.clr-amber:hover{border-color:#EAB308;}.clr-amber .badge.available{background:rgba(234,179,8,0.15);color:#f0cc50;border-color:rgba(234,179,8,0.3);}.clr-amber .install{color:#EAB308;background:rgba(234,179,8,0.08);border-color:rgba(234,179,8,0.2);}.clr-cyan .icon{background:rgba(6,182,212,0.12);color:#5cd6ec;}.clr-cyan:hover{border-color:#06B6D4;}.clr-cyan .badge.available{background:rgba(6,182,212,0.15);color:#5cd6ec;border-color:rgba(6,182,212,0.3);}.clr-cyan .install{color:#06B6D4;background:rgba(6,182,212,0.08);border-color:rgba(6,182,212,0.2);}.card.coming{opacity:0.45;cursor:not-allowed;user-select:none;}.card.coming:hover{border-color:var(--c-border, #2a2a3a);transform:none;opacity:0.55;}.card.coming .icon{background:rgba(255,255,255,0.06);color:var(--c-text-dim, #9898ab);}.install.muted{position:relative;color:var(--c-text-dim, #5a5a6a);background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.06);text-decoration:line-through;text-decoration-color:rgba(255,255,255,0.2);overflow:hidden;}.install.muted::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient( -45deg, transparent, transparent 4px, rgba(255,255,255,0.04) 4px, rgba(255,255,255,0.04) 5px );pointer-events:none;}h3{font-size:clamp(0.85rem, 1vw, 0.95rem);font-weight:600;margin-bottom:0.5rem;color:var(--c-text, #e4e4ed);font-family:var(--mono, monospace);}p{font-size:clamp(0.75rem, 0.9vw, 0.83rem);color:var(--c-text-dim, #9898ab);line-height:1.5;margin-bottom:0.875rem;}.install{display:block;font-family:var(--mono, monospace);font-size:clamp(0.68rem, 0.82vw, 0.78rem);color:var(--c-accent, #00B894);background:rgba(0,184,148,0.08);padding:0.375rem 0.625rem;border-radius:0.375rem;border:1px solid rgba(0,184,148,0.2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.install.vs{font-size:clamp(0.65rem, 0.75vw, 0.72rem);}.caution{display:block;margin-top:0.4rem;font-size:clamp(0.6rem, 0.72vw, 0.68rem);color:var(--c-text-dim, #6a6a7a);line-height:1.3;font-style:italic;}@media (max-width:40rem){.grid{grid-template-columns:1fr;}}</style>
+      <style>:host{display:block;padding:var(--space-section, 5rem) 0;}.container{max-width:var(--max-w, 70rem);margin:0 auto;padding:0 var(--space-page, 1.5rem);}.hd{text-align:center;margin-bottom:clamp(2rem, 4vw, 3.5rem);}.hd h2{font-size:clamp(1.4rem, 2.8vw, 2.2rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:0.75rem;color:var(--c-text, #e4e4ed);}.hd p{font-size:clamp(0.9rem, 1.1vw, 1.05rem);color:var(--c-text-dim, #9898ab);max-width:35rem;margin:0 auto;}.grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(min(100%, 14rem), 1fr));gap:clamp(0.75rem, 1.5vw, 1.25rem);}.card{background:var(--c-bg-card, #12121a);border:1px solid var(--c-border, #2a2a3a);border-radius:var(--radius, 0.75rem);padding:clamp(1.25rem, 2vw, 1.75rem);transition:border-color 0.25s, transform 0.2s;}.card:hover{border-color:var(--c-accent, #00B894);transform:translateY(-2px);}.card-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:clamp(0.75rem, 1.2vw, 1rem);}.icon{width:2.75rem;height:2.75rem;border-radius:0.625rem;display:flex;align-items:center;justify-content:center;background:rgba(0,184,148,0.12);color:#55efc4;margin-bottom:0;}.badge{font-size:0.65rem;font-weight:600;padding:0.2rem 0.5rem;border-radius:1rem;white-space:nowrap;line-height:1.4;letter-spacing:0.02em;}.badge.available{background:rgba(0,184,148,0.15);color:#55efc4;border:1px solid rgba(0,184,148,0.3);}.badge.soon{background:rgba(255,190,70,0.12);color:#f0c060;border:1px solid rgba(255,190,70,0.25);}/* — per-card color variants — */ .clr-teal .icon{background:rgba(46,188,176,0.12);color:#5de8d8;}.clr-teal:hover{border-color:#2EBCB0;}.clr-teal .badge.available{background:rgba(46,188,176,0.15);color:#5de8d8;border-color:rgba(46,188,176,0.3);}.clr-teal .install{color:#2EBCB0;background:rgba(46,188,176,0.08);border-color:rgba(46,188,176,0.2);}.clr-blue .icon{background:rgba(59,130,246,0.12);color:#7daafd;}.clr-blue:hover{border-color:#3B82F6;}.clr-blue .badge.available{background:rgba(59,130,246,0.15);color:#7daafd;border-color:rgba(59,130,246,0.3);}.clr-blue .install{color:#3B82F6;background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.2);}.clr-purple .icon{background:rgba(139,92,246,0.12);color:#b49afc;}.clr-purple:hover{border-color:#8B5CF6;}.clr-purple .badge.available{background:rgba(139,92,246,0.15);color:#b49afc;border-color:rgba(139,92,246,0.3);}.clr-purple .install{color:#8B5CF6;background:rgba(139,92,246,0.08);border-color:rgba(139,92,246,0.2);}.clr-coral .icon{background:rgba(255,113,112,0.12);color:#ff9b9a;}.clr-coral:hover{border-color:#FF7170;}.clr-coral .badge.available{background:rgba(255,113,112,0.15);color:#ff9b9a;border-color:rgba(255,113,112,0.3);}.clr-coral .install{color:#FF7170;background:rgba(255,113,112,0.08);border-color:rgba(255,113,112,0.2);}.clr-pink .icon{background:rgba(236,72,153,0.12);color:#f298c8;}.clr-pink:hover{border-color:#EC4899;}.clr-pink .badge.available{background:rgba(236,72,153,0.15);color:#f298c8;border-color:rgba(236,72,153,0.3);}.clr-pink .install{color:#EC4899;background:rgba(236,72,153,0.08);border-color:rgba(236,72,153,0.2);}.clr-amber .icon{background:rgba(234,179,8,0.12);color:#f0cc50;}.clr-amber:hover{border-color:#EAB308;}.clr-amber .badge.available{background:rgba(234,179,8,0.15);color:#f0cc50;border-color:rgba(234,179,8,0.3);}.clr-amber .install{color:#EAB308;background:rgba(234,179,8,0.08);border-color:rgba(234,179,8,0.2);}.clr-cyan .icon{background:rgba(6,182,212,0.12);color:#5cd6ec;}.clr-cyan:hover{border-color:#06B6D4;}.clr-cyan .badge.available{background:rgba(6,182,212,0.15);color:#5cd6ec;border-color:rgba(6,182,212,0.3);}.clr-cyan .install{color:#06B6D4;background:rgba(6,182,212,0.08);border-color:rgba(6,182,212,0.2);}.card.coming{opacity:0.45;cursor:not-allowed;user-select:none;}.card.coming:hover{border-color:var(--c-border, #2a2a3a);transform:none;opacity:0.55;}.card.coming .icon{background:rgba(255,255,255,0.06);color:var(--c-text-dim, #9898ab);}.install.muted{position:relative;color:var(--c-text-dim, #5a5a6a);background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.06);text-decoration:line-through;text-decoration-color:rgba(255,255,255,0.2);overflow:hidden;}.install.muted::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient( -45deg, transparent, transparent 4px, rgba(255,255,255,0.04) 4px, rgba(255,255,255,0.04) 5px );pointer-events:none;}h3{font-size:clamp(0.85rem, 1vw, 0.95rem);font-weight:600;margin-bottom:0.5rem;color:var(--c-text, #e4e4ed);font-family:var(--mono, monospace);}p{font-size:clamp(0.75rem, 0.9vw, 0.83rem);color:var(--c-text-dim, #9898ab);line-height:1.5;margin-bottom:0.875rem;}.install{display:block;font-family:var(--mono, monospace);font-size:clamp(0.68rem, 0.82vw, 0.78rem);color:var(--c-accent, #00B894);background:rgba(0,184,148,0.08);padding:0.375rem 0.625rem;border-radius:0.375rem;border:1px solid rgba(0,184,148,0.2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.install.vs{font-size:clamp(0.65rem, 0.75vw, 0.72rem);}.caution{display:block;margin-top:0.4rem;font-size:clamp(0.6rem, 0.72vw, 0.68rem);color:var(--c-text-dim, #6a6a7a);line-height:1.3;font-style:italic;}@media (max-width:30rem){.grid{grid-template-columns:1fr;}}</style>
       <section class="section">
         <div class="container">
           <div class="hd">
@@ -8633,6 +8637,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-page-home.csk ──
+
 (() => {
 "use strict";
 
@@ -8806,6 +8811,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-page-testing.csk ──
+
 (() => {
 "use strict";
 
@@ -9114,7 +9120,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskTestApi extends HTMLElement {
-  #_exampleAPI = "const { suite, compileOk, csk } = require('./lib/chasket-test');\n\nsuite('API Usage', t => {\n  t.beforeEach(() => {\n    console.log('setup');\n  });\n\n  t.test('test 1', () => {\n    const r = compileOk('&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;&lt;/p&gt;&lt;/template&gt;');\n    t.compileSuccess(r);\n  });\n\n  t.xtest('skipped test', () => {\n    // This test is skipped\n  });\n\n  t.afterEach(() => {\n    console.log('teardown');\n  });\n});\n\nsuite.run();";
+  #_exampleAPI = "<span class=k>const</span> { suite, compileOk, csk } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=f>suite</span>(<span class=s>'API Usage'</span>, t => {\n  t.<span class=f>beforeEach</span>(() => {\n    console.<span class=f>log</span>(<span class=s>'setup'</span>);\n  });\n\n  t.<span class=f>test</span>(<span class=s>'test 1'</span>, () => {\n    <span class=k>const</span> r = <span class=f>compileOk</span>(<span class=s>'&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;&lt;/p&gt;&lt;/template&gt;'</span>);\n    t.<span class=f>compileSuccess</span>(r);\n  });\n\n  t.<span class=f>xtest</span>(<span class=s>'skipped test'</span>, () => {\n    <span class=cm>// This test is skipped</span>\n  });\n\n  t.<span class=f>afterEach</span>(() => {\n    console.<span class=f>log</span>(<span class=s>'teardown'</span>);\n  });\n});\n\nsuite.<span class=f>run</span>();";
   get #exampleAPI() { return this.#_exampleAPI; }
   set #exampleAPI(v) { this.#_exampleAPI = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -9192,8 +9198,8 @@ class CskTestApi extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('testContent.api.lifecycleDesc'))}
           </p>
-          <pre><code>t.beforeEach(() => {{ /* setup */ }});
-t.afterEach(() => {{ /* cleanup */ }});</code></pre>
+          <pre><code>t.<span class=f>beforeEach</span>(() => <span class=i>{{ /* setup */ }}</span>);
+t.<span class=f>afterEach</span>(() => <span class=i>{{ /* cleanup */ }}</span>);</code></pre>
         </div>
       </section>
     `;
@@ -9252,8 +9258,8 @@ t.afterEach(() => {{ /* cleanup */ }});</code></pre>
           <p>
             ${this.#esc(this.#tr('testContent.api.lifecycleDesc'))}
           </p>
-          <pre><code>t.beforeEach(() => {{ /* setup */ }});
-t.afterEach(() => {{ /* cleanup */ }});</code></pre>
+          <pre><code>t.<span class=f>beforeEach</span>(() => <span class=i>{{ /* setup */ }}</span>);
+t.<span class=f>afterEach</span>(() => <span class=i>{{ /* cleanup */ }}</span>);</code></pre>
         </div>
       </section>
     `;
@@ -9380,19 +9386,19 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskTestAssertions extends HTMLElement {
-  #_exampleAssert = "const { suite, compileOk } = require('./lib/chasket-test');\n\nsuite('Assertions', t => {\n  t.test('basic assertions', () => {\n    t.assert(true, 'is truthy');\n    t.eq(5, 5, 'values equal');\n    t.deepEq({ a: 1 }, { a: 1 }, 'deep equal');\n    t.includes('hello world', 'world', 'includes substring');\n    t.notIncludes('hello', 'xyz', 'excludes substring');\n    t.matches('test123', /\\\\d+/, 'matches regex');\n    t.throws(() => { throw new Error('oops'); }, 'function throws');\n  });\n});\n\nsuite.run();";
+  #_exampleAssert = "<span class=k>const</span> { suite, compileOk } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=f>suite</span>(<span class=s>'Assertions'</span>, t => {\n  t.<span class=f>test</span>(<span class=s>'basic assertions'</span>, () => {\n    t.<span class=f>assert</span>(<span class=n>true</span>, <span class=s>'is truthy'</span>);\n    t.<span class=f>eq</span>(<span class=n>5</span>, <span class=n>5</span>, <span class=s>'values equal'</span>);\n    t.<span class=f>deepEq</span>({ a: <span class=n>1</span> }, { a: <span class=n>1</span> }, <span class=s>'deep equal'</span>);\n    t.<span class=f>includes</span>(<span class=s>'hello world'</span>, <span class=s>'world'</span>, <span class=s>'includes substring'</span>);\n    t.<span class=f>notIncludes</span>(<span class=s>'hello'</span>, <span class=s>'xyz'</span>, <span class=s>'excludes substring'</span>);\n    t.<span class=f>matches</span>(<span class=s>'test123'</span>, /\\\\d+/, <span class=s>'matches regex'</span>);\n    t.<span class=f>throws</span>(() => { throw <span class=k>new</span> <span class=f>Error</span>(<span class=s>'oops'</span>); }, <span class=s>'function throws'</span>);\n  });\n});\n\nsuite.<span class=f>run</span>();";
   get #exampleAssert() { return this.#_exampleAssert; }
   set #exampleAssert(v) { this.#_exampleAssert = v; this.#scheduleUpdate(); }
-  #_exampleOutput = "const { suite, compileOk, csk } = require('./lib/chasket-test');\n\nsuite('Output Assertions', t => {\n  t.test('verify output', () => {\n    const src = csk({\n      name: 'my-comp',\n      script: 'state msg: string = &quot;hello&quot;',\n      template: '&lt;p&gt;{{ msg }}&lt;/p&gt;'\n    });\n    const r = compileOk(src);\n\n    t.compileSuccess(r);\n    t.validJS(r);\n    t.outputIncludes(r, 'hello');\n    t.outputNotIncludes(r, 'world');\n    t.hasInterpolation(r, 'msg');\n  });\n});\n\nsuite.run();";
+  #_exampleOutput = "<span class=k>const</span> { suite, compileOk, csk } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=f>suite</span>(<span class=s>'Output Assertions'</span>, t => {\n  t.<span class=f>test</span>(<span class=s>'verify output'</span>, () => {\n    <span class=k>const</span> src = <span class=f>csk</span>({\n      name: <span class=s>'my-comp'</span>,\n      script: <span class=s>'state msg: string = &quot;hello&quot;'</span>,\n      template: <span class=s>'&lt;p&gt;{{ msg }}&lt;/p&gt;'</span>\n    });\n    <span class=k>const</span> r = <span class=f>compileOk</span>(src);\n\n    t.<span class=f>compileSuccess</span>(r);\n    t.<span class=f>validJS</span>(r);\n    t.<span class=f>outputIncludes</span>(r, <span class=s>'hello'</span>);\n    t.<span class=f>outputNotIncludes</span>(r, <span class=s>'world'</span>);\n    t.<span class=f>hasInterpolation</span>(r, <span class=s>'msg'</span>);\n  });\n});\n\nsuite.<span class=f>run</span>();";
   get #exampleOutput() { return this.#_exampleOutput; }
   set #exampleOutput(v) { this.#_exampleOutput = v; this.#scheduleUpdate(); }
-  #_exampleTemplate = "const { suite, compileOk, csk } = require('./lib/chasket-test');\n\nsuite('Template Assertions', t => {\n  t.test('check template output', () => {\n    const src = csk({\n      name: 'my-list',\n      template: '&lt;ul&gt;&lt;#for item of items&gt;&lt;li&gt;{{ item }}&lt;/li&gt;&lt;/#for&gt;&lt;/ul&gt;'\n    });\n    const r = compileOk(src);\n\n    const tpl = t.getTemplate(r);\n    console.log(tpl);  // the extracted template string\n\n    t.templateIncludes(r, '&lt;ul&gt;');\n    t.templateNotIncludes(r, 'invalid');\n  });\n});\n\nsuite.run();";
+  #_exampleTemplate = "<span class=k>const</span> { suite, compileOk, csk } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=f>suite</span>(<span class=s>'Template Assertions'</span>, t => {\n  t.<span class=f>test</span>(<span class=s>'check template output'</span>, () => {\n    <span class=k>const</span> src = <span class=f>csk</span>({\n      name: <span class=s>'my-list'</span>,\n      template: <span class=s>'&lt;ul&gt;&lt;#for item of items&gt;&lt;li&gt;{{ item }}&lt;/li&gt;&lt;/#for&gt;&lt;/ul&gt;'</span>\n    });\n    <span class=k>const</span> r = <span class=f>compileOk</span>(src);\n\n    <span class=k>const</span> tpl = t.<span class=f>getTemplate</span>(r);\n    console.<span class=f>log</span>(tpl);  <span class=cm>// the extracted template string</span>\n\n    t.<span class=f>templateIncludes</span>(r, <span class=s>'&lt;ul&gt;'</span>);\n    t.<span class=f>templateNotIncludes</span>(r, <span class=s>'invalid'</span>);\n  });\n});\n\nsuite.<span class=f>run</span>();";
   get #exampleTemplate() { return this.#_exampleTemplate; }
   set #exampleTemplate(v) { this.#_exampleTemplate = v; this.#scheduleUpdate(); }
-  #_exampleState = "const { suite, compileOk, csk } = require('./lib/chasket-test');\n\nsuite('Lifecycle & State', t => {\n  t.test('state and lifecycle', () => {\n    const src = csk({\n      name: 'my-comp',\n      script: '\n        state count: number = 0\n        watch count { console.log(&apos;changed&apos;); }\n        fn increment() { count++; }\n        on mount { console.log(&apos;mounted&apos;); }\n        on unmount { console.log(&apos;unmounted&apos;); }\n      '\n    });\n    const r = compileOk(src);\n\n    t.hasState(r, 'count');\n    t.hasWatch(r, 'count');\n    t.hasOnMount(r, 'console.log');\n    t.hasOnUnmount(r, 'console.log');\n  });\n});\n\nsuite.run();";
+  #_exampleState = "<span class=k>const</span> { suite, compileOk, csk } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=f>suite</span>(<span class=s>'Lifecycle & State'</span>, t => {\n  t.<span class=f>test</span>(<span class=s>'state and lifecycle'</span>, () => {\n    <span class=k>const</span> src = <span class=f>csk</span>({\n      name: <span class=s>'my-comp'</span>,\n      script: <span class=s>'\n        state count: number = 0\n        watch count { console.log(&apos;changed&apos;); }\n        fn increment() { count++; }\n        on mount { console.log(&apos;mounted&apos;); }\n        on unmount { console.log(&apos;unmounted&apos;); }\n      '</span>\n    });\n    <span class=k>const</span> r = <span class=f>compileOk</span>(src);\n\n    t.<span class=f>hasState</span>(r, <span class=s>'count'</span>);\n    t.<span class=f>hasWatch</span>(r, <span class=s>'count'</span>);\n    t.<span class=f>hasOnMount</span>(r, <span class=s>'console.log'</span>);\n    t.<span class=f>hasOnUnmount</span>(r, <span class=s>'console.log'</span>);\n  });\n});\n\nsuite.<span class=f>run</span>();";
   get #exampleState() { return this.#_exampleState; }
   set #exampleState(v) { this.#_exampleState = v; this.#scheduleUpdate(); }
-  #_exampleDiag = "const { suite, compileFail } = require('./lib/chasket-test');\n\nsuite('Diagnostics', t => {\n  t.test('diagnostic checks', () => {\n    const src = '&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;{{ unknown }}&lt;/p&gt;&lt;/template&gt;';\n    const r = compileFail(src);\n\n    t.compileFails(r);\n    t.hasDiag(r, 'E0301');  // undefined variable\n    t.hasDiag(r, 'E0301', 'error');  // with level\n    t.noDiag(r, 'E0302');\n    t.diagCount(r, 'error', 1);\n  });\n});\n\nsuite.run();";
+  #_exampleDiag = "<span class=k>const</span> { suite, compileFail } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=f>suite</span>(<span class=s>'Diagnostics'</span>, t => {\n  t.<span class=f>test</span>(<span class=s>'diagnostic checks'</span>, () => {\n    <span class=k>const</span> src = <span class=s>'&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;{{ unknown }}&lt;/p&gt;&lt;/template&gt;'</span>;\n    <span class=k>const</span> r = <span class=f>compileFail</span>(src);\n\n    t.<span class=f>compileFails</span>(r);\n    t.<span class=f>hasDiag</span>(r, <span class=s>'E0301'</span>);  <span class=cm>// undefined variable</span>\n    t.<span class=f>hasDiag</span>(r, <span class=s>'E0301'</span>, <span class=s>'error'</span>);  <span class=cm>// with level</span>\n    t.<span class=f>noDiag</span>(r, <span class=s>'E0302'</span>);\n    t.<span class=f>diagCount</span>(r, <span class=s>'error'</span>, <span class=n>1</span>);\n  });\n});\n\nsuite.<span class=f>run</span>();";
   get #exampleDiag() { return this.#_exampleDiag; }
   set #exampleDiag(v) { this.#_exampleDiag = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -10032,7 +10038,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskTestCompile extends HTMLElement {
-  #_exampleCompile = "const { compileOk, compileFail, csk } = require('./lib/chasket-test');\n\n// Success\nconst ok = compileOk('&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;hi&lt;/p&gt;&lt;/template&gt;');\nconsole.log(ok.success);  // true\nconsole.log(ok.output);   // JavaScript code\n\n// With file name\nconst r1 = compileOk(src, 'my-component.csk');\n\n// With options\nconst r2 = compileOk(src, 'test.csk', { strict: true });\n\n// Failure\nconst fail = compileFail('&lt;meta name=&quot;x&quot;&lt;/meta&gt;');  // bad syntax\nconsole.log(fail.success);  // false\nconsole.log(fail.diagnostics);  // [{ code, level, message, ... }]\n\n// Helper\nconst src = csk({\n  name: 'my-btn',\n  script: 'state disabled: boolean = false',\n  template: '&lt;button :disabled=&quot;disabled&quot;&gt;Click&lt;/button&gt;',\n  style: 'button { cursor: pointer; }',\n  meta: 'shadow: open'\n});\nconst r3 = compileOk(src);";
+  #_exampleCompile = "<span class=k>const</span> { compileOk, compileFail, csk } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=cm>// Success</span>\n<span class=k>const</span> ok = <span class=f>compileOk</span>(<span class=s>'&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;hi&lt;/p&gt;&lt;/template&gt;'</span>);\nconsole.<span class=f>log</span>(ok.success);  <span class=cm>// true</span>\nconsole.<span class=f>log</span>(ok.output);   <span class=cm>// JavaScript code</span>\n\n<span class=cm>// With file name</span>\n<span class=k>const</span> r1 = <span class=f>compileOk</span>(src, <span class=s>'my-component.csk'</span>);\n\n<span class=cm>// With options</span>\n<span class=k>const</span> r2 = <span class=f>compileOk</span>(src, <span class=s>'test.csk'</span>, { strict: <span class=n>true</span> });\n\n<span class=cm>// Failure</span>\n<span class=k>const</span> fail = <span class=f>compileFail</span>(<span class=s>'&lt;meta name=&quot;x&quot;&lt;/meta&gt;'</span>);  <span class=cm>// bad syntax</span>\nconsole.<span class=f>log</span>(fail.success);  <span class=cm>// false</span>\nconsole.<span class=f>log</span>(fail.diagnostics);  <span class=cm>// [{ code, level, message, ... }]</span>\n\n<span class=cm>// Helper</span>\n<span class=k>const</span> src = <span class=f>csk</span>({\n  name: <span class=s>'my-btn'</span>,\n  script: <span class=s>'state disabled: boolean = false'</span>,\n  template: <span class=s>'&lt;button :disabled=&quot;disabled&quot;&gt;Click&lt;/button&gt;'</span>,\n  style: <span class=s>'button { cursor: pointer; }'</span>,\n  meta: <span class=s>'shadow: open'</span>\n});\n<span class=k>const</span> r3 = <span class=f>compileOk</span>(src);";
   get #exampleCompile() { return this.#_exampleCompile; }
   set #exampleCompile(v) { this.#_exampleCompile = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -10288,7 +10294,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskTestExample extends HTMLElement {
-  #_exampleFull = "const { suite, compileOk, csk } = require('./lib/chasket-test');\n\nsuite('Counter Component', t => {\n  let src;\n\n  t.beforeEach(() => {\n    src = csk({\n      name: 'my-counter',\n      script: '\n        state count: number = 0\n        fn increment() { count++; }\n        fn decrement() { count--; }\n      ',\n      template: '\n        &lt;div&gt;\n          &lt;p&gt;Count: {{ count }}&lt;/p&gt;\n          &lt;button @click=&quot;increment&quot;&gt;+&lt;/button&gt;\n          &lt;button @click=&quot;decrement&quot;&gt;-&lt;/button&gt;\n        &lt;/div&gt;\n      '\n    });\n  });\n\n  t.test('compiles successfully', () => {\n    const r = compileOk(src);\n    t.compileSuccess(r);\n    t.validJS(r);\n  });\n\n  t.test('has state and methods', () => {\n    const r = compileOk(src);\n    t.hasState(r, 'count');\n    t.outputIncludes(r, 'increment');\n    t.outputIncludes(r, 'decrement');\n  });\n\n  t.test('template includes buttons', () => {\n    const r = compileOk(src);\n    t.templateIncludes(r, '&lt;button');\n    t.templateIncludes(r, 'Count:');\n  });\n\n  t.test('interpolates count', () => {\n    const r = compileOk(src);\n    t.hasInterpolation(r, 'count');\n  });\n\n  t.afterEach(() => {\n    console.log('test complete');\n  });\n});\n\nsuite.run();";
+  #_exampleFull = "<span class=k>const</span> { suite, compileOk, csk } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=f>suite</span>(<span class=s>'Counter Component'</span>, t => {\n  <span class=k>let</span> src;\n\n  t.<span class=f>beforeEach</span>(() => {\n    src = <span class=f>csk</span>({\n      name: <span class=s>'my-counter'</span>,\n      script: <span class=s>'\n        state count: number = 0\n        fn increment() { count++; }\n        fn decrement() { count--; }\n      '</span>,\n      template: <span class=s>'\n        &lt;div&gt;\n          &lt;p&gt;Count: {{ count }}&lt;/p&gt;\n          &lt;button @click=&quot;increment&quot;&gt;+&lt;/button&gt;\n          &lt;button @click=&quot;decrement&quot;&gt;-&lt;/button&gt;\n        &lt;/div&gt;\n      '</span>\n    });\n  });\n\n  t.<span class=f>test</span>(<span class=s>'compiles successfully'</span>, () => {\n    <span class=k>const</span> r = <span class=f>compileOk</span>(src);\n    t.<span class=f>compileSuccess</span>(r);\n    t.<span class=f>validJS</span>(r);\n  });\n\n  t.<span class=f>test</span>(<span class=s>'has state and methods'</span>, () => {\n    <span class=k>const</span> r = <span class=f>compileOk</span>(src);\n    t.<span class=f>hasState</span>(r, <span class=s>'count'</span>);\n    t.<span class=f>outputIncludes</span>(r, <span class=s>'increment'</span>);\n    t.<span class=f>outputIncludes</span>(r, <span class=s>'decrement'</span>);\n  });\n\n  t.<span class=f>test</span>(<span class=s>'template includes buttons'</span>, () => {\n    <span class=k>const</span> r = <span class=f>compileOk</span>(src);\n    t.<span class=f>templateIncludes</span>(r, <span class=s>'&lt;button'</span>);\n    t.<span class=f>templateIncludes</span>(r, <span class=s>'Count:'</span>);\n  });\n\n  t.<span class=f>test</span>(<span class=s>'interpolates count'</span>, () => {\n    <span class=k>const</span> r = <span class=f>compileOk</span>(src);\n    t.<span class=f>hasInterpolation</span>(r, <span class=s>'count'</span>);\n  });\n\n  t.<span class=f>afterEach</span>(() => {\n    console.<span class=f>log</span>(<span class=s>'test complete'</span>);\n  });\n});\n\nsuite.<span class=f>run</span>();";
   get #exampleFull() { return this.#_exampleFull; }
   set #exampleFull(v) { this.#_exampleFull = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -10520,13 +10526,13 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskTestOverview extends HTMLElement {
-  #_exampleOverview = "const { suite, compileOk, assert } = require('./lib/chasket-test');\n\nsuite('My Component Tests', t => {\n  t.test('basic compile', () => {\n    const r = compileOk('&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;hi&lt;/p&gt;&lt;/template&gt;');\n    t.assert(r.success, 'compiles');\n    t.outputIncludes(r, 'hi');\n  });\n});\n\nsuite.run();";
+  #_exampleOverview = "<span class=k>const</span> { suite, compileOk, assert } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=f>suite</span>(<span class=s>'My Component Tests'</span>, t => {\n  t.<span class=f>test</span>(<span class=s>'basic compile'</span>, () => {\n    <span class=k>const</span> r = <span class=f>compileOk</span>(<span class=s>'&lt;meta&gt;name: &quot;x&quot;&lt;/meta&gt;&lt;template&gt;&lt;p&gt;hi&lt;/p&gt;&lt;/template&gt;'</span>);\n    t.<span class=f>assert</span>(r.success, <span class=s>'compiles'</span>);\n    t.<span class=f>outputIncludes</span>(r, <span class=s>'hi'</span>);\n  });\n});\n\nsuite.<span class=f>run</span>();";
   get #exampleOverview() { return this.#_exampleOverview; }
   set #exampleOverview(v) { this.#_exampleOverview = v; this.#scheduleUpdate(); }
-  #_exampleSetup = "const { suite, compileOk, compileFail, csk } = require('./lib/chasket-test');\n\n// Simple compile check\nconst src = '&lt;meta&gt;name: &quot;test&quot;&lt;/meta&gt;&lt;template&gt;&lt;div&gt;content&lt;/div&gt;&lt;/template&gt;';\nconst result = compileOk(src);\nconsole.log(result.success);  // true\nconsole.log(result.output);   // generated JS code\nconsole.log(result.diagnostics);  // [ ]";
+  #_exampleSetup = "<span class=k>const</span> { suite, compileOk, compileFail, csk } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=cm>// Simple compile check</span>\n<span class=k>const</span> src = <span class=s>'&lt;meta&gt;name: &quot;test&quot;&lt;/meta&gt;&lt;template&gt;&lt;div&gt;content&lt;/div&gt;&lt;/template&gt;'</span>;\n<span class=k>const</span> result = <span class=f>compileOk</span>(src);\nconsole.<span class=f>log</span>(result.success);  <span class=cm>// true</span>\nconsole.<span class=f>log</span>(result.output);   <span class=cm>// generated JS code</span>\nconsole.<span class=f>log</span>(result.diagnostics);  <span class=cm>// [ ]</span>";
   get #exampleSetup() { return this.#_exampleSetup; }
   set #exampleSetup(v) { this.#_exampleSetup = v; this.#scheduleUpdate(); }
-  #_exampleQuick = "const { suite, compileOk, csk } = require('./lib/chasket-test');\n\nsuite('Counter Component', t => {\n  t.test('compiles with state', () => {\n    const src = csk({\n      name: 'my-counter',\n      script: 'state count: number = 0',\n      template: '&lt;button @click=&quot;count++&quot;&gt;{{ count }}&lt;/button&gt;'\n    });\n    const r = compileOk(src);\n    t.compileSuccess(r);\n    t.hasState(r, 'count');\n    t.outputIncludes(r, 'count++');\n  });\n});\n\nsuite.run();";
+  #_exampleQuick = "<span class=k>const</span> { suite, compileOk, csk } = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);\n\n<span class=f>suite</span>(<span class=s>'Counter Component'</span>, t => {\n  t.<span class=f>test</span>(<span class=s>'compiles with state'</span>, () => {\n    <span class=k>const</span> src = <span class=f>csk</span>({\n      name: <span class=s>'my-counter'</span>,\n      script: <span class=s>'state count: number = 0'</span>,\n      template: <span class=s>'&lt;button @click=&quot;count++&quot;&gt;{{ count }}&lt;/button&gt;'</span>\n    });\n    <span class=k>const</span> r = <span class=f>compileOk</span>(src);\n    t.<span class=f>compileSuccess</span>(r);\n    t.<span class=f>hasState</span>(r, <span class=s>'count'</span>);\n    t.<span class=f>outputIncludes</span>(r, <span class=s>'count++'</span>);\n  });\n});\n\nsuite.<span class=f>run</span>();";
   get #exampleQuick() { return this.#_exampleQuick; }
   set #exampleQuick(v) { this.#_exampleQuick = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
@@ -10606,7 +10612,7 @@ class CskTestOverview extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('testContent.overview.importDesc'))}
           </p>
-          <pre><code>const {{ suite, compileOk, compileFail, csk }} = require('./lib/chasket-test');</code></pre>
+          <pre><code><span class=k>const</span> <span class=i>{{ suite, compileOk, compileFail, csk }}</span> = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);</code></pre>
         </div>
         <p class="note-text">
           ${this.#esc(this.#tr('testContent.overview.autoDetect'))}
@@ -10707,7 +10713,7 @@ class CskTestOverview extends HTMLElement {
           <p>
             ${this.#esc(this.#tr('testContent.overview.importDesc'))}
           </p>
-          <pre><code>const {{ suite, compileOk, compileFail, csk }} = require('./lib/chasket-test');</code></pre>
+          <pre><code><span class=k>const</span> <span class=i>{{ suite, compileOk, compileFail, csk }}</span> = <span class=f>require</span>(<span class=s>'./lib/chasket-test'</span>);</code></pre>
         </div>
         <p class="note-text">
           ${this.#esc(this.#tr('testContent.overview.autoDetect'))}
@@ -11812,6 +11818,30 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 
 })();
 
-__chasketDefineQueue.forEach(([tag, cls]) => {
-  if (!customElements.get(tag)) customElements.define(tag, cls);
-});
+// Register components in dependency order (children before parents)
+(function() {
+  const tags = new Set(__chasketDefineQueue.map(([t]) => t));
+  const tagIdx = new Map(__chasketDefineQueue.map(([t], i) => [t, i]));
+  // Detect child custom elements from class source code
+  const deps = __chasketDefineQueue.map(([tag, cls]) => {
+    const src = cls.toString();
+    const children = [];
+    tags.forEach(t => { if (t !== tag && src.includes('<' + t)) children.push(t); });
+    return children;
+  });
+  // Topological sort (Kahn's algorithm): children defined before parents
+  const deg = deps.map(d => d.filter(t => tagIdx.has(t)).length);
+  const q = []; deg.forEach((d, i) => { if (d === 0) q.push(i); });
+  const order = [];
+  while (q.length) {
+    const i = q.shift(); order.push(i);
+    const myTag = __chasketDefineQueue[i][0];
+    deps.forEach((d, j) => { if (d.includes(myTag) && --deg[j] === 0) q.push(j); });
+  }
+  // Append any remaining (cyclic) in original order
+  for (let i = 0; i < __chasketDefineQueue.length; i++) if (!order.includes(i)) order.push(i);
+  order.forEach(i => {
+    const [tag, cls] = __chasketDefineQueue[i];
+    if (!customElements.get(tag)) customElements.define(tag, cls);
+  });
+})();

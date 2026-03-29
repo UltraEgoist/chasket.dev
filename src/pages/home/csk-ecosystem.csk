@@ -287,7 +287,7 @@
     font-style: italic;
   }
 
-  @media (max-width: 40rem) {
+  @media (max-width: 30rem) {
     .grid { grid-template-columns: 1fr; }
   }
 </style>
