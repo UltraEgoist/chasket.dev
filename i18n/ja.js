@@ -184,7 +184,21 @@ window.__i18n_register('ja', {
       typeSystem: '型システム',
       diagnostics: '診断メッセージ',
       errorCodes: 'エラーコード',
+      errors: {
+        e0001: 'template ブロック欠落',
+        e0002: '無効なコンポーネント名',
+        e0003: '型不一致',
+        e0004: '未定義の識別子',
+        e0301: '未定義変数参照',
+        e0302: '型にメソッドが存在しない',
+      },
       warningCodes: '警告コード',
+      warnings: {
+        w0101: '未使用の state 変数',
+        w0201: '@html セキュリティリスク',
+        w0202: '動的 URL 注入リスク',
+        w0203: '重複した id 属性',
+      },
       ecosystem: 'エコシステム',
       officialPackages: '公式パッケージ',
       compilationOutput: 'コンパイル出力'

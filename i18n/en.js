@@ -184,7 +184,21 @@ window.__i18n_register('en', {
       typeSystem: 'Type System',
       diagnostics: 'Diagnostics',
       errorCodes: 'Error Codes',
+      errors: {
+        e0001: 'Missing template block',
+        e0002: 'Invalid component name',
+        e0003: 'Type mismatch',
+        e0004: 'Undefined identifier',
+        e0301: 'Undefined variable reference',
+        e0302: 'Method not found on type',
+      },
       warningCodes: 'Warning Codes',
+      warnings: {
+        w0101: 'Unused state variable',
+        w0201: '@html security risk',
+        w0202: 'Dynamic URL injection risk',
+        w0203: 'Duplicate id attribute',
+      },
       ecosystem: 'Ecosystem',
       officialPackages: 'Official Packages',
       compilationOutput: 'Compilation Output'

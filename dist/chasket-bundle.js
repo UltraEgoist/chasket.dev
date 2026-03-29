@@ -1,4 +1,4 @@
-// Chasket Bundle - 2026-03-29T03:06:12.736Z
+// Chasket Bundle - 2026-03-29T03:14:13.875Z
 // 33 component(s)
 
 // Deferred registration queue: all classes are defined first,
@@ -2031,27 +2031,36 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskApiDiagnostics extends HTMLElement {
-  #_code_diagnostic_e0001 = "&lt;!-- csk-page-api.csk --&gt;\n&lt;meta&gt;\n  name: my-component\n&lt;/meta&gt;\n&lt;script&gt;\n  state count: number = 0\n&lt;/script&gt;\n&lt;!-- no template block --&gt;\n\n&lt;!-- fix: add template block --&gt;\n&lt;template&gt;\n  &lt;p&gt;{{ count }}&lt;/p&gt;\n&lt;/template&gt;";
+  #_code_diagnostic_e0001 = "<span class=cm>&lt;!-- csk-page-api.csk --&gt;</span>\n<span class=t>&lt;meta</span><span class=t>&gt;</span>\n  name: my-component\n<span class=t>&lt;/meta</span><span class=t>&gt;</span>\n<span class=t>&lt;script</span><span class=t>&gt;</span>\n  <span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>\n<span class=t>&lt;/script</span><span class=t>&gt;</span>\n<span class=cm>&lt;!-- no template block --&gt;</span>\n\n<span class=cm>&lt;!-- fix: add template block --&gt;</span>\n<span class=t>&lt;template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ count }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=t>&lt;/template</span><span class=t>&gt;</span>";
   get #code_diagnostic_e0001() { return this.#_code_diagnostic_e0001; }
   set #code_diagnostic_e0001(v) { this.#_code_diagnostic_e0001 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_e0002 = "&lt;!-- invalid: no hyphens --&gt;\n&lt;meta&gt;\n  name: MyComponent\n&lt;/meta&gt;\n\n&lt;!-- fix: use kebab-case --&gt;\n&lt;meta&gt;\n  name: my-component\n&lt;/meta&gt;";
+  #_code_diagnostic_e0002 = "<span class=cm>&lt;!-- invalid: no hyphens --&gt;</span>\n<span class=t>&lt;meta</span><span class=t>&gt;</span>\n  name: MyComponent\n<span class=t>&lt;/meta</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- fix: use kebab-case --&gt;</span>\n<span class=t>&lt;meta</span><span class=t>&gt;</span>\n  name: my-component\n<span class=t>&lt;/meta</span><span class=t>&gt;</span>";
   get #code_diagnostic_e0002() { return this.#_code_diagnostic_e0002; }
   set #code_diagnostic_e0002(v) { this.#_code_diagnostic_e0002 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_e0003 = "state count: number = 0\nstate result: string = count + 10  // error: assigning number+number to string\n\n// fix:\nstate result: number = count + 10\n// or\nstate result: string = (count + 10).toString()";
+  #_code_diagnostic_e0003 = "<span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>\n<span class=k>state</span> result: <span class=tp>string</span> = count + <span class=n>10</span>  <span class=cm>// error: assigning number+number to string</span>\n\n<span class=cm>// fix:</span>\n<span class=k>state</span> result: <span class=tp>number</span> = count + <span class=n>10</span>\n<span class=cm>// or</span>\n<span class=k>state</span> result: <span class=tp>string</span> = (count + <span class=n>10</span>).<span class=f>toString</span>()";
   get #code_diagnostic_e0003() { return this.#_code_diagnostic_e0003; }
   set #code_diagnostic_e0003(v) { this.#_code_diagnostic_e0003 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_w0101 = "state count: number = 0   // warning: unused\nstate name: string = 'John'\n\n&lt;template&gt;\n  &lt;p&gt;{{ name }}&lt;/p&gt;\n&lt;/template&gt;\n\n// fix: use or remove count";
+  #_code_diagnostic_w0101 = "<span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>   <span class=cm>// warning: unused</span>\n<span class=k>state</span> name: <span class=tp>string</span> = <span class=s>'John'</span>\n\n<span class=t>&lt;template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ name }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=t>&lt;/template</span><span class=t>&gt;</span>\n\n<span class=cm>// fix: use or remove count</span>";
   get #code_diagnostic_w0101() { return this.#_code_diagnostic_w0101; }
   set #code_diagnostic_w0101(v) { this.#_code_diagnostic_w0101 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_w0201 = "&lt;!-- dangerous: inserting user input as HTML --&gt;\n&lt;div @html=\"userContent\"&gt;&lt;/div&gt;\n\n&lt;!-- safe: auto-escaped --&gt;\n&lt;div&gt;{{ userContent }}&lt;/div&gt;\n\n&lt;!-- fix: use only trusted HTML --&gt;\n&lt;div @html=\"sanitize(userContent)\"&gt;&lt;/div&gt;";
+  #_code_diagnostic_w0201 = "<span class=cm>&lt;!-- dangerous: inserting user input as HTML --&gt;</span>\n<span class=t>&lt;div</span> @html=\"userContent\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- safe: auto-escaped --&gt;</span>\n<span class=t>&lt;div</span><span class=t>&gt;</span><span class=i>{{ userContent }}</span><span class=t>&lt;/div</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- fix: use only trusted HTML --&gt;</span>\n<span class=t>&lt;div</span> @html=\"sanitize(userContent)\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>";
   get #code_diagnostic_w0201() { return this.#_code_diagnostic_w0201; }
   set #code_diagnostic_w0201(v) { this.#_code_diagnostic_w0201 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_w0202 = "&lt;!-- dangerous: dynamic URL injection --&gt;\n&lt;a :href=\"'https://' + userInput\"&gt;Link&lt;/a&gt;\n\n&lt;!-- fix: URL validation --&gt;\n&lt;a :href=\"isValidUrl(userInput) ? userInput : '#'\"&gt;Link&lt;/a&gt;";
+  #_code_diagnostic_w0202 = "<span class=cm>&lt;!-- dangerous: dynamic URL injection --&gt;</span>\n<span class=t>&lt;a</span> :href=\"'https://' + userInput\"<span class=t>&gt;</span>Link<span class=t>&lt;/a</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- fix: URL validation --&gt;</span>\n<span class=t>&lt;a</span> :href=\"isValidUrl(userInput) ? userInput : '#'\"<span class=t>&gt;</span>Link<span class=t>&lt;/a</span><span class=t>&gt;</span>";
   get #code_diagnostic_w0202() { return this.#_code_diagnostic_w0202; }
   set #code_diagnostic_w0202(v) { this.#_code_diagnostic_w0202 = v; this.#scheduleUpdate(); }
-  #_code_diagnostic_w0203 = "&lt;!-- duplicate ID warning --&gt;\n&lt;div id=\"header\"&gt;&lt;/div&gt;\n&lt;div id=\"header\"&gt;&lt;/div&gt;  &lt;!-- warning --&gt;\n\n&lt;!-- fix: use unique IDs --&gt;\n&lt;div id=\"header\"&gt;&lt;/div&gt;\n&lt;div id=\"main\"&gt;&lt;/div&gt;";
+  #_code_diagnostic_w0203 = "<span class=cm>&lt;!-- duplicate ID warning --&gt;</span>\n<span class=t>&lt;div</span> id=\"header\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>\n<span class=t>&lt;div</span> id=\"header\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>  <span class=cm>&lt;!-- warning --&gt;</span>\n\n<span class=cm>&lt;!-- fix: use unique IDs --&gt;</span>\n<span class=t>&lt;div</span> id=\"header\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>\n<span class=t>&lt;div</span> id=\"main\"<span class=t>&gt;</span><span class=t>&lt;/div</span><span class=t>&gt;</span>";
   get #code_diagnostic_w0203() { return this.#_code_diagnostic_w0203; }
   set #code_diagnostic_w0203(v) { this.#_code_diagnostic_w0203 = v; this.#scheduleUpdate(); }
+  #_code_diagnostic_e0004 = "<span class=cm>// error: unknown identifier 'countr'</span>\n<span class=k>fn</span> <span class=f>increment</span>() {\n  countr++   <span class=cm>// typo</span>\n}\n\n<span class=cm>// fix: use declared variable</span>\n<span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>\n<span class=k>fn</span> <span class=f>increment</span>() {\n  count++\n}";
+  get #code_diagnostic_e0004() { return this.#_code_diagnostic_e0004; }
+  set #code_diagnostic_e0004(v) { this.#_code_diagnostic_e0004 = v; this.#scheduleUpdate(); }
+  #_code_diagnostic_e0301 = "<span class=t>&lt;template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ userName }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>  <span class=cm>&lt;!-- error: userName not defined --&gt;</span>\n<span class=t>&lt;/template</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- fix: declare in script --&gt;</span>\n<span class=t>&lt;script</span><span class=t>&gt;</span>\n  <span class=k>state</span> userName: <span class=tp>string</span> = <span class=s>'Alice'</span>\n<span class=t>&lt;/script</span><span class=t>&gt;</span>\n<span class=t>&lt;template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ userName }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=t>&lt;/template</span><span class=t>&gt;</span>";
+  get #code_diagnostic_e0301() { return this.#_code_diagnostic_e0301; }
+  set #code_diagnostic_e0301(v) { this.#_code_diagnostic_e0301 = v; this.#scheduleUpdate(); }
+  #_code_diagnostic_e0302 = "<span class=t>&lt;template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ count + 'px' }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>  <span class=cm>&lt;!-- error: number + string --&gt;</span>\n<span class=t>&lt;/template</span><span class=t>&gt;</span>\n\n<span class=cm>&lt;!-- fix: explicit conversion --&gt;</span>\n<span class=t>&lt;template</span><span class=t>&gt;</span>\n  <span class=t>&lt;p</span><span class=t>&gt;</span><span class=i>{{ count.toString() + 'px' }}</span><span class=t>&lt;/p</span><span class=t>&gt;</span>\n<span class=t>&lt;/template</span><span class=t>&gt;</span>";
+  get #code_diagnostic_e0302() { return this.#_code_diagnostic_e0302; }
+  set #code_diagnostic_e0302(v) { this.#_code_diagnostic_e0302 = v; this.#scheduleUpdate(); }
   #updateScheduled = false;
   #listeners = [];
 
@@ -2105,7 +2114,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code><span class=i>{{{ code_diagnostic_e0001 }}</span></code></pre>
+            <pre><code>${this.#code_diagnostic_e0001}</code></pre>
           </div>
         </div>
         <div id="e0002" class="subsection">
@@ -2120,7 +2129,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code><span class=i>{{{ code_diagnostic_e0002 }}</span></code></pre>
+            <pre><code>${this.#code_diagnostic_e0002}</code></pre>
           </div>
           <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.kebabCaseConvention'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.kebabRule1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.kebabRule2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.kebabRule3'))}</li></ul></div>
         </div>
@@ -2136,7 +2145,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code><span class=i>{{{ code_diagnostic_e0003 }}</span></code></pre>
+            <pre><code>${this.#code_diagnostic_e0003}</code></pre>
           </div>
         </div>
         <div id="e0004" class="subsection">
@@ -2151,9 +2160,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <p>
-              ${this.#esc(this.#tr('apiContent.diagnostics.e0004.fixDescription'))}
-            </p>
+            <pre><code>${this.#code_diagnostic_e0004}</code></pre>
           </div>
         </div>
         <div id="e0301" class="subsection">
@@ -2168,9 +2175,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <p>
-              ${this.#esc(this.#tr('apiContent.diagnostics.e0301.fixDescription'))}
-            </p>
+            <pre><code>${this.#code_diagnostic_e0301}</code></pre>
           </div>
         </div>
         <div id="e0302" class="subsection">
@@ -2185,9 +2190,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <p>
-              ${this.#esc(this.#tr('apiContent.diagnostics.e0302.fixDescription'))}
-            </p>
+            <pre><code>${this.#code_diagnostic_e0302}</code></pre>
           </div>
         </div>
       </section>
@@ -2209,7 +2212,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code><span class=i>{{{ code_diagnostic_w0101 }}</span></code></pre>
+            <pre><code>${this.#code_diagnostic_w0101}</code></pre>
           </div>
           <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.approaches'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach3'))}</li></ul></div>
         </div>
@@ -2225,7 +2228,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code><span class=i>{{{ code_diagnostic_w0201 }}</span></code></pre>
+            <pre><code>${this.#code_diagnostic_w0201}</code></pre>
           </div>
           <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.securityMeasures'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure3'))}</li></ul></div>
         </div>
@@ -2241,7 +2244,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code><span class=i>{{{ code_diagnostic_w0202 }}</span></code></pre>
+            <pre><code>${this.#code_diagnostic_w0202}</code></pre>
           </div>
           <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.countermeasures'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure3'))}</li></ul></div>
         </div>
@@ -2257,7 +2260,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code><span class=i>{{{ code_diagnostic_w0203 }}</span></code></pre>
+            <pre><code>${this.#code_diagnostic_w0203}</code></pre>
           </div>
           <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.bestPractices'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice3'))}</li></ul></div>
         </div>
@@ -2296,7 +2299,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code><span class=i>{{{ code_diagnostic_e0001 }}</span></code></pre>
+            <pre><code>${this.#code_diagnostic_e0001}</code></pre>
           </div>
         </div>
         <div id="e0002" class="subsection">
@@ -2311,7 +2314,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code><span class=i>{{{ code_diagnostic_e0002 }}</span></code></pre>
+            <pre><code>${this.#code_diagnostic_e0002}</code></pre>
           </div>
           <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.kebabCaseConvention'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.kebabRule1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.kebabRule2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.kebabRule3'))}</li></ul></div>
         </div>
@@ -2327,7 +2330,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code><span class=i>{{{ code_diagnostic_e0003 }}</span></code></pre>
+            <pre><code>${this.#code_diagnostic_e0003}</code></pre>
           </div>
         </div>
         <div id="e0004" class="subsection">
@@ -2342,9 +2345,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <p>
-              ${this.#esc(this.#tr('apiContent.diagnostics.e0004.fixDescription'))}
-            </p>
+            <pre><code>${this.#code_diagnostic_e0004}</code></pre>
           </div>
         </div>
         <div id="e0301" class="subsection">
@@ -2359,9 +2360,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <p>
-              ${this.#esc(this.#tr('apiContent.diagnostics.e0301.fixDescription'))}
-            </p>
+            <pre><code>${this.#code_diagnostic_e0301}</code></pre>
           </div>
         </div>
         <div id="e0302" class="subsection">
@@ -2376,9 +2375,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <p>
-              ${this.#esc(this.#tr('apiContent.diagnostics.e0302.fixDescription'))}
-            </p>
+            <pre><code>${this.#code_diagnostic_e0302}</code></pre>
           </div>
         </div>
       </section>
@@ -2400,7 +2397,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code><span class=i>{{{ code_diagnostic_w0101 }}</span></code></pre>
+            <pre><code>${this.#code_diagnostic_w0101}</code></pre>
           </div>
           <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.approaches'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0101.approach3'))}</li></ul></div>
         </div>
@@ -2416,7 +2413,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code><span class=i>{{{ code_diagnostic_w0201 }}</span></code></pre>
+            <pre><code>${this.#code_diagnostic_w0201}</code></pre>
           </div>
           <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.securityMeasures'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0201.measure3'))}</li></ul></div>
         </div>
@@ -2432,7 +2429,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code><span class=i>{{{ code_diagnostic_w0202 }}</span></code></pre>
+            <pre><code>${this.#code_diagnostic_w0202}</code></pre>
           </div>
           <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.countermeasures'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0202.measure3'))}</li></ul></div>
         </div>
@@ -2448,7 +2445,7 @@ class CskApiDiagnostics extends HTMLElement {
             <h4>
               ${this.#esc(this.#tr('apiContent.diagnostics.fixMethod'))}
             </h4>
-            <pre><code><span class=i>{{{ code_diagnostic_w0203 }}</span></code></pre>
+            <pre><code>${this.#code_diagnostic_w0203}</code></pre>
           </div>
           <div class="note"><strong>${this.#esc(this.#tr('apiContent.diagnostics.bestPractices'))}:</strong><ul><li>${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice1'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice2'))}</li><li>${this.#esc(this.#tr('apiContent.diagnostics.w0203.practice3'))}</li></ul></div>
         </div>
