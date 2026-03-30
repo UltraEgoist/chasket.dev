@@ -51,7 +51,8 @@
   // コンパイラがテンプレートリテラル生成時に挿入する不要な空白ノードを
   // 描画後に除去し、コード表示のレイアウト崩れを防止する。
   fn cleanPre() {
-    requestAnimationFrame(() => {
+    // 同期的に実行してCLSを回避する（rAF内だと描画後のシフトが発生する）
+    queueMicrotask(() => {
       this.shadowRoot.querySelectorAll('pre').forEach((el) => {
         for (let i = el.childNodes.length - 1; i >= 0; i--) {
           const n = el.childNodes[i]

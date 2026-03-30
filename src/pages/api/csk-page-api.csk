@@ -549,7 +549,14 @@ pre code .cs { color: #81ecec; }
 
 /* Mobile sidebar helpers */
 .sidebar-overlay {
-  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  pointer-events: none;
 }
 
 .sidebar-edge {
@@ -596,19 +603,10 @@ pre code .cs { color: #81ecec; }
     display: flex;
   }
 
-  .sidebar-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 999;
-    display: none;
-  }
-
   .sidebar-overlay.visible {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
 
   .sidebar-edge {
