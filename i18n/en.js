@@ -125,7 +125,10 @@ window.__i18n_register('en', {
   },
 
   footer: {
-    copyright: '2026 Chasket Contributors. MIT License.'
+    copyright: '2026 Chasket Contributors. MIT License.',
+    source: 'Source Code',
+    docsRepo: 'Docs Site',
+    ossNote: 'The source code for this site is open source'
   },
 
   notFound: {
