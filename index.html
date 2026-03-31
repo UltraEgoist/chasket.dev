@@ -41,20 +41,7 @@
   <!-- JS バンドルの先読み（fetchだけ先行、実行はbodyで） -->
   <link rel="preload" as="script" href="/dist/core-layout.js" />
   <link rel="preload" as="script" href="/dist/core-shared.js" />
-  <script>
-    // 現在のルートに対応するページバンドルを先読み
-    (function() {
-      var h = location.hash || '#/';
-      var p = 'page-home.js';
-      if (h.indexOf('#/guide') === 0) p = 'page-guide.js';
-      else if (h.indexOf('#/api') === 0) p = 'page-api.js';
-      else if (h.indexOf('#/testing') === 0) p = 'page-testing.js';
-      else if (h.indexOf('#/why') === 0) p = 'page-why.js';
-      var link = document.createElement('link');
-      link.rel = 'preload'; link.as = 'script'; link.href = '/dist/' + p;
-      document.head.appendChild(link);
-    })();
-  </script>
+  <script src="/scripts/preload-route.js"></script>
   <style>
     /* ── Design tokens (penetrate Shadow DOM) ── */
     :root {
@@ -105,21 +92,10 @@
     code { font-family: var(--mono); }
   </style>
 
-  <!-- i18n: コアシステムとアクティブ言語を同期ロード、非アクティブ言語は遅延 -->
+  <!-- i18n: load BEFORE the component bundle -->
   <script src="/i18n/i18n.js"></script>
-  <script>
-    // アクティブ言語のみ同期ロード、もう一方は defer で遅延ロード
-    (function() {
-      var lang = document.documentElement.lang || 'ja';
-      var active = lang === 'en' ? '/i18n/en.js' : '/i18n/ja.js';
-      var deferred = lang === 'en' ? '/i18n/ja.js' : '/i18n/en.js';
-      document.write('<script src="' + active + '"><\/script>');
-      var s = document.createElement('script');
-      s.src = deferred;
-      s.defer = true;
-      document.head.appendChild(s);
-    })();
-  </script>
+  <script src="/i18n/ja.js"></script>
+  <script src="/i18n/en.js"></script>
 </head>
 <body>
   <csk-shell>
@@ -135,16 +111,7 @@
       </div>
     </div>
   </csk-shell>
-  <script>
-    // 英語ユーザー向けにスケルトンテキストを即座に差し替え
-    if (document.documentElement.lang === 'en') {
-      var sk = document.getElementById('csk-skeleton');
-      if (sk) {
-        sk.querySelector('.skeleton-h1').innerHTML = 'Template-First<br><span class="skeleton-gradient">Web Components</span> Language';
-        sk.querySelector('.skeleton-sub').textContent = 'Write single-file components with built-in reactivity, type checking, and scoped CSS. Compiles to native HTMLElement classes with zero runtime.';
-      }
-    }
-  </script>
+  <script src="/scripts/skeleton-i18n.js"></script>
   <style>
     /* スケルトンスタイル — LCP描画後にJSが上書きするまでの表示 */
     .skeleton-hero {

@@ -9,6 +9,9 @@
 /dist/*
   Cache-Control: public, max-age=2592000, immutable
 
+/scripts/*
+  Cache-Control: public, max-age=2592000, immutable
+
 /i18n/*
   Cache-Control: public, max-age=86400
 
