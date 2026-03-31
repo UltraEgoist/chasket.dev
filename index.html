@@ -31,8 +31,30 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Latin フォント: swap（テキスト即表示→フォント適用時に切替） -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <!-- 日本語フォント: optional（キャッシュ済みなら使用、未取得なら system-ui で描画し裏で取得） -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=optional" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=optional" rel="stylesheet" />
+
+  <!-- JS バンドルの先読み（fetchだけ先行、実行はbodyで） -->
+  <link rel="preload" as="script" href="/dist/core-layout.js" />
+  <link rel="preload" as="script" href="/dist/core-shared.js" />
+  <script>
+    // 現在のルートに対応するページバンドルを先読み
+    (function() {
+      var h = location.hash || '#/';
+      var p = 'page-home.js';
+      if (h.indexOf('#/guide') === 0) p = 'page-guide.js';
+      else if (h.indexOf('#/api') === 0) p = 'page-api.js';
+      else if (h.indexOf('#/testing') === 0) p = 'page-testing.js';
+      else if (h.indexOf('#/why') === 0) p = 'page-why.js';
+      var link = document.createElement('link');
+      link.rel = 'preload'; link.as = 'script'; link.href = '/dist/' + p;
+      document.head.appendChild(link);
+    })();
+  </script>
   <style>
     /* ── Design tokens (penetrate Shadow DOM) ── */
     :root {
@@ -83,13 +105,76 @@
     code { font-family: var(--mono); }
   </style>
 
-  <!-- i18n: load BEFORE the component bundle -->
+  <!-- i18n: コアシステムとアクティブ言語を同期ロード、非アクティブ言語は遅延 -->
   <script src="/i18n/i18n.js"></script>
-  <script src="/i18n/ja.js"></script>
-  <script src="/i18n/en.js"></script>
+  <script>
+    // アクティブ言語のみ同期ロード、もう一方は defer で遅延ロード
+    (function() {
+      var lang = document.documentElement.lang || 'ja';
+      var active = lang === 'en' ? '/i18n/en.js' : '/i18n/ja.js';
+      var deferred = lang === 'en' ? '/i18n/ja.js' : '/i18n/en.js';
+      document.write('<script src="' + active + '"><\/script>');
+      var s = document.createElement('script');
+      s.src = deferred;
+      s.defer = true;
+      document.head.appendChild(s);
+    })();
+  </script>
 </head>
 <body>
-  <csk-shell></csk-shell>
+  <csk-shell>
+    <!--
+      スケルトン: JSが起動する前にLCP要素（h1）を即座に描画する。
+      csk-shell (shadow: none) のテンプレートが描画されると、この子要素は上書きされる。
+    -->
+    <div class="skeleton-hero" id="csk-skeleton">
+      <div class="skeleton-content">
+        <div class="skeleton-badge">v0.2.0 — SSR & Vite Plugin</div>
+        <h1 class="skeleton-h1">テンプレートファーストな<br><span class="skeleton-gradient">Web Components</span> 言語</h1>
+        <p class="skeleton-sub">組み込みのリアクティビティ、型チェック、スコープ付きCSSを備えたシングルファイルコンポーネントを記述。ランタイムゼロでネイティブ HTMLElement クラスにコンパイル。</p>
+      </div>
+    </div>
+  </csk-shell>
+  <script>
+    // 英語ユーザー向けにスケルトンテキストを即座に差し替え
+    if (document.documentElement.lang === 'en') {
+      var sk = document.getElementById('csk-skeleton');
+      if (sk) {
+        sk.querySelector('.skeleton-h1').innerHTML = 'Template-First<br><span class="skeleton-gradient">Web Components</span> Language';
+        sk.querySelector('.skeleton-sub').textContent = 'Write single-file components with built-in reactivity, type checking, and scoped CSS. Compiles to native HTMLElement classes with zero runtime.';
+      }
+    }
+  </script>
+  <style>
+    /* スケルトンスタイル — LCP描画後にJSが上書きするまでの表示 */
+    .skeleton-hero {
+      display: flex; align-items: center; justify-content: center;
+      min-height: max(70vh, 28rem); text-align: center;
+      padding: clamp(6rem, 12vw, 8rem) clamp(1rem, 3vw, 1.5rem) clamp(3rem, 6vw, 5rem);
+    }
+    .skeleton-content { max-width: 45rem; width: 100%; }
+    .skeleton-badge {
+      display: inline-block; font-size: clamp(0.7rem, 0.9vw, 0.8rem); font-weight: 500;
+      padding: 0.375rem 1rem; border-radius: 999px;
+      background: rgba(108,92,231,0.15); color: #a29bfe;
+      border: 1px solid rgba(108,92,231,0.3);
+      margin-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
+    }
+    .skeleton-h1 {
+      font-size: clamp(1.75rem, 5vw, 3.5rem); font-weight: 800;
+      line-height: 1.15; letter-spacing: -0.03em;
+      margin-bottom: clamp(0.75rem, 1.5vw, 1.25rem);
+      color: #e4e4ed; word-break: keep-all;
+    }
+    .skeleton-gradient {
+      background: linear-gradient(135deg, #a29bfe, #55efc4);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .skeleton-sub {
+      font-size: clamp(0.875rem, 1.2vw, 1.1rem); color: #9898ab;
+      max-width: 35rem; margin: 0 auto; line-height: 1.65;
+    }
+  </style>
   <!-- コアバンドル: レイアウト（navbar, footer, shell）と共有コンポーネント -->
   <script src="/dist/core-layout.js"></script>
   <script src="/dist/core-shared.js"></script>
