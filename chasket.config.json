@@ -1,9 +1,17 @@
 {
   "target": "js",
-  "outdir": "dist",
-  "bundle": "chasket-bundle.js",
   "shadow": "open",
   "sourcemap": false,
   "minify": false,
-  "src": "src"
+  "src": "src",
+  "outdir": "dist",
+  "entries": [
+    { "src": "src/layout",       "outdir": "dist", "bundle": "core-layout.js" },
+    { "src": "src/shared",       "outdir": "dist", "bundle": "core-shared.js" },
+    { "src": "src/pages/home",   "outdir": "dist", "bundle": "page-home.js" },
+    { "src": "src/pages/guide",  "outdir": "dist", "bundle": "page-guide.js" },
+    { "src": "src/pages/api",    "outdir": "dist", "bundle": "page-api.js" },
+    { "src": "src/pages/testing","outdir": "dist", "bundle": "page-testing.js" },
+    { "src": "src/pages/why",    "outdir": "dist", "bundle": "page-why.js" }
+  ]
 }

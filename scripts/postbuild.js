@@ -32,15 +32,44 @@
 const fs = require('fs');
 const path = require('path');
 
-const bundlePath = path.resolve(__dirname, '..', 'dist', 'chasket-bundle.js');
+// 複数バンドル対応: dist/ 内のすべてのバンドルファイルを処理する。
+// entries 方式で分割された core-layout.js, core-shared.js, page-*.js に対応。
+// 後方互換: chasket-bundle.js が存在する場合はそれも処理する。
+const distDir = path.resolve(__dirname, '..', 'dist');
+const bundleFiles = fs.readdirSync(distDir)
+  .filter(f => f.endsWith('.js') && !f.endsWith('.min.js') && !f.endsWith('.map'))
+  .filter(f => f.startsWith('core-') || f.startsWith('page-') || f === 'chasket-bundle.js')
+  .map(f => path.join(distDir, f));
 
-if (!fs.existsSync(bundlePath)) {
-  console.error('Bundle not found:', bundlePath);
+if (bundleFiles.length === 0) {
+  console.error('No bundle files found in:', distDir);
   process.exit(1);
 }
 
+console.log(`Processing ${bundleFiles.length} bundle(s)...`);
+
+for (const bundlePath of bundleFiles) {
+  console.log(`\n▸ ${path.basename(bundlePath)}`);
+
 let code = fs.readFileSync(bundlePath, 'utf-8');
 const before = code.length;
+
+// [パッチ0] __chasketDefineQueue の const 重複宣言を防止
+// entries 方式で複数バンドルを <script> タグで読み込む場合、
+// グローバルスコープで const が2回宣言されると SyntaxError になる。
+// "const" → "var" に変更し、各バンドルが独立して定義キューを初期化・処理可能にする。
+let queueFixCount = 0;
+code = code.replace(
+  /const __chasketDefineQueue = \[\];/g,
+  () => {
+    queueFixCount++;
+    return 'var __chasketDefineQueue = [];';
+  }
+);
+if (queueFixCount > 0) {
+  console.log(`  Patched __chasketDefineQueue const→var (${queueFixCount})`);
+}
+
 // [パッチ1] import 文除去
 // バンドル内の import 行を削除。テンプレート HTML 内の "import" で始まる行も
 // コンパイラが誤って抽出するため、広めのパターンで除去する。
@@ -440,3 +469,5 @@ const removed = before - code.length;
 if (removed > 0) {
   console.log(`  Stripped import statements from bundle (${removed} bytes)`);
 }
+
+} // end of bundleFiles loop

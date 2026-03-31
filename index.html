@@ -70,6 +70,9 @@
 </head>
 <body>
   <csk-shell></csk-shell>
-  <script src="/dist/chasket-bundle.js"></script>
+  <!-- コアバンドル: レイアウト（navbar, footer, shell）と共有コンポーネント -->
+  <script src="/dist/core-layout.js"></script>
+  <script src="/dist/core-shared.js"></script>
+  <!-- ページバンドルは csk-shell が動的にロードする -->
 </body>
 </html>

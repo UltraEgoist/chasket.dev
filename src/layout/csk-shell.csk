@@ -13,6 +13,31 @@
   // 理由: コンポーネント定義キューの完了を待つ必要があるため。
   state currentPage: string = ""
 
+  // ページバンドルのロード状態を管理するマップ。
+  // key: ページ名, value: Promise（ロード完了を待てるように）
+  // core-layout.js と core-shared.js は index.html で同期ロード済み。
+  // ページバンドルはルート遷移時にオンデマンドでロードする。
+  fn loadPageBundle(page: string) {
+    const bundleMap = {
+      home: '/dist/page-home.js',
+      why: '/dist/page-why.js',
+      guide: '/dist/page-guide.js',
+      api: '/dist/page-api.js',
+      testing: '/dist/page-testing.js'
+    }
+    const src = bundleMap[page]
+    if (!src) return Promise.resolve()
+    // 既にロード済み（script タグが存在する）ならスキップ
+    if (document.querySelector('script[src="' + src + '"]')) return Promise.resolve()
+    return new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = src
+      script.onload = resolve
+      script.onerror = reject
+      document.head.appendChild(script)
+    })
+  }
+
   // ハッシュからページ識別子を返す。
   // 既知のルート以外（セクションアンカー等）は空文字列を返し、
   // onHashChange() でスキップされる。これにより TOC リンクの
@@ -29,13 +54,15 @@
 
   // hashchange イベントのハンドラ。
   // getPage() が空文字列を返した場合はスキップ（セクションアンカー）。
-  // ページが変わった場合のみスクロール位置をリセット。
+  // ページバンドルをロードしてからページを切り替える。
   fn onHashChange() {
     const next = getPage()
     if (next === "") return
     const changed = (next !== currentPage)
-    currentPage = next
-    if (changed) window.scrollTo(0, 0)
+    loadPageBundle(next).then(() => {
+      currentPage = next
+      if (changed) window.scrollTo(0, 0)
+    })
   }
 
   fn scrollToTop() {
@@ -59,8 +86,12 @@
     // （shadow: none の fl-0 ID 衝突を回避するため @click を使わない）
     const backBtn = document.querySelector('.back-to-top')
     if (backBtn) backBtn.addEventListener('click', () => { scrollToTop() })
-    // setTimeout(0): 全カスタム要素の定義完了を待ってから初回レンダリング
-    setTimeout(() => { currentPage = getPage() || "home" }, 0)
+    // 初回ロード: ページバンドルをロードしてからレンダリング。
+    // setTimeout(0) で定義キュー完了を待ち、その後バンドルロード。
+    setTimeout(() => {
+      const page = getPage() || "home"
+      loadPageBundle(page).then(() => { currentPage = page })
+    }, 0)
   }
 </script>
 
