@@ -4,9 +4,16 @@
 # Dependencies
 node_modules/
 
-# Build intermediates (keep dist/chasket-bundle.js for prebuild deploy)
+# Build intermediates — バンドルファイル (core-*.js, page-*.js) のみコミット対象
+# 個別コンポーネント出力、ソースマップ、旧モノリシックバンドルは除外
 dist/build-diagnostics.json
 dist/components/
+dist/layout/
+dist/pages/
+dist/shared/
+dist/csk-*.js
+dist/csk-*.js.map
+dist/chasket-bundle.js
 
 # Internal docs are in chasket-internal repo
 docs/

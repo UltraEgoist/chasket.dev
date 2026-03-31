@@ -1,4 +1,4 @@
-// Chasket Bundle - 2026-03-31T13:29:15.721Z
+// Chasket Bundle - 2026-03-31T18:47:46.019Z
 // 8 component(s)
 
 // Deferred registration queue: all classes are defined first,
@@ -7,7 +7,7 @@
 var __chasketDefineQueue = [];
 
 // ── csk-code-demo.csk ──
-/* Built with Chasket v0.2.2 — https://chasket.dev */
+/* Built with Chasket v0.3.0 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -512,7 +512,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-comparison.csk ──
-/* Built with Chasket v0.2.2 — https://chasket.dev */
+/* Built with Chasket v0.3.0 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -1033,7 +1033,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-cta.csk ──
-/* Built with Chasket v0.2.2 — https://chasket.dev */
+/* Built with Chasket v0.3.0 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -1266,7 +1266,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-ecosystem.csk ──
-/* Built with Chasket v0.2.2 — https://chasket.dev */
+/* Built with Chasket v0.3.0 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -1475,7 +1475,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-features.csk ──
-/* Built with Chasket v0.2.2 — https://chasket.dev */
+/* Built with Chasket v0.3.0 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -1914,7 +1914,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-hero.csk ──
-/* Built with Chasket v0.2.2 — https://chasket.dev */
+/* Built with Chasket v0.3.0 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -2159,7 +2159,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-highlights.csk ──
-/* Built with Chasket v0.2.2 — https://chasket.dev */
+/* Built with Chasket v0.3.0 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -2456,10 +2456,8 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-page-home.csk ──
-/* Built with Chasket v0.2.2 — https://chasket.dev */
+/* Built with Chasket v0.3.0 — https://chasket.dev */
 
-(() => {
-"use strict";
 
 class CskPageHome extends HTMLElement {
   static #__css = `[data-chasket-scope="csk-page-home"] .page-home{display:flex;flex-direction:column;}`;
@@ -2645,7 +2643,6 @@ if (typeof __chasketDefineQueue !== 'undefined') {
   customElements.define('csk-page-home', CskPageHome);
 }
 
-})();
 
 // Register components in dependency order (children before parents)
 (function() {

@@ -1,4 +1,4 @@
-// Chasket Bundle - 2026-03-31T13:29:15.696Z
+// Chasket Bundle - 2026-03-31T18:47:46.006Z
 // 3 component(s)
 
 // Deferred registration queue: all classes are defined first,
@@ -7,7 +7,7 @@
 var __chasketDefineQueue = [];
 
 // ── csk-footer.csk ──
-/* Built with Chasket v0.2.2 — https://chasket.dev */
+/* Built with Chasket v0.3.0 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -196,7 +196,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-navbar.csk ──
-/* Built with Chasket v0.2.2 — https://chasket.dev */
+/* Built with Chasket v0.3.0 — https://chasket.dev */
 (() => {
 "use strict";
 
@@ -485,10 +485,8 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 })();
 
 // ── csk-shell.csk ──
-/* Built with Chasket v0.2.2 — https://chasket.dev */
+/* Built with Chasket v0.3.0 — https://chasket.dev */
 
-(() => {
-"use strict";
 
 class CskShell extends HTMLElement {
   static #__css = `[data-chasket-scope="csk-shell"] .shell{display:flex;flex-direction:column;min-height:100vh;}[data-chasket-scope="csk-shell"] .shell-main{flex:1;padding-top:3.75rem;}[data-chasket-scope="csk-shell"] .back-to-top{position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;border-radius:50%;background:var(--c-primary, #6C5CE7);color:#fff;border:none;font-size:1.25rem;cursor:pointer;z-index:900;opacity:0;visibility:hidden;transition:opacity 0.3s ease, visibility 0.3s ease, background 0.2s ease;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0, 0, 0, 0.3);}[data-chasket-scope="csk-shell"] .back-to-top.visible{opacity:1;visibility:visible;}[data-chasket-scope="csk-shell"] .back-to-top:hover{background:var(--c-primary-light, #a29bfe);}@media (max-width:480px){[data-chasket-scope="csk-shell"] .back-to-top{bottom:1rem;right:1rem;width:40px;height:40px;font-size:1.1rem;}}`;
@@ -766,7 +764,6 @@ if (typeof __chasketDefineQueue !== 'undefined') {
   customElements.define('csk-shell', CskShell);
 }
 
-})();
 
 // Register components in dependency order (children before parents)
 (function() {

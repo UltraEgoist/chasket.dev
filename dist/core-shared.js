@@ -1,4 +1,4 @@
-// Chasket Bundle - 2026-03-31T13:29:15.700Z
+// Chasket Bundle - 2026-03-31T18:47:46.008Z
 // 1 component(s)
 
 // Deferred registration queue: all classes are defined first,
@@ -7,7 +7,7 @@
 var __chasketDefineQueue = [];
 
 // ── csk-copy-btn.csk ──
-/* Built with Chasket v0.2.2 — https://chasket.dev */
+/* Built with Chasket v0.3.0 — https://chasket.dev */
 (() => {
 "use strict";
 
