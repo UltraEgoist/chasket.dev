@@ -127,7 +127,8 @@ window.__i18n_register('ja', {
   footer: {
     copyright: '2026 Chasket コントリビューター MIT License',
     source: 'ソースコード',
-    docsRepo: 'ドキュメントサイト',
+    docsRepo: 'ドキュメント',
+    docsSource: 'サイトソース',
     ossNote: 'このサイトのソースコードはオープンソースで公開されています'
   },
 
