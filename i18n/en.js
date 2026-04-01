@@ -13,7 +13,7 @@ window.__i18n_register('en', {
   },
 
   hero: {
-    badge: 'v0.2.0 — SSR & Vite Plugin',
+    badge: 'v0.3.0 — Now on VSCode Marketplace',
     titleLine1: 'The template-first language',
     titleLine2Prefix: 'for ',
     titleHighlight: 'Web Components',
@@ -112,6 +112,7 @@ window.__i18n_register('en', {
     vscode: 'VS Code extension with syntax highlighting, real-time diagnostics, and Go to Definition.',
     comingSoon: 'Coming Soon',
     available: 'Available',
+    available: 'Available',
     experimental: 'Early release — not yet battle-tested'
   },
 
@@ -208,7 +209,7 @@ window.__i18n_register('en', {
       compilationOutput: 'Compilation Output'
     },
     lastUpdated: 'Last updated: March 2026',
-    versionNote: 'This documentation is for Chasket v0.2.0.'
+    versionNote: 'This documentation is for Chasket v0.3.0.'
   },
 
   testing: {
@@ -511,7 +512,8 @@ window.__i18n_register('en', {
       vscodeFeature3: 'Full LSP integration',
       vscodeFeature4: 'Debugging capabilities',
       vscodeFeature5: 'Template validation',
-      vscodeInstallDesc: 'Search for ',
+      vscodeInstallDesc: 'Search for "Chasket" in VS Code Marketplace, or use the link below.',
+      vscodeMarketplaceLink: 'View on Marketplace',
       vscodeTitle: 'VS Code Extension',
     },
     types: {

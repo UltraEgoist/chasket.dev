@@ -107,16 +107,16 @@
           <span class="caution">{{ tr('ecosystem.experimental') }}</span>
         </div>
 
-        <div class="card coming">
+        <div class="card">
           <div class="card-head">
             <div class="icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"></path></svg>
             </div>
-            <span class="badge soon">{{ tr('ecosystem.comingSoon') }}</span>
+            <span class="badge">{{ tr('ecosystem.available') }}</span>
           </div>
           <h3>chasket-vscode</h3>
           <p>{{ tr('ecosystem.vscode') }}</p>
-          <span class="install muted vs">VS Code Marketplace</span>
+          <a href="https://marketplace.visualstudio.com/items?itemName=chasket.chasket-lang" target="_blank" rel="noopener noreferrer" class="install vs">VS Code Marketplace</a>
         </div>
       </div>
     </div>

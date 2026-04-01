@@ -13,7 +13,7 @@ window.__i18n_register('ja', {
   },
 
   hero: {
-    badge: 'v0.2.0 — SSR & Vite Plugin',
+    badge: 'v0.3.0 — VSCode Marketplace 公開中',
     titleLine1: 'テンプレートファーストな',
     titleLine2Prefix: '',
     titleHighlight: 'Web Components',
@@ -112,6 +112,7 @@ window.__i18n_register('ja', {
     vscode: 'シンタックスハイライト、リアルタイム診断、定義へのジャンプ対応の VS Code 拡張機能。',
     comingSoon: '準備中',
     available: '公開中',
+    available: '公開中',
     experimental: '初期リリース — 実戦での検証はこれからです'
   },
 
@@ -208,7 +209,7 @@ window.__i18n_register('ja', {
       compilationOutput: 'コンパイル出力'
     },
     lastUpdated: '最終更新: 2026年3月',
-    versionNote: 'このドキュメントは Chasket v0.2.0 に対応しています。'
+    versionNote: 'このドキュメントは Chasket v0.3.0 に対応しています。'
   },
 
   testing: {
@@ -511,7 +512,8 @@ window.__i18n_register('ja', {
       vscodeFeature3: 'LSP の完全統合',
       vscodeFeature4: 'デバッグ機能',
       vscodeFeature5: 'テンプレート検証',
-      vscodeInstallDesc: 'VS Code Marketplace で「Chasket」を検索してインストール。',
+      vscodeInstallDesc: 'VS Code Marketplace で「Chasket」を検索するか、下のリンクからインストール。',
+      vscodeMarketplaceLink: 'Marketplace で見る',
       vscodeTitle: 'VS Code 拡張',
     },
     types: {

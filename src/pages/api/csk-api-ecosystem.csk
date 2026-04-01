@@ -196,6 +196,13 @@
           <div class="note">
             <strong>{{ tr('apiContent.ecosystem.installation') }}:</strong>
             <p>{{ tr('apiContent.ecosystem.vscodeInstallDesc') }}</p>
+            <p style="margin-top: 0.5rem;">
+              <a href="https://marketplace.visualstudio.com/items?itemName=chasket.chasket-lang"
+                 target="_blank" rel="noopener noreferrer"
+                 style="color: var(--c-primary-light, #a29bfe); text-decoration: underline;">
+                {{ tr('apiContent.ecosystem.vscodeMarketplaceLink') }}
+              </a>
+            </p>
           </div>
         </div>
       </section>

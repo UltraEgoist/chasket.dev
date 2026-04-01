@@ -1,4 +1,4 @@
-// Chasket Bundle - 2026-03-31T18:47:46.038Z
+// Chasket Bundle - 2026-04-01T13:47:23.198Z
 // 7 component(s)
 
 // Deferred registration queue: all classes are defined first,
@@ -2186,7 +2186,7 @@ class CskApiEcosystem extends HTMLElement {
               </li>
             </ul>
           </div>
-          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><p>${this.#esc(this.#tr('apiContent.ecosystem.vscodeInstallDesc'))}</p></div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><p>${this.#esc(this.#tr('apiContent.ecosystem.vscodeInstallDesc'))}</p><p style="margin-top: 0.5rem;"><a href="https://marketplace.visualstudio.com/items?itemName=chasket.chasket-lang" target="_blank" rel="noopener noreferrer" style="color: var(--c-primary-light, #a29bfe); text-decoration: underline;">${this.#esc(this.#tr('apiContent.ecosystem.vscodeMarketplaceLink'))}</a></p></div>
         </div>
       </section>
       <!-- Compilation Output -->
@@ -2531,7 +2531,7 @@ class CskApiEcosystem extends HTMLElement {
               </li>
             </ul>
           </div>
-          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><p>${this.#esc(this.#tr('apiContent.ecosystem.vscodeInstallDesc'))}</p></div>
+          <div class="note"><strong>${this.#esc(this.#tr('apiContent.ecosystem.installation'))}:</strong><p>${this.#esc(this.#tr('apiContent.ecosystem.vscodeInstallDesc'))}</p><p style="margin-top: 0.5rem;"><a href="https://marketplace.visualstudio.com/items?itemName=chasket.chasket-lang" target="_blank" rel="noopener noreferrer" style="color: var(--c-primary-light, #a29bfe); text-decoration: underline;">${this.#esc(this.#tr('apiContent.ecosystem.vscodeMarketplaceLink'))}</a></p></div>
         </div>
       </section>
       <!-- Compilation Output -->
