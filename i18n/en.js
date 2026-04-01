@@ -156,6 +156,7 @@ window.__i18n_register('en', {
       styleBlock: 'style Block',
       componentComm: 'Component Communication',
       security: 'Security',
+      typescript: 'TypeScript / Modules',
       summary: 'Summary'
     },
     toc_items: {
@@ -176,7 +177,12 @@ window.__i18n_register('en', {
       conditionals: 'Conditionals',
       loops: 'Loops',
       htmlOutput: 'HTML Output',
-      slots: 'Slots'
+      slots: 'Slots',
+      tsInlineTypes: 'Inline Type Annotations',
+      tsTypeDecl: 'Type Declarations',
+      tsModules: 'ES Module Imports',
+      tsOutput: 'Compiled Output',
+      tsModuleFormat: 'Module Format'
     }
   },
 
@@ -741,6 +747,69 @@ window.__i18n_register('en', {
       urlValidation: {
         desc: 'When dynamically setting URLs, validate that they do not contain invalid protocols (such as javascript:).',
         title: 'URL Validation',
+      },
+    },
+    typescript: {
+      title: 'TypeScript / Modules',
+      desc: 'Chasket natively supports inline type annotations and ES Module imports inside &lt;script&gt; blocks. No special lang="ts" attribute is required.',
+      inlineTypes: {
+        title: 'Inline Type Annotations',
+        desc: 'All declaration keywords (state, prop, fn, ref, emit, provide, consume) accept type annotations directly.',
+        noteLabel: 'Features',
+        notes: {
+          n1: 'Type annotations are optional — code works without them',
+          n2: 'Type checking is performed at compile time',
+          n3: 'Use array<T> to specify element types for arrays',
+        },
+      },
+      typeDecl: {
+        title: 'Type Declarations',
+        desc: 'Define custom types with the type keyword. Object types, union types, and aliases are all supported.',
+        usesLabel: 'Use cases',
+        uses: {
+          u1: 'Define payload types for emit declarations',
+          u2: 'Explicitly type complex state and prop values',
+          u3: 'Establish shared types across components',
+        },
+      },
+      modules: {
+        title: 'ES Module Imports',
+        desc: 'All standard ES Module import syntaxes are supported inside Chasket &lt;script&gt; blocks.',
+        defaultImport: 'Default Import',
+        namedImport: 'Named Import',
+        namespaceImport: 'Namespace Import',
+        sideEffectImport: 'Side-effect Import',
+        typeOnlyImport: 'Type-only Import',
+        noteLabel: 'Features',
+        notes: {
+          n1: 'Components with import statements are compiled as ES Modules',
+          n2: '.ts extensions are automatically rewritten to .js',
+          n3: 'Type-only imports are completely removed from output',
+        },
+      },
+      output: {
+        title: 'Compiled Output',
+        desc: 'The --target option controls how type information is handled in the output.',
+        jsTarget: '--target js (default)',
+        tsTarget: '--target ts',
+        diffLabel: 'Differences',
+        diffs: {
+          d1: 'js: Type annotations are stripped, outputting pure JavaScript',
+          d2: 'ts: Type annotations are preserved, outputting TypeScript',
+        },
+      },
+      moduleFormat: {
+        title: 'Module Format',
+        desc: 'The compiled output format switches automatically based on whether import statements are present.',
+        withImports: 'With imports → ES Module',
+        withoutImports: 'Without imports → IIFE',
+        pathRewrite: 'Path Rewriting',
+        noteLabel: 'Key points',
+        notes: {
+          n1: 'ES Module format exports the class via export default',
+          n2: 'IIFE format calls customElements.define() immediately',
+          n3: 'ES Module format is recommended when using bundlers (Vite, etc.)',
+        },
       },
     },
     style: {

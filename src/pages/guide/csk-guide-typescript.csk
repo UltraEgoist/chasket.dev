@@ -1,0 +1,176 @@
+<meta>
+  name: csk-guide-typescript
+  shadow: none
+</meta>
+
+<script>
+  // TypeScript & ES Module ガイドセクション
+
+  state code_stateTyped: string = "state count: number = 0\nstate name: string = 'Alice'\nstate items: array&lt;string&gt; = ['a', 'b']\nstate visible: boolean = true"
+
+  state code_propTyped: string = "prop label: string = 'Default'\nprop max: number = 100\nprop options: array&lt;unknown&gt;"
+
+  state code_fnTyped: string = "fn add(a: number, b: number): number {\n  return a + b\n}\n\nfn greet(name: string): void {\n  console.log('Hello, ' + name)\n}"
+
+  state code_refTyped: string = "ref canvas: HTMLCanvasElement\nref input: HTMLInputElement"
+
+  state code_emitTyped: string = "emit change: { value: string }\nemit resize: { width: number, height: number }"
+
+  state code_provideTyped: string = "provide theme: string = 'dark'\nconsume locale: string"
+
+  state code_typeDecl: string = "type User = {\n  id: number\n  name: string\n  email: string\n}\n\ntype Status = 'pending' | 'active' | 'closed'\ntype Point = { x: number, y: number }"
+
+  state code_importDefault: string = "import utils from './utils.js'"
+
+  state code_importNamed: string = "import { formatDate, parseCSV } from './helpers.js'"
+
+  state code_importNamespace: string = "import * as math from './math.js'"
+
+  state code_importSideEffect: string = "import './polyfills.js'"
+
+  state code_importTypeOnly: string = "import type { Config } from './config.js'"
+
+  state code_outputJs: string = "&lt;!-- input: my-counter.csk --&gt;\nstate count: number = 0\nfn increment(amount: number): void {\n  count = count + amount\n}\n\n&lt;!-- output (--target js): types stripped --&gt;\n// count = 0\n// increment(amount) { this.count = this.count + amount; }"
+
+  state code_outputTs: string = "&lt;!-- output (--target ts): types preserved --&gt;\n// count: number = 0\n// increment(amount: number): void {\n//   this.count = this.count + amount;\n// }"
+
+  state code_moduleFormat: string = "&lt;!-- with imports → ES Module output --&gt;\nimport { api } from './api.js'\n\nstate data: string = ''\n\nfn load(): void {\n  data = api.fetch()\n}\n\n&lt;!-- compiled output: no IIFE wrapper --&gt;\n// import { api } from './api.js';\n// export default class MyCmp extends HTMLElement { ... }"
+
+  state code_iifeFormat: string = "&lt;!-- without imports → IIFE wrapper --&gt;\nstate count: number = 0\n\n&lt;!-- compiled output --&gt;\n// (function() {\n//   'use strict';\n//   class MyCmp extends HTMLElement { ... }\n//   customElements.define('my-cmp', MyCmp);\n// })();"
+
+  state code_pathRewrite: string = "&lt;!-- .ts extensions are rewritten to .js --&gt;\nimport { helper } from './utils.ts'\n\n&lt;!-- compiled output --&gt;\n// import { helper } from './utils.js';"
+
+  fn tr(k: string) { return window.__t(k) }
+</script>
+
+<template>
+  <!-- TypeScript対応 -->
+  <section id="typescript" class="doc-section">
+    <h2>{{ tr('guideContent.typescript.title') }}</h2>
+    <p>{{ tr('guideContent.typescript.desc') }}</p>
+
+    <!-- インライン型アノテーション -->
+    <div id="ts-inline-types" class="subsection">
+      <h3>{{ tr('guideContent.typescript.inlineTypes.title') }}</h3>
+      <p>{{ tr('guideContent.typescript.inlineTypes.desc') }}</p>
+
+      <h4>state</h4>
+      <pre><code>{{{ code_stateTyped }}}</code></pre>
+
+      <h4>prop</h4>
+      <pre><code>{{{ code_propTyped }}}</code></pre>
+
+      <h4>fn</h4>
+      <pre><code>{{{ code_fnTyped }}}</code></pre>
+
+      <h4>ref</h4>
+      <pre><code>{{{ code_refTyped }}}</code></pre>
+
+      <h4>emit</h4>
+      <pre><code>{{{ code_emitTyped }}}</code></pre>
+
+      <h4>provide / consume</h4>
+      <pre><code>{{{ code_provideTyped }}}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.typescript.inlineTypes.noteLabel') }}:</strong>
+        <ul>
+          <li>{{ tr('guideContent.typescript.inlineTypes.notes.n1') }}</li>
+          <li>{{ tr('guideContent.typescript.inlineTypes.notes.n2') }}</li>
+          <li>{{ tr('guideContent.typescript.inlineTypes.notes.n3') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- type宣言 -->
+    <div id="ts-type-decl" class="subsection">
+      <h3>{{ tr('guideContent.typescript.typeDecl.title') }}</h3>
+      <p>{{ tr('guideContent.typescript.typeDecl.desc') }}</p>
+
+      <pre><code>{{{ code_typeDecl }}}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.typescript.typeDecl.usesLabel') }}:</strong>
+        <ul>
+          <li>{{ tr('guideContent.typescript.typeDecl.uses.u1') }}</li>
+          <li>{{ tr('guideContent.typescript.typeDecl.uses.u2') }}</li>
+          <li>{{ tr('guideContent.typescript.typeDecl.uses.u3') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ESモジュール import -->
+    <div id="ts-modules" class="subsection">
+      <h3>{{ tr('guideContent.typescript.modules.title') }}</h3>
+      <p>{{ tr('guideContent.typescript.modules.desc') }}</p>
+
+      <h4>{{ tr('guideContent.typescript.modules.defaultImport') }}</h4>
+      <pre><code>{{{ code_importDefault }}}</code></pre>
+
+      <h4>{{ tr('guideContent.typescript.modules.namedImport') }}</h4>
+      <pre><code>{{{ code_importNamed }}}</code></pre>
+
+      <h4>{{ tr('guideContent.typescript.modules.namespaceImport') }}</h4>
+      <pre><code>{{{ code_importNamespace }}}</code></pre>
+
+      <h4>{{ tr('guideContent.typescript.modules.sideEffectImport') }}</h4>
+      <pre><code>{{{ code_importSideEffect }}}</code></pre>
+
+      <h4>{{ tr('guideContent.typescript.modules.typeOnlyImport') }}</h4>
+      <pre><code>{{{ code_importTypeOnly }}}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.typescript.modules.noteLabel') }}:</strong>
+        <ul>
+          <li>{{ tr('guideContent.typescript.modules.notes.n1') }}</li>
+          <li>{{ tr('guideContent.typescript.modules.notes.n2') }}</li>
+          <li>{{ tr('guideContent.typescript.modules.notes.n3') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- コンパイル出力 -->
+    <div id="ts-output" class="subsection">
+      <h3>{{ tr('guideContent.typescript.output.title') }}</h3>
+      <p>{{ tr('guideContent.typescript.output.desc') }}</p>
+
+      <h4>{{ tr('guideContent.typescript.output.jsTarget') }}</h4>
+      <pre><code>{{{ code_outputJs }}}</code></pre>
+
+      <h4>{{ tr('guideContent.typescript.output.tsTarget') }}</h4>
+      <pre><code>{{{ code_outputTs }}}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.typescript.output.diffLabel') }}:</strong>
+        <ul>
+          <li>{{ tr('guideContent.typescript.output.diffs.d1') }}</li>
+          <li>{{ tr('guideContent.typescript.output.diffs.d2') }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- モジュール形式 -->
+    <div id="ts-module-format" class="subsection">
+      <h3>{{ tr('guideContent.typescript.moduleFormat.title') }}</h3>
+      <p>{{ tr('guideContent.typescript.moduleFormat.desc') }}</p>
+
+      <h4>{{ tr('guideContent.typescript.moduleFormat.withImports') }}</h4>
+      <pre><code>{{{ code_moduleFormat }}}</code></pre>
+
+      <h4>{{ tr('guideContent.typescript.moduleFormat.withoutImports') }}</h4>
+      <pre><code>{{{ code_iifeFormat }}}</code></pre>
+
+      <h4>{{ tr('guideContent.typescript.moduleFormat.pathRewrite') }}</h4>
+      <pre><code>{{{ code_pathRewrite }}}</code></pre>
+
+      <div class="note">
+        <strong>{{ tr('guideContent.typescript.moduleFormat.noteLabel') }}:</strong>
+        <ul>
+          <li>{{ tr('guideContent.typescript.moduleFormat.notes.n1') }}</li>
+          <li>{{ tr('guideContent.typescript.moduleFormat.notes.n2') }}</li>
+          <li>{{ tr('guideContent.typescript.moduleFormat.notes.n3') }}</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</template>

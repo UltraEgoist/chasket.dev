@@ -135,6 +135,16 @@
           <li><a href="#style-block">{{ tr('guide.sections.styleBlock') }}</a></li>
           <li><a href="#component-comm">{{ tr('guide.sections.componentComm') }}</a></li>
           <li><a href="#security">{{ tr('guide.sections.security') }}</a></li>
+          <li>
+            <a href="#typescript">{{ tr('guide.sections.typescript') }}</a>
+            <ul>
+              <li><a href="#ts-inline-types">{{ tr('guide.toc_items.tsInlineTypes') }}</a></li>
+              <li><a href="#ts-type-decl">{{ tr('guide.toc_items.tsTypeDecl') }}</a></li>
+              <li><a href="#ts-modules">{{ tr('guide.toc_items.tsModules') }}</a></li>
+              <li><a href="#ts-output">{{ tr('guide.toc_items.tsOutput') }}</a></li>
+              <li><a href="#ts-module-format">{{ tr('guide.toc_items.tsModuleFormat') }}</a></li>
+            </ul>
+          </li>
         </ul>
       </nav>
     </aside>
@@ -161,6 +171,7 @@
       <csk-guide-style></csk-guide-style>
       <csk-guide-communication></csk-guide-communication>
       <csk-guide-security></csk-guide-security>
+      <csk-guide-typescript></csk-guide-typescript>
     </main>
   </div>
 </template>

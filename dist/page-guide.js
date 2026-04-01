@@ -1,5 +1,5 @@
-// Chasket Bundle - 2026-04-01T14:03:36.166Z
-// 7 component(s)
+// Chasket Bundle - 2026-04-01T14:12:16.353Z
+// 8 component(s)
 
 // Deferred registration queue: all classes are defined first,
 // then all customElements.define() calls happen at the end.
@@ -1906,6 +1906,463 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 
 })();
 
+// ── csk-guide-typescript.csk ──
+/* Built with Chasket v0.3.0 — https://chasket.dev */
+(() => {
+"use strict";
+
+class CskGuideTypescript extends HTMLElement {
+  #_code_stateTyped = "<span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>\n<span class=k>state</span> name: <span class=tp>string</span> = <span class=s>'Alice'</span>\n<span class=k>state</span> items: array<span class=t>&lt;string</span><span class=t>&gt;</span> = [<span class=s>'a'</span>, <span class=s>'b'</span>]\n<span class=k>state</span> visible: <span class=tp>boolean</span> = <span class=n>true</span>";
+  get #code_stateTyped() { return this.#_code_stateTyped; }
+  set #code_stateTyped(v) { this.#_code_stateTyped = v; this.#scheduleUpdate(); }
+  #_code_propTyped = "<span class=k>prop</span> label: <span class=tp>string</span> = <span class=s>'Default'</span>\n<span class=k>prop</span> max: <span class=tp>number</span> = <span class=n>100</span>\n<span class=k>prop</span> options: array<span class=t>&lt;unknown</span><span class=t>&gt;</span>";
+  get #code_propTyped() { return this.#_code_propTyped; }
+  set #code_propTyped(v) { this.#_code_propTyped = v; this.#scheduleUpdate(); }
+  #_code_fnTyped = "<span class=k>fn</span> <span class=f>add</span>(a: <span class=tp>number</span>, b: <span class=tp>number</span>): <span class=tp>number</span> {\n  <span class=k>return</span> a + b\n}\n\n<span class=k>fn</span> <span class=f>greet</span>(name: <span class=tp>string</span>): <span class=tp>void</span> {\n  console.<span class=f>log</span>(<span class=s>'Hello, '</span> + name)\n}";
+  get #code_fnTyped() { return this.#_code_fnTyped; }
+  set #code_fnTyped(v) { this.#_code_fnTyped = v; this.#scheduleUpdate(); }
+  #_code_refTyped = "ref canvas: HTMLCanvasElement\nref input: HTMLInputElement";
+  get #code_refTyped() { return this.#_code_refTyped; }
+  set #code_refTyped(v) { this.#_code_refTyped = v; this.#scheduleUpdate(); }
+  #_code_emitTyped = "<span class=k>emit</span> change: { value: <span class=tp>string</span> }\n<span class=k>emit</span> resize: { width: <span class=tp>number</span>, height: <span class=tp>number</span> }";
+  get #code_emitTyped() { return this.#_code_emitTyped; }
+  set #code_emitTyped(v) { this.#_code_emitTyped = v; this.#scheduleUpdate(); }
+  #_code_provideTyped = "<span class=k>provide</span> theme: <span class=tp>string</span> = <span class=s>'dark'</span>\n<span class=k>consume</span> locale: <span class=tp>string</span>";
+  get #code_provideTyped() { return this.#_code_provideTyped; }
+  set #code_provideTyped(v) { this.#_code_provideTyped = v; this.#scheduleUpdate(); }
+  #_code_typeDecl = "type User = {\n  id: <span class=tp>number</span>\n  name: <span class=tp>string</span>\n  email: <span class=tp>string</span>\n}\n\ntype Status = <span class=s>'pending'</span> | <span class=s>'active'</span> | <span class=s>'closed'</span>\ntype Point = { x: <span class=tp>number</span>, y: <span class=tp>number</span> }";
+  get #code_typeDecl() { return this.#_code_typeDecl; }
+  set #code_typeDecl(v) { this.#_code_typeDecl = v; this.#scheduleUpdate(); }
+  #_code_importDefault = "<span class=k>import</span> utils <span class=k>from</span> <span class=s>'./utils.js'</span>";
+  get #code_importDefault() { return this.#_code_importDefault; }
+  set #code_importDefault(v) { this.#_code_importDefault = v; this.#scheduleUpdate(); }
+  #_code_importNamed = "<span class=k>import</span> { formatDate, parseCSV } <span class=k>from</span> <span class=s>'./helpers.js'</span>";
+  get #code_importNamed() { return this.#_code_importNamed; }
+  set #code_importNamed(v) { this.#_code_importNamed = v; this.#scheduleUpdate(); }
+  #_code_importNamespace = "<span class=k>import</span> * as math <span class=k>from</span> <span class=s>'./math.js'</span>";
+  get #code_importNamespace() { return this.#_code_importNamespace; }
+  set #code_importNamespace(v) { this.#_code_importNamespace = v; this.#scheduleUpdate(); }
+  #_code_importSideEffect = "<span class=k>import</span> <span class=s>'./polyfills.js'</span>";
+  get #code_importSideEffect() { return this.#_code_importSideEffect; }
+  set #code_importSideEffect(v) { this.#_code_importSideEffect = v; this.#scheduleUpdate(); }
+  #_code_importTypeOnly = "<span class=k>import</span> type { Config } <span class=k>from</span> <span class=s>'./config.js'</span>";
+  get #code_importTypeOnly() { return this.#_code_importTypeOnly; }
+  set #code_importTypeOnly(v) { this.#_code_importTypeOnly = v; this.#scheduleUpdate(); }
+  #_code_outputJs = "<span class=cm>&lt;!-- input: my-counter.csk --&gt;</span>\n<span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>\n<span class=k>fn</span> <span class=f>increment</span>(amount: <span class=tp>number</span>): <span class=tp>void</span> {\n  count = count + amount\n}\n\n<span class=cm>&lt;!-- output (--target js): types stripped --&gt;</span>\n<span class=cm>// count = 0</span>\n<span class=cm>// increment(amount) { this.count = this.count + amount; }</span>";
+  get #code_outputJs() { return this.#_code_outputJs; }
+  set #code_outputJs(v) { this.#_code_outputJs = v; this.#scheduleUpdate(); }
+  #_code_outputTs = "<span class=cm>&lt;!-- output (--target ts): types preserved --&gt;</span>\n<span class=cm>// count: number = 0</span>\n<span class=cm>// increment(amount: number): void {</span>\n<span class=cm>//   this.count = this.count + amount;</span>\n<span class=cm>// }</span>";
+  get #code_outputTs() { return this.#_code_outputTs; }
+  set #code_outputTs(v) { this.#_code_outputTs = v; this.#scheduleUpdate(); }
+  #_code_moduleFormat = "<span class=cm>&lt;!-- with imports → ES Module output --&gt;</span>\n<span class=k>import</span> { api } <span class=k>from</span> <span class=s>'./api.js'</span>\n\n<span class=k>state</span> data: <span class=tp>string</span> = <span class=s>''</span>\n\n<span class=k>fn</span> <span class=f>load</span>(): <span class=tp>void</span> {\n  data = api.<span class=f>fetch</span>()\n}\n\n<span class=cm>&lt;!-- compiled output: no IIFE wrapper --&gt;</span>\n<span class=cm>// import { api } from './api.js';</span>\n<span class=cm>// export default class MyCmp extends HTM</span>LElement { ... }";
+  get #code_moduleFormat() { return this.#_code_moduleFormat; }
+  set #code_moduleFormat(v) { this.#_code_moduleFormat = v; this.#scheduleUpdate(); }
+  #_code_iifeFormat = "<span class=cm>&lt;!-- without imports → IIFE wrapper --&gt;</span>\n<span class=k>state</span> count: <span class=tp>number</span> = <span class=n>0</span>\n\n<span class=cm>&lt;!-- compiled output --&gt;</span>\n<span class=cm>// (function() {</span>\n<span class=cm>//   'use strict';</span>\n<span class=cm>//   class MyCmp extends HTM</span>LElement { ... }\n<span class=cm>//   customElements.define('my-cmp', MyCmp);</span>\n<span class=cm>// })();</span>";
+  get #code_iifeFormat() { return this.#_code_iifeFormat; }
+  set #code_iifeFormat(v) { this.#_code_iifeFormat = v; this.#scheduleUpdate(); }
+  #_code_pathRewrite = "<span class=cm>&lt;!-- .ts extensions are rewritten to .js --&gt;</span>\n<span class=k>import</span> { helper } <span class=k>from</span> <span class=s>'./utils.ts'</span>\n\n<span class=cm>&lt;!-- compiled output --&gt;</span>\n<span class=cm>// import { helper } from './utils.js';</span>";
+  get #code_pathRewrite() { return this.#_code_pathRewrite; }
+  set #code_pathRewrite(v) { this.#_code_pathRewrite = v; this.#scheduleUpdate(); }
+  #updateScheduled = false;
+  #listeners = [];
+
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    this.setAttribute('data-chasket-scope', 'csk-guide-typescript');
+    this.#render();
+    this.#bindEvents();
+    this.#bindRefs();
+  }
+
+  disconnectedCallback() {
+    this.#listeners.forEach(([el, ev, fn]) => el.removeEventListener(ev, fn));
+    this.#listeners = [];
+  }
+
+  #tr(k) {
+    return window.__t(k)
+  }
+
+  #render() {
+    const tpl = document.createElement('template');
+    tpl.innerHTML = `
+      <!-- TypeScript対応 -->
+      <section id="typescript" class="doc-section">
+        <h2>
+          ${this.#esc(this.#tr('guideContent.typescript.title'))}
+        </h2>
+        <p>
+          ${this.#esc(this.#tr('guideContent.typescript.desc'))}
+        </p>
+        <!-- インライン型アノテーション -->
+        <div id="ts-inline-types" class="subsection">
+          <h3>
+            ${this.#esc(this.#tr('guideContent.typescript.inlineTypes.title'))}
+          </h3>
+          <p>
+            ${this.#esc(this.#tr('guideContent.typescript.inlineTypes.desc'))}
+          </p>
+          <h4>
+            state
+          </h4>
+          <pre><code>${this.#code_stateTyped}</code></pre>
+          <h4>
+            prop
+          </h4>
+          <pre><code>${this.#code_propTyped}</code></pre>
+          <h4>
+            fn
+          </h4>
+          <pre><code>${this.#code_fnTyped}</code></pre>
+          <h4>
+            ref
+          </h4>
+          <pre><code>${this.#code_refTyped}</code></pre>
+          <h4>
+            emit
+          </h4>
+          <pre><code>${this.#code_emitTyped}</code></pre>
+          <h4>
+            provide / consume
+          </h4>
+          <pre><code>${this.#code_provideTyped}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.typescript.inlineTypes.noteLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.typescript.inlineTypes.notes.n1'))}</li><li>${this.#esc(this.#tr('guideContent.typescript.inlineTypes.notes.n2'))}</li><li>${this.#esc(this.#tr('guideContent.typescript.inlineTypes.notes.n3'))}</li></ul></div>
+        </div>
+        <!-- type宣言 -->
+        <div id="ts-type-decl" class="subsection">
+          <h3>
+            ${this.#esc(this.#tr('guideContent.typescript.typeDecl.title'))}
+          </h3>
+          <p>
+            ${this.#esc(this.#tr('guideContent.typescript.typeDecl.desc'))}
+          </p>
+          <pre><code>${this.#code_typeDecl}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.typescript.typeDecl.usesLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.typescript.typeDecl.uses.u1'))}</li><li>${this.#esc(this.#tr('guideContent.typescript.typeDecl.uses.u2'))}</li><li>${this.#esc(this.#tr('guideContent.typescript.typeDecl.uses.u3'))}</li></ul></div>
+        </div>
+        <!-- ESモジュール import -->
+        <div id="ts-modules" class="subsection">
+          <h3>
+            ${this.#esc(this.#tr('guideContent.typescript.modules.title'))}
+          </h3>
+          <p>
+            ${this.#esc(this.#tr('guideContent.typescript.modules.desc'))}
+          </p>
+          <h4>
+            ${this.#esc(this.#tr('guideContent.typescript.modules.defaultImport'))}
+          </h4>
+          <pre><code>${this.#code_importDefault}</code></pre>
+          <h4>
+            ${this.#esc(this.#tr('guideContent.typescript.modules.namedImport'))}
+          </h4>
+          <pre><code>${this.#code_importNamed}</code></pre>
+          <h4>
+            ${this.#esc(this.#tr('guideContent.typescript.modules.namespaceImport'))}
+          </h4>
+          <pre><code>${this.#code_importNamespace}</code></pre>
+          <h4>
+            ${this.#esc(this.#tr('guideContent.typescript.modules.sideEffectImport'))}
+          </h4>
+          <pre><code>${this.#code_importSideEffect}</code></pre>
+          <h4>
+            ${this.#esc(this.#tr('guideContent.typescript.modules.typeOnlyImport'))}
+          </h4>
+          <pre><code>${this.#code_importTypeOnly}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.typescript.modules.noteLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.typescript.modules.notes.n1'))}</li><li>${this.#esc(this.#tr('guideContent.typescript.modules.notes.n2'))}</li><li>${this.#esc(this.#tr('guideContent.typescript.modules.notes.n3'))}</li></ul></div>
+        </div>
+        <!-- コンパイル出力 -->
+        <div id="ts-output" class="subsection">
+          <h3>
+            ${this.#esc(this.#tr('guideContent.typescript.output.title'))}
+          </h3>
+          <p>
+            ${this.#esc(this.#tr('guideContent.typescript.output.desc'))}
+          </p>
+          <h4>
+            ${this.#esc(this.#tr('guideContent.typescript.output.jsTarget'))}
+          </h4>
+          <pre><code>${this.#code_outputJs}</code></pre>
+          <h4>
+            ${this.#esc(this.#tr('guideContent.typescript.output.tsTarget'))}
+          </h4>
+          <pre><code>${this.#code_outputTs}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.typescript.output.diffLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.typescript.output.diffs.d1'))}</li><li>${this.#esc(this.#tr('guideContent.typescript.output.diffs.d2'))}</li></ul></div>
+        </div>
+        <!-- モジュール形式 -->
+        <div id="ts-module-format" class="subsection">
+          <h3>
+            ${this.#esc(this.#tr('guideContent.typescript.moduleFormat.title'))}
+          </h3>
+          <p>
+            ${this.#esc(this.#tr('guideContent.typescript.moduleFormat.desc'))}
+          </p>
+          <h4>
+            ${this.#esc(this.#tr('guideContent.typescript.moduleFormat.withImports'))}
+          </h4>
+          <pre><code>${this.#code_moduleFormat}</code></pre>
+          <h4>
+            ${this.#esc(this.#tr('guideContent.typescript.moduleFormat.withoutImports'))}
+          </h4>
+          <pre><code>${this.#code_iifeFormat}</code></pre>
+          <h4>
+            ${this.#esc(this.#tr('guideContent.typescript.moduleFormat.pathRewrite'))}
+          </h4>
+          <pre><code>${this.#code_pathRewrite}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.typescript.moduleFormat.noteLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.typescript.moduleFormat.notes.n1'))}</li><li>${this.#esc(this.#tr('guideContent.typescript.moduleFormat.notes.n2'))}</li><li>${this.#esc(this.#tr('guideContent.typescript.moduleFormat.notes.n3'))}</li></ul></div>
+        </div>
+      </section>
+    `;
+    this.replaceChildren(tpl.content.cloneNode(true));
+  }
+
+  #getNewTree() {
+    const tpl = document.createElement('template');
+    tpl.innerHTML = `
+      <!-- TypeScript対応 -->
+      <section id="typescript" class="doc-section">
+        <h2>
+          ${this.#esc(this.#tr('guideContent.typescript.title'))}
+        </h2>
+        <p>
+          ${this.#esc(this.#tr('guideContent.typescript.desc'))}
+        </p>
+        <!-- インライン型アノテーション -->
+        <div id="ts-inline-types" class="subsection">
+          <h3>
+            ${this.#esc(this.#tr('guideContent.typescript.inlineTypes.title'))}
+          </h3>
+          <p>
+            ${this.#esc(this.#tr('guideContent.typescript.inlineTypes.desc'))}
+          </p>
+          <h4>
+            state
+          </h4>
+          <pre><code>${this.#code_stateTyped}</code></pre>
+          <h4>
+            prop
+          </h4>
+          <pre><code>${this.#code_propTyped}</code></pre>
+          <h4>
+            fn
+          </h4>
+          <pre><code>${this.#code_fnTyped}</code></pre>
+          <h4>
+            ref
+          </h4>
+          <pre><code>${this.#code_refTyped}</code></pre>
+          <h4>
+            emit
+          </h4>
+          <pre><code>${this.#code_emitTyped}</code></pre>
+          <h4>
+            provide / consume
+          </h4>
+          <pre><code>${this.#code_provideTyped}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.typescript.inlineTypes.noteLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.typescript.inlineTypes.notes.n1'))}</li><li>${this.#esc(this.#tr('guideContent.typescript.inlineTypes.notes.n2'))}</li><li>${this.#esc(this.#tr('guideContent.typescript.inlineTypes.notes.n3'))}</li></ul></div>
+        </div>
+        <!-- type宣言 -->
+        <div id="ts-type-decl" class="subsection">
+          <h3>
+            ${this.#esc(this.#tr('guideContent.typescript.typeDecl.title'))}
+          </h3>
+          <p>
+            ${this.#esc(this.#tr('guideContent.typescript.typeDecl.desc'))}
+          </p>
+          <pre><code>${this.#code_typeDecl}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.typescript.typeDecl.usesLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.typescript.typeDecl.uses.u1'))}</li><li>${this.#esc(this.#tr('guideContent.typescript.typeDecl.uses.u2'))}</li><li>${this.#esc(this.#tr('guideContent.typescript.typeDecl.uses.u3'))}</li></ul></div>
+        </div>
+        <!-- ESモジュール import -->
+        <div id="ts-modules" class="subsection">
+          <h3>
+            ${this.#esc(this.#tr('guideContent.typescript.modules.title'))}
+          </h3>
+          <p>
+            ${this.#esc(this.#tr('guideContent.typescript.modules.desc'))}
+          </p>
+          <h4>
+            ${this.#esc(this.#tr('guideContent.typescript.modules.defaultImport'))}
+          </h4>
+          <pre><code>${this.#code_importDefault}</code></pre>
+          <h4>
+            ${this.#esc(this.#tr('guideContent.typescript.modules.namedImport'))}
+          </h4>
+          <pre><code>${this.#code_importNamed}</code></pre>
+          <h4>
+            ${this.#esc(this.#tr('guideContent.typescript.modules.namespaceImport'))}
+          </h4>
+          <pre><code>${this.#code_importNamespace}</code></pre>
+          <h4>
+            ${this.#esc(this.#tr('guideContent.typescript.modules.sideEffectImport'))}
+          </h4>
+          <pre><code>${this.#code_importSideEffect}</code></pre>
+          <h4>
+            ${this.#esc(this.#tr('guideContent.typescript.modules.typeOnlyImport'))}
+          </h4>
+          <pre><code>${this.#code_importTypeOnly}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.typescript.modules.noteLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.typescript.modules.notes.n1'))}</li><li>${this.#esc(this.#tr('guideContent.typescript.modules.notes.n2'))}</li><li>${this.#esc(this.#tr('guideContent.typescript.modules.notes.n3'))}</li></ul></div>
+        </div>
+        <!-- コンパイル出力 -->
+        <div id="ts-output" class="subsection">
+          <h3>
+            ${this.#esc(this.#tr('guideContent.typescript.output.title'))}
+          </h3>
+          <p>
+            ${this.#esc(this.#tr('guideContent.typescript.output.desc'))}
+          </p>
+          <h4>
+            ${this.#esc(this.#tr('guideContent.typescript.output.jsTarget'))}
+          </h4>
+          <pre><code>${this.#code_outputJs}</code></pre>
+          <h4>
+            ${this.#esc(this.#tr('guideContent.typescript.output.tsTarget'))}
+          </h4>
+          <pre><code>${this.#code_outputTs}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.typescript.output.diffLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.typescript.output.diffs.d1'))}</li><li>${this.#esc(this.#tr('guideContent.typescript.output.diffs.d2'))}</li></ul></div>
+        </div>
+        <!-- モジュール形式 -->
+        <div id="ts-module-format" class="subsection">
+          <h3>
+            ${this.#esc(this.#tr('guideContent.typescript.moduleFormat.title'))}
+          </h3>
+          <p>
+            ${this.#esc(this.#tr('guideContent.typescript.moduleFormat.desc'))}
+          </p>
+          <h4>
+            ${this.#esc(this.#tr('guideContent.typescript.moduleFormat.withImports'))}
+          </h4>
+          <pre><code>${this.#code_moduleFormat}</code></pre>
+          <h4>
+            ${this.#esc(this.#tr('guideContent.typescript.moduleFormat.withoutImports'))}
+          </h4>
+          <pre><code>${this.#code_iifeFormat}</code></pre>
+          <h4>
+            ${this.#esc(this.#tr('guideContent.typescript.moduleFormat.pathRewrite'))}
+          </h4>
+          <pre><code>${this.#code_pathRewrite}</code></pre>
+          <div class="note"><strong>${this.#esc(this.#tr('guideContent.typescript.moduleFormat.noteLabel'))}:</strong><ul><li>${this.#esc(this.#tr('guideContent.typescript.moduleFormat.notes.n1'))}</li><li>${this.#esc(this.#tr('guideContent.typescript.moduleFormat.notes.n2'))}</li><li>${this.#esc(this.#tr('guideContent.typescript.moduleFormat.notes.n3'))}</li></ul></div>
+        </div>
+      </section>
+    `;
+    return tpl.content;
+  }
+
+  #patch(parent, newContent) {
+    const newNodes = Array.from(newContent.childNodes);
+    const oldNodes = Array.from(parent.childNodes);
+    const max = Math.max(oldNodes.length, newNodes.length);
+    for (let i = 0; i < max; i++) {
+      const o = oldNodes[i], n = newNodes[i];
+      if (!n) { parent.removeChild(o); continue; }
+      if (!o) { parent.appendChild(n.cloneNode(true)); continue; }
+      if (o.nodeType !== n.nodeType || o.nodeName !== n.nodeName) {
+        parent.replaceChild(n.cloneNode(true), o); continue;
+      }
+      if (o.nodeType === 3) {
+        if (o.textContent !== n.textContent) o.textContent = n.textContent;
+        continue;
+      }
+      if (o.nodeType === 1) {
+        const oA = o.attributes, nA = n.attributes;
+        for (let j = nA.length - 1; j >= 0; j--) {
+          const a = nA[j];
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+        }
+        for (let j = oA.length - 1; j >= 0; j--) {
+          if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+        }
+        if (o.tagName === 'STYLE') {
+          if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
+          continue;
+        }
+        this.#patch(o, n);
+      }
+    }
+  }
+
+  #bindEvents() {
+  }
+
+  #bindRefs() {
+  }
+
+  #scheduleUpdate() {
+    if (this.#updateScheduled) return;
+    this.#updateScheduled = true;
+    queueMicrotask(() => {
+      this.#updateScheduled = false;
+      this.#update();
+    });
+  }
+
+  #update() {
+    this.#updateScheduled = false;
+    this.#listeners.forEach(([el, ev, fn]) => el.removeEventListener(ev, fn));
+    this.#listeners = [];
+    this.#patch(this, this.#getNewTree());
+    this.#bindEvents();
+    this.#bindRefs();
+  }
+
+  #updateKeepFocus(focusedEl) {
+    this.#update();
+  }
+
+  #esc(val) {
+    if (val == null) return '';
+    const s = String(val);
+    if (!/[&<>"']/.test(s)) return s;
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  #escAttr(val) {
+    if (val == null) return '';
+    const s = String(val);
+    if (!/[&<>"'`\n\r]/.test(s)) return s;
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/`/g,'&#96;').replace(/\n/g,'&#10;').replace(/\r/g,'&#13;');
+  }
+
+  #escUrl(val) {
+    if (val == null) return '';
+    const s = String(val).trim();
+    let decoded = s;
+    for (let i = 0; i < 5; i++) {
+      try {
+        const next = decodeURIComponent(decoded);
+        if (next === decoded) break;
+        decoded = next;
+      } catch(e) { break; }
+    }
+    const normalized = decoded.replace(/[\s\x00-\x1F]/g, '');
+    if (/(javascript|data|vbscript|blob|file)\s*:/i.test(normalized)) return 'about:blank';
+    return this.#escAttr(normalized);
+  }
+}
+
+if (typeof __chasketClasses !== 'undefined') {
+  __chasketClasses['csk-guide-typescript'] = CskGuideTypescript;
+}
+if (typeof __chasketDefineQueue !== 'undefined') {
+  __chasketDefineQueue.push(['csk-guide-typescript', CskGuideTypescript]);
+} else if (!customElements.get('csk-guide-typescript')) {
+  customElements.define('csk-guide-typescript', CskGuideTypescript);
+}
+
+})();
+
 // ── csk-page-guide.csk ──
 /* Built with Chasket v0.3.0 — https://chasket.dev */
 
@@ -2039,6 +2496,7 @@ class CskPageGuide extends HTMLElement {
 <a href="#component-comm">${this.#esc(this.#tr('guide.sections.componentComm'))}</a>              </li>
               <li>
 <a href="#security">${this.#esc(this.#tr('guide.sections.security'))}</a>              </li>
+              <li><a href="#typescript">${this.#esc(this.#tr('guide.sections.typescript'))}</a><ul><li><a href="#ts-inline-types">${this.#esc(this.#tr('guide.toc_items.tsInlineTypes'))}</a></li><li><a href="#ts-type-decl">${this.#esc(this.#tr('guide.toc_items.tsTypeDecl'))}</a></li><li><a href="#ts-modules">${this.#esc(this.#tr('guide.toc_items.tsModules'))}</a></li><li><a href="#ts-output">${this.#esc(this.#tr('guide.toc_items.tsOutput'))}</a></li><li><a href="#ts-module-format">${this.#esc(this.#tr('guide.toc_items.tsModuleFormat'))}</a></li></ul></li>
             </ul>
           </nav>
         </aside>
@@ -2066,6 +2524,7 @@ class CskPageGuide extends HTMLElement {
           <csk-guide-style></csk-guide-style>
           <csk-guide-communication></csk-guide-communication>
           <csk-guide-security></csk-guide-security>
+          <csk-guide-typescript></csk-guide-typescript>
         </main>
       </div>
     `;
@@ -2104,6 +2563,7 @@ class CskPageGuide extends HTMLElement {
 <a href="#component-comm">${this.#esc(this.#tr('guide.sections.componentComm'))}</a>              </li>
               <li>
 <a href="#security">${this.#esc(this.#tr('guide.sections.security'))}</a>              </li>
+              <li><a href="#typescript">${this.#esc(this.#tr('guide.sections.typescript'))}</a><ul><li><a href="#ts-inline-types">${this.#esc(this.#tr('guide.toc_items.tsInlineTypes'))}</a></li><li><a href="#ts-type-decl">${this.#esc(this.#tr('guide.toc_items.tsTypeDecl'))}</a></li><li><a href="#ts-modules">${this.#esc(this.#tr('guide.toc_items.tsModules'))}</a></li><li><a href="#ts-output">${this.#esc(this.#tr('guide.toc_items.tsOutput'))}</a></li><li><a href="#ts-module-format">${this.#esc(this.#tr('guide.toc_items.tsModuleFormat'))}</a></li></ul></li>
             </ul>
           </nav>
         </aside>
@@ -2131,6 +2591,7 @@ class CskPageGuide extends HTMLElement {
           <csk-guide-style></csk-guide-style>
           <csk-guide-communication></csk-guide-communication>
           <csk-guide-security></csk-guide-security>
+          <csk-guide-typescript></csk-guide-typescript>
         </main>
       </div>
     `;

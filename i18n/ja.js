@@ -156,6 +156,7 @@ window.__i18n_register('ja', {
       styleBlock: 'style ブロック',
       componentComm: 'コンポーネント間通信',
       security: 'セキュリティ',
+      typescript: 'TypeScript / モジュール',
       summary: 'まとめ'
     },
     toc_items: {
@@ -176,7 +177,12 @@ window.__i18n_register('ja', {
       conditionals: '条件分岐',
       loops: 'ループ',
       htmlOutput: 'HTML出力',
-      slots: 'スロット'
+      slots: 'スロット',
+      tsInlineTypes: 'インライン型アノテーション',
+      tsTypeDecl: 'type 宣言',
+      tsModules: 'ES Module import',
+      tsOutput: 'コンパイル出力',
+      tsModuleFormat: 'モジュール形式'
     }
   },
 
@@ -741,6 +747,69 @@ window.__i18n_register('ja', {
       urlValidation: {
         desc: 'URLを動的に設定する場合は、不正なプロトコル（javascript:など）が含まれないか検証してください。',
         title: 'URL検証',
+      },
+    },
+    typescript: {
+      title: 'TypeScript / モジュール',
+      desc: 'Chasketは &lt;script&gt; ブロック内でインライン型アノテーションとES Moduleインポートをネイティブにサポートします。lang="ts" のような特別な指定は不要です。',
+      inlineTypes: {
+        title: 'インライン型アノテーション',
+        desc: 'すべての宣言キーワード（state, prop, fn, ref, emit, provide, consume）で型アノテーションを直接記述できます。',
+        noteLabel: '特徴',
+        notes: {
+          n1: '型アノテーションは任意 — 省略しても動作する',
+          n2: 'コンパイル時に型チェックが実行される',
+          n3: 'array<T> で配列の要素型を指定可能',
+        },
+      },
+      typeDecl: {
+        title: 'type 宣言',
+        desc: 'type キーワードでカスタム型を定義できます。オブジェクト型、ユニオン型、エイリアスなどが利用可能です。',
+        usesLabel: '用途',
+        uses: {
+          u1: 'emit のペイロード型を定義',
+          u2: 'state や prop の複雑な型を明示',
+          u3: 'コンポーネント間で共通の型を確立',
+        },
+      },
+      modules: {
+        title: 'ES Module import',
+        desc: 'Chasketの &lt;script&gt; ブロックでは、標準的なES Module import構文がすべてサポートされています。',
+        defaultImport: 'デフォルトインポート',
+        namedImport: '名前付きインポート',
+        namespaceImport: '名前空間インポート',
+        sideEffectImport: '副作用インポート',
+        typeOnlyImport: '型のみインポート',
+        noteLabel: '特徴',
+        notes: {
+          n1: 'import文を含むコンポーネントはESモジュール形式で出力される',
+          n2: '.ts 拡張子は自動的に .js に書き換えられる',
+          n3: 'type-only import は出力時に完全に除去される',
+        },
+      },
+      output: {
+        title: 'コンパイル出力',
+        desc: '--target オプションによって、型情報の扱いが変わります。',
+        jsTarget: '--target js（デフォルト）',
+        tsTarget: '--target ts',
+        diffLabel: '違い',
+        diffs: {
+          d1: 'js: 型アノテーションが除去され、純粋なJavaScriptとして出力',
+          d2: 'ts: 型アノテーションが保持され、TypeScriptとして出力',
+        },
+      },
+      moduleFormat: {
+        title: 'モジュール形式',
+        desc: 'import文の有無によって、コンパイル後の出力形式が自動的に切り替わります。',
+        withImports: 'import あり → ESモジュール',
+        withoutImports: 'import なし → IIFE',
+        pathRewrite: 'パス書き換え',
+        noteLabel: 'ポイント',
+        notes: {
+          n1: 'ESモジュール形式では export default でクラスがエクスポートされる',
+          n2: 'IIFE形式では即座に customElements.define() が呼ばれる',
+          n3: 'バンドラー（Vite等）と組み合わせる場合はESモジュール形式を推奨',
+        },
       },
     },
     style: {
