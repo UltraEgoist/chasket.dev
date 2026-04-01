@@ -40,8 +40,8 @@
 
   fn checkVersion() {
     fetch('/version.json?t=' + Date.now())
-      .then(function(r) { return r.json() })
-      .then(function(data) {
+      .then((r) => r.json())
+      .then((data) => {
         latestVersion = data.version || ''
         changelogUrl = data.changelog || ''
         const lang_key = lang()
@@ -54,12 +54,12 @@
           visible = true
         }
       })
-      .catch(function() { /* ネットワークエラーは無視 */ })
+      .catch(() => { /* ネットワークエラーは無視 */ })
   }
 
   on mount {
     // ページロード後に非同期でバージョンチェック
-    setTimeout(function() { checkVersion() }, 2000)
+    setTimeout(() => { checkVersion() }, 2000)
   }
 </script>
 

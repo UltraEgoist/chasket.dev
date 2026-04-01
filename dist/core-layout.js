@@ -1,4 +1,4 @@
-// Chasket Bundle - 2026-04-01T14:27:59.838Z
+// Chasket Bundle - 2026-04-01T14:51:23.007Z
 // 4 component(s)
 
 // Deferred registration queue: all classes are defined first,
@@ -531,7 +531,7 @@ class CskReleaseBanner extends HTMLElement {
     this.#bindEvents();
     this.#bindRefs();
     // ページロード後に非同期でバージョンチェック
-        setTimeout(function() { this.#checkVersion() }, 2000)
+        setTimeout(() => { this.#checkVersion() }, 2000)
   }
 
   disconnectedCallback() {
@@ -572,8 +572,8 @@ class CskReleaseBanner extends HTMLElement {
 
   #checkVersion() {
     fetch('/version.json?t=' + Date.now())
-          .then(function(r) { return r.json() })
-          .then(function(data) {
+          .then((r) => r.json())
+          .then((data) => {
             this.#latestVersion = data.version || ''
             this.#changelogUrl = data.changelog || ''
             const lang_key = this.#lang()
@@ -586,7 +586,7 @@ class CskReleaseBanner extends HTMLElement {
               this.#visible = true
             }
           })
-          .catch(function() { /* ネットワークエラーは無視 */ })
+          .catch(() => { /* ネットワークエラーは無視 */ })
   }
 
   #render() {
