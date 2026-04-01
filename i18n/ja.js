@@ -133,6 +133,10 @@ window.__i18n_register('ja', {
     ossNote: 'このサイトのソースコードはオープンソースで公開されています'
   },
 
+  releaseBanner: {
+    changelog: '変更履歴を見る'
+  },
+
   notFound: {
     message: 'お探しのページは存在しません。',
     backHome: 'ホームに戻る'

@@ -1,0 +1,9 @@
+{
+  "version": "0.3.0",
+  "date": "2026-04-01",
+  "changelog": "https://github.com/UltraEgoist/chasket/blob/main/CHANGELOG.md",
+  "highlights": {
+    "ja": "VSCode Marketplace 公開、TypeScript対応",
+    "en": "VSCode Marketplace launch, TypeScript support"
+  }
+}

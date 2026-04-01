@@ -1,5 +1,5 @@
-// Chasket Bundle - 2026-04-01T13:47:23.121Z
-// 3 component(s)
+// Chasket Bundle - 2026-04-01T14:03:36.107Z
+// 4 component(s)
 
 // Deferred registration queue: all classes are defined first,
 // then all customElements.define() calls happen at the end.
@@ -484,6 +484,268 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 
 })();
 
+// ── csk-release-banner.csk ──
+/* Built with Chasket v0.3.0 — https://chasket.dev */
+(() => {
+"use strict";
+
+class CskReleaseBanner extends HTMLElement {
+  static #__css = `:host{display:block;}.banner{display:flex;align-items:center;justify-content:space-between;gap:0.75rem;padding:0.5rem 1.25rem;background:linear-gradient(135deg, rgba(108,92,231,0.15), rgba(0,184,148,0.1));border-bottom:1px solid rgba(108,92,231,0.25);font-size:0.85rem;color:var(--c-text, #e4e4ed);animation:slideDown 0.3s ease-out;}@keyframes slideDown{from{transform:translateY(-100%);opacity:0;}to{transform:translateY(0);opacity:1;}}.content{display:flex;align-items:center;gap:0.625rem;flex-wrap:wrap;min-width:0;}.tag{display:inline-block;padding:0.125rem 0.5rem;border-radius:999px;background:rgba(108,92,231,0.25);color:var(--c-primary-light, #a29bfe);font-weight:600;font-size:0.75rem;white-space:nowrap;}.message{color:var(--c-text-dim, #9898ab);}.link{color:var(--c-primary-light, #a29bfe);text-decoration:underline;white-space:nowrap;}.link:hover{color:#fff;}.close{background:none;border:none;color:var(--c-text-dim, #9898ab);cursor:pointer;padding:0.25rem;border-radius:0.25rem;display:flex;align-items:center;flex-shrink:0;}.close:hover{color:#fff;}@media (max-width:30rem){.banner{padding:0.5rem 0.75rem;font-size:0.8rem;}.message{display:none;}}`;
+  static #__sheet = (() => { try { const s = new CSSStyleSheet(); s.replaceSync(CskReleaseBanner.#__css); return s; } catch(e) { return null; } })();
+
+  #_visible = false;
+  get #visible() { return this.#_visible; }
+  set #visible(v) { this.#_visible = v; this.#scheduleUpdate(); }
+  #_latestVersion = "";
+  get #latestVersion() { return this.#_latestVersion; }
+  set #latestVersion(v) { this.#_latestVersion = v; this.#scheduleUpdate(); }
+  #_highlights = "";
+  get #highlights() { return this.#_highlights; }
+  set #highlights(v) { this.#_highlights = v; this.#scheduleUpdate(); }
+  #_changelogUrl = "";
+  get #changelogUrl() { return this.#_changelogUrl; }
+  set #changelogUrl(v) { this.#_changelogUrl = v; this.#scheduleUpdate(); }
+  #_dismissed = false;
+  get #dismissed() { return this.#_dismissed; }
+  set #dismissed(v) { this.#_dismissed = v; this.#scheduleUpdate(); }
+  #updateScheduled = false;
+  #shadow;
+  #listeners = [];
+
+  constructor() {
+    super();
+    this.#shadow = this.attachShadow({ mode: 'open' });
+    if (CskReleaseBanner.#__sheet) this.#shadow.adoptedStyleSheets = [CskReleaseBanner.#__sheet];
+  }
+
+  connectedCallback() {
+    this.#render();
+    this.#bindEvents();
+    this.#bindRefs();
+    // ページロード後に非同期でバージョンチェック
+        setTimeout(function() { this.#checkVersion() }, 2000)
+  }
+
+  disconnectedCallback() {
+    this.#listeners.forEach(([el, ev, fn]) => el.removeEventListener(ev, fn));
+    this.#listeners = [];
+  }
+
+  #tr(k) {
+    return window.__t(k)
+  }
+
+  #lang() {
+    return window.__i18n_locale()
+  }
+
+  #currentSiteVersion() {
+    // hero.badge から "v0.3.0 — ..." の形式でバージョンを取得
+        const badge = window.__t('hero.badge') || ''
+        const m = badge.match(/v(\d+\.\d+\.\d+)/)
+        return m ? m[1] : '0.0.0'
+  }
+
+  #isNewer(remote, local) {
+    const r = remote.split('.').map(Number)
+        const l = local.split('.').map(Number)
+        for (let i = 0; i < 3; i++) {
+          if (r[i] > l[i]) return true
+          if (r[i] < l[i]) return false
+        }
+        return false
+  }
+
+  #dismiss() {
+    this.#dismissed = true
+        this.#visible = false
+        try { localStorage.setItem('csk_dismissed_version', this.#latestVersion) } catch(e) {}
+  }
+
+  #checkVersion() {
+    fetch('/version.json?t=' + Date.now())
+          .then(function(r) { return r.json() })
+          .then(function(data) {
+            this.#latestVersion = data.version || ''
+            this.#changelogUrl = data.changelog || ''
+            const lang_key = this.#lang()
+            this.#highlights = (data.highlights && data.highlights[lang_key]) || ''
+            const siteVer = this.#currentSiteVersion()
+            // 既にthis.#dismissedなバージョンならスキップ
+            let dismissedVer = ''
+            try { dismissedVer = localStorage.getItem('csk_dismissed_version') || '' } catch(e) {}
+            if (this.#isNewer(this.#latestVersion, siteVer) && this.#latestVersion !== dismissedVer) {
+              this.#visible = true
+            }
+          })
+          .catch(function() { /* ネットワークエラーは無視 */ })
+  }
+
+  #render() {
+    const tpl = document.createElement('template');
+    tpl.innerHTML = `
+      ${CskReleaseBanner.#__sheet ? '' : '<style>' + CskReleaseBanner.#__css + '</style>'}
+      ${this.#visible && !this.#dismissed ? `
+        <div class="banner">
+          <div class="content"><span class="tag">v${this.#esc(this.#latestVersion)}</span><span class="message">${this.#esc(this.#highlights)}</span><a href="${this.#escUrl(this.#changelogUrl)}" target="_blank" rel="noopener noreferrer" class="link">${this.#esc(this.#tr('releaseBanner.changelog'))}</a></div>
+          <button data-chasket-id="fl-csk-release-banner-0" class="close" aria-label="Close">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18">
+              </line>
+              <line x1="6" y1="6" x2="18" y2="18">
+              </line>
+            </svg>
+          </button>
+        </div>
+      ` : ''}
+    `;
+    this.#shadow.replaceChildren(tpl.content.cloneNode(true));
+  }
+
+  #getNewTree() {
+    const tpl = document.createElement('template');
+    tpl.innerHTML = `
+      ${CskReleaseBanner.#__sheet ? '' : '<style>' + CskReleaseBanner.#__css + '</style>'}
+      ${this.#visible && !this.#dismissed ? `
+        <div class="banner">
+          <div class="content"><span class="tag">v${this.#esc(this.#latestVersion)}</span><span class="message">${this.#esc(this.#highlights)}</span><a href="${this.#escUrl(this.#changelogUrl)}" target="_blank" rel="noopener noreferrer" class="link">${this.#esc(this.#tr('releaseBanner.changelog'))}</a></div>
+          <button data-chasket-id="fl-csk-release-banner-0" class="close" aria-label="Close">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18">
+              </line>
+              <line x1="6" y1="6" x2="18" y2="18">
+              </line>
+            </svg>
+          </button>
+        </div>
+      ` : ''}
+    `;
+    return tpl.content;
+  }
+
+  #patch(parent, newContent) {
+    const newNodes = Array.from(newContent.childNodes);
+    const oldNodes = Array.from(parent.childNodes);
+    const max = Math.max(oldNodes.length, newNodes.length);
+    for (let i = 0; i < max; i++) {
+      const o = oldNodes[i], n = newNodes[i];
+      if (!n) { parent.removeChild(o); continue; }
+      if (!o) { parent.appendChild(n.cloneNode(true)); continue; }
+      if (o.nodeType !== n.nodeType || o.nodeName !== n.nodeName) {
+        parent.replaceChild(n.cloneNode(true), o); continue;
+      }
+      if (o.nodeType === 3) {
+        if (o.textContent !== n.textContent) o.textContent = n.textContent;
+        continue;
+      }
+      if (o.nodeType === 1) {
+        const oA = o.attributes, nA = n.attributes;
+        for (let j = nA.length - 1; j >= 0; j--) {
+          const a = nA[j];
+          if (a.name === 'value' && (o.tagName === 'INPUT' || o.tagName === 'TEXTAREA' || o.tagName === 'SELECT')) {
+            if (o.value !== a.value) o.value = a.value;
+          } else if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+        }
+        for (let j = oA.length - 1; j >= 0; j--) {
+          if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+        }
+        if (o.tagName === 'STYLE') {
+          if (o.textContent !== n.textContent) o.textContent = n.textContent;
+          continue;
+        }
+        if (o.tagName.includes('-')) {
+          for (let j = nA.length - 1; j >= 0; j--) {
+            const a = nA[j];
+            if (o.getAttribute(a.name) !== a.value) o.setAttribute(a.name, a.value);
+          }
+          for (let j = oA.length - 1; j >= 0; j--) {
+            if (!n.hasAttribute(oA[j].name)) o.removeAttribute(oA[j].name);
+          }
+          continue;
+        }
+        this.#patch(o, n);
+      }
+    }
+  }
+
+  #bindEvents() {
+    {
+      const el = this.#shadow.querySelector('[data-chasket-id="fl-csk-release-banner-0"]');
+      if (el) {
+        const fn_click = (e) => { this.#dismiss(e); this.#scheduleUpdate(); };
+        el.addEventListener('click', fn_click);
+        this.#listeners.push([el, 'click', fn_click]);
+      }
+    }
+  }
+
+  #bindRefs() {
+  }
+
+  #scheduleUpdate() {
+    if (this.#updateScheduled) return;
+    this.#updateScheduled = true;
+    queueMicrotask(() => {
+      this.#updateScheduled = false;
+      this.#update();
+    });
+  }
+
+  #update() {
+    this.#updateScheduled = false;
+    this.#listeners.forEach(([el, ev, fn]) => el.removeEventListener(ev, fn));
+    this.#listeners = [];
+    this.#patch(this.#shadow, this.#getNewTree());
+    this.#bindEvents();
+    this.#bindRefs();
+  }
+
+  #updateKeepFocus(focusedEl) {
+    this.#update();
+  }
+
+  #esc(val) {
+    if (val == null) return '';
+    const s = String(val);
+    if (!/[&<>"']/.test(s)) return s;
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  #escAttr(val) {
+    if (val == null) return '';
+    const s = String(val);
+    if (!/[&<>"'`\n\r]/.test(s)) return s;
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/`/g,'&#96;').replace(/\n/g,'&#10;').replace(/\r/g,'&#13;');
+  }
+
+  #escUrl(val) {
+    if (val == null) return '';
+    const s = String(val).trim();
+    let decoded = s;
+    for (let i = 0; i < 5; i++) {
+      try {
+        const next = decodeURIComponent(decoded);
+        if (next === decoded) break;
+        decoded = next;
+      } catch(e) { break; }
+    }
+    const normalized = decoded.replace(/[\s\x00-\x1F]/g, '');
+    if (/(javascript|data|vbscript|blob|file)\s*:/i.test(normalized)) return 'about:blank';
+    return this.#escAttr(normalized);
+  }
+}
+
+if (typeof __chasketClasses !== 'undefined') {
+  __chasketClasses['csk-release-banner'] = CskReleaseBanner;
+}
+if (typeof __chasketDefineQueue !== 'undefined') {
+  __chasketDefineQueue.push(['csk-release-banner', CskReleaseBanner]);
+} else if (!customElements.get('csk-release-banner')) {
+  customElements.define('csk-release-banner', CskReleaseBanner);
+}
+
+})();
+
 // ── csk-shell.csk ──
 /* Built with Chasket v0.3.0 — https://chasket.dev */
 
@@ -600,6 +862,7 @@ class CskShell extends HTMLElement {
     tpl.innerHTML = `
       ${CskShell.#__sheet ? '' : '<style>' + CskShell.#__css + '</style>'}
       <div class="shell">
+        <csk-release-banner></csk-release-banner>
         <csk-navbar></csk-navbar>
         <main class="shell-main">
           ${this.#currentPage === 'home' ? `
@@ -628,6 +891,7 @@ class CskShell extends HTMLElement {
     tpl.innerHTML = `
       ${CskShell.#__sheet ? '' : '<style>' + CskShell.#__css + '</style>'}
       <div class="shell">
+        <csk-release-banner></csk-release-banner>
         <csk-navbar></csk-navbar>
         <main class="shell-main">
           ${this.#currentPage === 'home' ? `

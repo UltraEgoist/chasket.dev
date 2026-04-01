@@ -97,6 +97,7 @@
 
 <template>
   <div class="shell">
+    <csk-release-banner></csk-release-banner>
     <csk-navbar></csk-navbar>
     <main class="shell-main">
       <#if condition="currentPage === 'home'">

@@ -1,0 +1,153 @@
+<meta>
+  name: "csk-release-banner"
+  shadow: open
+</meta>
+
+<script>
+  // サイトに埋め込まれた現在のバージョン（i18n badge から取得）
+  // version.json の最新バージョンと比較して通知を出す
+  state visible: boolean = false
+  state latestVersion: string = ""
+  state highlights: string = ""
+  state changelogUrl: string = ""
+  state dismissed: boolean = false
+
+  fn tr(k: string) { return window.__t(k) }
+  fn lang() { return window.__i18n_locale() }
+
+  fn currentSiteVersion() {
+    // hero.badge から "v0.3.0 — ..." の形式でバージョンを取得
+    const badge = window.__t('hero.badge') || ''
+    const m = badge.match(/v(\d+\.\d+\.\d+)/)
+    return m ? m[1] : '0.0.0'
+  }
+
+  fn isNewer(remote: string, local: string) {
+    const r = remote.split('.').map(Number)
+    const l = local.split('.').map(Number)
+    for (let i = 0; i < 3; i++) {
+      if (r[i] > l[i]) return true
+      if (r[i] < l[i]) return false
+    }
+    return false
+  }
+
+  fn dismiss() {
+    dismissed = true
+    visible = false
+    try { localStorage.setItem('csk_dismissed_version', latestVersion) } catch(e) {}
+  }
+
+  fn checkVersion() {
+    fetch('/version.json?t=' + Date.now())
+      .then(function(r) { return r.json() })
+      .then(function(data) {
+        latestVersion = data.version || ''
+        changelogUrl = data.changelog || ''
+        const lang_key = lang()
+        highlights = (data.highlights && data.highlights[lang_key]) || ''
+        const siteVer = currentSiteVersion()
+        // 既にdismissedなバージョンならスキップ
+        let dismissedVer = ''
+        try { dismissedVer = localStorage.getItem('csk_dismissed_version') || '' } catch(e) {}
+        if (isNewer(latestVersion, siteVer) && latestVersion !== dismissedVer) {
+          visible = true
+        }
+      })
+      .catch(function() { /* ネットワークエラーは無視 */ })
+  }
+
+  on mount {
+    // ページロード後に非同期でバージョンチェック
+    setTimeout(function() { checkVersion() }, 2000)
+  }
+</script>
+
+<template>
+  <#if condition="visible && !dismissed">
+    <div class="banner">
+      <div class="content">
+        <span class="tag">v{{ latestVersion }}</span>
+        <span class="message">
+          {{ highlights }}
+        </span>
+        <a :href="changelogUrl" target="_blank" rel="noopener noreferrer" class="link">
+          {{ tr('releaseBanner.changelog') }}
+        </a>
+      </div>
+      <button @click="dismiss" class="close" aria-label="Close">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+  </#if>
+</template>
+
+<style>
+  :host { display: block; }
+
+  .banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.5rem 1.25rem;
+    background: linear-gradient(135deg, rgba(108,92,231,0.15), rgba(0,184,148,0.1));
+    border-bottom: 1px solid rgba(108,92,231,0.25);
+    font-size: 0.85rem;
+    color: var(--c-text, #e4e4ed);
+    animation: slideDown 0.3s ease-out;
+  }
+
+  @keyframes slideDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to   { transform: translateY(0);     opacity: 1; }
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    flex-wrap: wrap;
+    min-width: 0;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.125rem 0.5rem;
+    border-radius: 999px;
+    background: rgba(108,92,231,0.25);
+    color: var(--c-primary-light, #a29bfe);
+    font-weight: 600;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .message {
+    color: var(--c-text-dim, #9898ab);
+  }
+
+  .link {
+    color: var(--c-primary-light, #a29bfe);
+    text-decoration: underline;
+    white-space: nowrap;
+  }
+  .link:hover { color: #fff; }
+
+  .close {
+    background: none;
+    border: none;
+    color: var(--c-text-dim, #9898ab);
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .close:hover { color: #fff; }
+
+  @media (max-width: 30rem) {
+    .banner { padding: 0.5rem 0.75rem; font-size: 0.8rem; }
+    .message { display: none; }
+  }
+</style>

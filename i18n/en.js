@@ -133,6 +133,10 @@ window.__i18n_register('en', {
     ossNote: 'The source code for this site is open source'
   },
 
+  releaseBanner: {
+    changelog: 'View changelog'
+  },
+
   notFound: {
     message: 'This page does not exist.',
     backHome: 'Back to Home'
