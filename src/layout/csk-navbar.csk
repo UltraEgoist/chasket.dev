@@ -79,6 +79,7 @@
         <a href="#/guide" :class="isActive('/guide') ? 'active' : ''" @click="closeMenu">{{ tr('nav.guide') }}</a>
         <a href="#/api" :class="isActive('/api') ? 'active' : ''" @click="closeMenu">{{ tr('nav.api') }}</a>
         <a href="#/testing" :class="isActive('/testing') ? 'active' : ''" @click="closeMenu">{{ tr('nav.testing') }}</a>
+        <a href="#/playground" :class="'playground-link ' + (isActive('/playground') ? 'active' : '')" @click="closeMenu">{{ tr('nav.playground') }}<span class="soon-badge">Soon</span></a>
         <a href="#ecosystem" :class="isActive('/') ? '' : ''" @click|prevent="goEcosystem">{{ tr('nav.ecosystem') }}</a>
         <a
           href="https://github.com/UltraEgoist/chasket"
@@ -171,6 +172,32 @@
     height: 2px;
     background: var(--c-accent, #2EBCB0);
     border-radius: 1px;
+  }
+
+  .playground-link {
+    position: relative;
+    opacity: 0.55;
+    transition: opacity 0.2s, color 0.2s;
+  }
+  .playground-link:hover {
+    opacity: 0.85;
+  }
+  .playground-link.active {
+    opacity: 1;
+  }
+  .soon-badge {
+    display: inline-block;
+    margin-left: 0.35rem;
+    padding: 0.1rem 0.4rem;
+    font-size: 0.55rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background: linear-gradient(135deg, #6C5CE7, #a29bfe);
+    color: #fff;
+    border-radius: 8px;
+    vertical-align: middle;
+    line-height: 1.4;
   }
 
   .gh-link {

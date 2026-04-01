@@ -9,7 +9,8 @@ window.__i18n_register('ja', {
     ecosystem: 'エコシステム',
     toggleMenu: 'メニュー切替',
     switchLang: '言語を切り替え',
-    why: 'Why Chasket'
+    why: 'Why Chasket',
+    playground: 'Playground'
   },
 
   hero: {
@@ -1098,5 +1099,28 @@ window.__i18n_register('ja', {
 
     ctaTitle: '始めてみよう',
     ctaDesc: 'たった 1 コマンドで Chasket プロジェクトを作成し、テンプレートファーストの Web コンポーネント開発を体験してください。'
+  },
+
+  playground: {
+    title: 'Playground',
+    badge: 'Coming Soon',
+    tabs: {
+      output: 'Output',
+      preview: 'Preview'
+    },
+    share: 'Share',
+    compiledOutput: 'compiled output',
+    overlayTitle: 'Playground 準備中',
+    overlayDesc: 'ブラウザ上で .csk を書き、リアルタイムでコンパイル・プレビューできる環境を構築中です。',
+    features: {
+      editor: 'コードエディタ',
+      editorDesc: '構文ハイライト付きの.cskエディタ',
+      compile: 'リアルタイムコンパイル',
+      compileDesc: '入力と同時にコンパイル結果を表示',
+      preview: 'ライブプレビュー',
+      previewDesc: 'コンパイルしたコンポーネントを即座に描画',
+      share: 'URL共有',
+      shareDesc: 'コードをURLに埋め込んで共有可能'
+    }
   }
 })

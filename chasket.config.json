@@ -12,6 +12,7 @@
     { "src": "src/pages/guide",  "outdir": "dist", "bundle": "page-guide.js" },
     { "src": "src/pages/api",    "outdir": "dist", "bundle": "page-api.js" },
     { "src": "src/pages/testing","outdir": "dist", "bundle": "page-testing.js" },
-    { "src": "src/pages/why",    "outdir": "dist", "bundle": "page-why.js" }
+    { "src": "src/pages/why",    "outdir": "dist", "bundle": "page-why.js" },
+    { "src": "src/pages/playground", "outdir": "dist", "bundle": "page-playground.js" }
   ]
 }

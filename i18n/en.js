@@ -9,7 +9,8 @@ window.__i18n_register('en', {
     ecosystem: 'Ecosystem',
     toggleMenu: 'Toggle menu',
     switchLang: 'Switch language',
-    why: 'Why Chasket'
+    why: 'Why Chasket',
+    playground: 'Playground'
   },
 
   hero: {
@@ -1098,5 +1099,28 @@ window.__i18n_register('en', {
 
     ctaTitle: 'Get Started',
     ctaDesc: 'Create a Chasket project with a single command and experience template-first Web Component development.'
+  },
+
+  playground: {
+    title: 'Playground',
+    badge: 'Coming Soon',
+    tabs: {
+      output: 'Output',
+      preview: 'Preview'
+    },
+    share: 'Share',
+    compiledOutput: 'compiled output',
+    overlayTitle: 'Playground Coming Soon',
+    overlayDesc: 'An interactive environment to write .csk components and see real-time compilation and preview in the browser.',
+    features: {
+      editor: 'Code Editor',
+      editorDesc: '.csk editor with syntax highlighting',
+      compile: 'Real-time Compilation',
+      compileDesc: 'See compiled output as you type',
+      preview: 'Live Preview',
+      previewDesc: 'Render compiled components instantly',
+      share: 'URL Sharing',
+      shareDesc: 'Embed code in URL for easy sharing'
+    }
   }
 })

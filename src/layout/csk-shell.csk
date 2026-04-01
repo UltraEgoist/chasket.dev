@@ -23,7 +23,8 @@
       why: '/dist/page-why.js',
       guide: '/dist/page-guide.js',
       api: '/dist/page-api.js',
-      testing: '/dist/page-testing.js'
+      testing: '/dist/page-testing.js',
+      playground: '/dist/page-playground.js'
     }
     const src = bundleMap[page]
     if (!src) return Promise.resolve()
@@ -48,6 +49,7 @@
     if (hash.startsWith("#/guide")) return "guide"
     if (hash.startsWith("#/api")) return "api"
     if (hash.startsWith("#/testing")) return "testing"
+    if (hash.startsWith("#/playground")) return "playground"
     if (hash === "#/" || hash === "#" || hash === "") return "home"
     return ""
   }
@@ -110,6 +112,8 @@
         <csk-page-api></csk-page-api>
       <:else-if condition="currentPage === 'testing'">
         <csk-page-testing></csk-page-testing>
+      <:else-if condition="currentPage === 'playground'">
+        <csk-page-playground></csk-page-playground>
       </#if>
     </main>
     <csk-footer></csk-footer>
