@@ -7,10 +7,10 @@
   Content-Security-Policy: default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://cloudflareinsights.com
 
 /dist/*
-  Cache-Control: public, max-age=2592000, immutable
+  Cache-Control: public, max-age=86400, must-revalidate
 
 /scripts/*
-  Cache-Control: public, max-age=2592000, immutable
+  Cache-Control: public, max-age=86400, must-revalidate
 
 /i18n/*
   Cache-Control: public, max-age=86400
