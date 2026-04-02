@@ -107,16 +107,17 @@
           <span class="caution">{{ tr('ecosystem.experimental') }}</span>
         </div>
 
-        <div class="card">
+        <div class="card clr-indigo">
           <div class="card-head">
             <div class="icon">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1111 8H2m10.59 11.41A2 2 0 1014 16H2m15.73-8.27A2.5 2.5 0 1119.5 12H2"></path></svg>
             </div>
-            <span class="badge">{{ tr('ecosystem.available') }}</span>
+            <span class="badge available">{{ tr('ecosystem.available') }}</span>
           </div>
           <h3>chasket-vscode</h3>
           <p>{{ tr('ecosystem.vscode') }}</p>
           <a href="https://marketplace.visualstudio.com/items?itemName=chasket.chasket-lang" target="_blank" rel="noopener noreferrer" class="install vs">VS Code Marketplace</a>
+          <span class="caution">{{ tr('ecosystem.experimental') }}</span>
         </div>
       </div>
     </div>
@@ -216,6 +217,11 @@
   .clr-cyan:hover  { border-color: #06B6D4; }
   .clr-cyan .badge.available { background: rgba(6,182,212,0.15); color: #5cd6ec; border-color: rgba(6,182,212,0.3); }
   .clr-cyan .install { color: #06B6D4; background: rgba(6,182,212,0.08); border-color: rgba(6,182,212,0.2); }
+
+  .clr-indigo .icon  { background: rgba(99,102,241,0.12); color: #a5b4fc; }
+  .clr-indigo:hover  { border-color: #6366F1; }
+  .clr-indigo .badge.available { background: rgba(99,102,241,0.15); color: #a5b4fc; border-color: rgba(99,102,241,0.3); }
+  .clr-indigo .install { color: #6366F1; background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.2); }
 
   .card.coming {
     opacity: 0.45;
