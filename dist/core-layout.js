@@ -1,4 +1,4 @@
-// Chasket Bundle - 2026-04-01T14:51:23.007Z
+// Chasket Bundle - 2026-04-02T12:44:23.422Z
 // 4 component(s)
 
 // Deferred registration queue: all classes are defined first,
@@ -498,7 +498,7 @@ if (typeof __chasketDefineQueue !== 'undefined') {
 "use strict";
 
 class CskReleaseBanner extends HTMLElement {
-  static #__css = `:host{display:block;}.banner{display:flex;align-items:center;justify-content:space-between;gap:0.75rem;padding:0.5rem 1.25rem;background:linear-gradient(135deg, rgba(108,92,231,0.15), rgba(0,184,148,0.1));border-bottom:1px solid rgba(108,92,231,0.25);font-size:0.85rem;color:var(--c-text, #e4e4ed);animation:slideDown 0.3s ease-out;}@keyframes slideDown{from{transform:translateY(-100%);opacity:0;}to{transform:translateY(0);opacity:1;}}.content{display:flex;align-items:center;gap:0.625rem;flex-wrap:wrap;min-width:0;}.tag{display:inline-block;padding:0.125rem 0.5rem;border-radius:999px;background:rgba(108,92,231,0.25);color:var(--c-primary-light, #a29bfe);font-weight:600;font-size:0.75rem;white-space:nowrap;}.message{color:var(--c-text-dim, #9898ab);}.link{color:var(--c-primary-light, #a29bfe);text-decoration:underline;white-space:nowrap;}.link:hover{color:#fff;}.close{background:none;border:none;color:var(--c-text-dim, #9898ab);cursor:pointer;padding:0.25rem;border-radius:0.25rem;display:flex;align-items:center;flex-shrink:0;}.close:hover{color:#fff;}@media (max-width:30rem){.banner{padding:0.5rem 0.75rem;font-size:0.8rem;}.message{display:none;}}`;
+  static #__css = `:host{display:block;position:fixed;top:0;left:0;right:0;z-index:1100;pointer-events:none;}.banner{display:flex;align-items:center;justify-content:space-between;gap:0.75rem;padding:0.5rem 1.25rem;background:linear-gradient(135deg, rgba(108,92,231,0.95), rgba(0,184,148,0.85));font-size:0.85rem;color:#fff;animation:slideDown 0.35s ease-out;pointer-events:auto;backdrop-filter:blur(8px);box-shadow:0 2px 12px rgba(0,0,0,0.3);}@keyframes slideDown{from{transform:translateY(-100%);opacity:0;}to{transform:translateY(0);opacity:1;}}.content{display:flex;align-items:center;gap:0.625rem;flex-wrap:wrap;min-width:0;}.tag{display:inline-block;padding:0.125rem 0.5rem;border-radius:999px;background:rgba(255,255,255,0.2);color:#fff;font-weight:600;font-size:0.75rem;white-space:nowrap;}.message{color:rgba(255,255,255,0.85);}.link{color:#fff;text-decoration:underline;text-underline-offset:2px;white-space:nowrap;}.link:hover{opacity:0.8;}.close{background:none;border:none;color:rgba(255,255,255,0.7);cursor:pointer;padding:0.25rem;border-radius:0.25rem;display:flex;align-items:center;flex-shrink:0;}.close:hover{color:#fff;}@media (max-width:30rem){.banner{padding:0.5rem 0.75rem;font-size:0.8rem;}.message{display:none;}}`;
   static #__sheet = (() => { try { const s = new CSSStyleSheet(); s.replaceSync(CskReleaseBanner.#__css); return s; } catch(e) { return null; } })();
 
   #_visible = false;
