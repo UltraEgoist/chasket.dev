@@ -14,7 +14,7 @@ window.__i18n_register('ja', {
   },
 
   hero: {
-    badge: 'v0.3.0 — VSCode Marketplace 公開中',
+    badge: 'v0.3.1 — VSCode Marketplace 公開中',
     titleLine1: 'テンプレートファーストな',
     titleLine2Prefix: '',
     titleHighlight: 'Web Components',
@@ -219,7 +219,7 @@ window.__i18n_register('ja', {
       compilationOutput: 'コンパイル出力'
     },
     lastUpdated: '最終更新: 2026年3月',
-    versionNote: 'このドキュメントは Chasket v0.3.0 に対応しています。'
+    versionNote: 'このドキュメントは Chasket v0.3.1 に対応しています。'
   },
 
   testing: {

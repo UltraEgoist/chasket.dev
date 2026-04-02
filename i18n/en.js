@@ -14,7 +14,7 @@ window.__i18n_register('en', {
   },
 
   hero: {
-    badge: 'v0.3.0 — Now on VSCode Marketplace',
+    badge: 'v0.3.1 — Now on VSCode Marketplace',
     titleLine1: 'The template-first language',
     titleLine2Prefix: 'for ',
     titleHighlight: 'Web Components',
@@ -219,7 +219,7 @@ window.__i18n_register('en', {
       compilationOutput: 'Compilation Output'
     },
     lastUpdated: 'Last updated: March 2026',
-    versionNote: 'This documentation is for Chasket v0.3.0.'
+    versionNote: 'This documentation is for Chasket v0.3.1.'
   },
 
   testing: {

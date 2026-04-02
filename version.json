@@ -1,9 +1,9 @@
 {
-  "version": "0.3.0",
-  "date": "2026-04-01",
+  "version": "0.3.1",
+  "date": "2026-04-03",
   "changelog": "https://github.com/UltraEgoist/chasket/blob/main/CHANGELOG.md",
   "highlights": {
-    "ja": "VSCode Marketplace 公開、TypeScript対応",
-    "en": "VSCode Marketplace launch, TypeScript support"
+    "ja": "対話型 chasket init、テンプレート選択対応",
+    "en": "Interactive chasket init with template selection"
   }
 }
