@@ -15,19 +15,10 @@
 /i18n/*
   Cache-Control: public, max-age=86400
 
-/favicon.svg
+/public/icons/*
   Cache-Control: public, max-age=2592000, immutable
 
-/favicon*.png
-  Cache-Control: public, max-age=2592000, immutable
-
-/apple-touch-icon.png
-  Cache-Control: public, max-age=2592000, immutable
-
-/favicon.ico
-  Cache-Control: public, max-age=2592000, immutable
-
-/og-image.png
+/public/images/*
   Cache-Control: public, max-age=2592000
 
 /version.json
